@@ -1,0 +1,307 @@
+body{
+  background-color:#eeeeee;
+}
+.justify{
+  text-align:justify;
+}
+.top-bar{
+  background-color:#0bb2bf;
+  height:60px;
+  border-bottom:3px solid white;
+}
+
+.top-bar-section ul, .top-bar-section li a:not(.button) {
+  background-color:#0bb2bf;
+}
+
+.top-bar-section ul li.hover > a{
+  background-color:#0bb2bf;
+}
+
+.pesquisa-topo{
+  width:300px !important;
+  margin:0 auto !important;
+  display:block !important;
+
+}
+.pesquisa-topo-campo{
+  width: 300px !important;
+  border-radius: 5px;
+  padding: 10px;
+  color: #7f7f7f !important;
+  line-height:default !important;
+  height:35px !important;
+  margin-top:2px !important;
+}
+.menu-topo{
+  max-width:100%;
+  }
+
+.menu-topo-container{
+  max-width:960px;
+  margin:0 auto;
+}
+.cabecalho{
+  width:100%;
+  height:60px;
+  background-color:#0bb2bf;
+  position:absolute;
+  border-bottom:3px solid white;
+}
+
+
+.imagem-temporada{
+  width: 30px;
+  position: absolute;
+  margin-top: 5px;
+  margin-left: 5px;
+}
+.nome-temporada{
+  padding-left:30px;
+}
+
+section.active .imagem-temporada{
+  width:60px;
+  margin-top:-15px;
+  border:2px solid white;
+}
+section.active p.nome-temporada{
+  padding-left:60px;
+}
+
+.imagem-elenco{
+  width:72px;
+  filter: grayscale(100%);
+  -webkit-filter: grayscale(100%);
+  -moz-filter: grayscale(100%);
+  filter: grayscale(100%)
+}
+.imagem-elenco:hover{
+  filter: grayscale(0%);
+  -webkit-filter: grayscale(0%);
+  -moz-filter: grayscale(0%);
+  filter: grayscale(0%)
+}
+.lista-elenco li{
+  display: inline-block;
+  vertical-align: middle;
+  list-style:none;
+  margin-top: 5px;
+}
+.primeiro-botao{
+  margin-top:10px;
+}
+.lista-episodios li{
+  list-style: none;
+}
+
+.lista-episodios li:hover{
+  background-color:#eee;
+}
+
+.botao-destaque{
+  background: #ffc247 !important;
+  border-color:#e9a51c !important;
+  border-radius:5px;
+  height:auto !important;
+}
+
+.botao-destaque:hover{
+  background-color:#ffcb62 !important;
+  }
+
+.painel-entrar {
+  margin-top: 6px !important;
+}
+.logo-meuseriado{
+  text-indent:-9999px;
+  background:url("meuseriado.png") no-repeat;
+  width: 220px;
+  margin-top: 12px !important;
+}
+
+.texto-pequeno {
+  font-size: 11px;
+  margin-left: 10px;
+  color: #aaa;
+}
+
+.rating {
+  unicode-bidi: bidi-override;
+  direction: rtl;
+}
+.rating > span {
+  display: inline-block;
+  position: relative;
+  width: 1.1em;
+  font-size: 13px;
+}
+.rating > span:hover:before,
+.rating > span:hover ~ span:before {
+   content: "\2605";
+   position: absolute;
+}
+
+.nota-lista-serie {
+  float: right;
+  min-width:180px;
+  text-align:right;
+}
+
+.nota-label{
+  font-size:12px;
+  color:#aaa !important;
+  margin:3px 5px 0px 0px;
+}
+.nota-lista-serie span{
+  color:#e0c300;
+}
+.nota-lista-serie{
+  display:none;
+}
+
+.lista-episodios li:hover .nota-lista-serie{
+  display:block;
+  }
+
+.Facebook-entrar {
+  background: rgba(88,114,167,1);
+  border: 1px solid #29447e;
+  border-bottom-color: #1a356e;
+}
+
+.campo{
+  border-radius: 5px;
+  padding: 10px;
+  color: #7f7f7f !important;
+  line-height:default !important;
+  height:35px !important;
+}
+.campo-login {
+  margin-top: 10px !important;
+}
+.form-login{
+  margin-top:-20px;
+  margin-bottom:20px !important;
+}
+
+.titulo-episodio h2 {
+  color: #BBB;
+  font-size: 15px;
+  line-height: 25px;
+}
+
+.titulo-episodio h1 {
+  font-size: 30px;
+  line-height: 30px;
+}
+
+.editor-sinopse img {
+  width: 30px;
+}
+
+.editor-sinopse {
+  background-color: #ddd;
+  padding: 10px;
+  font-size: 12px;
+  color: #aaa;
+  margin-top: -15px;
+
+}
+.quem-viu-episodio li{
+  list-style:none;
+  display:inline;
+}
+
+.quem-viu-episodio img {
+  width: 47px;
+  margin: 2px 0px 1px 0px;
+  filter: grayscale(100%);
+  -webkit-filter: grayscale(100%);
+  -moz-filter: grayscale(100%);
+  filter: grayscale(100%);
+}
+
+.quem-viu-episodio img:hover {
+  filter: grayscale(0%);
+  -webkit-filter: grayscale(0%);
+  -moz-filter: grayscale(0%);
+  filter: grayscale(0%);
+}
+.lista-resultados-miniaturas li{
+  list-style: none;
+}
+.miniatura-resultados{
+  margin:12px 0px 12px 0px;
+  padding:5px;
+  background-color:white;
+}
+
+.descricao-item-listado {
+  background-color: white;
+  width: 100%;
+  position: relative;
+  display:none;
+  margin-top:-100px;
+  height:100px;
+  overflow:hidden;
+  opacity:0.9;
+  padding:0px 10px 10px 10px;
+
+}
+
+.descricao-item-listado p{
+  opacity:1.0;
+  color:#333;
+}
+
+.descricao-item-listado h3{
+  font-size:16px;
+  line-height: 16px;
+  padding: 10px 0px 0px 0px;
+  color:#0bb2bf;
+}
+
+.painel-logado a{
+  font-weight:bold;
+  color:white;
+}
+
+.painel-logado img{
+  width:24px;
+  height:24px;
+  border:2px solid white;
+  margin-right:5px;
+  background-color:White;
+}
+
+
+.painel-logado {
+  width:200px;
+  overflow:hidden;
+  white-space: nowrap;
+  text-overflow:ellipsis;
+  color:white;
+  text-align:right;
+  font-size:13px;
+  margin-top: 5px !important;
+}
+
+#dropdown-usuario-logado{
+  background-color:white;
+  margin-top:15px;
+  margin-left:-10px;
+  font-size:18px;
+}
+#dropdown-usuario-logado li{
+  width:100%;
+}
+#dropdown-usuario-logado a{
+  background-color:white !important;
+  color:#3a3a3a;
+  border-bottom:1px solid #ededed;
+}
+  
+#dropdown-usuario-logado li:hover a{
+  background-color:#ededed!important;
+}

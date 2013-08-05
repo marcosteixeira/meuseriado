@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  texto: MyText
+  nota: 1
+  avaliavel_id: 1
+  avaliavel_type: MyString
+
+two:
+  texto: MyText
+  nota: 1
+  avaliavel_id: 1
+  avaliavel_type: MyString

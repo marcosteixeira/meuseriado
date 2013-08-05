@@ -1,0 +1,134 @@
+<div class="cabecalho"></div>		
+<div class="row">
+  <div class="large-12 columns">
+    <!-- Navigation -->
+      <nav class="top-bar">
+        <ul class="title-area">
+          <!-- Title Area -->
+          <li class="name">
+            <h1 class="logo-meuseriado">
+              <a href="/">
+                meuseriado
+              </a>
+            </h1>
+          </li>
+          <li class="toggle-topbar menu-icon"><a href="#"><span>menu</span></a></li>
+        </ul>
+ 
+        <section class="top-bar-section">
+        	<% if user_signed_in? %>
+	          <div class="painel-logado right">
+	             <a href="#" data-dropdown="dropdown-usuario-logado"><img src='<%= current_user.imagem_formatada %>'> <%= current_user.name %></a>
+	               <ul id="dropdown-usuario-logado" class="f-dropdown" data-dropdown-content>
+	                <li><a href='/users/<%= current_user.slug %>'>Minha página pessoal</a></li>
+	                <li><%= link_to "Sair", destroy_user_session_path, method: :get  %></li>
+	              </ul>
+	           </div>
+		    <% else %>
+          	<ul class="painel-entrar right">
+	            <li><a href="#" data-dropdown="drop_entrar">Entrar</a>
+            		<div id="drop_entrar" class="f-dropdown content small" data-dropdown-content="">
+  					  <p>
+					  	<a href="/users/auth/facebook" class="button Facebook-entrar large-12 columns">Entrar com Facebook</a>
+					  </p><b/>	
+  					  <p>
+					  	<a href="/users/auth/google_oauth2" class="button Facebook-entrar large-12 columns">Entrar com conta do Google</a>
+					  </p>	
+  					  <br/>
+					  <hr>
+				   	  <%= form_for(resource, :as => resource_name, :url => session_path(resource_name), :html => { :class => "form-login" }) do |f| %>
+						
+						 <input autofocus="autofocus" id="user_email_entrar" placeholder="Nome" name="user[email]" type="email" class="campo campo-login">
+						 <input id="user_password_entrar" name="user[password]" placeholder="Senha" type="password" class="campo campo-login">
+						 <div class="campo campo-login">
+						 <%= link_to "Esqueceu sua senha?", new_password_path(resource_name) %>
+						 </div>
+						 <br/>
+						  <% if devise_mapping.rememberable? -%>
+						    <div class="campo campo-login"><%= f.check_box :remember_me %> Permanecer conectado</div>
+						  <% end -%>
+						
+						  <div><%= f.submit "Entrar" %></div>
+						<% end %>
+            		</div>
+            	</li>
+	            <li><a href="#" data-dropdown="drop2" class="small button botao-destaque">Cadastre-se</a> 
+	            	<div id="drop2" class="f-dropdown content small" data-dropdown-content="">
+					  <h4>Crie sua conta agora:</h4>
+  					  <p>
+					  	<a href="/users/auth/facebook" class="button Facebook-entrar large-12 columns">Entrar com Facebook</a>
+					  </p>
+					  <b/>	
+  					  <p>
+					  	<a href="/users/auth/google_oauth2" class="button Facebook-entrar large-12 columns">Entrar com conta do Google</a>
+					  </p>	
+					  <br/>
+					  <hr>
+					  <p>Ou crie sua conta sem facebook</p>
+				   	  <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :class => "form-login" }) do |f| %>
+						  <input id="user_name" name="user[name]" type="text"  placeholder="Nome" class="campo campo-login">
+						  <input id="user_email" name="user[email]" type="text"  placeholder="Email" class="campo campo-login">
+						  <input id="user_password" name="user[password]" type="password" placeholder="Senha" class="campo campo-login">
+			        	  <input id="user_password_confirmation" name="user[password_confirmation]" type="password" placeholder="Confirme sua senha" class="campo campo-login">
+						  <p><%= f.submit "Cadastrar" %></p>
+					 <% end %>
+	   		         </div>
+            	 </li>
+	          </ul>
+		    <% end %>
+          <ul class="pesquisa-topo">
+          	<%= form_for Serie.new do |f| %>
+	            <li class="search">
+	                <input type="search" id="pesquisa" name="pesquisa" class="pesquisa-topo-campo" placeholder="Procure por séries, episódios, pessoas ...">
+	            </li> 
+	            <li class="has-button hide">
+	              <%= f.submit "Cadastrar" %>
+	            </li>
+			<% end %>
+          </ul>
+         </ul>
+        </section>
+      </nav>
+    <!-- End Navigation -->
+    </div>
+  </div>
+  <script>
+  $.widget( "custom.catcomplete", $.ui.autocomplete, {
+    _renderMenu: function( ul, items ) {
+      var that = this,
+        currentCategory = "";
+      $.each( items, function( index, item ) {
+        if ( item.tipo != currentCategory ) {
+          ul.append( "<li class='ui-autocomplete-category'>" + item.tipo + "</li>" );
+          currentCategory = item.tipo;
+        }
+        that._renderItemData ( ul, item );
+      });
+    },
+    _renderItem: function (ul, item){
+	   	if(item.imagem){
+	      return $( "<li>" )
+	        .append( "<a> <img src='"+ item.imagem +"' class='imagem-temporada'/> <p class='title nome-temporada'>" + item.label + "</p></a></li> " )
+	        .appendTo( ul );
+    	}else{
+    		return $( "<li>" )
+	        .append( "<a> " + item.label + "</a></li> " )
+	        .appendTo( ul );
+    	}
+    }
+  });
+  
+  $(function() {
+    $( "#pesquisa" ).catcomplete({
+      source: "/autocomplete/index",
+      minLength: 1,
+      delay: 0,
+      select: function( event, ui ) {
+        $( "#pesquisa" ).val( ui.item.label );
+ 		window.location.replace("/series/"+ui.item.id);
+        return true ; 
+      	}
+    });
+  });
+  
+  </script>

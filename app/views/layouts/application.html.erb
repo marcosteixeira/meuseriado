@@ -1,0 +1,31 @@
+<html>
+	<!--[if IE 8]> 				 <html class="no-js lt-ie9" lang="en" > <![endif]-->
+	<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+
+	<head>
+	  <title>MeuSeriado</title>
+	  <meta charset="utf-8" />
+	  <meta name="viewport" content="width=device-width" />
+	  <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
+	  <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+	  <%= csrf_meta_tags %>
+	  <%= javascript_include_tag "vendor/jquery-1.10.2.min", "data-turbolinks-track" => true %>
+	  <%= javascript_include_tag "vendor/jquery.raty", "data-turbolinks-track" => true %>
+	  <%= javascript_include_tag "http://code.jquery.com/ui/1.10.3/jquery-ui.js", "data-turbolinks-track" => true %>
+	  <%= javascript_include_tag "vendor/custom.modernizr", "data-turbolinks-track" => true %>
+	  <%= javascript_include_tag "foundation.min", "data-turbolinks-track" => true %>
+	  <%= stylesheet_link_tag    "foundation", media: "all", "data-turbolinks-track" => true %>
+	  <%= stylesheet_link_tag    "meuseriado", media: "all", "data-turbolinks-track" => true %>
+	  <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
+	</head>
+	<body>
+	  <%= render partial: "home/menu_principal" %>
+	 
+	  <p class="notice"><%= notice %></p>
+	  <p class="alert"><%= alert %></p>
+	  
+	  <%= yield %>
+	 
+	  <%= render partial: "home/rodape" %>
+	</body>
+</html>

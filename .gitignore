@@ -1,3 +1,7 @@
+#ignorar pastas
+app/assets/images/series/**/*
+log/*.log
+tmp/**/*
 *.rbc
 *.sassc
 .sass-cache

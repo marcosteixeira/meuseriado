@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  imagem: MyString
+  serie_id: 1
+  temporada: 1
+
+two:
+  imagem: MyString
+  serie_id: 1
+  temporada: 1
