@@ -1,5 +1,5 @@
 #ignorar pastas
-app/assets/images/series/**/*
+app/assets/images/series/*/*
 log/*.log
 tmp/**/*
 *.rbc
