@@ -36,6 +36,15 @@ class SeriesController < ApplicationController
           serie_by_id = tvdb.find_series_by_id(id_serie)
           series << serie_by_id
         else
+          serie_banco = Serie.find_by_nome(nome_serie)
+       
+          if serie_banco
+            redirect_to(action: "show", id: serie_banco)
+          else 
+            serie_banco = salvar serie
+            redirect_to(action: "show", id: serie_banco)
+          end
+          
           series = tvdb.fetch_series_from_data(:title => nome_serie)
         end
         

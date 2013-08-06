@@ -20,7 +20,7 @@
 	          <div class="painel-logado right">
 	             <a href="#" data-dropdown="dropdown-usuario-logado"><img src='<%= current_user.imagem_formatada %>'> <%= current_user.name %></a>
 	               <ul id="dropdown-usuario-logado" class="f-dropdown" data-dropdown-content>
-	                <li><a href='/users/<%= current_user.slug %>'>Minha página pessoal</a></li>
+	                <li><%= link_to 'Minha página pessoal',controller: 'users' ,  action: 'show', id: current_user %></li>
 	                <li><%= link_to "Sair", destroy_user_session_path, method: :get  %></li>
 	              </ul>
 	           </div>
@@ -29,10 +29,10 @@
 	            <li><a href="#" data-dropdown="drop_entrar">Entrar</a>
             		<div id="drop_entrar" class="f-dropdown content small" data-dropdown-content="">
   					  <p>
-					  	<a href="/users/auth/facebook" class="button Facebook-entrar large-12 columns">Entrar com Facebook</a>
+  					  	<%= link_to "Entrar com Facebook", user_omniauth_authorize_path(:facebook), { :class=>"button Facebook-entrar large-12 columns" } %>
 					  </p><b/>	
   					  <p>
-					  	<a href="/users/auth/google_oauth2" class="button Facebook-entrar large-12 columns">Entrar com conta do Google</a>
+  					  	<%= link_to "Entrar com conta do Google", user_omniauth_authorize_path(:google_oauth2), { :class=>"button Facebook-entrar large-12 columns" } %>
 					  </p>	
   					  <br/>
 					  <hr>
@@ -56,11 +56,11 @@
 	            	<div id="drop2" class="f-dropdown content small" data-dropdown-content="">
 					  <h4>Crie sua conta agora:</h4>
   					  <p>
-					  	<a href="/users/auth/facebook" class="button Facebook-entrar large-12 columns">Entrar com Facebook</a>
+					  	<%= link_to "Entrar com Facebook", user_omniauth_authorize_path(:facebook), { :class=>"button Facebook-entrar large-12 columns" } %>
 					  </p>
 					  <b/>	
   					  <p>
-					  	<a href="/users/auth/google_oauth2" class="button Facebook-entrar large-12 columns">Entrar com conta do Google</a>
+					  	<%= link_to "Entrar com conta do Google", user_omniauth_authorize_path(:google_oauth2), { :class=>"button Facebook-entrar large-12 columns" } %>
 					  </p>	
 					  <br/>
 					  <hr>
