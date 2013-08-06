@@ -27,11 +27,13 @@ namespace :deploy do
         run "cp #{deploy_to}shared/database.yml #{current_path}/config/"
     end
 end
-# If you are using Passenger mod_rails uncomment this:
-#namespace :deploy do
-#  task :start do ; end
-#  task :stop do ; end
-#  task :restart, :roles => :app, :except => { :no_release => true } do
-#    run "#{try_sudo} touch #{File.join(current_path,'tmp','restart.txt')}"
-#  end
-#end
+
+namespace :bundle do
+
+  desc "run bundle install and ensure all gem requirements are met"
+  task :install do
+    run "cd #{current_path} && bundle install  --deployment"
+  end
+
+end
+before "deploy:restart", "bundle:install"
