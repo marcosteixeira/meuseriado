@@ -14,11 +14,6 @@ server "192.241.234.24", :app, :web, :db, :primary => true
 set :stages, ["production"]
 set :default_stage, "production"
 
-# if you want to clean up old releases on each deploy uncomment this:
-# after "deploy:restart", "deploy:cleanup"
-task :after_update_code, :roles => [:web, :db, :app] do
-  run "chown www:data:www:data -R #{deploy_to}" 
-end
 # if you're still using the script/reaper helper you will need
 # these http://github.com/rails/irs_process_scripts
 namespace :deploy do
@@ -29,13 +24,8 @@ end
 after :deploy, 'deploy:database'
 namespace :deploy do
     task :database, :roles => :app do
-        run "cp #{deploy_to}/shared/database.yml #{current_path}/config/"
+        run "cp #{deploy_to}shared/database.yml #{current_path}/config/"
     end
-end
-
-after "deploy:setup", :setup_group
-task :setup_group do
-  run "chown -R :www:data #{deploy_to} && chmod -R g+s #{deploy_to}"
 end
 # If you are using Passenger mod_rails uncomment this:
 #namespace :deploy do
