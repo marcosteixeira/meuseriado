@@ -1,5 +1,6 @@
 set :application, "meuseriado"
 set :user, "marcosteixeira"
+set :group, "www-data"
 set :repository, "git@github.com:marcosteixeira/meuseriado.git"
 set :scm, "git"
 set :deploy_to, "/home/marcosteixeira/meuseriado/"
@@ -30,6 +31,11 @@ namespace :deploy do
     task :database, :roles => :app do
         run "cp #{deploy_to}/shared/database.yml #{current_path}/config/"
     end
+end
+
+after "deploy:setup", :setup_group
+task :setup_group do
+  run "chown -R :www:data #{deploy_to} && chmod -R g+s #{deploy_to}"
 end
 # If you are using Passenger mod_rails uncomment this:
 #namespace :deploy do

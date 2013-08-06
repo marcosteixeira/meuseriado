@@ -10,5 +10,6 @@ module Meuseriado
   class Application < Rails::Application
     config.i18n.default_locale = :'pt-BR'
     config.encoding = "utf-8"
+    config.assets.enabled = true
   end
 end
