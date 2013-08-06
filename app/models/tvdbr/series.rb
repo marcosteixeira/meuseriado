@@ -42,7 +42,7 @@ module Tvdbr
         if hash["Image"]
           personagem.imagem = Serie.salvar_imagem("http://www.thetvdb.com/banners/#{hash["Image"]}", hash["Image"].split("/").last, "personagem")
         else
-          personagem.imagem = "../assets/series/imagem_padrao.jpg"
+          personagem.imagem = "../images/series/imagem_padrao.jpg"
         end
              
         personagem.nome = hash["Role"]
