@@ -133,7 +133,6 @@ ActiveRecord::Schema.define(version: 20130731013517) do
   end
 
   add_index "temporadas", ["serie_id"], name: "temporadas_serie_id_fk", using: :btree
-  add_index "temporadas", ["slug"], name: "index_temporadas_on_slug", unique: true, using: :btree
 
   create_table "users", force: true do |t|
     t.string   "email",                  default: "",                                   null: false

@@ -8,7 +8,6 @@ class CreateTemporadas < ActiveRecord::Migration
       t.timestamps
     end
     
-    add_index :temporadas, :slug, unique: true
     add_foreign_key(:temporadas, :series)
   end
 end
