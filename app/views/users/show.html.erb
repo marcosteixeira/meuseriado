@@ -14,7 +14,7 @@
    		<img alt="<%= @user.slug %>-grande" src='<%= @user.imagem_formatada%>'>
 
    		<% if user_signed_in? && @user.id == current_user.id %>
-   			<a href="/users/edit" class="small button large-12 columns">Editar perfil</a>
+   			<%= link_to 'Editar perfil',edit_user_registration_path, { :class=>"small button large-12 columns" } %>
    		<% else %> 
    			<a href="#" class="small button large-12 success columns primeiro-botao">Adicionar como amigo</a>
    		<% end %> 

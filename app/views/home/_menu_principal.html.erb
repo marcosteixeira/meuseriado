@@ -20,7 +20,7 @@
 	          <div class="painel-logado right">
 	             <a href="#" data-dropdown="dropdown-usuario-logado"><img src='<%= current_user.imagem_formatada %>'> <%= current_user.name %></a>
 	               <ul id="dropdown-usuario-logado" class="f-dropdown" data-dropdown-content>
-	                <li><%= link_to 'Minha página pessoal',controller: 'users' ,  action: 'show', id: current_user %></li>
+	                <li><%= link_to 'Minha página pessoal', user_path(current_user) %></li>
 	                <li><%= link_to "Sair", destroy_user_session_path, method: :get  %></li>
 	              </ul>
 	           </div>
@@ -119,7 +119,7 @@
   
   $(function() {
     $( "#pesquisa" ).catcomplete({
-      source: "/autocomplete/index",
+      source: "autocomplete/index",
       minLength: 1,
       delay: 0,
       select: function( event, ui ) {

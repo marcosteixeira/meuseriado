@@ -22,7 +22,7 @@ class User < ActiveRecord::Base
 	
 	def imagem_formatada
 	  if self.avatar_file_name
-	    "../assets/series/users/#{self.id}/#{self.avatar_file_name}"
+	    "../series/users/#{self.id}/#{self.avatar_file_name}"
 	  else
 	    self.imagem
 	  end
