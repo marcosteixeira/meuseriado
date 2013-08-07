@@ -11,6 +11,7 @@ set :rails_env, :production
 # Or: `accurev`, `bzr`, `cvs`, `darcs`, `git`, `mercurial`, `perforce`, `subversion` or `none`
 server "192.241.234.24", :app, :web, :db, :primary => true
 set :deploy_via, :copy
+set :copy_exclude, [".git/*", ".svn/*", "app/images/series/*"]
 set :stages, ["production"]
 set :default_stage, "production"
 
