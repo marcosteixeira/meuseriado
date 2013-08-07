@@ -12,7 +12,7 @@ class User < ActiveRecord::Base
          
   has_attached_file :avatar,
       :path => ":rails_root/app/assets/images/series/users/:id/:filename",
-      :url => "../assets/images/series/:id/:filename"
+      :url => "/images/series/:id/:filename"
       
   has_many :avaliacoes, :dependent => :delete_all
 	
