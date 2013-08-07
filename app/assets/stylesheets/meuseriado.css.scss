@@ -115,7 +115,7 @@ section.active p.nome-temporada{
 }
 .logo-meuseriado{
   text-indent:-9999px;
-  background:url("meuseriado.png") no-repeat;
+  background:url("/images/meuseriado.png") no-repeat;
   width: 220px;
   margin-top: 12px !important;
 }
@@ -304,4 +304,22 @@ section.active p.nome-temporada{
   
 #dropdown-usuario-logado li:hover a{
   background-color:#ededed!important;
+}
+.estrelas-pagina-interior{
+  display:inline;
+  margin-bottom:20px;
+}
+.infos-interior{
+  min-height:30px;
+  color:#a7a7a7;
+  font-size:13px;
+}
+.nota-numerica{
+  font-weight:bold;
+  color:#333;
+  font-size:16px;
+  margin-left: 5px;
+}
+.data-lancamento-interno, .infos-interior{
+  font-size:15px;
 }
