@@ -3,7 +3,11 @@
 	<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
 
 	<head>
-	  <title>MeuSeriado</title>
+	  <% if @title %>
+	  	<title>MeuSeriado - <%= @title%></title>
+	  <% else %>
+	  	<title>MeuSeriado</title>
+	  <% end %>
 	  <meta charset="utf-8" />
 	  <meta name="viewport" content="width=device-width" />
 	  <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>

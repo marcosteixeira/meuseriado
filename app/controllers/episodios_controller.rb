@@ -1,3 +1,4 @@
+#coding: utf-8
 class EpisodiosController < ApplicationController
   
   before_filter :authenticate_user!, :except => [:show, :index]
@@ -8,6 +9,7 @@ class EpisodiosController < ApplicationController
 
   def show
     @episodio = Episodio.friendly.find(params[:id])
+    @title = "#{@episodio.serie.nome} - Temporada #{@episodio.temporada} - Episódio #{@episodio.numero} - #{@episodio.nome}"
   end
   
   def marcar
