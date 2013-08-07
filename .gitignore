@@ -1,4 +1,5 @@
 #ignorar pastas
+app/assets/images/series/**/*
 app/assets/images/series/banner/**/*
 app/assets/images/series/elenco/**/*
 app/assets/images/series/episodio/**/*
