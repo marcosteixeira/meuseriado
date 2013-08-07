@@ -32,7 +32,7 @@ namespace :bundle do
 
   desc "run bundle install and ensure all gem requirements are met"
   task :install do
-    run "cd #{current_path} && bundle install  --deployment && rake db:migrate RAILS_ENV=\"production\""
+    run "cd #{current_path} && bundle install  --deployment && rake db:migrate RAILS_ENV=production"
   end
 
 end
