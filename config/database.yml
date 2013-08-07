@@ -34,6 +34,6 @@ production:
   encoding: utf8
   database: meuseriado_production
   pool: 5
-  username: root
-  password:
+  username: mallandro
+  password: capadocia
   socket: /var/run/mysqld/mysqld.sock
