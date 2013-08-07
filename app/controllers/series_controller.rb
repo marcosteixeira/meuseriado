@@ -103,6 +103,8 @@ class SeriesController < ApplicationController
         redirect_to(action: "show", id: @serie)
       end
     end
+
+    @title = @serie.nome
   end
   
   def salvar(serie)
