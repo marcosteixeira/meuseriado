@@ -73,7 +73,7 @@ class SeriesController < ApplicationController
               if s.poster
                 serie_pesquisa.poster = Serie.salvar_imagem(s.poster,s.poster.split("/").last , "pesquisa")
               else
-                serie_pesquisa.poster = "../images/series/imagem_padrao.jpg"  
+                serie_pesquisa.poster = "/images/series/imagem_padrao.jpg"  
               end
               @series << serie_pesquisa
               @iniciais = cria_array_iniciais(@series)
@@ -124,13 +124,13 @@ class SeriesController < ApplicationController
     if serie.banner
       nova_serie.banner = Serie.salvar_imagem(serie.banner,serie.banner.split("/").last , "banner")
     else
-      nova_serie.banner = "../images/series/imagem_padrao.jpg"  
+      nova_serie.banner = "/images/series/imagem_padrao.jpg"  
     end
     nova_serie.sinopse = serie.overview
     if serie.fanart 
       nova_serie.fanart = Serie.salvar_imagem(serie.fanart,serie.fanart.split("/").last , "fanart")
     else
-      nova_serie.fanart= "../images/series/imagem_padrao.jpg"    
+      nova_serie.fanart= "/images/series/imagem_padrao.jpg"    
     end
     nova_serie.estreia = serie.first_aired
     nova_serie.id_imdb = serie.imdb_id
@@ -138,7 +138,7 @@ class SeriesController < ApplicationController
     if serie.poster 
       nova_serie.poster = Serie.salvar_imagem(serie.poster,serie.poster.split("/").last , "serie")
     else
-      nova_serie.poster = "../images/series/imagem_padrao.jpg"
+      nova_serie.poster = "/images/series/imagem_padrao.jpg"
     end
     nova_serie.nota = serie.rating
     nova_serie.duracao_episodio = serie.runtime
@@ -194,7 +194,7 @@ class SeriesController < ApplicationController
         if episodio_tvdb.filename
           episodio.banner = Serie.salvar_imagem(episodio_tvdb.filename,episodio_tvdb.filename.split("/").last , "episodio")
         else
-          episodio.banner = "../images/series/imagem_padrao.jpg"
+          episodio.banner = "/images/series/imagem_padrao.jpg"
         end
              
         episodio.id_imdb = episodio_tvdb.imdb_id

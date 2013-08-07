@@ -436,9 +436,9 @@
 
   $.fn.raty.defaults = {
     cancel        : false,
-    cancelHint    : 'img/Cancel this rating!',
-    cancelOff     : '../assets/images/cancel-off.png',
-    cancelOn      : '../assets/images/cancel-on.png',
+    cancelHint    : '/images/Cancel this rating!',
+    cancelOff     : '/images/cancel-off.png',
+    cancelOn      : '/images/cancel-on.png',
     cancelPlace   : 'left',
     click         : undefined,
     half          : false,
@@ -459,15 +459,15 @@
     single        : false,
     size          : 16,
     space         : true,
-    starHalf      : "../images/star-half.png",
-    starOff       : "../images/star-off.png",
-    starOn        : "../images/star-on.png",
+    starHalf      : '/images/star-half.png',
+    starOff       : '/images/star-off.png',
+    starOn        : '/images/star-on.png',
     target        : undefined,
     targetFormat  : '{score}',
     targetKeep    : false,
     targetText    : '',
     targetType    : 'hint',
-    width         : 120
+    width         : 150
   };
 
 })(jQuery);

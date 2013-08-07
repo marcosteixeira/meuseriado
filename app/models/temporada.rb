@@ -5,6 +5,7 @@ class Temporada < ActiveRecord::Base
   
   belongs_to :serie
   has_many :episodios, :through => :serie
+  has_many :avaliacoes, as: :avaliavel
 
   def episodios_ordenados_exibicao
     self.serie.episodios.where({temporada: self.temporada }).order("temporada desc, numero desc")

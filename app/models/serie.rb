@@ -64,9 +64,9 @@ class Serie < ActiveRecord::Base
           file.write open(url).read
         end
       rescue 
-        return "../images/series/imagem_padrao.jpg"
+        return "/images/series/imagem_padrao.jpg"
       end
-      "../images/series/#{pasta}#{nome_imagem}"
+      "/images/series/#{pasta}#{nome_imagem}"
     end
   end
 end
