@@ -10,7 +10,7 @@ set :rails_env, :production
 # set :scm, :git # You can set :scm explicitly or Capistrano will make an intelligent guess based on known version control directory names
 # Or: `accurev`, `bzr`, `cvs`, `darcs`, `git`, `mercurial`, `perforce`, `subversion` or `none`
 server "192.241.234.24", :app, :web, :db, :primary => true
-
+set :deploy_via, :copy
 set :stages, ["production"]
 set :default_stage, "production"
 
