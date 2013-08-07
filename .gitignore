@@ -1,13 +1,4 @@
 #ignorar pastas
-app/assets/images/series/**/*
-app/assets/images/series/banner/**/*
-app/assets/images/series/elenco/**/*
-app/assets/images/series/episodio/**/*
-app/assets/images/series/fanart/**/*
-app/assets/images/series/pesquisa/**/*
-app/assets/images/series/poster/**/*
-app/assets/images/series/season/**/*
-app/assets/images/series/users/**/*
 log/*.log
 tmp/**/*
 *.rbc
