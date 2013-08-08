@@ -1,4 +1,5 @@
 #ignorar pastas
+app/assets/images/series/**/*.jpg
 log/*.log
 tmp/**/*
 *.rbc

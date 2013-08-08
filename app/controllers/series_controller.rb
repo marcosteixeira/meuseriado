@@ -22,69 +22,69 @@ class SeriesController < ApplicationController
   end
   
   def buscar_series(nome_serie=nil)
-
+    
     nome_serie||= params['pesquisa']
     id_serie = params['id_serie_search']
     
-    if (nome_serie.nil? || nome_serie.blank?) && (id_serie.nil? || nome_serie.blank? ) 
+    if (nome_serie.nil? || nome_serie.blank?) && (id_serie.nil? || id_serie.blank? ) 
       redirect_to action: 'index'
     else
-      
-      tvdb = Tvdbr::Client.new
         series=[]
         if id_serie
-          serie_by_id = tvdb.find_series_by_id(id_serie)
-          series << serie_by_id
-        else
-          series = tvdb.fetch_series_from_data(:title => nome_serie)
-        end
-        
-        if series.empty?
-          flash[:notice] = "Nenhuma série encontrada com esse nome."
-          redirect_to action: 'index'
-        else
-        
-          if (series.first.series_name.downcase.eql? nome_serie.downcase || series.size == 1) 
-            
-            serie = tvdb.find_series_by_id(series.first.id)
-            serie_banco = Serie.find_by_nome(serie.series_name)
-         
-            if serie_banco
+          serie_banco = Serie.find_by_id(id_serie)
+          if serie_banco
               redirect_to(action: "show", id: serie_banco)
-            else 
-              serie_banco = salvar serie
+          else 
+              tvdb = Tvdbr::Client.new
+              serie_by_id = tvdb.find_series_by_id(id_serie.to_i)
+              serie_banco = salvar serie_by_id
               redirect_to(action: "show", id: serie_banco)
-            end
-          else
-            
-          @series= []
-          for s in series
-            if series.size <= 3
-              serie_pesquisa = salvar s
-              params['search'] = false
-            else
-              serie_pesquisa = Serie.new
-              params['search'] = true
-            end
-            if s
-              serie_pesquisa.nome = s.series_name
-              serie_pesquisa.id = s.id
-              serie_pesquisa.nota = s.rating
-              if s.poster
-                serie_pesquisa.poster = Serie.salvar_imagem(s.poster,s.poster.split("/").last , "pesquisa")
-              else
-                serie_pesquisa.poster = "/images/series/imagem_padrao.jpg"  
-              end
-              @series << serie_pesquisa
-              @iniciais = cria_array_iniciais(@series)
-            end
           end
-          render action: "index"
+        else
+            serie_banco = Serie.find_by_nome(nome_serie)
+            if serie_banco
+                redirect_to(action: "show", id: serie_banco)
+            else 
+                  tvdb = Tvdbr::Client.new
+                  series = tvdb.fetch_series_from_data(:title => nome_serie)
+                  if series.empty?
+                    flash[:notice] = "Nenhuma série encontrada com esse nome."
+                    redirect_to action: 'index'
+                  else
+                        if (series.first.series_name.downcase.eql? nome_serie.downcase || series.size == 1)
+                            puts "SERIE UNICA, SALVANDO SERIE"
+                            serie_banco = salvar series.first
+                            puts "REDIRECIONANDO PARA SHOW"
+                            redirect_to(action: "show", id: serie_banco)
+                        else
+                             @series= []
+                             for s in series
+                                   if series.size <= 3
+                                    serie_pesquisa = salvar s
+                                    params['search'] = false
+                                   else
+                                    serie_pesquisa = Serie.new
+                                    serie_pesquisa.nome = s.series_name
+                                    serie_pesquisa.id = s.id
+                                    serie_pesquisa.nota = s.rating
+                                        if s.poster
+                                          serie_pesquisa.poster = Serie.salvar_imagem(s.poster,s.poster.split("/").last , "pesquisa")
+                                        else
+                                          serie_pesquisa.poster = "/images/series/imagem_padrao.jpg"  
+                                        end
+                                    params['search'] = true
+                                   end
+                                   @series << serie_pesquisa
+                                   @iniciais = cria_array_iniciais(@series)
+                             end
+                             render action: "index"
+                        end
+                  end
+            end
         end
-      end
     end
   end
-  
+
   def show
     if params[:id].to_i == 0
       @serie = Serie.friendly.find_by_slug(params[:id])

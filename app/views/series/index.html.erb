@@ -79,15 +79,16 @@ Portfolio.doSort();
 	           <div class="large-3 columns">
 	              <div class="miniatura-resultados" data-cat='<%= serie.nome[0,1]%>'>
 	              	<% if params['search'] %>
-	                	<a data-method="post" href='/series?id_serie_search=<%= serie.id %>;pesquisa=<%= serie.nome %>' rel="nofollow">
+	              		<%= link_to image_tag(serie.poster), series_path(:id_serie_search => serie.id), :method => :post %>
+	                	<!-- <a data-method="post" href='/series?id_serie_search=<%= serie.id %>;pesquisa=<%= serie.nome %>' rel="nofollow"> -->
 	                <% else %>
-	                	<a href="/series/<%= serie.slug%>">
-	                <% end %>
+                	<a href="/series/<%= serie.slug%>">
 	                	<img src='<%= serie.poster%>' height="203" width="298">
 	            	</a>
+	                <% end %>
 	                 <div class="descricao-item-listado">
 	                 	<% if params['search'] %>
-							<a data-method="post" href='/series?id_serie_search=<%= serie.id %>;pesquisa=<%= serie.nome %>' rel="nofollow"><h3><%= serie.nome%></h3></a>
+	                 		<%= link_to serie.nome, series_path(:id_serie_search => serie.id), :method => :post %>
 	                  	<% else %>
 	                  		<a href="/series/<%= serie.slug%>"><h3><%= serie.nome%></h3></a>
 	                  	<% end %>
