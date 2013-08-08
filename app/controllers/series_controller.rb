@@ -22,29 +22,36 @@ class SeriesController < ApplicationController
   end
   
   def buscar_series(nome_serie=nil)
-    
+    puts "CREATE"    
     nome_serie||= params['pesquisa']
     id_serie = params['id_serie_search']
-    
+      
     if (nome_serie.nil? || nome_serie.blank?) && (id_serie.nil? || id_serie.blank? ) 
+        puts "TUDO NULL"    
       redirect_to action: 'index'
     else
         series=[]
         if id_serie
           serie_banco = Serie.find_by_id(id_serie)
+          puts "Passou id serie"
           if serie_banco
+          puts "Serie ja existe banco"
               redirect_to(action: "show", id: serie_banco)
           else 
+              puts "Serie nao existe, buscando série"
               tvdb = Tvdbr::Client.new
               serie_by_id = tvdb.find_series_by_id(id_serie.to_i)
               serie_banco = salvar serie_by_id
               redirect_to(action: "show", id: serie_banco)
           end
         else
+            puts "Passou nome serie, buscando série no banco" 
             serie_banco = Serie.find_by_nome(nome_serie)
             if serie_banco
+                puts "Serie ja existe"
                 redirect_to(action: "show", id: serie_banco)
-            else 
+            else
+                  puts "Serie nao existe buscando na api" 
                   tvdb = Tvdbr::Client.new
                   series = tvdb.fetch_series_from_data(:title => nome_serie)
                   if series.empty?
@@ -60,9 +67,11 @@ class SeriesController < ApplicationController
                              @series= []
                              for s in series
                                    if series.size <= 3
+                                    puts "retornou mais de 3 resultados"
                                     serie_pesquisa = salvar s
                                     params['search'] = false
                                    else
+                                    puts "retornou menos de 3 resultados"
                                     serie_pesquisa = Serie.new
                                     serie_pesquisa.nome = s.series_name
                                     serie_pesquisa.id = s.id
