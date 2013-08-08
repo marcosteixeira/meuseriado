@@ -1,5 +1,9 @@
 #coding: utf-8
 class SeriesController < ApplicationController
+
+  def my_logger
+    @@my_logger ||= Logger.new("#{Rails.root}/log/series.log")
+  end
   
   require 'open-uri'  
   def index
@@ -22,36 +26,40 @@ class SeriesController < ApplicationController
   end
   
   def buscar_series(nome_serie=nil)
-    puts "CREATE"    
+    my_logger.info("Iniciando criação de série")    
     nome_serie||= params['pesquisa']
     id_serie = params['id_serie_search']
-      
+    
+    my_logger.info("ID: #{id_serie}, Nome: #{nome_serie}")    
+          
     if (nome_serie.nil? || nome_serie.blank?) && (id_serie.nil? || id_serie.blank? ) 
-        puts "TUDO NULL"    
+        my_logger.info("Todas as informações estão vazias")    
       redirect_to action: 'index'
     else
         series=[]
         if id_serie
           serie_banco = Serie.find_by_id(id_serie)
-          puts "Passou id serie"
+          my_logger.info("Id série informado")
           if serie_banco
-          puts "Serie ja existe banco"
+          my_logger.info("Serie ja existe banco")
               redirect_to(action: "show", id: serie_banco)
           else 
-              puts "Serie nao existe, buscando série"
+              my_logger.info("Serie nao existe, buscando série na api")
               tvdb = Tvdbr::Client.new
               serie_by_id = tvdb.find_series_by_id(id_serie.to_i)
+              my_logger.info("Salvando série no banco")
               serie_banco = salvar serie_by_id
+              my_logger.info("Redirecionando para show")
               redirect_to(action: "show", id: serie_banco)
           end
         else
-            puts "Passou nome serie, buscando série no banco" 
+            my_logger.info("Passou nome serie, buscando série no banco" )
             serie_banco = Serie.find_by_nome(nome_serie)
             if serie_banco
-                puts "Serie ja existe"
+                my_logger.info("Serie ja existe")
                 redirect_to(action: "show", id: serie_banco)
             else
-                  puts "Serie nao existe buscando na api" 
+                  my_logger.info("Serie nao existe buscando na api" )
                   tvdb = Tvdbr::Client.new
                   series = tvdb.fetch_series_from_data(:title => nome_serie)
                   if series.empty?
@@ -59,19 +67,19 @@ class SeriesController < ApplicationController
                     redirect_to action: 'index'
                   else
                         if (series.first.series_name.downcase.eql? nome_serie.downcase || series.size == 1)
-                            puts "SERIE UNICA, SALVANDO SERIE"
+                            my_logger.info("SERIE UNICA, SALVANDO SERIE")
                             serie_banco = salvar series.first
-                            puts "REDIRECIONANDO PARA SHOW"
+                            my_logger.info("REDIRECIONANDO PARA SHOW")
                             redirect_to(action: "show", id: serie_banco)
                         else
                              @series= []
                              for s in series
                                    if series.size <= 3
-                                    puts "retornou mais de 3 resultados"
+                                    my_logger.info("retornou mais de 3 resultados")
                                     serie_pesquisa = salvar s
                                     params['search'] = false
                                    else
-                                    puts "retornou menos de 3 resultados"
+                                    my_logger.info("retornou menos de 3 resultados")
                                     serie_pesquisa = Serie.new
                                     serie_pesquisa.nome = s.series_name
                                     serie_pesquisa.id = s.id
