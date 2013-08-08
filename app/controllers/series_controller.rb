@@ -7,6 +7,11 @@ class SeriesController < ApplicationController
   
   require 'open-uri'  
   def index
+  
+    if params['id_serie_search']
+      buscar_series
+    end
+    
     @series||= Serie.order(:nome)
     @iniciais = cria_array_iniciais(@series)
   end
