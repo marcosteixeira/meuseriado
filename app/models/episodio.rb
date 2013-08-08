@@ -9,4 +9,7 @@ class Episodio < ActiveRecord::Base
    [[ self.serie.nome, self.temporada, self.numero, self.nome],
    [ self.serie.nome, self.temporada, self.numero]]
   end
+  def nome_episodio_formatado
+    "#{self.serie.nome} S%02dE%02d" % [self.temporada, self.numero]
+  end
 end

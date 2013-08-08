@@ -1,4 +1,6 @@
-<img src="<%= temporada.imagem%>" alt="temporada<%= temporada.temporada%>" class="imagem-temporada">
+<a href="/series/<%= temporada.serie.slug%>/temporadas/<%= temporada.temporada%>">
+	<img src="<%= temporada.imagem%>" alt="temporada<%= temporada.temporada%>" class="imagem-temporada">
+</a>
 <p class="title nome-temporada" data-section-title><a href="#">Temporada <%= temporada.temporada %> <span class="right">Média Geral:<%= temporada.media_geral %></span></a></p>
 <div class="content" data-section-content>
 	<br>

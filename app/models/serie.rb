@@ -12,7 +12,7 @@ class Serie < ActiveRecord::Base
   has_and_belongs_to_many :generos
   
   def personagens_imagem
-    self.personagens.where("imagem is not null" ).limit(8);
+    self.personagens.where("imagem is not null" );
   end
   
   def temporadas_validas_ordenadas

@@ -20,7 +20,7 @@
    		<a href="#" class="small button secondary large-12 columns">Escrever uma avaliação</a>
    		<h4>Elenco:</h4>
    		<ul class="lista-elenco">
-   			<% @serie.personagens_imagem.each do |p| %>
+   			<% @serie.personagens_imagem.limit(8).each do |p| %>
    				<li><img src="<%= p.imagem %>" alt="<%= p.slug%>" class="imagem-elenco"></li>
    			<% end %>
    		</ul>

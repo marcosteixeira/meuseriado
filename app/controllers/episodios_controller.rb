@@ -9,9 +9,9 @@ class EpisodiosController < ApplicationController
 
   def show
     @episodio = Episodio.friendly.find(params[:id])
-    @title = "#{@episodio.serie.nome} - Temporada #{@episodio.temporada} - Episódio #{@episodio.numero} - #{@episodio.nome}"
+    @title = "#{@episodio.nome_episodio_formatado} - Temporada #{@episodio.temporada} Episódio #{@episodio.numero} - #{@episodio.nome}"
   end
-  
+
   def marcar
     @episodio = Episodio.friendly.find(params[:id])
     

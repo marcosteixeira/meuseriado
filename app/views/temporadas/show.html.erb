@@ -24,7 +24,7 @@
 
 		   		<h4>Elenco:</h4>
    		<ul class="lista-elenco">
-			<% @temporada.serie.personagens_imagem.each do |p| %>
+			<% @temporada.serie.personagens_imagem.limit(4).each do |p| %>
    				<li><img src="<%= p.imagem %>" alt="<%= p.slug%>" class="imagem-elenco"></li>
    			<% end %>
    		</ul>
@@ -43,7 +43,7 @@
    			</h1>
    		</hgroup>
    		<div class="row infos-interior">
-   			<div class="large-5 columns">Média geral:<div id="star" class="estrelas-pagina-interior"> </div> <span class="nota-numerica"><%= @temporada.media_geral%></span></div> <div class="large-7 columns data-lancamento-interno">Lançamento: <b>30/04/2013</b></div>
+   			<div class="large-5 columns">Média geral:<div id="star" class="estrelas-pagina-interior"> </div> <span class="nota-numerica"><%= @temporada.media_geral%></span></div> <div class="large-7 columns data-lancamento-interno">Lançamento: <b><%= date @temporada.data_lancamento%></b></div>
    		</div>
    		<p class="justify"></p>
 
