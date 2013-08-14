@@ -135,8 +135,8 @@ ActiveRecord::Schema.define(version: 20130809141700) do
   add_index "temporadas", ["serie_id"], name: "temporadas_serie_id_fk", using: :btree
 
   create_table "users", force: true do |t|
-    t.string   "email",                  default: "",                                   null: false
-    t.string   "encrypted_password",     default: "",                                   null: false
+    t.string   "email",                  default: "",                                 null: false
+    t.string   "encrypted_password",     default: "",                                 null: false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
@@ -151,7 +151,7 @@ ActiveRecord::Schema.define(version: 20130809141700) do
     t.string   "provider"
     t.string   "uid"
     t.string   "slug"
-    t.string   "imagem",                 default: "../assets/series/imagem_padrao.jpg"
+    t.string   "imagem",                 default: "/images/series/imagem_padrao.jpg"
     t.string   "avatar_file_name"
     t.string   "avatar_content_type"
     t.integer  "avatar_file_size"

@@ -13,7 +13,7 @@ Meuseriado::Application.routes.draw do
   
   resources :episodios do
     member do
-      post :marcar
+      get :marcar
     end
   # url: /episodios/:id/marcar
   # named_route: marcar_episodio_path
@@ -21,7 +21,7 @@ Meuseriado::Application.routes.draw do
   
   resources :series do
     member do
-      post :adicionar
+      get :adicionar
     end
   # url: /series/:id/adicionar
   # named_route: adicionar_episodio_path

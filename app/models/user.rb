@@ -15,6 +15,7 @@ class User < ActiveRecord::Base
       :url => "/images/series/:id/:filename"
       
   has_many :avaliacoes, :dependent => :delete_all
+	has_many :series, :through => :avaliacoes, :source => :avaliavel, :source_type => "Serie"
 	
 	def user_params
 	    params.require(:user).permit(:name, :provider, :uid, :name, :avatar)
@@ -53,6 +54,10 @@ class User < ActiveRecord::Base
             )
     end
     user
+  end
+  
+  def viu_serie?(serie)
+     self.series.include? serie
   end
   
 end

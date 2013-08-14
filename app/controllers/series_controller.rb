@@ -1,6 +1,8 @@
 #coding: utf-8
 class SeriesController < ApplicationController
-
+  
+  before_filter :authenticate_user!, :except => [:show, :index, :my_logger, :create]
+  
   def my_logger
     @@my_logger ||= Logger.new("#{Rails.root}/log/series.log")
   end
@@ -252,6 +254,21 @@ class SeriesController < ApplicationController
       temporada.imagem = Serie.salvar_imagem(url, nome_imagem, "temporada")
       temporada.save
     end
+  end
+  
+  def adicionar
+    @serie = Serie.friendly.find(params[:id])
+    
+    aval = Avaliacao.find_by_sql("select * from avaliacoes where avaliavel_type='Serie' and avaliavel_id=#{@serie.id} and user_id=#{current_user.id} ")
+
+    if aval.empty? 
+      aval = Avaliacao.new
+      aval.user = current_user
+      @serie.avaliacoes << aval
+      @serie.save
+    end 
+    redirect_to(action: "show", id: @serie)
+
   end
   
 end
