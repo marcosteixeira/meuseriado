@@ -12,10 +12,6 @@ Meuseriado::Application.routes.draw do
   end
   
   resources :episodios do
-    resources :avaliacoes
-  end
-  
-  resources :episodios do
     member do
       post :marcar
     end
