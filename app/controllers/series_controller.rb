@@ -8,9 +8,9 @@ class SeriesController < ApplicationController
   require 'open-uri'  
   def index
   
-    # if params['id_serie_search']
-      # buscar_series
-    # end
+    if params['id_serie_search']
+      buscar_series
+    end
     
     @series||= Serie.order(:nome)
     @iniciais = cria_array_iniciais(@series)
@@ -52,10 +52,16 @@ class SeriesController < ApplicationController
               my_logger.info("Serie nao existe, buscando série na api")
               tvdb = Tvdbr::Client.new
               serie_by_id = tvdb.find_series_by_id(id_serie.to_i)
-              my_logger.info("Salvando série no banco")
-              serie_banco = salvar serie_by_id
-              my_logger.info("Redirecionando para show")
-              redirect_to(action: "show", id: serie_banco)
+              if serie_by_id
+                my_logger.info("Salvando série no banco")
+                serie_banco = salvar serie_by_id
+                my_logger.info("Redirecionando para show")
+                redirect_to(action: "show", id: serie_banco)
+              else
+                my_logger.info("Serie nao encontrada mediante id passado")
+                flash[:notice] = "Nenhuma série encontrada."
+                redirect_to action: 'index'
+              end
           end
         else
             my_logger.info("Passou nome serie, buscando série no banco" )

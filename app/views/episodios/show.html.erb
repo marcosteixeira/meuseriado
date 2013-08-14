@@ -1,8 +1,5 @@
 <div class="row">
 	<div class="large-12 columns">
-	 
-	    <!-- Desktop Slider -->
-	 
 	     <ul class="breadcrumbs">
 	      <li><a href="/">meuseriado</a></li>
 	      <li><a href="/series">Séries</a></li>
@@ -16,8 +13,7 @@
 <div class="row">
 	<div class="large-4 columns">
 		<img src='<%=@episodio.banner %>' alt="imagem-episodio">
-		<!-- <a href='/episodios/<%= @episodio.slug%>/marcar' class="small button large-12 success columns primeiro-botao" data-method="post" rel="nofollow">Eu vi este episódio!</a> -->
-		<li><%= link_to "Eu vi esse episódio!", marcar_episodio_path, method: :post  %></li>
+		<a href='/episodios/<%= @episodio.slug%>/marcar' class="small button large-12 success columns primeiro-botao" data-method="post" rel="nofollow">Eu vi este episódio!</a>
 		<a href="#" class="small button secondary large-12 columns">Vou assistir depois</a> 
 		<a href="#" class="small button secondary large-12 columns">Escrever uma avaliação</a>
 		<h4>Quem viu este episódio:</h4>
