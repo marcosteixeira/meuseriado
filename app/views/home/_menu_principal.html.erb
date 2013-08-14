@@ -120,7 +120,7 @@
   $(function() {
     $( "#pesquisa" ).catcomplete({
       source: "/autocomplete/index",
-      minLength: 1,
+      minLength: 3,
       delay: 0,
       select: function( event, ui ) {
         $( "#pesquisa" ).val( ui.item.label );
