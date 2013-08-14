@@ -84,17 +84,19 @@ class SeriesController < ApplicationController
                                     serie_pesquisa = salvar s
                                     params['search'] = false
                                    else
-                                    my_logger.info("retornou menos de 3 resultados")
-                                    serie_pesquisa = Serie.new
-                                    serie_pesquisa.nome = s.series_name
-                                    serie_pesquisa.id = s.id
-                                    serie_pesquisa.nota = s.rating
-                                        if s.poster
-                                          serie_pesquisa.poster = Serie.salvar_imagem(s.poster,s.poster.split("/").last , "pesquisa")
-                                        else
-                                          serie_pesquisa.poster = "/images/series/imagem_padrao.jpg"  
-                                        end
-                                    params['search'] = true
+                                     if s 
+                                        my_logger.info("retornou menos de 3 resultados")
+                                        serie_pesquisa = Serie.new
+                                        serie_pesquisa.nome = s.series_name
+                                        serie_pesquisa.id = s.id
+                                        serie_pesquisa.nota = s.rating
+                                            if s.poster
+                                              serie_pesquisa.poster = Serie.salvar_imagem(s.poster,s.poster.split("/").last , "pesquisa")
+                                            else
+                                              serie_pesquisa.poster = "/images/series/imagem_padrao.jpg"  
+                                            end
+                                        params['search'] = true
+                                      end
                                    end
                                    @series << serie_pesquisa
                                    @iniciais = cria_array_iniciais(@series)

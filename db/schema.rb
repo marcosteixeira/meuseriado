@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130731013517) do
+ActiveRecord::Schema.define(version: 20130809141700) do
 
   create_table "atores", force: true do |t|
     t.string   "nome",       default: "", null: false
@@ -46,7 +46,7 @@ ActiveRecord::Schema.define(version: 20130731013517) do
     t.string   "banner"
     t.string   "id_imdb"
     t.text     "sinopse",           limit: 16777215
-    t.string   "atores_convidados"
+    t.text     "atores_convidados", limit: 16777215
     t.integer  "numero_absoluto"
     t.string   "nota"
     t.datetime "estreia"
