@@ -1,21 +1,32 @@
-<a href="/series/<%= temporada.serie.slug%>/temporadas/<%= temporada.temporada%>">
-	<img src="<%= temporada.imagem%>" alt="temporada<%= temporada.temporada%>" class="imagem-temporada">
-</a>
-<p class="title nome-temporada" data-section-title><a href="#">Temporada <%= temporada.temporada %> <span class="right">Média Geral:<%= temporada.media_geral %></span></a></p>
-<div class="content" data-section-content>
-	<br>
-	<ul class="lista-episodios">
-		<% temporada.episodios_ordenados_exibicao.each do |episodio| %>
-			<li>
-				<a href="/episodios/<%= episodio.slug%>"><%= episodio.numero%> - <%= episodio.nome%></a>
-				<span class="texto-pequeno">Exibição em <%= date(episodio.estreia)%> </span>	
-				<div class="nota-lista-serie">
-					<span class="left nota-label">Nota:</span>
-  					<div class="rating">
-						<span>☆</span><span>☆</span><span>☆</span><span>☆</span><span>☆</span><span>☆</span><span>☆</span><span>☆</span><span>☆</span><span>☆</span>
-					</div>	
-				</div>
-			</li>
-		<% end %>
-	</ul>
-</div>
+<% if temporada %>
+	<a href="/series/<%= temporada.serie.slug%>/temporadas/<%= temporada.temporada%>">
+		<img src="<%= temporada.imagem%>" alt="temporada<%= temporada.temporada%>" class="imagem-temporada">
+	</a>
+	<p class="title nome-temporada" data-section-title>
+		<a href="#">
+			<% if temporada.temporada == 0%>
+				Especiais
+			<% else %>
+				Temporada <%= temporada.temporada %>
+			<% end %>
+			<span class="right">Média Geral:<%= temporada.media_geral %></span>
+		</a>
+	</p>
+	<div class="content" data-section-content>
+		<br>
+		<ul class="lista-episodios">
+			<% temporada.episodios_ordenados_exibicao.each do |episodio| %>
+				<li>
+					<a href="/episodios/<%= episodio.slug%>"><%= episodio.numero%> - <%= episodio.nome%></a>
+					<span class="texto-pequeno">Exibição em <%= date(episodio.estreia)%> </span>	
+					<div class="nota-lista-serie">
+						<span class="left nota-label">Nota:</span>
+	  					<div class="rating">
+							<span>☆</span><span>☆</span><span>☆</span><span>☆</span><span>☆</span><span>☆</span><span>☆</span><span>☆</span><span>☆</span><span>☆</span>
+						</div>	
+					</div>
+				</li>
+			<% end %>
+		</ul>
+	</div>
+<% end%>

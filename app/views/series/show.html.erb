@@ -37,11 +37,14 @@
    		<p class="justify"><%= @serie.sinopse%></p>
 
 	  <div class="section-container accordion" data-section="accordion">
-	  		<% @serie.temporadas_validas_ordenadas.each do |temporada| %>
-	  			<section>
+			<% @serie.temporadas_validas_ordenadas.each do |temporada| %>
+				<section>
 					<%= listar_temporada temporada %>
 				</section>
-	    	<% end %>
+			<% end %>
+			<section>
+				<%= listar_temporada @serie.temporada_especial %>
+			</section>
 		</div>
    	</div>
    </div>

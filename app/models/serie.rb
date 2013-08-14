@@ -19,6 +19,14 @@ class Serie < ActiveRecord::Base
     self.temporadas.where("temporadas.temporada <> 0").order("temporadas.temporada desc")
   end
   
+  def temporada_especial
+    temporadas = self.temporadas.where("temporadas.temporada = 0")
+    
+    if (!temporadas.empty? && temporadas.size == 1)
+      temporadas.first
+    end
+  end
+  
   def media_geral
     self.avaliacoes.average('nota')
   end
