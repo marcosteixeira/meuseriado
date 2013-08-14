@@ -9,7 +9,20 @@ class Episodio < ActiveRecord::Base
    [[ self.serie.nome, self.temporada, self.numero, self.nome],
    [ self.serie.nome, self.temporada, self.numero]]
   end
+
   def nome_episodio_formatado
     "#{self.serie.nome} S%02dE%02d" % [self.temporada, self.numero]
   end
+  
+  def marcar_como_visto(user)
+    aval = Avaliacao.find_by_sql("select * from avaliacoes where avaliavel_type='Episodio' and avaliavel_id=#{self.id} and user_id=#{user.id} ")
+    
+    if aval.empty? 
+      aval = Avaliacao.new
+      aval.user = current_user
+      self.avaliacoes << aval
+      self.save
+    end 
+  end
+  
 end

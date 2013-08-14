@@ -16,6 +16,7 @@ class User < ActiveRecord::Base
       
   has_many :avaliacoes, :dependent => :delete_all
 	has_many :series, :through => :avaliacoes, :source => :avaliavel, :source_type => "Serie"
+	has_many :episodios, :through => :avaliacoes, :source => :avaliavel, :source_type => "Episodio"
 	
 	def user_params
 	    params.require(:user).permit(:name, :provider, :uid, :name, :avatar)
@@ -58,6 +59,10 @@ class User < ActiveRecord::Base
   
   def viu_serie?(serie)
      self.series.include? serie
+  end
+  
+  def viu_episodio?(episodio)
+     self.episodios.include? episodio
   end
   
 end

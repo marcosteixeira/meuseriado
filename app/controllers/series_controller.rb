@@ -271,4 +271,8 @@ class SeriesController < ApplicationController
 
   end
   
+  def marcar_toda
+    @serie = Serie.friendly.find(params[:id])
+  end
+  
 end

@@ -13,7 +13,11 @@
 <div class="row">
 	<div class="large-4 columns">
 		<img src='<%=@episodio.banner %>' alt="imagem-episodio">
-		<a href='/episodios/<%= @episodio.slug%>/marcar' class="small button large-12 success columns primeiro-botao" rel="nofollow">Eu vi este episódio!</a>
+		<% if (user_signed_in? && current_user.viu_episodio?(@episodio)) %>
+			<a href='#' class="small button large-12 success columns primeiro-botao" rel="nofollow">Já viu(Ver com o André as estrelinhas)</a>
+		<% else %>
+			<a href='/episodios/<%= @episodio.slug%>/marcar' class="small button large-12 success columns primeiro-botao" rel="nofollow">Eu vi este episódio!</a>
+		<% end %>
 		<a href="#" class="small button secondary large-12 columns">Vou assistir depois</a> 
 		<a href="#" class="small button secondary large-12 columns">Escrever uma avaliação</a>
 		<h4>Quem viu este episódio:</h4>
