@@ -19,7 +19,7 @@ class Episodio < ActiveRecord::Base
     
     if aval.empty? 
       aval = Avaliacao.new
-      aval.user = current_user
+      aval.user = user
       self.avaliacoes << aval
       self.save
     end 
