@@ -17,7 +17,7 @@ $('#star').raty({  });
    <div class="row conteudo-do-usuario">
    	<div class="large-4 columns">
    		<div class="foto-perfil">
-        	<img src='<%= @user.imagem%>' alt="<%= @user.name%>">
+        	<img src='<%= @user.imagem_formatada%>' alt="<%= @user.name%>">
       	</div>
    		<a href="#" class="small button large-12 success columns primeiro-botao">Adicionar como amigo</a> 
    		<a href="#" class="small button secondary large-12 columns">Enviar mensagem</a> 
@@ -28,7 +28,7 @@ $('#star').raty({  });
    			<% @user.amigos.each do |amigo|%>
 				<li>
 					<a href="/users/<%=amigo.slug%>" class="tip-user" >
-						<img src='<%=amigo.imagem%>' width="60" height="60" alt="<%=amigo.name%>">
+						<img src='<%=amigo.imagem_formatada %>' width="60" height="60" alt="<%=amigo.name%>">
 					</a>
 				</li>
 			<% end%>
