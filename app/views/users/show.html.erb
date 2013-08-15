@@ -1,30 +1,143 @@
+<script type="text/javascript">
+$(document).ready(function(){
+$('#star').raty({  });
+
+} );
+</script>
+<div class="pagina-do-usuario">
 <div class="row">
-    <div class="large-12 columns">
-	     <ul class="breadcrumbs">
-         	<li><a href="/">meuseriado</a></li>
-         	<li class="current"><a href='/users/<%= @user.slug %>'><%= @user.name %></a></li>
+    <div class="large-12 columns"> 
+     <ul class="breadcrumbs">
+          <li><a href="#">meuseriado</a></li>
+          <li class="current"><a href="#">Meu perfil</a></li>
         </ul>
-    </div>
-</div>
+          </div>
+  </div>
+ 
+   <div class="row conteudo-do-usuario">
+   	<div class="large-4 columns">
+   		<div class="foto-perfil">
+        	<img src='<%= @user.imagem%>' alt="<%= @user.name%>">
+      	</div>
+   		<a href="#" class="small button large-12 success columns primeiro-botao">Adicionar como amigo</a> 
+   		<a href="#" class="small button secondary large-12 columns">Enviar mensagem</a> 
 
-
-<div class="row">
-	<div class="large-4 columns">
-
-   		<img alt="<%= @user.slug %>-grande" src='<%= @user.imagem_formatada%>'>
-
-   		<% if user_signed_in? && @user.id == current_user.id %>
-   			<%= link_to 'Editar perfil',edit_user_registration_path, { :class=>"small button large-12 columns" } %>
-   		<% else %> 
-   			<a href="#" class="small button large-12 success columns primeiro-botao">Adicionar como amigo</a>
-   		<% end %> 
+   		
    		<h4>Amigos:</h4>
-   		<ul class="lista-elenco">
-   		</ul>
-   		<a href="#" class="right">Mostrar os arrombado tudo</a>
-     		
+   		<ul class="quem-viu-episodio large-12">
+   			<% @user.amigos.each do |amigo|%>
+				<li>
+					<a href="/users/<%=amigo.slug%>" class="tip-user" >
+						<img src='<%=amigo.imagem%>' width="60" height="60" alt="<%=amigo.name%>">
+					</a>
+				</li>
+			<% end%>
+			
+		</ul>
+		<a href="#">Mostrar todos os amigos</a>
    	</div>
-	<div class="large-8 columns">
-		<h1><%= @user.name %></h1>
-	</div>
+   	<div class="large-8 columns">
+   		<hgroup class="titulo-episodio">
+   		<a href="#">
+   			<h1>
+   				<%= @user.name %> 
+   			</h1>
+   		</a>
+   		</hgroup>
+   		<div class="row infos-interior">
+   			<div class="large-4 columns">Episódios asssistidos: <span class="round success label"><%=@user.episodios.count %></span>
+   			</div> <div class="large-4 columns">Notas dadas: <span class="round label"><%= @user.notas_episodios.count%></span></div>
+   			<div class="large-4 columns data-lancamento-interno">Cadastro: <span class="round secondary label"><%= date @user.created_at%></span></div>
+   		</div>
+
+       <div class="row">
+          <div class="large-12 columns">
+            <h2>Séries Favoritas</h2>
+              <ul class="lista-series-favoritas">
+                <li><a href="#"><img src="http://192.241.234.24/images/series/poster/79349-27.jpg" alt="" class=""></a></li>
+                <li><a href="#"><img src="http://192.241.234.24/images/series/poster/82066-1.jpg" alt="" class=""></a></li>
+                <li><a href="#"><img src="http://192.241.234.24/images/series/poster/83123-6.jpg" alt="" class=""></a></li>
+                <li><a href="#"><img src="http://192.241.234.24/images/series/poster/129261-11.jpg" alt="" class=""></a></li>
+                <li><a href="#"><img src="http://192.241.234.24/images/series/poster/75340-1.jpg" alt="" class=""></a></li>
+             </ul>
+        <a href="#" class="right">Mostrar todas as séries favoritas >></a>
+        </div>
+      </div>
+        <div class="row">
+          <div class="large-12 columns">
+            <h2>Grade de séries</h2>
+            <div class="section-container auto" data-section>
+              <section>
+                <p class="title" data-section-title><a href="#panel1">Ativas (3)</a></p>
+                <div class="content" data-section-content>
+                 <table style="width:100%">
+                  <thead>
+                    <tr>
+                      <th >Série</th>
+                      <th>Episódio</th>
+                      <th >Média</th>
+                      <th>Notas</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td><a href="#">American Horror Story</a></td>
+                      <td>25/25</td>
+                      <td>9.08</td>
+                      <td>25</td>
+                    </tr>
+                    <tr>
+                      <td><a href="#">American Idol</a></td>
+                      <td>463/463</td>
+                      <td>6.84</td>
+                      <td>37</td>
+                    </tr>
+                    <tr>
+                      <td><a href="#">Hannibal</a></td>
+                      <td>13/13</td>
+                      <td>7.70</td>
+                      <td>10</td>
+                    </tr>
+
+                  </tbody>
+                </table>
+                </div>
+              </section>
+              <section>
+                <p class="title" data-section-title><a href="#panel2">Finalizadas</a></p>
+                <div class="content" data-section-content>
+                </div>
+              </section>
+              <section>
+                <p class="title" data-section-title><a href="#panel2">Geladeira</a></p>
+                <div class="content" data-section-content>
+                </div>
+              </section>
+              <section>
+                <p class="title" data-section-title><a href="#panel2">Abandonadas</a></p>
+                <div class="content" data-section-content>
+                </div>
+              </section>
+            </div>
+        </div>
+      </div>
+      <div class="row">
+          <div class="large-12 columns">
+            <h2>Últimas Atividades</h2>
+              <ul class="lista-ultimas-atividades">
+                <li>Avaliou <a href="#">How the thing is going</a> da <a href="">temporada 4</a> de <a href="">Dexter</a></li>
+                <li>Assistiu <a href="#">How the thing is going</a> da <a href="">temporada 4</a> de <a href="">Dexter</a></li>
+                <li>Comentou em <a href="#">Darkness on the Edge of Town</a> da <a href="">temporada 1</a> de <a href="">Arrow</a></li>
+                <li>Avaliou <a href="#">Darkness on the Edge of Town</a> da <a href="">temporada 1</a> de <a href="">Arrow</a></li>
+                <li>Assistiu <a href="#">Darkness on the Edge of Town</a> da <a href="">temporada 1</a> de <a href="">Arrow</a></li>
+                <li>Avaliou <a href="#">The One With The Routine (a.k.a. The One With The Rockin' New Year)</a> da <a href="">temporada 6</a> de <a href="">Friends</a></li>
+                <li>Assistiu <a href="#">The One With The Routine (a.k.a. The One With The Rockin' New Year)</a> da <a href="">temporada 6</a> de <a href="">Friends</a></li>
+                <li>Avaliou <a href="#">A Herald of the New Age</a> da <a href="">temporada 3</a> de <a href="">Merlin</a></li>
+                <li>Assistiu <a href="#">A Herald of the New Age</a> da <a href="">temporada 3</a> de <a href="">Merlin</a></li>
+                <li>Avaliou <a href="#">No Natal a Gente Vem Te Mudar </a> da <a href="">temporada 2</a> de <a href="">Sai de Baixo</a></li>
+             </ul>
+        </div>
+      </div>
+   	</div>
+   </div>
 </div>

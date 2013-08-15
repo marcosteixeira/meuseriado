@@ -17,7 +17,11 @@ class User < ActiveRecord::Base
   has_many :avaliacoes, :dependent => :delete_all
 	has_many :series, :through => :avaliacoes, :source => :avaliavel, :source_type => "Serie"
 	has_many :episodios, :through => :avaliacoes, :source => :avaliavel, :source_type => "Episodio"
-	
+  has_many :amigo_para, :foreign_key => 'user_id',  :class_name => 'Amizade' 
+  has_many :amigo_de, :foreign_key => 'amigo_id', :class_name => 'Amizade'                             
+  has_many :ligado_para, :through => :amigo_para,   :source => :amigo 
+  has_many :ligado_de, :through => :amigo_de, :source => :user
+  	
 	def user_params
 	    params.require(:user).permit(:name, :provider, :uid, :name, :avatar)
 	end
@@ -65,4 +69,16 @@ class User < ActiveRecord::Base
      self.episodios.include? episodio
   end
   
+  def amigos
+    User.find_by_sql " 
+      select * 
+      from users 
+      where id in ( 
+        select amigo_id 
+        from amizades 
+        where (user_id = #{self.id} or amigo_id = #{self.id}))" 
+  end
+  def notas_episodios
+    self.episodios.where("avaliacoes.nota is not null")
+  end
 end

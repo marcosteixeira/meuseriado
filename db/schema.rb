@@ -11,17 +11,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130809141700) do
+ActiveRecord::Schema.define(version: 20131115111324) do
 
-  create_table "atores", force: true do |t|
-    t.string   "nome",       default: "", null: false
-    t.string   "slug"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+  create_table "amizades", id: false, force: true do |t|
+    t.integer "user_id",  null: false
+    t.integer "amigo_id", null: false
   end
 
-  add_index "atores", ["nome"], name: "index_atores_on_nome", unique: true, using: :btree
-  add_index "atores", ["slug"], name: "index_atores_on_slug", unique: true, using: :btree
+  add_index "amizades", ["amigo_id"], name: "amizades_amigo_id_fk", using: :btree
+  add_index "amizades", ["user_id", "amigo_id"], name: "index_amizades_on_user_id_and_amigo_id", unique: true, using: :btree
 
   create_table "avaliacoes", force: true do |t|
     t.text     "texto",          limit: 16777215
@@ -161,6 +159,9 @@ ActiveRecord::Schema.define(version: 20130809141700) do
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   add_index "users", ["slug"], name: "index_users_on_slug", unique: true, using: :btree
+
+  add_foreign_key "amizades", "users", :name => "amizades_amigo_id_fk", :column => "amigo_id"
+  add_foreign_key "amizades", "users", :name => "amizades_user_id_fk"
 
   add_foreign_key "avaliacoes", "users", :name => "avaliacoes_user_id_fk"
 
