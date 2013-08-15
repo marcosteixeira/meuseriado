@@ -1,6 +1,11 @@
 body{
   background-color:#eeeeee;
 }
+h2{
+  font-size: 22px;
+  color: #6f6f6f;
+  line-height: 30px;
+}
 .justify{
   text-align:justify;
 }
@@ -311,7 +316,7 @@ section.active p.nome-temporada{
 }
 .infos-interior{
   min-height:30px;
-  color:#a7a7a7;
+  color:#616161;
   font-size:13px;
 }
 .nota-numerica{
@@ -322,4 +327,46 @@ section.active p.nome-temporada{
 }
 .data-lancamento-interno, .infos-interior{
   font-size:15px;
+}
+.lista-ultimas-atividades{
+  list-style: none;
+}
+
+.lista-ultimas-atividades li{
+  font-size: 15px;
+  color: #616161;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-height: 30px;
+}
+/*
+.pagina-do-usuario{
+  background: url('http://thetvdb.com/banners/fanart/original/153021-13.jpg') no-repeat  fixed;
+  margin-top:-30px;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+.conteudo-do-usuario{
+  background:url('../img/testebg.png');
+}
+*/
+
+.label.secondary {
+  background-color: #9B9B9B !important;
+  color: white !important;
+}
+
+.lista-series-favoritas li{
+  display: inline-block;
+  vertical-align: middle;
+  list-style:none;
+  margin-top: 5px;
+  width:120px;
+}
+.foto-perfil img{
+  width:100%;
+  border:5px solid white;
 }
