@@ -273,6 +273,8 @@ class SeriesController < ApplicationController
   
   def marcar_toda
     @serie = Serie.friendly.find(params[:id])
+    @serie.marcar_inteira(current_user)
+    redirect_to(action: "show", id: @serie)
   end
   
 end

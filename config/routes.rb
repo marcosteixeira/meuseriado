@@ -22,6 +22,7 @@ Meuseriado::Application.routes.draw do
   resources :series do
     member do
       get :adicionar
+      get :marcar_toda
     end
   # url: /series/:id/adicionar
   # named_route: adicionar_episodio_path

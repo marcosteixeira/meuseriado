@@ -88,4 +88,13 @@ class Serie < ActiveRecord::Base
       self.save
     end 
   end
+  
+  def marcar_inteira(user)
+    self.temporadas_validas_ordenadas.each do |temporada|
+      temporada.episodios_ordenados_exibicao.each do |episodio|
+        episodio.marcar_como_visto(user)
+      end
+    end
+    self.marcar_como_vista(user)
+  end
 end
