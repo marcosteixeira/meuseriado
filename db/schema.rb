@@ -13,6 +13,19 @@
 
 ActiveRecord::Schema.define(version: 20131115111324) do
 
+  create_table "acompanhamento_series", id: false, force: true do |t|
+    t.integer  "serie_id",   null: false
+    t.integer  "user_id",    null: false
+    t.boolean  "ativa"
+    t.boolean  "finalizada"
+    t.boolean  "geladeira"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "acompanhamento_series", ["serie_id", "user_id"], name: "index_acompanhamento_series_on_serie_id_and_user_id", unique: true, using: :btree
+  add_index "acompanhamento_series", ["user_id"], name: "acompanhamento_series_user_id_fk", using: :btree
+
   create_table "amizades", id: false, force: true do |t|
     t.integer "user_id",  null: false
     t.integer "amigo_id", null: false
@@ -159,6 +172,9 @@ ActiveRecord::Schema.define(version: 20131115111324) do
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   add_index "users", ["slug"], name: "index_users_on_slug", unique: true, using: :btree
+
+  add_foreign_key "acompanhamento_series", "series", :name => "acompanhamento_series_serie_id_fk"
+  add_foreign_key "acompanhamento_series", "users", :name => "acompanhamento_series_user_id_fk"
 
   add_foreign_key "amizades", "users", :name => "amizades_amigo_id_fk", :column => "amigo_id"
   add_foreign_key "amizades", "users", :name => "amizades_user_id_fk"

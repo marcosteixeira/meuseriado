@@ -8,7 +8,7 @@
           		<% if user_signed_in? && current_user.id == @user.id %>
           			Meu perfil
           		<% else %>
-          			<%= current_user.name%>
+          			<%= @user.name%>
           		<% end %>
           	</a>
       	  </li>
