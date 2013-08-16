@@ -70,15 +70,11 @@ class User < ActiveRecord::Base
   end
   
   def amigos
-    User.find_by_sql " 
-      select * 
-      from users 
-      where id in ( 
-        select amigo_id 
-        from amizades 
-        where (user_id = #{self.id} or amigo_id = #{self.id}))" 
+    User.find_by_sql "select * from users where id in ( select user_id from amizades where amigo_id = #{self.id})  or id in (select amigo_id from amizades where user_id = #{self.id})" 
   end
+
   def notas_episodios
     self.episodios.where("avaliacoes.nota is not null")
   end
+
 end
