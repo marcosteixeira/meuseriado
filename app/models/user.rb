@@ -21,7 +21,6 @@ class User < ActiveRecord::Base
   has_many :amigo_de, :foreign_key => 'amigo_id', :class_name => 'Amizade'                             
   has_many :ligado_para, :through => :amigo_para,   :source => :amigo 
   has_many :ligado_de, :through => :amigo_de, :source => :user
-  has_many :acompanhamento_series, :dependent => :delete_all
     	
 	def user_params
 	    params.require(:user).permit(:name, :provider, :uid, :name, :avatar)

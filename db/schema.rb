@@ -11,11 +11,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131115111324) do
+ActiveRecord::Schema.define(version: 20130816115401) do
 
-  create_table "acompanhamento_series", id: false, force: true do |t|
-    t.integer  "serie_id",   null: false
-    t.integer  "user_id",    null: false
+  create_table "acompanhamento_series", force: true do |t|
+    t.integer  "avaliacao_id", null: false
     t.boolean  "ativa"
     t.boolean  "finalizada"
     t.boolean  "geladeira"
@@ -23,8 +22,7 @@ ActiveRecord::Schema.define(version: 20131115111324) do
     t.datetime "updated_at"
   end
 
-  add_index "acompanhamento_series", ["serie_id", "user_id"], name: "index_acompanhamento_series_on_serie_id_and_user_id", unique: true, using: :btree
-  add_index "acompanhamento_series", ["user_id"], name: "acompanhamento_series_user_id_fk", using: :btree
+  add_index "acompanhamento_series", ["avaliacao_id"], name: "index_acompanhamento_series_on_avaliacao_id", unique: true, using: :btree
 
   create_table "amizades", id: false, force: true do |t|
     t.integer "user_id",  null: false
@@ -33,6 +31,16 @@ ActiveRecord::Schema.define(version: 20131115111324) do
 
   add_index "amizades", ["amigo_id"], name: "amizades_amigo_id_fk", using: :btree
   add_index "amizades", ["user_id", "amigo_id"], name: "index_amizades_on_user_id_and_amigo_id", unique: true, using: :btree
+
+  create_table "atores", force: true do |t|
+    t.string   "nome",       default: "", null: false
+    t.string   "slug"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "atores", ["nome"], name: "index_atores_on_nome", unique: true, using: :btree
+  add_index "atores", ["slug"], name: "index_atores_on_slug", unique: true, using: :btree
 
   create_table "avaliacoes", force: true do |t|
     t.text     "texto",          limit: 16777215
@@ -146,8 +154,8 @@ ActiveRecord::Schema.define(version: 20131115111324) do
   add_index "temporadas", ["serie_id"], name: "temporadas_serie_id_fk", using: :btree
 
   create_table "users", force: true do |t|
-    t.string   "email",                  default: "",                                 null: false
-    t.string   "encrypted_password",     default: "",                                 null: false
+    t.string   "email",                  default: "",                                   null: false
+    t.string   "encrypted_password",     default: "",                                   null: false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
@@ -162,7 +170,7 @@ ActiveRecord::Schema.define(version: 20131115111324) do
     t.string   "provider"
     t.string   "uid"
     t.string   "slug"
-    t.string   "imagem",                 default: "/images/series/imagem_padrao.jpg"
+    t.string   "imagem",                 default: "../assets/series/imagem_padrao.jpg"
     t.string   "avatar_file_name"
     t.string   "avatar_content_type"
     t.integer  "avatar_file_size"
@@ -173,8 +181,7 @@ ActiveRecord::Schema.define(version: 20131115111324) do
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   add_index "users", ["slug"], name: "index_users_on_slug", unique: true, using: :btree
 
-  add_foreign_key "acompanhamento_series", "series", :name => "acompanhamento_series_serie_id_fk"
-  add_foreign_key "acompanhamento_series", "users", :name => "acompanhamento_series_user_id_fk"
+  add_foreign_key "acompanhamento_series", "avaliacoes", :name => "acompanhamento_series_avaliacao_id_fk"
 
   add_foreign_key "amizades", "users", :name => "amizades_amigo_id_fk", :column => "amigo_id"
   add_foreign_key "amizades", "users", :name => "amizades_user_id_fk"
