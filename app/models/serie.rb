@@ -78,12 +78,33 @@ class Serie < ActiveRecord::Base
     end
   end
   
-  def marcar_como_vista(user)
+  def marcar_como_vista(user,finalizou=false)
     aval = Avaliacao.find_by_sql("select * from avaliacoes where avaliavel_type='Serie' and avaliavel_id=#{self.id} and user_id=#{user.id} ")
     
     if aval.empty? 
       aval = Avaliacao.new
       aval.user = user
+      
+      acompanhamento = AcompanhamentoSerie.new
+      acompanhamento.avaliacao = aval
+      
+      if finalizou
+        if self.finalizada?
+          acompanhamento.finalizada = true
+          acompanhamento.ativa = false
+          acompanhamento.geladeira = false
+        else
+          acompanhamento.ativa = true
+          acompanhamento.finalizada = false
+          acompanhamento.geladeira = false
+        end
+      else
+          acompanhamento.ativa = true
+          acompanhamento.finalizada = false
+          acompanhamento.geladeira = false
+      end
+      aval.acompanhamento_serie = acompanhamento 
+    
       self.avaliacoes << aval
       self.save
     end 
@@ -95,6 +116,10 @@ class Serie < ActiveRecord::Base
         episodio.marcar_como_visto(user)
       end
     end
-    self.marcar_como_vista(user)
+    self.marcar_como_vista(user, true)
+  end
+  
+  def finalizada?
+    self.status.eql? "Em andamento"
   end
 end

@@ -258,15 +258,7 @@ class SeriesController < ApplicationController
   
   def adicionar
     @serie = Serie.friendly.find(params[:id])
-    
-    aval = Avaliacao.find_by_sql("select * from avaliacoes where avaliavel_type='Serie' and avaliavel_id=#{@serie.id} and user_id=#{current_user.id} ")
-
-    if aval.empty? 
-      aval = Avaliacao.new
-      aval.user = current_user
-      @serie.avaliacoes << aval
-      @serie.save
-    end 
+    @serie.marcar_como_vista(current_user)    
     redirect_to(action: "show", id: @serie)
 
   end
