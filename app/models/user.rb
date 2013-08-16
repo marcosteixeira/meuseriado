@@ -42,7 +42,7 @@ class User < ActiveRecord::Base
                          uid:auth.uid,
                          email:auth.info.email,
                          password:Devise.friendly_token[0,20],
-                         imagem: "https://graph.facebook.com/#{auth.uid}/picture?width=300&height=441"
+                         imagem: "https://graph.facebook.com/#{auth.uid}/picture?type=large"
                          )
   end
   user

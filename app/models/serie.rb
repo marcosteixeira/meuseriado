@@ -77,4 +77,15 @@ class Serie < ActiveRecord::Base
       "/images/series/#{pasta}#{nome_imagem}"
     end
   end
+  
+  def marcar_como_vista(user)
+    aval = Avaliacao.find_by_sql("select * from avaliacoes where avaliavel_type='Serie' and avaliavel_id=#{self.id} and user_id=#{user.id} ")
+    
+    if aval.empty? 
+      aval = Avaliacao.new
+      aval.user = user
+      self.avaliacoes << aval
+      self.save
+    end 
+  end
 end

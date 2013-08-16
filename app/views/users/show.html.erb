@@ -1,15 +1,17 @@
-<script type="text/javascript">
-$(document).ready(function(){
-$('#star').raty({  });
-
-} );
-</script>
 <div class="pagina-do-usuario">
 <div class="row">
     <div class="large-12 columns"> 
      <ul class="breadcrumbs">
           <li><a href="#">meuseriado</a></li>
-          <li class="current"><a href="#">Meu perfil</a></li>
+          <li class="current">
+          	<a href="#">
+          		<% if user_signed_in? && current_user.id == @user.id %>
+          			Meu perfil
+          		<% else %>
+          			<%= current_user.name%>
+          		<% end %>
+          	</a>
+      	  </li>
         </ul>
           </div>
   </div>
@@ -19,7 +21,11 @@ $('#star').raty({  });
    		<div class="foto-perfil">
         	<img src='<%= @user.imagem_formatada%>' alt="<%= @user.name%>">
       	</div>
-   		<a href="#" class="small button large-12 success columns primeiro-botao">Adicionar como amigo</a> 
+      	<% if user_signed_in? && current_user.id == @user.id %>
+	  		<%= link_to "Editar perfil", edit_user_registration_path, { :class=>"small button large-12 success columns primeiro-botao" } %>
+      	<% else %>
+	   		<a href="#" class="small button large-12 success columns primeiro-botao">Adicionar como amigo</a> 
+      	<% end %>
    		<a href="#" class="small button secondary large-12 columns">Enviar mensagem</a> 
 
    		
@@ -45,7 +51,7 @@ $('#star').raty({  });
    		</a>
    		</hgroup>
    		<div class="row infos-interior">
-   			<div class="large-4 columns">Episódios asssistidos: <span class="round success label"><%=@user.episodios.count %></span>
+   			<div class="large-4 columns">Episódios assistidos: <span class="round success label"><%=@user.episodios.count %></span>
    			</div> <div class="large-4 columns">Notas dadas: <span class="round label"><%= @user.notas_episodios.count%></span></div>
    			<div class="large-4 columns data-lancamento-interno">Cadastro: <span class="round secondary label"><%= date @user.created_at%></span></div>
    		</div>
@@ -54,11 +60,9 @@ $('#star').raty({  });
           <div class="large-12 columns">
             <h2>Séries Favoritas</h2>
               <ul class="lista-series-favoritas">
-                <li><a href="#"><img src="http://192.241.234.24/images/series/poster/79349-27.jpg" alt="" class=""></a></li>
-                <li><a href="#"><img src="http://192.241.234.24/images/series/poster/82066-1.jpg" alt="" class=""></a></li>
-                <li><a href="#"><img src="http://192.241.234.24/images/series/poster/83123-6.jpg" alt="" class=""></a></li>
-                <li><a href="#"><img src="http://192.241.234.24/images/series/poster/129261-11.jpg" alt="" class=""></a></li>
-                <li><a href="#"><img src="http://192.241.234.24/images/series/poster/75340-1.jpg" alt="" class=""></a></li>
+              	<% @user.series.each do |serie|%>
+                	<li><a href="/series/<%=serie.slug%>"><img src='<%=serie.poster%>' alt='<%=serie.nome%>' ></a></li>
+                <% end %>
              </ul>
         <a href="#" class="right">Mostrar todas as séries favoritas >></a>
         </div>
