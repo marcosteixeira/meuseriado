@@ -1,3 +1,4 @@
+#coding: utf-8
 class Serie < ActiveRecord::Base
     extend FriendlyId
  
@@ -80,46 +81,58 @@ class Serie < ActiveRecord::Base
   
   def marcar_como_vista(user,finalizou=false)
     aval = Avaliacao.find_by_sql("select * from avaliacoes where avaliavel_type='Serie' and avaliavel_id=#{self.id} and user_id=#{user.id} ")
-    
     if aval.empty? 
       aval = Avaliacao.new
       aval.user = user
-      
-      acompanhamento = AcompanhamentoSerie.new
-      acompanhamento.avaliacao = aval
-      
-      if finalizou
-        if self.finalizada?
-          acompanhamento.finalizada = true
-          acompanhamento.ativa = false
-          acompanhamento.geladeira = false
-        else
-          acompanhamento.ativa = true
-          acompanhamento.finalizada = false
-          acompanhamento.geladeira = false
-        end
-      else
-          acompanhamento.ativa = true
-          acompanhamento.finalizada = false
-          acompanhamento.geladeira = false
-      end
-      aval.acompanhamento_serie = acompanhamento 
-    
+      acompanhamento = criar_acompanhamento(aval, finalizou)
       self.avaliacoes << aval
       self.save
+    else
+      if self.finalizada? && finalizou
+        aval_banco = aval.first
+        if !aval_banco.acompanhamento_serie.finalizada
+          aval_banco.acompanhamento_serie.finalizada = true
+          aval_banco.acompanhamento_serie.ativa = false
+          aval_banco.acompanhamento_serie.geladeira = false
+          aval_banco.acompanhamento_serie.save
+        end        
+      end
     end 
   end
-  
+
+  def criar_acompanhamento(aval, finalizou)
+    acompanhamento= AcompanhamentoSerie.new
+    if finalizou
+      if self.finalizada?
+        acompanhamento.finalizada = true
+        acompanhamento.ativa = false
+        acompanhamento.geladeira = false
+      else
+        acompanhamento.ativa = true
+        acompanhamento.finalizada = false
+        acompanhamento.geladeira = false
+      end
+    else
+        acompanhamento.ativa = true
+        acompanhamento.finalizada = false
+        acompanhamento.geladeira = false
+    end
+    acompanhamento.avaliacao = aval
+    aval.acompanhamento_serie = acompanhamento
+  end  
+
   def marcar_inteira(user)
     self.temporadas_validas_ordenadas.each do |temporada|
       temporada.episodios_ordenados_exibicao.each do |episodio|
-        episodio.marcar_como_visto(user)
+        if episodio.estreia && episodio.estreia < Time.now
+          episodio.marcar_como_visto(user)
+        end
       end
     end
     self.marcar_como_vista(user, true)
   end
   
   def finalizada?
-    self.status.eql? "Em andamento"
+    self.status.eql? "Finalizada"
   end
 end
