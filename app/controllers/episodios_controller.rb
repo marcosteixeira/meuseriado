@@ -14,9 +14,9 @@ class EpisodiosController < ApplicationController
 
   def marcar
     @episodio = Episodio.friendly.find(params[:id])
-    @episodio.marcar_como_visto(current_user)
     serie = @episodio.serie
     serie.marcar_como_vista(current_user)
+    @episodio.marcar_como_visto(current_user)
     redirect_to(action: "show", id: @episodio)
   end
   
