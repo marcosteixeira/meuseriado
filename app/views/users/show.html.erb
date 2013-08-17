@@ -72,76 +72,25 @@
             <h2>Grade de séries</h2>
             <div class="section-container auto" data-section>
               <section>
-                <p class="title" data-section-title><a href="#panel1">Ativas (3)</a></p>
-                <div class="content" data-section-content>
-                 <table style="width:100%">
-                  <thead>
-                    <tr>
-                      <th >Série</th>
-                      <th>Episódio</th>
-                      <th >Média</th>
-                      <th>Notas</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td><a href="#">American Horror Story</a></td>
-                      <td>25/25</td>
-                      <td>9.08</td>
-                      <td>25</td>
-                    </tr>
-                    <tr>
-                      <td><a href="#">American Idol</a></td>
-                      <td>463/463</td>
-                      <td>6.84</td>
-                      <td>37</td>
-                    </tr>
-                    <tr>
-                      <td><a href="#">Hannibal</a></td>
-                      <td>13/13</td>
-                      <td>7.70</td>
-                      <td>10</td>
-                    </tr>
-
-                  </tbody>
-                </table>
-                </div>
+                <p class="title" data-section-title><a href="#panel1">Ativas (<%=@user.series_vistas.where("ativa = 1").count%>)</a></p>
+                <%= listar_series_usuario(@user.series_vistas.where("ativa = 1"), @user) %>
               </section>
               <section>
-                <p class="title" data-section-title><a href="#panel2">Finalizadas</a></p>
-                <div class="content" data-section-content>
-                </div>
+                <p class="title" data-section-title><a href="#panel2">Finalizadas (<%=@user.series_vistas.where("finalizada = 1").count%>)</a></p>
+                <%= listar_series_usuario(@user.series_vistas.where("finalizada = 1"), @user) %>
               </section>
               <section>
-                <p class="title" data-section-title><a href="#panel2">Geladeira</a></p>
-                <div class="content" data-section-content>
-                </div>
+                <p class="title" data-section-title><a href="#panel2">Geladeira (<%=@user.series_vistas.where("geladeira = 1").count%>)</a></p>
+                <%= listar_series_usuario(@user.series_vistas.where("geladeira = 1"), @user) %>
               </section>
               <section>
-                <p class="title" data-section-title><a href="#panel2">Abandonadas</a></p>
-                <div class="content" data-section-content>
-                </div>
+                <p class="title" data-section-title><a href="#panel2">Abandonadas (<%=@user.series_vistas.where("abandonada = 1").count%>)</a></p>
+                <%= listar_series_usuario(@user.series_vistas.where("abandonada = 1"), @user) %>
               </section>
             </div>
         </div>
       </div>
-      <div class="row">
-          <div class="large-12 columns">
-            <h2>Últimas Atividades</h2>
-              <ul class="lista-ultimas-atividades">
-                <li>Avaliou <a href="#">How the thing is going</a> da <a href="">temporada 4</a> de <a href="">Dexter</a></li>
-                <li>Assistiu <a href="#">How the thing is going</a> da <a href="">temporada 4</a> de <a href="">Dexter</a></li>
-                <li>Comentou em <a href="#">Darkness on the Edge of Town</a> da <a href="">temporada 1</a> de <a href="">Arrow</a></li>
-                <li>Avaliou <a href="#">Darkness on the Edge of Town</a> da <a href="">temporada 1</a> de <a href="">Arrow</a></li>
-                <li>Assistiu <a href="#">Darkness on the Edge of Town</a> da <a href="">temporada 1</a> de <a href="">Arrow</a></li>
-                <li>Avaliou <a href="#">The One With The Routine (a.k.a. The One With The Rockin' New Year)</a> da <a href="">temporada 6</a> de <a href="">Friends</a></li>
-                <li>Assistiu <a href="#">The One With The Routine (a.k.a. The One With The Rockin' New Year)</a> da <a href="">temporada 6</a> de <a href="">Friends</a></li>
-                <li>Avaliou <a href="#">A Herald of the New Age</a> da <a href="">temporada 3</a> de <a href="">Merlin</a></li>
-                <li>Assistiu <a href="#">A Herald of the New Age</a> da <a href="">temporada 3</a> de <a href="">Merlin</a></li>
-                <li>Avaliou <a href="#">No Natal a Gente Vem Te Mudar </a> da <a href="">temporada 2</a> de <a href="">Sai de Baixo</a></li>
-             </ul>
-        </div>
-      </div>
+	  <%= ultimas_atualizacoes @user %>	
    	</div>
    </div>
 </div>

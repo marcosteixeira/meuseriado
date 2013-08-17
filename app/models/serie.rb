@@ -16,8 +16,8 @@ class Serie < ActiveRecord::Base
     self.personagens.where("imagem is not null" );
   end
   
-  def temporadas_validas_ordenadas
-    self.temporadas.where("temporadas.temporada <> 0").order("temporadas.temporada desc")
+  def temporadas_validas_ordenadas(ordenacao="desc")
+    self.temporadas.where("temporadas.temporada <> 0").order("temporadas.temporada #{ordenacao}")
   end
   
   def temporada_especial
@@ -94,6 +94,7 @@ class Serie < ActiveRecord::Base
           aval_banco.acompanhamento_serie.finalizada = true
           aval_banco.acompanhamento_serie.ativa = false
           aval_banco.acompanhamento_serie.geladeira = false
+          aval_banco.acompanhamento_serie.abandonada = false
           aval_banco.acompanhamento_serie.save
         end        
       end
@@ -107,32 +108,37 @@ class Serie < ActiveRecord::Base
         acompanhamento.finalizada = true
         acompanhamento.ativa = false
         acompanhamento.geladeira = false
+        acompanhamento.abandonada = false
       else
         acompanhamento.ativa = true
         acompanhamento.finalizada = false
         acompanhamento.geladeira = false
+        acompanhamento.abandonada = false
       end
     else
         acompanhamento.ativa = true
         acompanhamento.finalizada = false
         acompanhamento.geladeira = false
+        acompanhamento.abandonada = false
     end
     acompanhamento.avaliacao = aval
     aval.acompanhamento_serie = acompanhamento
   end  
 
   def marcar_inteira(user)
-    self.temporadas_validas_ordenadas.each do |temporada|
-      temporada.episodios_ordenados_exibicao.each do |episodio|
-        if episodio.estreia && episodio.estreia < Time.now
-          episodio.marcar_como_visto(user)
-        end
+    self.marcar_como_vista(user, true)
+    self.temporadas_validas_ordenadas("asc").each do |temporada|
+      temporada.episodios_ordenados_exibicao_passado.each do |episodio|
+        episodio.marcar_como_visto(user)
       end
     end
-    self.marcar_como_vista(user, true)
   end
   
   def finalizada?
     self.status.eql? "Finalizada"
+  end
+  
+  def episodios_exibicao
+    self.episodios.where("temporada <> 0 and estreia <  '#{Time.now}' ").order("temporada desc, numero desc") 
   end
 end

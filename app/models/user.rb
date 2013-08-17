@@ -14,14 +14,13 @@ class User < ActiveRecord::Base
       :path => ":rails_root/app/assets/images/series/users/:id/:filename",
       :url => "/images/series/:id/:filename"
       
-  has_many :avaliacoes, :dependent => :delete_all
+  has_many :avaliacoes, :dependent => :delete_all, :order => 'id DESC'
 	has_many :series, :through => :avaliacoes, :source => :avaliavel, :source_type => "Serie"
 	has_many :episodios, :through => :avaliacoes, :source => :avaliavel, :source_type => "Episodio"
   has_many :amigo_para, :foreign_key => 'user_id',  :class_name => 'Amizade' 
   has_many :amigo_de, :foreign_key => 'amigo_id', :class_name => 'Amizade'                             
   has_many :ligado_para, :through => :amigo_para,   :source => :amigo 
   has_many :ligado_de, :through => :amigo_de, :source => :user
-  
   has_many :series_vistas, :through => :avaliacoes, :source => :acompanhamento_serie
 
 	def user_params
@@ -75,8 +74,15 @@ class User < ActiveRecord::Base
     User.find_by_sql "select * from users where id in ( select user_id from amizades where amigo_id = #{self.id})  or id in (select amigo_id from amizades where user_id = #{self.id})" 
   end
 
-  def notas_episodios
-    self.episodios.where("avaliacoes.nota is not null")
+  def notas_episodios(serie=nil)
+    if serie
+      self.episodios.where("avaliacoes.nota is not null and serie_id = #{serie.id}")
+    else
+      self.episodios.where("avaliacoes.nota is not null")
+    end
   end
-
+  
+  def media_serie(serie)
+    Avaliacao.where("avaliavel_type = 'Episodio' and avaliavel_id in (select id from episodios where serie_id = #{serie.id})").average('nota')
+  end
 end

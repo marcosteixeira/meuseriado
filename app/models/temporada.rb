@@ -9,6 +9,10 @@ class Temporada < ActiveRecord::Base
   
   def episodios_ordenados_exibicao
     self.serie.episodios.where({temporada: self.temporada }).order("temporada desc, numero desc")
+  end 
+  
+  def episodios_ordenados_exibicao_passado
+    self.serie.episodios.where("temporada = #{self.temporada} and estreia <  '#{Time.now}' ").order("temporada asc, numero asc")
   end  
   
   def media_geral

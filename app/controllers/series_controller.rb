@@ -211,12 +211,6 @@ class SeriesController < ApplicationController
   def copia_episodios(serie_tvdb, serie)
     serie_tvdb.episodes.each do |episodio_tvdb|
       if episodio_tvdb.episode_name
-        #episodio = Episodio.find_by_sql("select id from episodios where id = #{episodio_tvdb.id}")
-        #if episodio.blank?
-         # episodio = Episodio.new
-        #else
-         # episodio = Episodio.find(episodio.first.id)
-        #end
         episodio = Episodio.new
         episodio.id = episodio_tvdb.id
         episodio.numero = episodio_tvdb.episode_number

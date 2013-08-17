@@ -11,5 +11,7 @@ module Meuseriado
     config.i18n.default_locale = :'pt-BR'
     config.encoding = "utf-8"
     config.assets.enabled = false
+    config.time_zone = 'Brasilia'
+    config.active_record.default_timezone = :local
   end
 end
