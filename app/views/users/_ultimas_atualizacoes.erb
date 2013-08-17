@@ -1,0 +1,19 @@
+<% if !user.avaliacoes.empty? %>
+  <div class="row">
+      <div class="large-12 columns">
+        <h2>Últimas Atividades</h2>
+          <ul class="lista-ultimas-atividades">
+          	<% user.avaliacoes.limit(10).each do |avaliacao| %>
+				<% if avaliacao.avaliavel_type.eql? 'Serie'%>
+					<li>Adicionou <a href='/series/<%=avaliacao.avaliavel.slug%>'><%=avaliacao.avaliavel.nome%></a> às suas séries favoritas</li>
+				<% end %>
+				<% if avaliacao.avaliavel_type.eql? 'Episodio'%>
+		            <li>Assistiu <a href="/episodios/<%=avaliacao.avaliavel.slug%>"><%=avaliacao.avaliavel.nome%></a> da <a href="/series/<%=avaliacao.avaliavel.serie.slug%>/temporadas/<%=avaliacao.avaliavel.temporada%>"> temporada <%=avaliacao.avaliavel.temporada %></a> de <a href='/series/<%= avaliacao.avaliavel.serie.slug%>'><%= avaliacao.avaliavel.serie.nome%></a></li>
+          		<% end %>
+          	<%end%>
+         </ul>
+         <a href="#" class="right">Mostrar todas as atualizações >></a>
+    </div>
+  </div>
+
+<% end %>
