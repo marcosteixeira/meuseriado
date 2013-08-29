@@ -27,8 +27,14 @@ module Tvdbr
       actors = []
       urls = self.parent.actor_urls(self.id)
       if !urls.nil?
-        urls.each do |hash|
-          actors<< novo_ator(hash)
+        if urls.first.class.to_s.eql? "Hash"
+          urls.each do |hash|
+              actors<< novo_ator(hash)
+          end
+        else
+          if urls.first.class.to_s.eql? "Array"
+            actors<< novo_ator(urls)  
+          end
         end
       end
       actors

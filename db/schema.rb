@@ -18,6 +18,7 @@ ActiveRecord::Schema.define(version: 20130816115401) do
     t.boolean  "ativa"
     t.boolean  "finalizada"
     t.boolean  "geladeira"
+    t.boolean  "abandonada"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
