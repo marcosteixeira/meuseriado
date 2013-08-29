@@ -139,6 +139,10 @@ class Serie < ActiveRecord::Base
   end
   
   def episodios_exibicao
-    self.episodios.where("temporada <> 0 and estreia <  '#{Time.now}' ").order("temporada desc, numero desc") 
+    result  = self.episodios.where("temporada <> 0 and estreia <  '#{Time.now}' ").order("temporada desc, numero desc") 
+    if result.size == 0
+      result = self.episodios.where("temporada <> 0 and (estreia <  '#{Time.now}' or estreia is null )").order("temporada desc, numero desc")
+    end
+    return result
   end
 end
