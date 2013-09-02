@@ -12,7 +12,6 @@ class TemporadasController < ApplicationController
   end
   
   def marcar_toda
-    puts "ID TEMPORADA #{params[:id]}"
     @temporada = Temporada.friendly.find(params[:id])
     serie = @temporada.serie
     serie.marcar_como_vista(current_user)

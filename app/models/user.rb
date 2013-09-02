@@ -90,8 +90,8 @@ class User < ActiveRecord::Base
     retorno = true
     temporada.episodios.each do |episodio_temporada|
       if !self.viu_episodio? episodio_temporada
-        puts "Episodio #{episodio_temporada.numero}"
         retorno = false
+        break
       end
     end
     puts retorno
