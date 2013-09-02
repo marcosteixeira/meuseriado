@@ -34,4 +34,11 @@ class Temporada < ActiveRecord::Base
   def gerar_slug
    "#{self.temporada}"
   end
+  
+  def marcar_como_vista(user)
+    episodios_ordenados_exibicao_passado.each do |episodio|
+          episodio.marcar_como_visto(user)
+    end
+  end
+  
 end

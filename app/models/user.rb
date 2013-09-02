@@ -85,4 +85,17 @@ class User < ActiveRecord::Base
   def media_serie(serie)
     Avaliacao.where("avaliavel_type = 'Episodio' and avaliavel_id in (select id from episodios where serie_id = #{serie.id})").average('nota')
   end
+  
+  def viu_temporada? (temporada)
+    retorno = true
+    temporada.episodios.each do |episodio_temporada|
+      if !self.viu_episodio? episodio_temporada
+        puts "Episodio #{episodio_temporada.numero}"
+        retorno = false
+      end
+    end
+    puts retorno
+    return retorno
+  end
+
 end
