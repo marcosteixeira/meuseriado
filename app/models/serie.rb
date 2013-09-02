@@ -3,7 +3,6 @@ class Serie < ActiveRecord::Base
     extend FriendlyId
  
   friendly_id :nome, use: :slugged
-  
   belongs_to :produtora
   has_many :avaliacoes, as: :avaliavel
   has_many :users, :through => :avaliacoes
@@ -33,6 +32,127 @@ class Serie < ActiveRecord::Base
   end
   
   class << self
+    
+    def salvar(serie)
+      nova_serie = copia_serie_api(serie)
+      nova_serie.save
+      inserir_temporadas(nova_serie)
+      nova_serie
+    end
+    
+    def inserir_temporadas(serie)
+      episodios = Episodio.find_by_sql("select temporada from episodios where serie_id='#{serie.id}' group by temporada")
+      
+      for ep in episodios
+        temporada = Temporada.new
+        temporada.serie = serie
+        temporada.temporada = ep.temporada
+        nome_imagem = "#{serie.id}-#{ep.temporada}.jpg"
+        url = "http://thetvdb.com/banners/seasons/#{nome_imagem}"
+        temporada.imagem = Serie.salvar_imagem(url, nome_imagem, "temporada")
+        temporada.save
+      end
+    end
+
+    
+    def copia_serie_api(serie)
+      nova_serie = Serie.friendly.find_by_id(serie.id)
+      
+      nova_serie ||= Serie.new
+      
+      nova_serie.id = serie.id
+      nova_serie.nome = serie.series_name
+      nova_serie.dia_exibicao = serie.airs_day_of_week
+      nova_serie.horario_exibicao = serie.airs_time
+      if serie.banner
+        nova_serie.banner = Serie.salvar_imagem(serie.banner,serie.banner.split("/").last , "banner")
+      else
+        nova_serie.banner = "/images/series/imagem_padrao.jpg"  
+      end
+      nova_serie.sinopse = serie.overview
+      if serie.fanart 
+        nova_serie.fanart = Serie.salvar_imagem(serie.fanart,serie.fanart.split("/").last , "fanart")
+      else
+        nova_serie.fanart= "/images/series/imagem_padrao.jpg"    
+      end
+      nova_serie.estreia = serie.first_aired
+      nova_serie.id_imdb = serie.imdb_id
+      
+      if serie.poster 
+        nova_serie.poster = Serie.salvar_imagem(serie.poster,serie.poster.split("/").last , "serie")
+      else
+        nova_serie.poster = "/images/series/imagem_padrao.jpg"
+      end
+      nova_serie.nota = serie.rating
+      nova_serie.duracao_episodio = serie.runtime
+      if serie.network
+        nova_serie.produtora = Produtora.find_or_create_by(nome: serie.network)
+      end
+      
+      
+      if serie.status.eql? "Ended"
+        nova_serie.status = "Finalizada"
+      else
+        nova_serie.status = "Em andamento"
+      end
+      
+      copia_episodios(serie, nova_serie)
+      copia_personagens(serie, nova_serie)
+      copia_generos(serie.categories, nova_serie)
+      nova_serie
+    end
+    
+    def copia_generos(generos, nova_serie)
+      generos.each do |genero|
+        nova_serie.generos << Genero.find_or_create_by(nome: genero)
+      end
+    end
+    
+    def copia_personagens(serie_tvdb, serie)
+      for personagem_tvdb in serie_tvdb.actors_serie
+        if !personagem_tvdb.nil?
+          personagem_tvdb.serie = serie
+          serie.personagens << personagem_tvdb
+        end
+      end
+    end
+    
+    def copia_episodios(serie_tvdb, serie)
+      serie_tvdb.episodes.each do |episodio_tvdb|
+        if episodio_tvdb.episode_name
+          episodio = Episodio.new
+          episodio.id = episodio_tvdb.id
+          episodio.numero = episodio_tvdb.episode_number
+          episodio.nome = episodio_tvdb.episode_name
+          episodio.temporada = episodio_tvdb.season_number
+          episodio.diretor = episodio_tvdb.director
+          episodio.escritores = episodio_tvdb.writer
+          episodio.nota = episodio_tvdb.rating
+          if episodio_tvdb.filename
+            episodio.banner = Serie.salvar_imagem(episodio_tvdb.filename,episodio_tvdb.filename.split("/").last , "episodio")
+          else
+            episodio.banner = "/images/series/imagem_padrao.jpg"
+          end
+               
+          episodio.id_imdb = episodio_tvdb.imdb_id
+          episodio.sinopse = episodio_tvdb.overview
+          episodio.atores_convidados = episodio_tvdb.guest_stars
+          episodio.numero_absoluto = episodio_tvdb.absolute_number
+          episodio.estreia = episodio_tvdb.first_aired
+          episodio.serie= serie
+          serie.episodios<< episodio
+        end
+      end
+    end
+    
+    def updater_bot(tempo=1.day.ago)
+
+      tvdb = Tvdbr::Client.new
+      tvdb.each_updated_series(:since => tempo) do |serie|
+          Serie.salvar(serie)
+      end
+    end
+    
     #
     #Baixa a imagem da url passada, passando tbm o nome do arquivo
     #e retorna o caminho do disco
