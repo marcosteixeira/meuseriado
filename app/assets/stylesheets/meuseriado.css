@@ -350,7 +350,7 @@ section.active p.nome-temporada{
   background-size: cover;
 }
 .conteudo-do-usuario{
-	background:url('../img/testebg.png');
+	background:url('/images/testebg.png');
 }
 */
 
@@ -369,4 +369,120 @@ section.active p.nome-temporada{
 .foto-perfil img{
 	width:100%;
 	border:5px solid white;
+}
+
+.lista-de-series-mais-assistidas li{
+	list-style:none;
+	float:left;
+	margin:2px;
+}
+
+.primeiro-lugar{
+	max-width:330px;
+}
+
+.segundo-lugar{
+	max-width:206px;
+}
+
+.terceiro-lugar{
+	max-width:122px;
+}
+
+.descricao-destacando {
+position: absolute;
+margin-top: -34px;
+padding: 5px;
+color:white;
+font-weight:bold;
+white-space:nowrap;
+overflow: hidden;
+opacity:0.9;
+}
+
+.primeiro-lugar .descricao-destacando {
+	background-color:#e5ae1e;
+	width:330px;
+}
+
+.primeiro-lugar:hover .descricao-destacando {
+	background-color:#f6c74a;
+}
+
+.segundo-lugar .descricao-destacando {
+	background-color:#1f99a4;
+	width:206px;
+}
+
+.segundo-lugar:hover .descricao-destacando{
+	background-color:#32c3d0;
+}
+
+.terceiro-lugar .descricao-destacando {
+	background-color:#333754;
+	width:122px;
+}
+
+.terceiro-lugar:hover .descricao-destacando {
+	background-color:#44486a;
+}
+
+.pessoas-assistiram, .pessoas-votaram, .pessoas-comentaram{
+	margin-left:10px;
+
+}
+.pessoas-assistiram{
+	padding-left:25px;
+}
+.pessoas-votaram{
+	padding-left:17px;
+}
+
+.pessoas-comentaram{
+	padding-left:19px;
+}
+
+.pessoas-assistiram{
+	background:url('/images/icone-olhos.png') 0px 7px no-repeat;
+}
+.pessoas-votaram{
+	background:url('/images/icone-trofeu.png') 0px 7px no-repeat;
+}
+
+.pessoas-comentaram{
+	background:url('/images/icone-comentario.png') 0px 7px no-repeat;
+}
+
+.indent{
+	text-indent: -9999px;
+	position:absolute;
+}
+.titulo-mais-assistidos-da-semana{
+	background:url('/images/icone-filme.png') 0px 7px no-repeat;
+	padding-left:20px;
+}
+
+.anuncio-grande{
+	width:336px;
+}
+.trending-topic li{
+	list-style: none;
+	font-size:14px;
+	color:#333;
+}
+
+.comentarios-armazenados{
+	margin-left:10px;
+	padding-left:17px;
+	background: url('/images/icone-comentario-escuro.png') 0px 3px no-repeat;
+}
+
+.titulo-gerando-assunto{
+	padding-left:20px;
+	background: url('/images/icone-fogo.png') 0px 5px no-repeat;
+}
+
+.titulo-ultimas-atualizacoes{
+	padding-left:30px;
+	background: url('/images/icone-ultimas-atualizacoes.png') 0px 7px no-repeat;
 }

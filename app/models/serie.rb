@@ -9,6 +9,7 @@ class Serie < ActiveRecord::Base
   has_many :episodios, :dependent => :delete_all, :order => 'episodios.temporada,episodios.numero'
   has_many :personagens, :dependent => :delete_all, :order => 'personagens.aparicao'
   has_many :temporadas, :dependent => :delete_all
+  has_many :episodios_vistos, :through => :avaliacoes, :source => :avaliavel, :source_type => "Episodio"
   has_and_belongs_to_many :generos
   
   def personagens_imagem
@@ -264,5 +265,13 @@ class Serie < ActiveRecord::Base
       result = self.episodios.where("temporada <> 0 and (estreia <  '#{Time.now}' or estreia is null )").order("temporada desc, numero desc")
     end
     return result
+  end
+  
+  def visualizacoes_semanais(nota_null = "")
+    series = Serie.find_by_sql("select * from series s, episodios e, avaliacoes a where e.serie_id = s.id and e.id = a.avaliavel_id and a.created_at > '#{1.week.ago}' and s.id = #{self.id} and a.avaliavel_type= 'Episodio' #{nota_null} order by a.created_at desc ")
+  end
+  
+  def votos_semanais
+    self.visualizacoes_semanais(" and a.nota is not null")
   end
 end
