@@ -11,16 +11,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130816115401) do
+ActiveRecord::Schema.define(version: 20130903121910) do
 
   create_table "acompanhamento_series", force: true do |t|
     t.integer  "avaliacao_id", null: false
     t.boolean  "ativa"
     t.boolean  "finalizada"
     t.boolean  "geladeira"
-    t.boolean  "abandonada"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "abandonada"
   end
 
   add_index "acompanhamento_series", ["avaliacao_id"], name: "index_acompanhamento_series_on_avaliacao_id", unique: true, using: :btree
@@ -74,6 +74,7 @@ ActiveRecord::Schema.define(version: 20130816115401) do
     t.string   "slug"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "ativo"
   end
 
   add_index "episodios", ["serie_id"], name: "episodios_serie_id_fk", using: :btree

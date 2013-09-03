@@ -123,6 +123,10 @@ class Serie < ActiveRecord::Base
         if episodio_tvdb.episode_name
           episodio = Episodio.new
           episodio.id = episodio_tvdb.id
+          banco = Episodio.find_by_id(episodio_tvdb.id)
+          if banco
+            episodio = banco
+          end
           episodio.numero = episodio_tvdb.episode_number
           episodio.nome = episodio_tvdb.episode_name
           episodio.temporada = episodio_tvdb.season_number
@@ -140,6 +144,15 @@ class Serie < ActiveRecord::Base
           episodio.atores_convidados = episodio_tvdb.guest_stars
           episodio.numero_absoluto = episodio_tvdb.absolute_number
           episodio.estreia = episodio_tvdb.first_aired
+          
+          if episodio.estreia
+            if episodio.estreia.future?
+              episodio.ativo = false
+            else
+              episodio.ativo = true
+            end
+          end
+          
           episodio.serie= serie
           serie.episodios<< episodio
         end

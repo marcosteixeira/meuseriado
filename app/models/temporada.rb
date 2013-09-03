@@ -12,10 +12,11 @@ class Temporada < ActiveRecord::Base
   end 
   
   def episodios_ordenados_exibicao_passado
-    result = self.serie.episodios.where("temporada = #{self.temporada} and estreia <  '#{Time.now}' ").order("temporada asc, numero asc")
+  
+   result = self.serie.episodios.where("temporada = #{self.temporada} and  ativo = 1 ").order("temporada asc, numero asc")
     
     if result.size == 0
-      result = self.serie.episodios.where("temporada = #{self.temporada} and (estreia <  '#{Time.now}' or estreia is null ) ").order("temporada asc, numero asc")
+      result = self.serie.episodios.where("temporada = #{self.temporada} and (ativo = 1 or estreia is null ) ").order("temporada asc, numero asc")
     end
     return result
   end  
@@ -36,7 +37,7 @@ class Temporada < ActiveRecord::Base
   end
   
   def marcar_como_vista(user)
-    episodios_ordenados_exibicao_passado.each do |episodio|
+    self.episodios_ordenados_exibicao_passado.each do |episodio|
           episodio.marcar_como_visto(user)
     end
 
