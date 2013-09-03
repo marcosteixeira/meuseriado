@@ -5,101 +5,48 @@
       <div class="caixa-de-destaques">
         <ul class="lista-de-series-mais-assistidas">
           <li class="primeiro-lugar">
-            <a href="#"><img src="<%= @primeira.poster %>" alt="<%= @primeira.slug %>"></a>
+            <a href="/series/<%= @episodios[0].serie.slug %>"><img src="<%= @episodios[0].serie.poster %>" alt="<%= @episodios[0].serie.slug %>"></a>
             <div class="descricao-destacando">
-              <h1 class="indent"><a href="#"><%= @primeira.nome %></a></h1> <!-- Isso aqui é para dar mais destaque ao google. não aparece para o usuário final. Repare que o primeiro colocado eh H1 -->
+              <h1 class="indent"><a href="#"><%= @episodios[0].serie.nome %></a></h1>
               <div class="pessoas-assistiram left">
-                <%= @primeira.visualizacoes_semanais.count %>
+                <%= @episodios[0].serie.visualizacoes_semanais.count %>
               </div>
               <div class="pessoas-votaram left">
-                <%= @primeira.votos_semanais.count %>
+                <%= @episodios[0].serie.votos_semanais.count %>
               </div>
               <div class="pessoas-comentaram left">
                 892-disqus
               </div>
             </div>
           </li>
-          <li class="segundo-lugar">
-            <a href="#"><img src="http://192.241.234.24/images/series/poster/121361-4.jpg" alt="nome da serie"></a>
-            <div class="descricao-destacando">
-              <h2 class="indent"><a href="#">Nome da Série</a></h2> <!-- a lista media é H2 -->
-              <div class="pessoas-assistiram left">
-                8753
-              </div>
-              <div class="pessoas-votaram left">
-                8.4
-              </div>
-            </div>
-          </li>
-          <li class="segundo-lugar">
-           <a href="#"> <img src="http://192.241.234.24/images/series/poster/129261-11.jpg" alt="nome da serie"></a>
-            <div class="descricao-destacando">
-              <h2 class="indent"><a href="#">Nome da Série</a></h2>
-              <div class="pessoas-assistiram left">
-                6725
-              </div>
-              <div class="pessoas-votaram left">
-                9.5
-              </div>
-            </div>
-          </li>
-          <li class="segundo-lugar">
-            <a href="#"><img src="http://192.241.234.24/images/series/poster/82066-1.jpg" alt="nome da serie"></a>
-            <div class="descricao-destacando">
-              <h2 class="indent"><a href="#">Nome da Série</a></h2>
-              <div class="pessoas-assistiram left">
-                5283
-              </div>
-              <div class="pessoas-votaram left">
-                9.9
-              </div>
-            </div>
-          </li>
-          <li class="terceiro-lugar">
-            <a href="#"><img src="http://192.241.234.24/images/series/poster/257655-5.jpg" alt="nome da serie"></a>
-            <div class="descricao-destacando">
-              <h3 class="indent"><a href="#">Nome da Série</a></h3> <!-- A lista pequena é composta de H3 no indent -->
-              <div class="pessoas-assistiram left">
-                4212
-              </div>
-            </div>
-          </li>
-          <li class="terceiro-lugar">
-            <a href="#"><img src="http://192.241.234.24/images/series/poster/255316-2.jpg" alt="nome da serie"></a>
-            <div class="descricao-destacando">
-              <h3 class="indent"><a href="#">Nome da Série</a></h3>
-              <div class="pessoas-assistiram left">
-                3125
-              </div>
-            </div>
-          </li>
-          <li class="terceiro-lugar">
-            <a href="#"><img src="http://192.241.234.24/images/series/poster/75340-1.jpg" alt="nome da serie"></a>
-            <div class="descricao-destacando">
-              <h3 class="indent"><a href="#">Nome da Série</a></h3>
-              <div class="pessoas-assistiram left">
-                785
-              </div>
-            </div>
-          </li>
-          <li class="terceiro-lugar">
-            <a href="#"><img src="http://192.241.234.24/images/series/poster/79168-3.jpg" alt="nome da serie"></a>
-            <div class="descricao-destacando">
-              <h3 class="indent"><a href="#">Nome da Série</a></h3>
-              <div class="pessoas-assistiram left">
-                323
-              </div>
-            </div>
-          </li>
-          <li class="terceiro-lugar">
-           <a href="#"> <img src="http://192.241.234.24/images/series/poster/71663-20.jpg" alt="nome da serie"></a>
-            <div class="descricao-destacando">
-              <h3 class="indent"><a href="#">Nome da Série</a></h3>
-              <div class="pessoas-assistiram left">
-                87
-              </div>
-            </div>
-          </li>
+          <% for i in 1..3 %>
+	          <li class="segundo-lugar">
+	            <a href="/series/<%= @episodios[i].serie.slug %>"><img src="<%= @episodios[i].serie.poster %>" alt="<%= @episodios[i].serie.slug %>"></a>
+	            <div class="descricao-destacando">
+	              <h2 class="indent"><a href="#"><%= @episodios[i].serie.nome %></a></h2>
+	              <div class="pessoas-assistiram left">
+	                <%= @episodios[i].serie.visualizacoes_semanais.count %>
+	              </div>
+	              <div class="pessoas-votaram left">
+	                <%= @episodios[i].serie.votos_semanais.count %>
+	              </div>
+	            </div>
+	          </li>
+          <% end %>
+          
+          <% for i in 4..@episodios.size - 1 %>
+          	<% if @episodios[i].serie %>
+	          <li class="terceiro-lugar">
+	            <a href="/series/<%= @episodios[i].serie.slug %>"><img src="<%= @episodios[i].serie.poster %>" alt="<%= @episodios[i].serie.slug %>"></a>
+	            <div class="descricao-destacando">
+	              <h3 class="indent"><a href="#"><%= @episodios[i].serie.nome %></a></h3>
+	              <div class="pessoas-assistiram left">
+	                <%= @episodios[i].serie.visualizacoes_semanais.count %>
+	              </div>
+	            </div>
+	          </li>
+	          <% end %>
+          <% end %>
         </ul>
       </div>
     </div>
@@ -110,48 +57,8 @@
     </div>
 </div>
   <div class="row">
-    <div class="large-4 columns">
-      <h2 class="titulo-gerando-assunto">Está gerando assunto</h2>
-      <ul class="trending-topic">
-        <li><a href="#">Pretty Little Liars - 4x12</a> <span class="comentarios-armazenados">456 </span> </li>
-        <li><a href="#">Dexter - 8x9</a>  <span class="comentarios-armazenados">291</span> </li>
-        <li><a href="#">Under The Dome - 1x10</a> <span class="comentarios-armazenados">266</span> </li>
-        <li><a href="#">Breaking Bad - 5x11</a> <span class="comentarios-armazenados">252</span> </li>
-        <li><a href="#">Suits - 3x7</a> <span class="comentarios-armazenados">91</span> </li>
-        <li><a href="#">Breaking Bad - 5x12</a> <span class="comentarios-armazenados">84</span> </li>
-        <li><a href="#">Under The Dome - 1x10</a> <span class="comentarios-armazenados">266</span> </li>
-        <li><a href="#">Breaking Bad - 5x11</a> <span class="comentarios-armazenados">252</span> </li>
-        <li><a href="#">Breaking Bad - 5x12</a> <span class="comentarios-armazenados">84</span> </li>
-        <li><a href="#">Under The Dome - 1x10</a> <span class="comentarios-armazenados">266</span> </li>
-      </ul><!--
-      <ul class="trending-topic">
-        <li><a href="#">Pretty Little Liars - 4x12</a>  <div class="comentarios-armazenados right">456</div></li>
-        <li><a href="#">Dexter - 8x9</a>  <div class="comentarios-armazenados right">291</div> </li>
-        <li><a href="#">Under The Dome - 1x10</a> <div class="comentarios-armazenados right">266</div> </li>
-        <li><a href="#">Breaking Bad - 5x11</a> <div class="comentarios-armazenados right">252</div> </li>
-        <li><a href="#">Suits - 3x7</a> <div class="comentarios-armazenados right">91</div> </li>
-        <li><a href="#">Breaking Bad - 5x12</a> <div class="comentarios-armazenados right">84</div> </li>
-        <li><a href="#">Under The Dome - 1x10</a> <div class="comentarios-armazenados right">266</div> </li>
-        <li><a href="#">Breaking Bad - 5x11</a> <div class="comentarios-armazenados right">252</div> </li>
-        <li><a href="#">Breaking Bad - 5x12</a> <div class="comentarios-armazenados right">84</div> </li>
-        <li><a href="#">Under The Dome - 1x10</a> <div class="comentarios-armazenados right">266 </li>
-      </ul>-->
-    </div>
-    <div class="large-3 columns">
-      <h2 class="titulo-ultimas-atualizacoes">Rolando agora</h2>
-      <ul class="trending-topic">
-        <li><img src="http://bancodeseries.com.br/images/users/16x16/1000001038.jpg"> assistiu <a href="#">Law & Order</a> - <a href="#">11x6</a></li>
-        <li><img src="http://bancodeseries.com.br/images/users/16x16/1000001038.jpg"> avaliou <a href="#">Six Feet Under</a> - <a href="#">1x1 - 9</a></li>
-        <li><img src="http://bancodeseries.com.br/images/users/16x16/1000001038.jpg"> assistiu <a href="#">Glee</a> - <a href="#">3x22</a></li>
-        <li><img src="http://bancodeseries.com.br/images/users/16x16/1000005850.jpg"> assistiu <a href="#">Shameless (UK)</a> </li>
-        <li><img src="http://bancodeseries.com.br/images/users/16x16/1000013124.jpg"> favoritou <a href="#">Shameless (UK)</a> </li>
-        <li><img src="http://bancodeseries.com.br/images/users/16x16/999996296.jpg"> comentou <a href="#">Glee</a> - <a href="#">3x21</a></li>
-        <li><img src="http://bancodeseries.com.br/images/users/16x16/999997682.jpg"> avaliou <a href="#">Shameless (UK)</a></li>
-        <li><img src="http://bancodeseries.com.br/images/users/16x16/1000013124.jpg"> comentou <a href="#">Glee</a> - <a href="#">3x21</a></li>
-        <li><img src="http://bancodeseries.com.br/images/users/16x16/999996296.jpg"> comentou <a href="#">Glee</a> - <a href="#">3x21</a></li>
-        <li><img src="http://bancodeseries.com.br/images/users/16x16/999997682.jpg"> avaliou <a href="#">Shameless (UK)</a></li>
-     </ul>
-    </div>
+	<%= gerando_assunto(@avaliacoes)%>
+	<%= rolando_agora(@avaliacoes)%>
     <div class="large-5 columns">
       <div class="anuncio-grande right">
       </div>

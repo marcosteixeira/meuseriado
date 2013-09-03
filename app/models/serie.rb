@@ -249,9 +249,7 @@ class Serie < ActiveRecord::Base
   def marcar_inteira(user)
     self.marcar_como_vista(user, true)
     self.temporadas_validas_ordenadas("asc").each do |temporada|
-      temporada.episodios_ordenados_exibicao_passado.each do |episodio|
-        episodio.marcar_como_visto(user)
-      end
+      temporada.marcar_como_vista(user)
     end
   end
   

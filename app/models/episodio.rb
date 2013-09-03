@@ -11,7 +11,11 @@ class Episodio < ActiveRecord::Base
   end
 
   def nome_episodio_formatado
-    "#{self.serie.nome} S%02dE%02d" % [self.temporada, self.numero]
+    "#{self.serie.nome} #{self.nome_episodio}"
+  end
+  
+  def nome_episodio
+    "S%02dE%02d" % [self.temporada, self.numero]
   end
   
   def marcar_como_visto(user)

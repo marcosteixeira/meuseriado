@@ -94,7 +94,6 @@ class User < ActiveRecord::Base
         break
       end
     end
-    puts retorno
     return retorno
   end
 

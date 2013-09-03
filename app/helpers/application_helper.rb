@@ -20,4 +20,15 @@ module ApplicationHelper
     locals: {user: user}
   end
 
+  def gerando_assunto(avaliacoes)
+    render partial: "home/gerando_assunto",
+    locals: {avaliacoes: avaliacoes}
+  end
+  
+  def rolando_agora(avaliacoes)
+    render partial: "home/rolando_agora",
+    locals: {avaliacoes: avaliacoes}
+  end
+
+
 end

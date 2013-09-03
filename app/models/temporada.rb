@@ -39,6 +39,15 @@ class Temporada < ActiveRecord::Base
     episodios_ordenados_exibicao_passado.each do |episodio|
           episodio.marcar_como_visto(user)
     end
+
+    aval = Avaliacao.find_by_sql("select * from avaliacoes where avaliavel_type='Temporada' and avaliavel_id=#{self.id} and user_id=#{user.id} ")
+
+    if aval.empty? 
+      aval = Avaliacao.new
+      aval.user = user
+      self.avaliacoes << aval
+      self.save
+    end 
   end
   
 end
