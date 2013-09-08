@@ -8,7 +8,7 @@
     	 	<% else %>
     	 		avaliou
     	 	<% end %>
-    	 <a href="/series/"><%=avaliacao.avaliavel.serie.nome%></a> - <a href="/episodios/<%=avaliacao.avaliavel.slug%>"><%=avaliacao.avaliavel.nome_episodio%></a></li>
+    	 <a href="/series/<%=avaliacao.avaliavel.serie.slug%>"><%=avaliacao.avaliavel.serie.nome%></a> - <a href="/episodios/<%=avaliacao.avaliavel.slug%>"><%=avaliacao.avaliavel.nome_episodio%></a></li>
     <% end %>
  </ul>
 </div>
