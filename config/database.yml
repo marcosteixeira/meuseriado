@@ -12,10 +12,11 @@ development:
   adapter: mysql2
   encoding: utf8
   database: meuseriado_development
+  port: 3306
   pool: 5
   username: root
   password:
-  socket: /var/run/mysqld/mysqld.sock
+  #socket: /var/run/mysqld/mysqld.sock
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
@@ -27,13 +28,13 @@ test:
   pool: 5
   username: root
   password:
-  socket: /var/run/mysqld/mysqld.sock
+  #socket: /var/run/mysqld/mysqld.sock
 
 production:
   adapter: mysql2
   encoding: utf8
   database: meuseriado_production
   pool: 5
-  username: mallandro
-  password: capadocia
-  socket: /var/run/mysqld/mysqld.sock
+  username: root
+  password: 
+  #socket: /var/run/mysqld/mysqld.sock

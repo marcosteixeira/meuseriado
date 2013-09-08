@@ -18,9 +18,9 @@ ActiveRecord::Schema.define(version: 20130903121910) do
     t.boolean  "ativa"
     t.boolean  "finalizada"
     t.boolean  "geladeira"
+    t.boolean  "abandonada"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "abandonada"
   end
 
   add_index "acompanhamento_series", ["avaliacao_id"], name: "index_acompanhamento_series_on_avaliacao_id", unique: true, using: :btree
