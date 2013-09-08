@@ -20,7 +20,11 @@
 			<input type="checkbox"> Marcar temporada inteira como vista<!-- linha nova -->
 		</li><!-- linha nova -->
 		<% temporada.episodios_ordenados_exibicao.each do |episodio| %>
-		  	<li><input class="check-box-viu-episodio" type="checkbox"><!-- linha nova -->
+			<% if user_signed_in? && current_user.viu_episodio?(episodio)  %>
+				<li class="episodio-assistido"  ><input  class="check-box-viu-episodio" type="checkbox" checked> 
+			<% else %>
+		  		<li><input class="check-box-viu-episodio" type="checkbox"><!-- linha nova -->
+		  	<% end %>
 		  		<a href="/episodios/<%= episodio.slug%>"><%= episodio.numero%> - <%= episodio.nome%></a>
 		  		<span class="texto-pequeno">Exibido em <%= date(episodio.estreia)%></span>	
 		  		<div class="nota-lista-serie">
