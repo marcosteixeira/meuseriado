@@ -48,7 +48,7 @@ class Serie < ActiveRecord::Base
         
         existe = Temporada.find_by_sql("select * from temporadas where serie_id = #{serie.id} and temporada = #{ep.temporada}")
         
-        if existe
+        if existe.size > 0
           temporada = existe.first
         else
           temporada = Temporada.new
