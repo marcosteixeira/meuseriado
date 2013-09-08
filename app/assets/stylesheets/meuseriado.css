@@ -350,7 +350,7 @@ section.active p.nome-temporada{
   background-size: cover;
 }
 .conteudo-do-usuario{
-	background:url('/images/testebg.png');
+	background:url('../img/testebg.png');
 }
 */
 
@@ -485,4 +485,18 @@ opacity:0.9;
 .titulo-ultimas-atualizacoes{
 	padding-left:30px;
 	background: url('/images/icone-ultimas-atualizacoes.png') 0px 7px no-repeat;
+}
+
+.check-box-viu-episodio{
+	margin:0px !important;
+	padding:0px !important;
+}
+
+.episodio-assistido a{
+	text-decoration:line-through;
+	color:#ccc;
+}
+.marcar-temporada-inteira{
+	color:#666;
+	font-weight:bold;
 }

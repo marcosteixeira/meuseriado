@@ -1,8 +1,9 @@
+
 <% if temporada %>
 	<a href="/series/<%= temporada.serie.slug%>/temporadas/<%= temporada.temporada%>">
 		<img src="<%= temporada.imagem%>" alt="temporada<%= temporada.temporada%>" class="imagem-temporada">
 	</a>
-	<p class="title nome-temporada" data-section-title>
+		<p class="title nome-temporada" data-section-title>
 		<a href="#">
 			<% if temporada.temporada == 0%>
 				Especiais
@@ -15,18 +16,21 @@
 	<div class="content" data-section-content>
 		<br>
 		<ul class="lista-episodios">
-			<% temporada.episodios_ordenados_exibicao.each do |episodio| %>
-				<li>
-					<a href="/episodios/<%= episodio.slug%>"><%= episodio.numero%> - <%= episodio.nome%></a>
-					<span class="texto-pequeno">Exibição em <%= date(episodio.estreia)%> </span>	
-					<div class="nota-lista-serie">
-						<span class="left nota-label">Nota:</span>
-	  					<div class="rating">
-							<span>☆</span><span>☆</span><span>☆</span><span>☆</span><span>☆</span><span>☆</span><span>☆</span><span>☆</span><span>☆</span><span>☆</span>
-						</div>	
-					</div>
-				</li>
-			<% end %>
+		<li class="marcar-temporada-inteira"> <!-- linha nova -->
+			<input type="checkbox"> Marcar temporada inteira como vista<!-- linha nova -->
+		</li><!-- linha nova -->
+		<% temporada.episodios_ordenados_exibicao.each do |episodio| %>
+		  	<li><input class="check-box-viu-episodio" type="checkbox"><!-- linha nova -->
+		  		<a href="/episodios/<%= episodio.slug%>"><%= episodio.numero%> - <%= episodio.nome%></a>
+		  		<span class="texto-pequeno">Exibido em <%= date(episodio.estreia)%></span>	
+		  		<div class="nota-lista-serie">
+		  			<span class="left nota-label">Nota:</span>
+		      		<div class="rating">
+						<span>☆</span><span>☆</span><span>☆</span><span>☆</span><span>☆</span><span>☆</span><span>☆</span><span>☆</span><span>☆</span><span>☆</span>
+					</div>	
+				</div>
+		  	</li>
+		<% end %>
 		</ul>
 	</div>
-<% end%>
+<% end %>
