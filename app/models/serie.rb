@@ -175,6 +175,14 @@ class Serie < ActiveRecord::Base
       end
     end
     
+    def update_serie(serie)
+      tvdb = Tvdbr::Client.new
+      serie_by_id = tvdb.find_series_by_id(serie.id)
+      if serie_by_id
+        serie_banco = Serie.salvar serie_by_id
+      end
+    end
+    
     #
     #Baixa a imagem da url passada, passando tbm o nome do arquivo
     #e retorna o caminho do disco
