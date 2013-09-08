@@ -42,10 +42,18 @@ class Serie < ActiveRecord::Base
     end
     
     def inserir_temporadas(serie)
-      episodios = Episodio.find_by_sql("select temporada from episodios where serie_id='#{serie.id}' group by temporada")
+      temporada_banco = Episodio.find_by_sql("select temporada from episodios where serie_id=#{serie.id} group by temporada")
       
-      for ep in episodios
-        temporada = Temporada.new
+      for ep in temporada_banco
+        
+        existe = Temporada.find_by_sql("select * from temporadas where serie_id = #{serie.id} and temporada = #{ep.temporada}")
+        
+        if existe
+          temporada = existe.first
+        else
+          temporada = Temporada.new
+        end
+         
         temporada.serie = serie
         temporada.temporada = ep.temporada
         nome_imagem = "#{serie.id}-#{ep.temporada}.jpg"
