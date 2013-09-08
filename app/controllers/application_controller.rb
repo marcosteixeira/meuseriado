@@ -20,6 +20,7 @@ class ApplicationController < ActionController::Base
   def after_sign_out_path_for(resource)
     session[:previous_url] || root_path
   end
+
   #rescue_from Exception, :with => :handle_public_excepton
   
   protected
