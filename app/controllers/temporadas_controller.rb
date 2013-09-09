@@ -16,6 +16,9 @@ class TemporadasController < ApplicationController
     serie = @temporada.serie
     serie.marcar_como_vista(current_user)
     @temporada.marcar_como_vista(current_user)
-    redirect_to(action: "show", id: @temporada)
+    respond_to do |format|
+      format.html { redirect_to "show", id: @temporada, notice: 'Temporada marcada com sucesso.' }
+      format.json { render json: "ok", status: :ok }
+    end
   end
 end

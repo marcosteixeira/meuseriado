@@ -17,13 +17,13 @@
 		<br>
 		<ul class="lista-episodios">
 		<li class="marcar-temporada-inteira"> <!-- linha nova -->
-			<input type="checkbox"> Marcar temporada inteira como vista<!-- linha nova -->
+			<input type="checkbox" onchange="marcarTemporada(<%= temporada.id%>)"  id="temporada_<%= temporada.id%>"> Marcar temporada inteira como vista<!-- linha nova -->
 		</li><!-- linha nova -->
 		<% temporada.episodios_ordenados_exibicao.each do |episodio| %>
 			<% if user_signed_in? && current_user.viu_episodio?(episodio)  %>
-				<li class="episodio-assistido"  ><input  class="check-box-viu-episodio" type="checkbox" checked> 
+				<li class="episodio-assistido li_temporada_<%=temporada.id%>"  ><input  class="check-box-viu-episodio episodio_temporada_<%=temporada.id%>" type="checkbox" checked id="episodio_<%= episodio.id%>"> 
 			<% else %>
-		  		<li><input class="check-box-viu-episodio" type="checkbox"><!-- linha nova -->
+		  		<li class="li_temporada_<%=temporada.id%>"><input class="check-box-viu-episodio episodio_temporada_<%=temporada.id%>" type="checkbox" id="episodio_<%= episodio.id%>"><!-- linha nova -->
 		  	<% end %>
 		  		<a href="/episodios/<%= episodio.slug%>"><%= episodio.numero%> - <%= episodio.nome%></a>
 		  		<span class="texto-pequeno">Exibido em <%= date(episodio.estreia)%></span>	
@@ -37,4 +37,18 @@
 		<% end %>
 		</ul>
 	</div>
+	
+	<script>
+		function marcarTemporada(idTemporada){
+			marcar = jQuery('#temporada_'+idTemporada).is(':checked');
+			
+			$.getJSON('/temporadas/'+idTemporada+'/marcar_toda', function(data) {
+			});
+		 	jQuery('#temporada_'+idTemporada).prop('checked', true);
+		 	jQuery('.episodio_temporada_'+idTemporada).prop('checked', true);
+		 	jQuery('.li_temporada_'+idTemporada).addClass("episodio-assistido");
+		}
+	
+	
+	</script>
 <% end %>
