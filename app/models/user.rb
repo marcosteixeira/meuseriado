@@ -17,6 +17,7 @@ class User < ActiveRecord::Base
   has_many :avaliacoes, :dependent => :delete_all, :order => 'id DESC'
 	has_many :series, :through => :avaliacoes, :source => :avaliavel, :source_type => "Serie"
 	has_many :episodios, :through => :avaliacoes, :source => :avaliavel, :source_type => "Episodio"
+	has_many :temporadas, :through => :avaliacoes, :source => :avaliavel, :source_type => "Temporada"
   has_many :amigo_para, :foreign_key => 'user_id',  :class_name => 'Amizade' 
   has_many :amigo_de, :foreign_key => 'amigo_id', :class_name => 'Amizade'                             
   has_many :ligado_para, :through => :amigo_para,   :source => :amigo 
@@ -67,7 +68,7 @@ class User < ActiveRecord::Base
   end
   
   def viu_episodio?(episodio)
-     self.episodios.include? episodio
+    self.episodios.include? episodio
   end
   
   def amigos
@@ -87,14 +88,7 @@ class User < ActiveRecord::Base
   end
   
   def viu_temporada? (temporada)
-    retorno = true
-    temporada.episodios.each do |episodio_temporada|
-      if !self.viu_episodio? episodio_temporada
-        retorno = false
-        break
-      end
-    end
-    return retorno
+    self.temporadas.include?(temporada)
   end
 
 end

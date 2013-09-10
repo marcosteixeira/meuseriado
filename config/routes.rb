@@ -31,6 +31,7 @@ Meuseriado::Application.routes.draw do
   resources :temporadas do
     member do
       get :marcar_toda
+      get :desmarcar_toda
     end
   end
 

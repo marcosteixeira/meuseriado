@@ -16,9 +16,14 @@
 	<div class="content" data-section-content>
 		<br>
 		<ul class="lista-episodios">
-		<li class="marcar-temporada-inteira"> <!-- linha nova -->
-			<input type="checkbox" onchange="marcarTemporada(<%= temporada.id%>)"  id="temporada_<%= temporada.id%>"> Marcar temporada inteira como vista<!-- linha nova -->
-		</li><!-- linha nova -->
+			<% if user_signed_in? && current_user.viu_temporada?(temporada) %>
+				<li class="marcar-temporada-inteira episodio-assistido">
+					<input type="checkbox" onchange="marcarTemporada(<%= temporada.id%>)"  checked id="temporada_<%= temporada.id%>"> Marcar temporada inteira como vista<!-- linha nova -->
+			<% else %>
+				<li class="marcar-temporada-inteira">
+					<input type="checkbox" onchange="marcarTemporada(<%= temporada.id%>)"  id="temporada_<%= temporada.id%>"> Marcar temporada inteira como vista<!-- linha nova -->
+			<% end %>
+				</li>
 		<% temporada.episodios_ordenados_exibicao.each do |episodio| %>
 			<% if user_signed_in? && current_user.viu_episodio?(episodio)  %>
 				<li class="episodio-assistido li_temporada_<%=temporada.id%>"  ><input  class="check-box-viu-episodio episodio_temporada_<%=temporada.id%>" type="checkbox" checked id="episodio_<%= episodio.id%>"> 
@@ -42,11 +47,19 @@
 		function marcarTemporada(idTemporada){
 			marcar = jQuery('#temporada_'+idTemporada).is(':checked');
 			
-			$.getJSON('/temporadas/'+idTemporada+'/marcar_toda', function(data) {
-			});
-		 	jQuery('#temporada_'+idTemporada).prop('checked', true);
-		 	jQuery('.episodio_temporada_'+idTemporada).prop('checked', true);
-		 	jQuery('.li_temporada_'+idTemporada).addClass("episodio-assistido");
+			if(marcar){
+				$.getJSON('/temporadas/'+idTemporada+'/marcar_toda', function(data) {
+				 	jQuery('#temporada_'+idTemporada).prop('checked', true);
+				 	jQuery('.episodio_temporada_'+idTemporada).prop('checked', true);
+				 	jQuery('.li_temporada_'+idTemporada).addClass("episodio-assistido");
+				});
+			}else{
+				$.getJSON('/temporadas/'+idTemporada+'/desmarcar_toda', function(data) {
+				 	jQuery('#temporada_'+idTemporada).prop('checked', false);
+				 	jQuery('.episodio_temporada_'+idTemporada).prop('checked', false);
+				 	jQuery('.li_temporada_'+idTemporada).removeClass("episodio-assistido");
+				});	
+			}
 		}
 	
 	

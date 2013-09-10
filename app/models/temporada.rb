@@ -12,13 +12,7 @@ class Temporada < ActiveRecord::Base
   end 
   
   def episodios_ordenados_exibicao_passado
-  
-   result = self.serie.episodios.where("temporada = #{self.temporada} and  ativo = 1 ").order("temporada asc, numero asc")
-    
-    if result.size == 0
-      result = self.serie.episodios.where("temporada = #{self.temporada} and (ativo = 1 or estreia is null ) ").order("temporada asc, numero asc")
-    end
-    return result
+    self.serie.episodios.where("temporada = #{self.temporada} and (ativo = 1 or estreia is null ) ").order("temporada asc, numero asc")
   end  
   
   def media_geral
@@ -44,10 +38,23 @@ class Temporada < ActiveRecord::Base
     aval = Avaliacao.find_by_sql("select * from avaliacoes where avaliavel_type='Temporada' and avaliavel_id=#{self.id} and user_id=#{user.id} ")
 
     if aval.empty? 
+      puts "Avaliacao existe"
       aval = Avaliacao.new
       aval.user = user
       self.avaliacoes << aval
       self.save
+    end 
+  end
+
+  def desmarcar_como_vista(user)
+    self.episodios_ordenados_exibicao_passado.each do |episodio|
+          episodio.desmarcar_como_visto(user)
+    end
+
+    aval = Avaliacao.find_by_sql("select * from avaliacoes where avaliavel_type='Temporada' and avaliavel_id=#{self.id} and user_id=#{user.id} ")
+
+    if !aval.empty? 
+      aval.first.destroy
     end 
   end
   
