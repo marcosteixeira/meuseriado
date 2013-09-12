@@ -1,8 +1,8 @@
-<div class="large-3 columns">
+<div class="large-3 columns texto-limitado">
   <h2 class="titulo-ultimas-atualizacoes">Rolando agora</h2>
   <ul class="trending-topic">
   	<% avaliacoes.each do |avaliacao| %>
-    	<li><img src="<%=avaliacao.user.imagem_formatada%>" style="width: 16px; height: 16px;">
+    	<li><a href="/users/<%= avaliacao.user.slug%>"><img src="<%=avaliacao.user.imagem_formatada%>" style="width: 16px; height: 16px;"></a>
     		<% if avaliacao.nota.nil? %>
     	 		assistiu 
     	 	<% else %>

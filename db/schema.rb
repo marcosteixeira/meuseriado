@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130903121910) do
+ActiveRecord::Schema.define(version: 20130911155921) do
 
   create_table "acompanhamento_series", force: true do |t|
     t.integer  "avaliacao_id", null: false
@@ -79,6 +79,15 @@ ActiveRecord::Schema.define(version: 20130903121910) do
 
   add_index "episodios", ["serie_id"], name: "episodios_serie_id_fk", using: :btree
   add_index "episodios", ["slug"], name: "index_episodios_on_slug", unique: true, using: :btree
+
+  create_table "friendships", force: true do |t|
+    t.integer "friendable_id"
+    t.integer "friend_id"
+    t.integer "blocker_id"
+    t.boolean "pending",       default: true
+  end
+
+  add_index "friendships", ["friendable_id", "friend_id"], name: "index_friendships_on_friendable_id_and_friend_id", unique: true, using: :btree
 
   create_table "generos", force: true do |t|
     t.string   "nome",       default: "", null: false

@@ -500,3 +500,10 @@ opacity:0.9;
   color:#666;
   font-weight:bold;
 }
+
+.texto-limitado li{
+
+  overflow:hidden;
+  white-space:nowrap;
+  text-overflow: ellipsis;
+}
