@@ -31,7 +31,7 @@
    		
    		<h4>Amigos:</h4>
    		<ul class="quem-viu-episodio large-12">
-   			<% @user.amigos.each do |amigo|%>
+   			<% @user.friends.each do |amigo|%>
 				<li>
 					<a href="/users/<%=amigo.slug%>" class="tip-user" >
 						<img src='<%=amigo.imagem_formatada %>' width="60" height="60" alt="<%=amigo.name%>">
@@ -60,7 +60,7 @@
           <div class="large-12 columns">
             <h2>Séries Favoritas</h2>
               <ul class="lista-series-favoritas">
-              	<% @user.series.limit(5).each do |serie|%>
+              	<% @user.series.first(5).each do |serie|%>
                 	<li><a href="/series/<%=serie.slug%>"><img src='<%=serie.poster%>' alt='<%=serie.nome%>' ></a></li>
                 <% end %>
              </ul>

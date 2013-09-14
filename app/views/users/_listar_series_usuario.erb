@@ -4,7 +4,7 @@
 		  <thead>
 		    <tr>
 		      <th >Série</th>
-		      <th>Episódio</th>
+		      <th>Episódios</th>
 		      <th >Média</th>
 		      <th>Notas</th>
 		    </tr>
@@ -13,7 +13,7 @@
 		  	<% acompanhamentos_series.each do |acompanhamento|%>
 			    <tr>
 			      <td><a href="/series/<%=acompanhamento.avaliacao.avaliavel.slug%>"><%= acompanhamento.avaliacao.avaliavel.nome%></a></td>
-			      <td><%= user.episodios.where("serie_id = #{acompanhamento.avaliacao.avaliavel.id}").count%>/<%= acompanhamento.avaliacao.avaliavel.episodios_exibicao.count%></td>
+			      <td><%= user.episodios(acompanhamento.avaliacao.avaliavel.id).count%>/<%= acompanhamento.avaliacao.avaliavel.episodios_exibicao.count%></td>
 			      <td><%= number_with_precision user.media_serie(acompanhamento.avaliacao.avaliavel), :precision => 2  %></td>
 			      <td><%= user.notas_episodios(acompanhamento.avaliacao.avaliavel).count%></td>
 			    </tr>

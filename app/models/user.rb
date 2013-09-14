@@ -15,11 +15,25 @@ class User < ActiveRecord::Base
       :path => ":rails_root/app/assets/images/series/users/:id/:filename",
       :url => "/images/series/:id/:filename"
       
-  has_many :avaliacoes, :dependent => :delete_all, :order => 'id DESC'
-	has_many :series, :through => :avaliacoes, :source => :avaliavel, :source_type => "Serie"
-	has_many :episodios, :through => :avaliacoes, :source => :avaliavel, :source_type => "Episodio"
+  has_many :avaliacoes, :dependent => :delete_all, :order => 'id DESC'	
 	has_many :temporadas, :through => :avaliacoes, :source => :avaliavel, :source_type => "Temporada"
   has_many :series_vistas, :through => :avaliacoes, :source => :acompanhamento_serie
+	
+	def series
+	  Serie.find_by_sql("SELECT  `series`.* FROM `series` INNER JOIN `avaliacoes` ON `series`.`id` = `avaliacoes`.`avaliavel_id` WHERE `avaliacoes`.`user_id` = #{self.id} AND `avaliacoes`.`avaliavel_type` = 'Serie'  ORDER BY id DESC")
+	end
+	
+	def episodios(serie_id=nil)
+	  if serie_id
+      Episodio.find_by_sql("SELECT `episodios`.* FROM `episodios` INNER JOIN `avaliacoes` ON `episodios`.`id` = `avaliacoes`.`avaliavel_id` WHERE `avaliacoes`.`user_id` = #{self.id} AND `avaliacoes`.`avaliavel_type` = 'Episodio' AND episodios.serie_id = #{serie_id} ")	  
+	  else
+      Episodio.find_by_sql("SELECT `episodios`.* FROM `episodios` INNER JOIN `avaliacoes` ON `episodios`.`id` = `avaliacoes`.`avaliavel_id` WHERE `avaliacoes`.`user_id` = #{self.id} AND `avaliacoes`.`avaliavel_type` = 'Episodio'")	  
+	  end
+	end
+	
+	def temporadas
+	  Temporada.find_by_sql("SELECT `temporadas`.* FROM `temporadas` INNER JOIN `avaliacoes` ON `temporadas`.`id` = `avaliacoes`.`avaliavel_id` WHERE `avaliacoes`.`user_id` = #{self.id} AND `avaliacoes`.`avaliavel_type` = 'Temporada'")
+	end
 
 	def user_params
 	    params.require(:user).permit(:name, :provider, :uid, :name, :avatar)
@@ -70,9 +84,9 @@ class User < ActiveRecord::Base
   
   def notas_episodios(serie=nil)
     if serie
-      self.episodios.where("avaliacoes.nota is not null and serie_id = #{serie.id}")
+      Episodio.find_by_sql("SELECT * FROM `episodios` INNER JOIN `avaliacoes` ON `episodios`.`id` = `avaliacoes`.`avaliavel_id` WHERE `avaliacoes`.`user_id` = #{self.id} AND `avaliacoes`.`avaliavel_type` = 'Episodio' AND avaliacoes.nota is not null and serie_id = #{serie.id} ")
     else
-      self.episodios.where("avaliacoes.nota is not null")
+      Episodio.find_by_sql("SELECT * FROM `episodios` INNER JOIN `avaliacoes` ON `episodios`.`id` = `avaliacoes`.`avaliavel_id` WHERE `avaliacoes`.`user_id` = #{self.id} AND `avaliacoes`.`avaliavel_type` = 'Episodio' AND avaliacoes.nota is not null")
     end
   end
   
@@ -81,6 +95,7 @@ class User < ActiveRecord::Base
   end
   
   def viu_temporada? (temporada)
+    puts "VIU TEMPORADA?"
     self.temporadas.include?(temporada)
   end
 
