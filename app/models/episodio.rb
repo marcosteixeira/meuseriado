@@ -32,8 +32,13 @@ class Episodio < ActiveRecord::Base
   def desmarcar_como_visto(user)
     aval = Avaliacao.find_by_sql("select * from avaliacoes where avaliavel_type='Episodio' and avaliavel_id=#{self.id} and user_id=#{user.id} ")
     
-    if !aval.empty? 
+    if !aval.empty?
+      serie = aval.first.avaliavel.serie 
       aval.first.destroy
+      
+      if !user.viu_serie?(serie)
+        serie.desmarcar_como_vista(user)
+      end
     end 
   end
 
