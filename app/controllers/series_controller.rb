@@ -14,13 +14,7 @@ class SeriesController < ApplicationController
     if params['id_serie_search']
       buscar_series
     end
-
-
     @series||= Serie.order(:nome)
-
-
-
-
     @iniciais = cria_array_iniciais(@series)
   end
 
