@@ -15,7 +15,12 @@ class SeriesController < ApplicationController
       buscar_series
     end
 
+
     @series||= Serie.order(:nome)
+
+
+
+
     @iniciais = cria_array_iniciais(@series)
   end
 
