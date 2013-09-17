@@ -10,13 +10,13 @@ class SeriesController < ApplicationController
   require 'open-uri'
 
   def index
-
     if params['id_serie_search']
       buscar_series
     end
     session[:pagina_pesquisa_atual] = 1
   end
 
+  # @return [json]
   def carregar_series
     session[:pagina_pesquisa_atual] = session[:pagina_pesquisa_atual] + 1
     @series||= Serie.order(:nome).page(session[:pagina_pesquisa_atual]).per(1)
