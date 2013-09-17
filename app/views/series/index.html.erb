@@ -103,7 +103,10 @@
       <% else %>
           <script>
               $(window).scroll(function () {
-                  if ($(document).height() - $(window).scrollTop() < 300) {
+
+                  console.log("Escroto top "+$(window).scrollTop() );
+                  console.log("Body "+jQuery('body').height());
+                  if ($(window).scrollTop() == jQuery('body').height()) {
 
                       pesquisarSeries();
                   }

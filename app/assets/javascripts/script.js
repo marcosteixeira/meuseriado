@@ -9,6 +9,7 @@ function pesquisarSeries() {
                 if (jQuery("#" + serie.id).length == 0) {
 
                     $("#lista-dos-resultados").append('<li>');
+                    $("#lista-dos-resultados").find('li:last').attr('id', serie.id);
                     $("#lista-dos-resultados").find('li:last').append('<div>');
                     $("#lista-dos-resultados").find('div:last').addClass('large-3 columns');
                     $("#lista-dos-resultados").find('div:last').append('<div>');
