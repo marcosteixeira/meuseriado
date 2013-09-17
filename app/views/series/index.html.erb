@@ -32,16 +32,21 @@
 
         Portfolio.doSort();
 
-        jQuery(".miniatura-resultados").hover(
-                function () {
-                    jQuery(this).find(".descricao-item-listado").fadeIn(150);
-                },
-                function () {
-                    jQuery(this).find(".descricao-item-listado").fadeOut();
-                }
-        );
+        habilitaHoverMiniatura();
 
     } );
+
+
+        function habilitaHoverMiniatura(){
+            jQuery(".miniatura-resultados").hover(
+                    function () {
+                        jQuery(this).find(".descricao-item-listado").fadeIn(150);
+                    },
+                    function () {
+                        jQuery(this).find(".descricao-item-listado").fadeOut();
+                    }
+            );
+        }
 </script>
 <div class="row">
   <div class="large-12 columns">
@@ -98,14 +103,13 @@
       <% else %>
           <script>
               $(window).scroll(function () {
-
-                  if ($(window).scrollTop() == $(document).height() - $(window).height()) {
+                  if ($(document).height() - $(window).scrollTop() < 300) {
 
                       pesquisarSeries();
                   }
               });
 
-                  pesquisarSeries();
+              pesquisarSeries();
           </script>
       <% end %>
     </ul>

@@ -1,7 +1,7 @@
 #coding: utf-8
 class SeriesController < ApplicationController
 
-  before_filter :authenticate_user!, :except => [:show, :index, :my_logger, :create]
+  before_filter :authenticate_user!, :except => [:show, :index, :my_logger, :create, :carregar_series]
 
   def my_logger
     @@my_logger ||= Logger.new("#{Rails.root}/log/series.log")
@@ -18,9 +18,9 @@ class SeriesController < ApplicationController
 
   # @return [json]
   def carregar_series
-    session[:pagina_pesquisa_atual] = session[:pagina_pesquisa_atual] + 1
     @series||= Serie.order(:nome).page(session[:pagina_pesquisa_atual]).per(1)
     @iniciais = cria_array_iniciais(@series)
+    session[:pagina_pesquisa_atual] = session[:pagina_pesquisa_atual] + 1
     render :json => {:status => :ok, :series => @series.as_json}
   end
 
