@@ -18,7 +18,7 @@ class SeriesController < ApplicationController
 
   # @return [json]
   def carregar_series
-    @series||= Serie.order(:nome).page(session[:pagina_pesquisa_atual]).per(1)
+    @series||= Serie.order(:nome).page(session[:pagina_pesquisa_atual]).per(40)
     @iniciais = cria_array_iniciais(@series)
     session[:pagina_pesquisa_atual] = session[:pagina_pesquisa_atual] + 1
     render :json => {:status => :ok, :series => @series.as_json}
