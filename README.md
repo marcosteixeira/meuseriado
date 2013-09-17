@@ -2,4 +2,4 @@ meuseriado
 ==========
 
 
-meuseriado.com.br
+meuseriado.com.br  (Ainda não está em produção)
