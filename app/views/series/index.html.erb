@@ -1,114 +1,112 @@
 <script type="text/javascript">
-$(document).ready(function() {
-  var Portfolio = {
-    sort: function(items) {
-        items.show();
-        $('#lista-dos-resultados').find('div.miniatura-resultados').not(items).fadeOut(500);
-    },
-    showAll: function(items) {
-        items.fadeIn(500);
-    },
-    doSort: function() {
-        $('a', '#menu-listar-resuldatos').on('click', function() {
+    $(document).ready(function() {
+        var Portfolio = {
+            sort: function(items) {
+                items.show();
+                $('#lista-dos-resultados').find('div.miniatura-resultados').not(items).fadeOut(500);
+            },
+            showAll: function(items) {
+                items.fadeIn(500);
+            },
+            doSort: function() {
+                $('a', '#menu-listar-resuldatos').on('click', function() {
 
-            var $a = $(this);
-            if (!$a.is('#all')) {
+                    var $a = $(this);
+                    if (!$a.is('#all')) {
 
-                var items = $('div[data-cat=' + $a.data('cat') + ']', '#lista-dos-resultados');
+                        var items = $('div[data-cat=' + $a.data('cat') + ']', '#lista-dos-resultados');
 
-                Portfolio.sort(items);
+                        Portfolio.sort(items);
 
-            } else {
+                    } else {
 
-                Portfolio.showAll($('div.miniatura-resultados', '#lista-dos-resultados'));
+                        Portfolio.showAll($('div.miniatura-resultados', '#lista-dos-resultados'));
 
+
+                    }
+
+                });
 
             }
+        };
 
-        });
+        Portfolio.doSort();
 
-    }
-};
+        jQuery(".miniatura-resultados").hover(
+                function () {
+                    jQuery(this).find(".descricao-item-listado").fadeIn(150);
+                },
+                function () {
+                    jQuery(this).find(".descricao-item-listado").fadeOut();
+                }
+        );
 
-Portfolio.doSort();
-         
-           jQuery(".miniatura-resultados").hover(
-      function () {
-        jQuery(this).find(".descricao-item-listado").fadeIn(150);
-      },
-      function () {
-        jQuery(this).find(".descricao-item-listado").fadeOut();
-      }
-  );
-
-} );
+    } );
 </script>
 <div class="row">
-    <div class="large-12 columns">
- 
+  <div class="large-12 columns">
+
     <!-- Desktop Slider -->
- 
-     <ul class="breadcrumbs">
-          <li><a href="/">meuseriado</a></li>
-          <li class="current"><a href="#">
-          	<% if params['search'] %>
-          		Resultado da pesquisa:
-          	<% else %>
-          		Séries
-          	<% end %>
-          </a></li>
-        </ul>
-          </div>
+
+    <ul class="breadcrumbs">
+      <li><a href="/">meuseriado</a></li>
+      <li class="current"><a href="#">
+        <% if params['search'] %>
+            Resultado da pesquisa:
+        <% else %>
+            Séries
+        <% end %>
+      </a></li>
+    </ul>
+  </div>
+</div>
+<% if params['search'] %>
+    <div class="row">
+      <div class="large-12 columns">
+        <div id="menu-listar-resuldatos">
+          <a href="#" id="all">Todas</a>
+          <% @iniciais.each do |inicial|%>
+              <a href="#" data-cat='<%= inicial %>'><%= inicial.upcase %></a>
+          <% end %>
         </div>
- 
-   <div class="row">
-   	<div class="large-12 columns">
-    <div id="menu-listar-resuldatos">
-        <a href="#" id="all">Todas</a>
-        <% @iniciais.each do |inicial|%>
-        	<a href="#" data-cat='<%= inicial %>'><%= inicial.upcase %></a>
-        <% end %>
+      </div>
     </div>
+<% end %>
+<div class="row">
+  <div class="large-12 columns">
+    <ul id="lista-dos-resultados" class="lista-resultados-miniaturas">
+
+      <% if params['search'] %>
+          <% @series.each do |serie| %>
+              <li>
+                <div class="large-3 columns">
+                  <div class="miniatura-resultados" data-cat='<%= serie.nome[0,1]%>'>
+                    <%= link_to image_tag(serie.poster), series_path(:id_serie_search => serie.id), :method => :post %>
+                    <div class="descricao-item-listado">
+                      <%= link_to serie.nome, series_path(:id_serie_search => serie.id), :method => :post %>
+                      <% if serie.nota  %>
+                          <div id="star-<%= serie.id%>"> <span class="right"> <%=serie.nota.to_f%></span></div>
+                      <% end %>
+                      <script>
+                          $('#star-<%= serie.id%>').raty({ readOnly: true, score: <%=serie.nota.to_f/2%> });
+                      </script>
+                    </div>
+                  </div>
+                </div>
+              </li>
+          <% end %>
+      <% else %>
+          <script>
+              $(window).scroll(function () {
+
+                  if ($(window).scrollTop() == $(document).height() - $(window).height()) {
+
+                      pesquisarSeries();
+                  }
+              });
+          </script>
+      <% end %>
+    </ul>
   </div>
-  </div>
-   <div class="row">
-    <div class="large-12 columns">
-      <ul id="lista-dos-resultados" class="lista-resultados-miniaturas">
-      	<% @series.each do |serie| %>
-	        <li>
-	           <div class="large-3 columns">
-	              <div class="miniatura-resultados" data-cat='<%= serie.nome[0,1]%>'>
-	              	<% if params['search'] %>
-	              		<%= link_to image_tag(serie.poster), series_path(:id_serie_search => serie.id), :method => :post %>
-	                	<!-- <a data-method="post" href='/series?id_serie_search=<%= serie.id %>;pesquisa=<%= serie.nome %>' rel="nofollow"> -->
-	                <% else %>
-                	<a href="/series/<%= serie.slug%>">
-	                	<img src='<%= serie.poster%>' height="203" width="298">
-	            	</a>
-	                <% end %>
-	                 <div class="descricao-item-listado">
-	                 	<% if params['search'] %>
-	                 		<%= link_to serie.nome, series_path(:id_serie_search => serie.id), :method => :post %>
-	                  	<% else %>
-	                  		<a href="/series/<%= serie.slug%>"><h3><%= serie.nome%></h3></a>
-	                  	<% end %>
-	                  	<% if serie.nota  %>
-	                     <div id="star-<%= serie.id%>"> <span class="right"> <%=serie.nota.to_f%></span></div>
-	                     <% end %>
-	                  <p>
-	                  	<% serie.generos.each do |genero|%>
-	                  		<%=genero.nome%>
-                  		<% end %>
-	                  </p>
-	                  <script>
-	                  	$('#star-<%= serie.id%>').raty({ readOnly: true, score: <%=serie.nota.to_f/2%> });
-	                  </script> 
-	                </div>
-	              </div>
-	            </div>
-	        </li>
-        <% end %>
-      </ul>
-    </div>
-  </div>
+</div>
 </div>

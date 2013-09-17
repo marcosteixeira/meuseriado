@@ -14,8 +14,14 @@ class SeriesController < ApplicationController
     if params['id_serie_search']
       buscar_series
     end
-    @series||= Serie.order(:nome)
+    session[:pagina_pesquisa_atual] = 1
+  end
+
+  def carregar_series
+    session[:pagina_pesquisa_atual] = session[:pagina_pesquisa_atual] + 1
+    @series||= Serie.order(:nome).page(session[:pagina_pesquisa_atual]).per(1)
     @iniciais = cria_array_iniciais(@series)
+    render :json => {:status => :ok, :series => @series.as_json}
   end
 
   def cria_array_iniciais(series)
