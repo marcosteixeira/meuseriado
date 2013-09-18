@@ -120,7 +120,7 @@ section.active p.nome-temporada{
 }
 .logo-meuseriado{
     text-indent:-9999px;
-    background:url("/images/meuseriado.png") no-repeat;
+    background:url("/images/logo-meuseriado-header.png") no-repeat;
     width: 220px;
     margin-top: 12px !important;
 }
@@ -530,4 +530,37 @@ section.active p.nome-temporada{
 
 h1, h2, h3, h4, h5, h6{
     font-family:arial;
+}
+.field_with_errors input{
+    border-color: #FA7A7D !important;
+}
+
+.pagina-formulario label {
+    margin-bottom: -7px;
+}
+
+.google-entrar{
+    background: #df4a32;
+    border: 1px solid #c64028;
+    border-bottom-color: #a52c17;
+}
+
+.google-entrar:hover{
+    background: #BD3C27;
+}
+
+.Facebook-entrar:hover{
+    background:rgba(58, 81, 128, 1);
+}
+
+.lista-de-botoes {
+    padding-top: 10px;
+}
+
+.logo-meuseriado-footer{
+    text-indent:-9999px;
+    background:url("/images/logo-meuseriado-footer.png") no-repeat;
+    width: 220px;
+    margin-top: 0px;
+    float: left;
 }

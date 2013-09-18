@@ -15,8 +15,7 @@ class User < ActiveRecord::Base
       :path => ":rails_root/app/assets/images/series/users/:id/:filename",
       :url => "/images/series/:id/:filename"
       
-  has_many :avaliacoes, :dependent => :delete_all, :order => 'id DESC'	
-	has_many :temporadas, :through => :avaliacoes, :source => :avaliavel, :source_type => "Temporada"
+  has_many :avaliacoes, :dependent => :delete_all, :order => 'id DESC'
   has_many :series_vistas, :through => :avaliacoes, :source => :acompanhamento_serie
 	
 	def series
@@ -95,7 +94,6 @@ class User < ActiveRecord::Base
   end
   
   def viu_temporada? (temporada)
-    puts "VIU TEMPORADA?"
     self.temporadas.include?(temporada)
   end
 
