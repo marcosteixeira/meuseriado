@@ -1,344 +1,344 @@
 body{
-	background-color:#eeeeee;
+    background-color:#eeeeee;
 }
 h2{
-	font-size: 22px;
-	color: #6f6f6f;
-	line-height: 30px;
+    font-size: 22px;
+    color: #6f6f6f;
+    line-height: 30px;
 }
 .justify{
-	text-align:justify;
+    text-align:justify;
 }
 .top-bar{
-	background-color:#0bb2bf;
-	height:60px;
-	border-bottom:3px solid white;
+    background-color:#0bb2bf;
+    height:60px;
+    border-bottom:3px solid white;
 }
 
 .top-bar-section ul, .top-bar-section li a:not(.button) {
-	background-color:#0bb2bf;
+    background-color:#0bb2bf;
 }
 
 .top-bar-section ul li.hover > a{
-	background-color:#0bb2bf;
+    background-color:#0bb2bf;
 }
 
 .pesquisa-topo{
-	width:300px !important;
-	margin:0 auto !important;
-	display:block !important;
+    width:300px !important;
+    margin:0 auto !important;
+    display:block !important;
 
 }
 .pesquisa-topo-campo{
-	width: 300px !important;
-	border-radius: 5px;
-	padding: 10px;
-	color: #7f7f7f !important;
-	line-height:default !important;
-	height:35px !important;
-	margin-top:2px !important;
+    width: 300px !important;
+    border-radius: 5px;
+    padding: 10px;
+    color: #7f7f7f !important;
+    line-height:default !important;
+    height:35px !important;
+    margin-top:2px !important;
 }
 .menu-topo{
-	max-width:100%;
-	}
+    max-width:100%;
+}
 
 .menu-topo-container{
-	max-width:960px;
-	margin:0 auto;
+    max-width:960px;
+    margin:0 auto;
 }
 .cabecalho{
-	width:100%;
-	height:60px;
-	background-color:#0bb2bf;
-	position:absolute;
-	border-bottom:3px solid white;
+    width:100%;
+    height:60px;
+    background-color:#0bb2bf;
+    position:absolute;
+    border-bottom:3px solid white;
 }
 
 
 .imagem-temporada{
-	width: 30px;
-	position: absolute;
-	margin-top: 5px;
-	margin-left: 5px;
+    width: 30px;
+    position: absolute;
+    margin-top: 5px;
+    margin-left: 5px;
 }
 .nome-temporada{
-	padding-left:30px;
+    padding-left:30px;
 }
 
 section.active .imagem-temporada{
-	width:60px;
-	margin-top:-15px;
-	border:2px solid white;
+    width:60px;
+    margin-top:-15px;
+    border:2px solid white;
 }
 section.active p.nome-temporada{
-	padding-left:60px;
+    padding-left:60px;
 }
 
 .imagem-elenco{
-	width:72px;
-	filter: grayscale(100%);
-	-webkit-filter: grayscale(100%);
-	-moz-filter: grayscale(100%);
-	filter: grayscale(100%)
+    width:72px;
+    filter: grayscale(100%);
+    -webkit-filter: grayscale(100%);
+    -moz-filter: grayscale(100%);
+    filter: grayscale(100%)
 }
 .imagem-elenco:hover{
-	filter: grayscale(0%);
-	-webkit-filter: grayscale(0%);
-	-moz-filter: grayscale(0%);
-	filter: grayscale(0%)
+    filter: grayscale(0%);
+    -webkit-filter: grayscale(0%);
+    -moz-filter: grayscale(0%);
+    filter: grayscale(0%)
 }
 .lista-elenco li{
-	display: inline-block;
-	vertical-align: middle;
-	list-style:none;
-	margin-top: 5px;
+    display: inline-block;
+    vertical-align: middle;
+    list-style:none;
+    margin-top: 5px;
 }
 .primeiro-botao{
-	margin-top:10px;
+    margin-top:10px;
 }
 .lista-episodios li{
-	list-style: none;
+    list-style: none;
 }
 
 .lista-episodios li:hover{
-	background-color:#eee;
+    background-color:#eee;
 }
 
 .botao-destaque{
-	background: #ffc247 !important;
-	border-color:#e9a51c !important;
-	border-radius:5px;
-	height:auto !important;
+    background: #ffc247 !important;
+    border-color:#e9a51c !important;
+    border-radius:5px;
+    height:auto !important;
 }
 
 .botao-destaque:hover{
-	background-color:#ffcb62 !important;
-	}
+    background-color:#ffcb62 !important;
+}
 
 .painel-entrar {
-	margin-top: 6px !important;
+    margin-top: 6px !important;
 }
 .logo-meuseriado{
-	text-indent:-9999px;
-	background:url("/images/meuseriado.png") no-repeat;
-	width: 220px;
-	margin-top: 12px !important;
+    text-indent:-9999px;
+    background:url("/images/meuseriado.png") no-repeat;
+    width: 220px;
+    margin-top: 12px !important;
 }
 
 .texto-pequeno {
-	font-size: 11px;
-	margin-left: 10px;
-	color: #aaa;
+    font-size: 11px;
+    margin-left: 10px;
+    color: #aaa;
 }
 
 .rating {
-  unicode-bidi: bidi-override;
-  direction: rtl;
+    unicode-bidi: bidi-override;
+    direction: rtl;
 }
 .rating > span {
-  display: inline-block;
-  position: relative;
-  width: 1.1em;
-  font-size: 13px;
+    display: inline-block;
+    position: relative;
+    width: 1.1em;
+    font-size: 13px;
 }
 .rating > span:hover:before,
 .rating > span:hover ~ span:before {
-   content: "\2605";
-   position: absolute;
+    content: "\2605";
+    position: absolute;
 }
 
 .nota-lista-serie {
-	float: right;
-	min-width:180px;
-	text-align:right;
+    float: right;
+    min-width:180px;
+    text-align:right;
 }
 
 .nota-label{
-	font-size:12px;
-	color:#aaa !important;
-	margin:3px 5px 0px 0px;
+    font-size:12px;
+    color:#aaa !important;
+    margin:3px 5px 0px 0px;
 }
 .nota-lista-serie span{
-	color:#e0c300;
+    color:#e0c300;
 }
 .nota-lista-serie{
-	display:none;
+    display:none;
 }
 
 .lista-episodios li:hover .nota-lista-serie{
-	display:block;
-	}
+    display:block;
+}
 
 .Facebook-entrar {
-	background: rgba(88,114,167,1);
-	border: 1px solid #29447e;
-	border-bottom-color: #1a356e;
+    background: rgba(88,114,167,1);
+    border: 1px solid #29447e;
+    border-bottom-color: #1a356e;
 }
 
 .campo{
-	border-radius: 5px;
-	padding: 10px;
-	color: #7f7f7f !important;
-	line-height:default !important;
-	height:35px !important;
+    border-radius: 5px;
+    padding: 10px;
+    color: #7f7f7f !important;
+    line-height:default !important;
+    height:35px !important;
 }
 .campo-login {
-	margin-top: 10px !important;
+    margin-top: 10px !important;
 }
 .form-login{
-	margin-top:-20px;
-	margin-bottom:20px !important;
+    margin-top:-20px;
+    margin-bottom:20px !important;
 }
 
 .titulo-episodio h2 {
-	color: #BBB;
-	font-size: 15px;
-	line-height: 25px;
+    color: #BBB;
+    font-size: 15px;
+    line-height: 25px;
 }
 
 .titulo-episodio h1 {
-	font-size: 30px;
-	line-height: 30px;
+    font-size: 30px;
+    line-height: 30px;
 }
 
 .editor-sinopse img {
-	width: 30px;
+    width: 30px;
 }
 
 .editor-sinopse {
-	background-color: #ddd;
-	padding: 10px;
-	font-size: 12px;
-	color: #aaa;
-	margin-top: -15px;
+    background-color: #ddd;
+    padding: 10px;
+    font-size: 12px;
+    color: #aaa;
+    margin-top: -15px;
 
 }
 .quem-viu-episodio li{
-	list-style:none;
-	display:inline;
+    list-style:none;
+    display:inline;
 }
 
 .quem-viu-episodio img {
-	width: 47px;
-	margin: 2px 0px 1px 0px;
-	filter: grayscale(100%);
-	-webkit-filter: grayscale(100%);
-	-moz-filter: grayscale(100%);
-	filter: grayscale(100%);
+    width: 47px;
+    margin: 2px 0px 1px 0px;
+    filter: grayscale(100%);
+    -webkit-filter: grayscale(100%);
+    -moz-filter: grayscale(100%);
+    filter: grayscale(100%);
 }
 
 .quem-viu-episodio img:hover {
-	filter: grayscale(0%);
-	-webkit-filter: grayscale(0%);
-	-moz-filter: grayscale(0%);
-	filter: grayscale(0%);
+    filter: grayscale(0%);
+    -webkit-filter: grayscale(0%);
+    -moz-filter: grayscale(0%);
+    filter: grayscale(0%);
 }
 .lista-resultados-miniaturas li{
-	list-style: none;
+    list-style: none;
 }
 .miniatura-resultados{
-	margin:12px 0px 12px 0px;
-	padding:5px;
-	background-color:white;
+    margin:12px 0px 12px 0px;
+    padding:5px;
+    background-color:white;
 }
 
 .descricao-item-listado {
-	background-color: white;
-	width: 100%;
-	position: relative;
-	display:none;
-	margin-top:-100px;
-	height:100px;
-	overflow:hidden;
-	opacity:0.9;
-	padding:0px 10px 10px 10px;
+    background-color: white;
+    width: 100%;
+    position: relative;
+    display:none;
+    margin-top:-100px;
+    height:100px;
+    overflow:hidden;
+    opacity:0.9;
+    padding:0px 10px 10px 10px;
 
 }
 
 .descricao-item-listado p{
-	opacity:1.0;
-	color:#333;
+    opacity:1.0;
+    color:#333;
 }
 
 .descricao-item-listado h3{
-	font-size:16px;
-	line-height: 16px;
-	padding: 10px 0px 0px 0px;
-	color:#0bb2bf;
+    font-size:16px;
+    line-height: 16px;
+    padding: 10px 0px 0px 0px;
+    color:#0bb2bf;
 }
 
 .painel-logado a{
-	font-weight:bold;
-	color:white;
+    font-weight:bold;
+    color:white;
 }
 
 .painel-logado img{
-	width:24px;
-	height:24px;
-	border:2px solid white;
-	margin-right:5px;
-	background-color:White;
+    width:24px;
+    height:24px;
+    border:2px solid white;
+    margin-right:5px;
+    background-color:White;
 }
 
 
 .painel-logado {
-	width:200px;
-	overflow:hidden;
-	white-space: nowrap;
-	text-overflow:ellipsis;
-	color:white;
-	text-align:right;
-	font-size:13px;
-	margin-top: 5px !important;
+    width:200px;
+    overflow:hidden;
+    white-space: nowrap;
+    text-overflow:ellipsis;
+    color:white;
+    text-align:right;
+    font-size:13px;
+    margin-top: 5px !important;
 }
 
 #dropdown-usuario-logado{
-	background-color:white;
-	margin-top:15px;
-	margin-left:-10px;
-	font-size:18px;
+    background-color:white;
+    margin-top:15px;
+    margin-left:-10px;
+    font-size:18px;
 }
 #dropdown-usuario-logado li{
-	width:100%;
+    width:100%;
 }
 #dropdown-usuario-logado a{
-	background-color:white !important;
-	color:#3a3a3a;
-	border-bottom:1px solid #ededed;
+    background-color:white !important;
+    color:#3a3a3a;
+    border-bottom:1px solid #ededed;
 }
-	
+
 #dropdown-usuario-logado li:hover a{
-	background-color:#ededed!important;
+    background-color:#ededed!important;
 }
 .estrelas-pagina-interior{
-	display:inline;
-	margin-bottom:20px;
+    display:inline;
+    margin-bottom:20px;
 }
 .infos-interior{
-	min-height:30px;
-	color:#616161;
-	font-size:13px;
+    min-height:30px;
+    color:#616161;
+    font-size:13px;
 }
 .nota-numerica{
-	font-weight:bold;
-	color:#333;
-	font-size:16px;
-	margin-left: 5px;
+    font-weight:bold;
+    color:#333;
+    font-size:16px;
+    margin-left: 5px;
 }
 .data-lancamento-interno, .infos-interior{
-	font-size:15px;
+    font-size:15px;
 }
 .lista-ultimas-atividades{
-	list-style: none;
+    list-style: none;
 }
 
 .lista-ultimas-atividades li{
-	font-size: 15px;
-	color: #616161;
-	white-space: nowrap;
-	overflow: hidden;
-	text-overflow: ellipsis;
-	line-height: 30px;
+    font-size: 15px;
+    color: #616161;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    line-height: 30px;
 }
 /*
 .pagina-do-usuario{
@@ -350,165 +350,184 @@ section.active p.nome-temporada{
   background-size: cover;
 }
 .conteudo-do-usuario{
-	background:url('../img/testebg.png');
+	background:url('/images/testebg.png');
 }
 */
 
 .label.secondary {
-	background-color: #9B9B9B !important;
-	color: white !important;
+    background-color: #9B9B9B !important;
+    color: white !important;
 }
 
 .lista-series-favoritas li{
-	display: inline-block;
-	vertical-align: middle;
-	list-style:none;
-	margin-top: 5px;
-	width:120px;
+    display: inline-block;
+    vertical-align: middle;
+    list-style:none;
+    margin-top: 5px;
+    width:120px;
 }
 .foto-perfil img{
-	width:100%;
-	border:5px solid white;
+    width:100%;
+    border:5px solid white;
 }
 
 .lista-de-series-mais-assistidas li{
-	list-style:none;
-	float:left;
-	margin:2px;
+    list-style:none;
+    float:left;
+    margin:2px;
 }
 
 .primeiro-lugar{
-	max-width:330px;
+    max-width:330px;
 }
 
 .segundo-lugar{
-	max-width:206px;
+    max-width:206px;
 }
 
 .terceiro-lugar{
-	max-width:122px;
+    max-width:122px;
 }
 
 .descricao-destacando {
-position: absolute;
-margin-top: -34px;
-padding: 5px;
-color:white;
-font-weight:bold;
-white-space:nowrap;
-overflow: hidden;
-opacity:0.9;
+    position: absolute;
+    margin-top: -34px;
+    padding: 5px;
+    color:white;
+    font-weight:bold;
+    white-space:nowrap;
+    overflow: hidden;
+    opacity:0.9;
 }
 
 .primeiro-lugar .descricao-destacando {
-	background-color:#e5ae1e;
-	width:330px;
+    background-color:#e5ae1e;
+    width:330px;
 }
 
 .primeiro-lugar:hover .descricao-destacando {
-	background-color:#f6c74a;
+    background-color:#f6c74a;
 }
 
 .segundo-lugar .descricao-destacando {
-	background-color:#1f99a4;
-	width:206px;
+    background-color:#1f99a4;
+    width:206px;
 }
 
 .segundo-lugar:hover .descricao-destacando{
-	background-color:#32c3d0;
+    background-color:#32c3d0;
 }
 
 .terceiro-lugar .descricao-destacando {
-	background-color:#333754;
-	width:122px;
+    background-color:#333754;
+    width:122px;
 }
 
 .terceiro-lugar:hover .descricao-destacando {
-	background-color:#44486a;
+    background-color:#44486a;
 }
 
 .pessoas-assistiram, .pessoas-votaram, .pessoas-comentaram{
-	margin-left:10px;
+    margin-left:10px;
 
 }
 .pessoas-assistiram{
-	padding-left:25px;
+    padding-left:25px;
 }
 .pessoas-votaram{
-	padding-left:17px;
+    padding-left:17px;
 }
 
 .pessoas-comentaram{
-	padding-left:19px;
+    padding-left:19px;
 }
 
 .pessoas-assistiram{
-	background:url('/images/icone-olhos.png') 0px 7px no-repeat;
+    background:url('/images/icone-olhos.png') 0px 7px no-repeat;
 }
 .pessoas-votaram{
-	background:url('/images/icone-trofeu.png') 0px 7px no-repeat;
+    background:url('/images/icone-trofeu.png') 0px 7px no-repeat;
 }
 
 .pessoas-comentaram{
-	background:url('/images/icone-comentario.png') 0px 7px no-repeat;
+    background:url('/images/icone-comentario.png') 0px 7px no-repeat;
 }
 
 .indent{
-	text-indent: -9999px;
-	position:absolute;
+    text-indent: -9999px;
+    position:absolute;
 }
 .titulo-mais-assistidos-da-semana{
-	background:url('/images/icone-filme.png') 0px 7px no-repeat;
-	padding-left:20px;
+    background:url('/images/icone-filme.png') 0px 7px no-repeat;
+    padding-left:20px;
 }
 
 .anuncio-grande{
-	width:336px;
+    width:336px;
 }
 .trending-topic li{
-	list-style: none;
-	font-size:14px;
-	color:#333;
+    list-style: none;
+    font-size:14px;
+    color:#333;
 }
 
 .comentarios-armazenados{
-	margin-left:10px;
-	padding-left:17px;
-	background: url('/images/icone-comentario-escuro.png') 0px 3px no-repeat;
+    margin-left:10px;
+    padding-left:17px;
+    background: url('/images/icone-comentario-escuro.png') 0px 3px no-repeat;
 }
 
 .titulo-gerando-assunto{
-	padding-left:20px;
-	background: url('/images/icone-fogo.png') 0px 5px no-repeat;
+    padding-left:20px;
+    background: url('/images/icone-fogo.png') 0px 5px no-repeat;
 }
 
 .titulo-ultimas-atualizacoes{
-	padding-left:30px;
-	background: url('/images/icone-ultimas-atualizacoes.png') 0px 7px no-repeat;
+    padding-left:30px;
+    background: url('/images/icone-ultimas-atualizacoes.png') 0px 7px no-repeat;
 }
 
 .check-box-viu-episodio{
-	margin:0px !important;
-	padding:0px !important;
+    margin:0px !important;
+    padding:0px !important;
 }
 
 .episodio-assistido a{
-	text-decoration:line-through;
-	color:#ccc;
+    text-decoration:line-through;
+    color:#ccc;
 }
 .marcar-temporada-inteira{
-	color:#666;
-	font-weight:bold;
+    color:#666;
+    font-weight:bold;
 }
-
 .texto-limitado li{
 
-	overflow:hidden;
-	white-space:nowrap;
-	text-overflow: ellipsis;
+    overflow:hidden;
+    white-space:nowrap;
+    text-overflow: ellipsis;
 }
 
-.foto-serie-pesquisada{
-    width: 298;
-    height: 203;
+.pagina-formulario ul li{
+    list-style:none;
+}
+
+.alert-box.alert{
+    background-color: #e44f52;
+}
+
+.elenco-todos{
+    width:100px;
+    filter: grayscale(0%);
+    -webkit-filter: grayscale(0%);
+    -moz-filter: grayscale(0%);
+    filter: grayscale(0%);
+}
+
+.lista-de-personagens{
+    font-size:18px;
+    margin-top:-20px;
+}
+
+h1, h2, h3, h4, h5, h6{
+    font-family:arial;
 }

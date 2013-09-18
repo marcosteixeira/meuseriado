@@ -1,7 +1,7 @@
 #coding: utf-8
 class SeriesController < ApplicationController
 
-  before_filter :authenticate_user!, :except => [:show, :index, :my_logger, :create, :carregar_series]
+  before_filter :authenticate_user!, :except => [:show, :index, :my_logger, :create, :carregar_series, :personagens]
 
   def my_logger
     @@my_logger ||= Logger.new("#{Rails.root}/log/series.log")
@@ -94,12 +94,12 @@ class SeriesController < ApplicationController
               @series= []
               for s in series
                 if series.size <= 3
-                  my_logger.info("retornou mais de 3 resultados")
+                  my_logger.info("retornou menos de 3 resultados")
                   serie_pesquisa = Serie.salvar s
                   params['search'] = false
                 else
                   if s
-                    my_logger.info("retornou menos de 3 resultados")
+                    my_logger.info("retornou mais de 3 resultados")
                     serie_pesquisa = Serie.new
                     serie_pesquisa.nome = s.series_name
                     serie_pesquisa.id = s.id
@@ -124,7 +124,7 @@ class SeriesController < ApplicationController
   end
 
   def show
-    if params[:id].to_i == 0
+    if params[:id].respond_to?(:to_str)
       @serie = Serie.friendly.find_by_slug(params[:id])
     else
       @serie = Serie.friendly.find_by_id(params[:id])
@@ -132,7 +132,7 @@ class SeriesController < ApplicationController
     if !@serie
 
       tvdb = Tvdbr::Client.new
-      if params[:id].to_i == 0
+      if params[:id].respond_to?(:to_str)
 
         params[:id_serie] = nil
         buscar_series params[:id]
@@ -156,6 +156,10 @@ class SeriesController < ApplicationController
     @serie = Serie.friendly.find(params[:id])
     @serie.marcar_inteira(current_user)
     redirect_to(action: "show", id: @serie)
+  end
+
+  def personagens
+    @serie = Serie.friendly.find(params[:id])
   end
 
 end

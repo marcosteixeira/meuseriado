@@ -40,7 +40,7 @@ h2{
 }
 .menu-topo{
   max-width:100%;
-  }
+}
 
 .menu-topo-container{
   max-width:960px;
@@ -113,7 +113,7 @@ section.active p.nome-temporada{
 
 .botao-destaque:hover{
   background-color:#ffcb62 !important;
-  }
+}
 
 .painel-entrar {
   margin-top: 6px !important;
@@ -143,8 +143,8 @@ section.active p.nome-temporada{
 }
 .rating > span:hover:before,
 .rating > span:hover ~ span:before {
-   content: "\2605";
-   position: absolute;
+  content: "\2605";
+  position: absolute;
 }
 
 .nota-lista-serie {
@@ -167,7 +167,7 @@ section.active p.nome-temporada{
 
 .lista-episodios li:hover .nota-lista-serie{
   display:block;
-  }
+}
 
 .Facebook-entrar {
   background: rgba(88,114,167,1);
@@ -306,7 +306,7 @@ section.active p.nome-temporada{
   color:#3a3a3a;
   border-bottom:1px solid #ededed;
 }
-  
+
 #dropdown-usuario-logado li:hover a{
   background-color:#ededed!important;
 }
@@ -342,15 +342,15 @@ section.active p.nome-temporada{
 }
 /*
 .pagina-do-usuario{
-  background: url('http://thetvdb.com/banners/fanart/original/153021-13.jpg') no-repeat  fixed;
-  margin-top:-30px;
+	background: url('http://thetvdb.com/banners/fanart/original/153021-13.jpg') no-repeat  fixed;
+	margin-top:-30px;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
 }
 .conteudo-do-usuario{
-  background:url('../img/testebg.png');
+	background:url('/images/testebg.png');
 }
 */
 
@@ -390,14 +390,14 @@ section.active p.nome-temporada{
 }
 
 .descricao-destacando {
-position: absolute;
-margin-top: -34px;
-padding: 5px;
-color:white;
-font-weight:bold;
-white-space:nowrap;
-overflow: hidden;
-opacity:0.9;
+  position: absolute;
+  margin-top: -34px;
+  padding: 5px;
+  color:white;
+  font-weight:bold;
+  white-space:nowrap;
+  overflow: hidden;
+  opacity:0.9;
 }
 
 .primeiro-lugar .descricao-destacando {
@@ -500,7 +500,6 @@ opacity:0.9;
   color:#666;
   font-weight:bold;
 }
-
 .texto-limitado li{
 
   overflow:hidden;
@@ -508,7 +507,27 @@ opacity:0.9;
   text-overflow: ellipsis;
 }
 
-.foto-serie-pesquisada{
-  width: 298;
-  height: 203;
+.pagina-formulario ul li{
+  list-style:none;
+}
+
+.alert-box.alert{
+  background-color: #e44f52;
+}
+
+.elenco-todos{
+  width:100px;
+  filter: grayscale(0%);
+  -webkit-filter: grayscale(0%);
+  -moz-filter: grayscale(0%);
+  filter: grayscale(0%);
+}
+
+.lista-de-personagens{
+  font-size:18px;
+  margin-top:-20px;
+}
+
+h1, h2, h3, h4, h5, h6{
+  font-family:arial;
 }
