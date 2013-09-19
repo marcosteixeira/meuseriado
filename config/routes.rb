@@ -6,6 +6,7 @@ Meuseriado::Application.routes.draw do
   resources :users, :only => [:index, :show]
   resources :series, :only => [:show, :index,:create]
   resources :episodios, :only => [:show, :index]
+  resources :feeds
   root :to => "home#index"
 
   resources :series do

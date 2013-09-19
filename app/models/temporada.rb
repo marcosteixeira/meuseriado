@@ -57,5 +57,9 @@ class Temporada < ActiveRecord::Base
       aval.first.destroy
     end 
   end
+
+  def nome_temporada_formatado
+    "#{self.serie.nome} - Temporada #{self.temporada}"
+  end
   
 end

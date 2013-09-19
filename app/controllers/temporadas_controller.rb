@@ -8,7 +8,7 @@ class TemporadasController < ApplicationController
       @temporada = Temporada.friendly.find(params[:id])
     end
     
-    @title = "#{@temporada.serie.nome} - Temporada #{@temporada.temporada}"
+    @title = @temporada.nome_temporada_formatado
   end
   
   def marcar_toda
