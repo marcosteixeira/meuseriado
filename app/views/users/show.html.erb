@@ -1,96 +1,123 @@
 <div class="pagina-do-usuario">
-<div class="row">
-    <div class="large-12 columns"> 
-     <ul class="breadcrumbs">
-          <li><a href="/">meuseriado</a></li>
-          <li class="current">
-          	<a href="#">
-          		<% if user_signed_in? && current_user.id == @user.id %>
-          			Meu perfil
-          		<% else %>
-          			<%= @user.name%>
-          		<% end %>
-          	</a>
-      	  </li>
-        </ul>
-          </div>
+  <div class="row">
+    <div class="large-12 columns">
+      <ul class="breadcrumbs">
+        <li><a href="/">meuseriado</a></li>
+        <li class="current">
+          <a href="#">
+            <% if user_signed_in? && current_user.id == @user.id %>
+                Meu perfil
+            <% else %>
+                <%= @user.name %>
+            <% end %>
+          </a>
+        </li>
+      </ul>
+    </div>
   </div>
- 
-   <div class="row conteudo-do-usuario">
-   	<div class="large-4 columns">
-   		<div class="foto-perfil">
-        	<img src='<%= @user.imagem_formatada%>' alt="<%= @user.name%>">
-      	</div>
-      	<% if user_signed_in? && current_user.id == @user.id %>
-	  		<%= link_to "Editar perfil", edit_user_registration_path, { :class=>"small button large-12 success columns primeiro-botao" } %>
-      	<% else %>
-	   		<a href="#" class="small button large-12 success columns primeiro-botao">Adicionar como amigo</a> 
-      	<% end %>
-   		<a href="#" class="small button secondary large-12 columns">Enviar mensagem</a> 
 
-   		
-   		<h4>Amigos:</h4>
-   		<ul class="quem-viu-episodio large-12">
-   			<% @user.friends.each do |amigo|%>
-				<li>
-					<a href="/users/<%=amigo.slug%>" class="tip-user" >
-						<img src='<%=amigo.imagem_formatada %>' width="60" height="60" alt="<%=amigo.name%>">
-					</a>
-				</li>
-			<% end%>
-			
-		</ul>
-		<a href="#">Mostrar todos os amigos</a>
-   	</div>
-   	<div class="large-8 columns">
-   		<hgroup class="titulo-episodio">
-   		<a href="#">
-   			<h1>
-   				<%= @user.name %> 
-   			</h1>
-   		</a>
-   		</hgroup>
-   		<div class="row infos-interior">
-   			<div class="large-4 columns">Episódios assistidos: <span class="round success label"><%=@user.episodios.count %></span>
-   			</div> <div class="large-4 columns">Notas dadas: <span class="round label"><%= @user.notas_episodios.count%></span></div>
-   			<div class="large-4 columns data-lancamento-interno">Cadastro: <span class="round secondary label"><%= date @user.created_at%></span></div>
-   		</div>
+  <div class="row conteudo-do-usuario">
+    <div class="large-4 columns">
+      <div class="foto-perfil">
+        <img src='<%= @user.imagem_formatada %>' alt="<%= @user.name %>">
+      </div>
+      <% if user_signed_in? && current_user.id == @user.id %>
+          <%= link_to "Editar perfil", edit_user_registration_path, {:class => "small button large-12 success columns primeiro-botao"} %>
+      <% else %>
+          <a href="#" class="small button large-12 success columns primeiro-botao">Adicionar como amigo</a>
+      <% end %>
+      <a href="#" class="small button secondary large-12 columns">Enviar mensagem</a>
 
-       <div class="row">
-          <div class="large-12 columns">
-            <h2>Séries Favoritas</h2>
-              <ul class="lista-series-favoritas">
-              	<% @user.series.first(5).each do |serie|%>
-                	<li><a href="/series/<%=serie.slug%>"><img src='<%=serie.poster%>' alt='<%=serie.nome%>' ></a></li>
-                <% end %>
-             </ul>
-        <a href="#" class="right">Mostrar todas as séries favoritas >></a>
+
+      <h4>Amigos:</h4>
+      <ul class="quem-viu-episodio large-12">
+        <% @user.friends.each do |amigo| %>
+            <li>
+              <a href="/users/<%= amigo.slug %>" class="tip-user">
+                <img src='<%= amigo.imagem_formatada %>' width="60" height="60" alt="<%= amigo.name %>">
+              </a>
+            </li>
+        <% end %>
+
+      </ul>
+      <a href="#">Mostrar todos os amigos</a>
+    </div>
+    <div class="large-8 columns">
+      <hgroup class="titulo-episodio">
+        <a href="#">
+          <h1>
+            <%= @user.name %>
+          </h1>
+        </a>
+      </hgroup>
+      <div class="row infos-interior">
+        <div class="large-4 columns">Episódios assistidos: <span class="round success label"><%=@user.episodios.count %></span>
+        </div> <div class="large-4 columns">Notas dadas: <span class="round label"><%= @user.notas_episodios.count%></span></div>
+        <div class="large-4 columns data-lancamento-interno">Cadastro: <span class="round secondary label"><%= date @user.created_at%></span></div>
+      </div>
+
+      <div class="row">
+        <div class="large-12 columns">
+          <h2>Séries Favoritas</h2>
+          <ul class="lista-series-favoritas" id="ul-series">
+            <% @user.series.first(5).each do |serie| %>
+                <li><a href="/series/<%= serie.slug %>"><img src='<%= serie.poster %>' alt='<%= serie.nome %>'></a></li>
+            <% end %>
+          </ul>
+          <a href="javascript:carregarSeriesFavoritas()" class="right">Mostrar todas as séries favoritas >></a>
         </div>
       </div>
-        <div class="row">
-          <div class="large-12 columns">
-            <h2>Grade de séries</h2>
-            <div class="section-container auto" data-section>
-              <section>
-                <p class="title" data-section-title><a href="#panel1">Ativas (<%=@user.series_vistas.where("ativa = 1").count%>)</a></p>
-                <%= listar_series_usuario(@user.series_vistas.where("ativa = 1"), @user) %>
-              </section>
-              <section>
-                <p class="title" data-section-title><a href="#panel2">Finalizadas (<%=@user.series_vistas.where("finalizada = 1").count%>)</a></p>
-                <%= listar_series_usuario(@user.series_vistas.where("finalizada = 1"), @user) %>
-              </section>
-              <section>
-                <p class="title" data-section-title><a href="#panel2">Geladeira (<%=@user.series_vistas.where("geladeira = 1").count%>)</a></p>
-                <%= listar_series_usuario(@user.series_vistas.where("geladeira = 1"), @user) %>
-              </section>
-              <section>
-                <p class="title" data-section-title><a href="#panel2">Abandonadas (<%=@user.series_vistas.where("abandonada = 1").count%>)</a></p>
-                <%= listar_series_usuario(@user.series_vistas.where("abandonada = 1"), @user) %>
-              </section>
-            </div>
+      <div class="row">
+        <div class="large-12 columns">
+          <h2>Grade de séries</h2>
+
+          <div class="section-container auto" data-section>
+            <section>
+              <p class="title" data-section-title>
+                <a href="#panel1">Ativas (<%= @user.series_vistas.where("ativa = 1").count %>)</a></p>
+              <%= listar_series_usuario(@user.series_vistas.where("ativa = 1"), @user) %>
+            </section>
+            <section>
+              <p class="title" data-section-title>
+                <a href="#panel2">Finalizadas (<%= @user.series_vistas.where("finalizada = 1").count %>)</a></p>
+              <%= listar_series_usuario(@user.series_vistas.where("finalizada = 1"), @user) %>
+            </section>
+            <section>
+              <p class="title" data-section-title>
+                <a href="#panel2">Geladeira (<%= @user.series_vistas.where("geladeira = 1").count %>)</a></p>
+              <%= listar_series_usuario(@user.series_vistas.where("geladeira = 1"), @user) %>
+            </section>
+            <section>
+              <p class="title" data-section-title>
+                <a href="#panel2">Abandonadas (<%= @user.series_vistas.where("abandonada = 1").count %>)</a></p>
+              <%= listar_series_usuario(@user.series_vistas.where("abandonada = 1"), @user) %>
+            </section>
+          </div>
         </div>
       </div>
-	  <%= ultimas_atualizacoes @user %>	
-   	</div>
-   </div>
+      <%= ultimas_atualizacoes @user %>
+    </div>
+  </div>
 </div>
+<script>
+
+    function carregarSeriesFavoritas() {
+        $.ajax({
+            url: "/users/<%= @user.slug %>/carregar_series",
+            success: function (data) {
+
+                $(data.series).each(function (i, serie) {
+                    if (jQuery("#li-" + serie.id).length == 0) {
+                        $("#ul-series").append("<li style='margin-right: 2px;' id='li-" + serie.id + "'>");
+                        $("#ul-series").find('li:last').append('<a>');
+                        $("#ul-series").find('li:last').append('<a>');
+                        $("#ul-series").find('li:last').append('<a>');
+                        $("#ul-series").find('li:last').find('a').attr("href", "/series/"+serie.slug);
+                        $("#ul-series").find('a:last').append('<img>');
+                        $("#ul-series").find('a:last').find('img').attr("src", serie.poster);
+                    }
+                });
+            }});
+    }
+
+</script>

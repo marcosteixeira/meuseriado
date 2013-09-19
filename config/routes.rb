@@ -38,4 +38,11 @@ Meuseriado::Application.routes.draw do
       get :desmarcar_toda
     end
   end
+
+  resources :users do
+    member do
+      get :carregar_series
+    end
+  end
+
 end
