@@ -1,0 +1,37 @@
+<div class="pagina-formulario" xmlns="http://www.w3.org/1999/html">
+  <div class="row">
+    <div class="large-12 columns">
+      <h2>Editar usuário</h2>
+
+      <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put , :multipart => true} ) do |f| %>
+          <%= devise_error_messages! %>
+
+          <div><%= f.label :nome %><br />
+            <%= f.text_field :name, :autofocus => true %></div>
+
+          <div><%= f.label :avatar %><br />
+            <%= f.file_field :avatar %></div>
+
+          <div><%= f.label :email %><br />
+            <%= f.email_field :email %></div>
+
+          <div><%= f.label :senha %><br />
+            <%= f.password_field :password %></div>
+
+          <div><%= f.label :repita_a_senha %><br />
+            <%= f.password_field :password_confirmation %></div>
+
+
+          <div class="row lista-de-botoes">
+            <div class="large-2 columns"><%= f.submit "Atualizar", :class => 'small button large-12 columns' %></div>
+          </div>
+
+          <a href="/users/password/new">Esqueceu sua senha?</a> </br>
+
+          <%= link_to "Voltar", :back %>
+
+      <% end %>
+
+    </div>
+  </div>
+</div>
