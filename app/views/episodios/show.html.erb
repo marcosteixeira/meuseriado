@@ -14,9 +14,9 @@
 	<div class="large-4 columns">
 		<img src='<%=@episodio.banner %>' alt="imagem-episodio">
 		<% if (user_signed_in? && current_user.viu_episodio?(@episodio)) %>
-			<a href='#' class="small button large-12 success columns primeiro-botao" rel="nofollow">Já viu(Ver com o André as estrelinhas)</a>
+			<a href='#' class="small button large-12 success columns primeiro-botao">Já viu(Ver com o André as estrelinhas)</a>
 		<% else %>
-			<a href='/episodios/<%= @episodio.slug%>/marcar' class="small button large-12 success columns primeiro-botao" rel="nofollow">Eu vi este episódio!</a>
+			<a href='/episodios/<%= @episodio.slug%>/marcar' class="small button large-12 success columns primeiro-botao">Eu vi este episódio!</a>
 		<% end %>
 		<a href="#" class="small button secondary large-12 columns">Vou assistir depois</a> 
 		<a href="#" class="small button secondary large-12 columns">Escrever uma avaliação</a>
@@ -44,10 +44,6 @@
 			</h1>
 		</a>
 		</hgroup>
-		<p class="justify"> <%=@episodio.sinopse%> <em><a href="#">Editar sinopse</a></em></p>
-		<p class="editor-sinopse"> 
-			<img src="http://www.bancodeseries.com.br/images/users/1000002838.jpg" class="inline"> Sinopse revisada por <a href="#">Leandrinho</a> | <a href="#">830 horas assistidas</a> | <a href="#">45 edições aprovadas</a> 		
-		</p>
 		<div class="panel">
 			<p>Análises deste Episódio:</p>
 			<p><a href="#">Viciado em Serie</a> | <a href="#">Temporada em Serie</a> | <a href="#">Manicomio Series</a> | <a href="#">LoGGado</a> | <a href="#">The Series Factor</a> | <a href="#">Portal Conquistadores</a> | <a href="#">Viciados em Series Anonimos</a> | <a href="#">Dominação Nerd</a> | <a href="#">Estante Nerd</a> | <a href="#">Guia das Series</a> | <a href="#">Séries em Foco</a> </p>
@@ -59,3 +55,4 @@
 	
 	<!-- Comentarios Fim -->
 	</div>
+</div>

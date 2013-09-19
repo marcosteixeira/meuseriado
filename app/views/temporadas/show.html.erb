@@ -20,9 +20,9 @@
    	<div class="large-4 columns">
    		<img src="<%= @temporada.imagem %>" alt="<%= @temporada.serie.slug %>-grande">
 		<% if (user_signed_in? && current_user.viu_temporada?(@temporada)) %>
-			<a href='#' class="small button large-12 success columns primeiro-botao" rel="nofollow">Já viu(Ver com o André as estrelinhas)</a>
+			<a href='#' class="small button large-12 success columns primeiro-botao">Já viu(Ver com o André as estrelinhas)</a>
 		<% else %>
-			<a href='/temporadas/<%= @temporada.slug%>/marcar_toda' class="small button large-12 success columns primeiro-botao" rel="nofollow">Marcar temporada inteira como vista</a>
+			<a href='/temporadas/<%= @temporada.slug%>/marcar_toda' class="small button large-12 success columns primeiro-botao">Marcar temporada inteira como vista</a>
 		<% end %>
 
    		<a href="#" class="small button secondary large-12 columns">Vou assistir depois</a> 
