@@ -1,53 +1,60 @@
 <!DOCTYPE html>
 <html>
-	<!--[if IE 8]> 				 <html class="no-js lt-ie9" lang="en" > <![endif]-->
-	<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<!--[if IE 8]>
+<html class="no-js lt-ie9" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js" lang="en"> <!--<![endif]-->
 
-	<head>
-	  <% if @title %>
-	  	<title>MeuSeriado - <%= @title%></title>
-	  <% else %>
-	  	<title>MeuSeriado</title>
-	  <% end %>
-	  <meta charset="utf-8" />
-      <meta name="google-site-verification" content="yY69MiM4_1l1uSzD9RDycZu-5w80j-IN08roDTw_1vs" />
-	  <meta name="viewport" content="width=device-width" />
-	  
-	  
-	  <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
-	  <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
-	  <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
-	  <%= csrf_meta_tags %>
-	  <%= javascript_include_tag "jquery-1.10.2.min", "data-turbolinks-track" => true %>
-	  <%= javascript_include_tag "jquery.raty", "data-turbolinks-track" => true %>
-	  <%= javascript_include_tag "http://code.jquery.com/ui/1.10.3/jquery-ui.js", "data-turbolinks-track" => true %>
-	  <%= javascript_include_tag "custom.modernizr", "data-turbolinks-track" => true %>
-	  <%= javascript_include_tag "foundation.min", "data-turbolinks-track" => true %>
-      <%= javascript_include_tag "script", "data-turbolinks-track" => false %>
-	  <%= stylesheet_link_tag    "foundation", media: "all", "data-turbolinks-track" => true %>
-	  <%= stylesheet_link_tag    "meuseriado", media: "all", "data-turbolinks-track" => true %>
-	  <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
-	</head>
-	<body>
-	  <%= render partial: "home/menu_principal" %>
-	  
-	  <div class="large-12 columns">
-		 <% if notice %>
-		     <div data-alert class="alert-box success">
-		        <%= notice %>
-		      	<a href="#" class="close">&times;</a>
-			 </div>
-		<% end %>
-		<% if alert %>
-		     <div data-alert class="alert-box success">
-		        <%= alert %>
-		      	<a href="#" class="close">&times;</a>
-			 </div>
-		<% end %>
-		</div>
+<head>
+  <% if @title %>
+      <title>MeuSeriado - <%= @title %></title>
+  <% else %>
+      <title>MeuSeriado</title>
+  <% end %>
+  <meta charset="utf-8"/>
+  <meta name="google-site-verification" content="yY69MiM4_1l1uSzD9RDycZu-5w80j-IN08roDTw_1vs"/>
+  <meta name="viewport" content="width=device-width"/>
 
-	  <%= yield %>
-      <%= auto_discovery_link_tag(:rss, "/feeds/feed") %>
-	  <%= render partial: "home/rodape" %>
-	</body>
+
+  <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon"/>
+  <%= stylesheet_link_tag "application", media: "all", "data-turbolinks-track" => true %>
+  <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+  <%= csrf_meta_tags %>
+  <%= javascript_include_tag "jquery-1.10.2.min", "data-turbolinks-track" => true %>
+  <%= javascript_include_tag "jquery.raty", "data-turbolinks-track" => true %>
+  <%= javascript_include_tag "http://code.jquery.com/ui/1.10.3/jquery-ui.js", "data-turbolinks-track" => true %>
+  <%= javascript_include_tag "custom.modernizr", "data-turbolinks-track" => true %>
+  <%= javascript_include_tag "foundation.min", "data-turbolinks-track" => true %>
+  <%= javascript_include_tag "script", "data-turbolinks-track" => false %>
+  <%= stylesheet_link_tag "foundation", media: "all", "data-turbolinks-track" => true %>
+  <%= stylesheet_link_tag "meuseriado", media: "all", "data-turbolinks-track" => true %>
+  <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css"/>
+</head>
+<body>
+<%= render partial: "home/menu_principal" %>
+
+<div class="row">
+  <div class="large-12 columns">
+    <% if notice %>
+        <div data-alert class="alert-box success">
+          <%= notice %>
+          <a href="#" class="close">&times;</a>
+        </div>
+    <% end %>
+
+
+    <% if alert %>
+        <div data-alert class="alert-box success">
+          <%= alert %>
+          <a href="#" class="close">&times;</a>
+        </div>
+    <% end %>
+  </div>
+</div>
+
+<%= yield %>
+
+<%= auto_discovery_link_tag(:rss, "/feeds/feed") %>
+<%= render partial: "home/rodape" %>
+</body>
 </html>

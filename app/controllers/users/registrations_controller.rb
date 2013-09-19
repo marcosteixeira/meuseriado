@@ -5,7 +5,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
       params[:user].delete("password")
       params[:user].delete("password_confirmation")
     end
-    
+
     @user = User.find(current_user.id)
     if @user.update_attributes(params[:user].permit(:avatar, :name))
       set_flash_message :notice, :updated
@@ -16,11 +16,16 @@ class Users::RegistrationsController < Devise::RegistrationsController
       render "edit"
     end
   end
-  
+
+  def new
+    super
+  end
+
   private
   def resource_params
     params.require(:user).permit(:name, :email, :password, :password_confirmation, :profile_attributes, :provider, :uid, :avatar)
   end
+
   def sign_up_params
     params.require(:user).permit(:name, :email, :password, :password_confirmation, :profile_attributes, :provider, :uid, :avatar)
   end
