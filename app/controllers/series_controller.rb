@@ -96,7 +96,7 @@ class SeriesController < ApplicationController
                 if series.size <= 3
                   my_logger.info("retornou menos de 3 resultados")
                   serie_pesquisa = Serie.salvar s
-                  params['search'] = false
+                  params['search'] = true
                 else
                   if s
                     my_logger.info("retornou mais de 3 resultados")
