@@ -54,4 +54,5 @@ Devise.setup do |config|
   config.omniauth :facebook, "178946175618292", "f2580eec301f82b42a078273fcd4fd7c", :scope => 'email'
   require "omniauth-google-oauth2"
   config.omniauth :google_oauth2, "195300766712.apps.googleusercontent.com", "Fmh3_4Bvn5bgRQPcZxFGG67p", { access_type: "offline", approval_prompt: "" }
+  config.secret_key = '273d815c4c384c4c1164a006bc25b40d805a2888dd973d11245c96316cb347d31500b9d4b381d1524e08db9f2e07c7532d7829eee8761fe24df02b4c3048c489'
 end
