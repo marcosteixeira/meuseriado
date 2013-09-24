@@ -51,6 +51,10 @@ gem 'amistad'
 
 gem 'kaminari'
 
+gem 'commontator', '~> 2.0.1'
+
+gem 'protected_attributes'
+
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
   gem 'sdoc', require: false

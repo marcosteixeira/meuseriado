@@ -2,12 +2,13 @@ Meuseriado::Application.routes.draw do
 
   get "autocomplete/index"
   get "series/carregar_series"
-  devise_for :users,  :controllers => {:registrations => "users/registrations", :omniauth_callbacks => "users/omniauth_callbacks"}
+  devise_for :users, :controllers => {:registrations => "users/registrations", :omniauth_callbacks => "users/omniauth_callbacks"}
   resources :users, :only => [:index, :show]
-  resources :series, :only => [:show, :index,:create]
+  resources :series, :only => [:show, :index, :create]
   resources :episodios, :only => [:show, :index]
   resources :feeds
   root :to => "home#index"
+  mount Commontator::Engine => '/commontator'
 
   resources :series do
     resources :temporadas
