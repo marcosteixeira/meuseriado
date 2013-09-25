@@ -56,6 +56,9 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.6.3)
+    commontator (4.0.0)
+      jquery-rails
+      rails (>= 4.0)
     devise (3.1.0)
       bcrypt-ruby (~> 3.0)
       orm_adapter (~> 0.1)
@@ -198,6 +201,7 @@ DEPENDENCIES
   amistad
   capistrano
   coffee-rails (~> 4.0.0)
+  commontator (~> 4.0.0)
   devise
   foreigner
   friendly_id!

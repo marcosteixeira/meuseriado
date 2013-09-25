@@ -1,6 +1,7 @@
 class Episodio < ActiveRecord::Base
   extend FriendlyId
   friendly_id :gerar_slug, use: :slugged
+  acts_as_commontable
   
   belongs_to :serie, :dependent => :delete
   has_many :avaliacoes, as: :avaliavel

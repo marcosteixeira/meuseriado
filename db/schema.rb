@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130911155921) do
+ActiveRecord::Schema.define(version: 20130920015543497) do
 
   create_table "acompanhamento_series", force: true do |t|
     t.integer  "avaliacao_id", null: false
@@ -24,14 +24,6 @@ ActiveRecord::Schema.define(version: 20130911155921) do
   end
 
   add_index "acompanhamento_series", ["avaliacao_id"], name: "index_acompanhamento_series_on_avaliacao_id", unique: true, using: :btree
-
-  create_table "amizades", id: false, force: true do |t|
-    t.integer "user_id",  null: false
-    t.integer "amigo_id", null: false
-  end
-
-  add_index "amizades", ["amigo_id"], name: "amizades_amigo_id_fk", using: :btree
-  add_index "amizades", ["user_id", "amigo_id"], name: "index_amizades_on_user_id_and_amigo_id", unique: true, using: :btree
 
   create_table "atores", force: true do |t|
     t.string   "nome",       default: "", null: false
@@ -56,6 +48,51 @@ ActiveRecord::Schema.define(version: 20130911155921) do
   add_index "avaliacoes", ["avaliavel_id"], name: "index_avaliacoes_on_avaliavel_id", using: :btree
   add_index "avaliacoes", ["avaliavel_type"], name: "index_avaliacoes_on_avaliavel_type", using: :btree
   add_index "avaliacoes", ["user_id"], name: "avaliacoes_user_id_fk", using: :btree
+
+  create_table "commontator_comments", force: true do |t|
+    t.string   "creator_type"
+    t.integer  "creator_id"
+    t.string   "editor_type"
+    t.integer  "editor_id"
+    t.integer  "thread_id",                      null: false
+    t.text     "body",                           null: false
+    t.datetime "deleted_at"
+    t.integer  "cached_votes_total", default: 0
+    t.integer  "cached_votes_up",    default: 0
+    t.integer  "cached_votes_down",  default: 0
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "commontator_comments", ["cached_votes_down"], name: "index_commontator_comments_on_cached_votes_down", using: :btree
+  add_index "commontator_comments", ["cached_votes_total"], name: "index_commontator_comments_on_cached_votes_total", using: :btree
+  add_index "commontator_comments", ["cached_votes_up"], name: "index_commontator_comments_on_cached_votes_up", using: :btree
+  add_index "commontator_comments", ["creator_type", "creator_id", "thread_id"], name: "index_c_c_on_c_type_and_c_id_and_t_id", using: :btree
+  add_index "commontator_comments", ["thread_id"], name: "index_commontator_comments_on_thread_id", using: :btree
+
+  create_table "commontator_subscriptions", force: true do |t|
+    t.string   "subscriber_type",             null: false
+    t.integer  "subscriber_id",               null: false
+    t.integer  "thread_id",                   null: false
+    t.integer  "unread",          default: 0, null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "commontator_subscriptions", ["subscriber_type", "subscriber_id", "thread_id"], name: "index_c_s_on_s_type_and_s_id_and_t_id", unique: true, using: :btree
+  add_index "commontator_subscriptions", ["thread_id"], name: "index_commontator_subscriptions_on_thread_id", using: :btree
+
+  create_table "commontator_threads", force: true do |t|
+    t.string   "commontable_type"
+    t.integer  "commontable_id"
+    t.datetime "closed_at"
+    t.string   "closer_type"
+    t.integer  "closer_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "commontator_threads", ["commontable_type", "commontable_id"], name: "index_c_t_on_c_type_and_c_id", unique: true, using: :btree
 
   create_table "episodios", force: true do |t|
     t.integer  "numero",                             default: 0, null: false
@@ -192,23 +229,20 @@ ActiveRecord::Schema.define(version: 20130911155921) do
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   add_index "users", ["slug"], name: "index_users_on_slug", unique: true, using: :btree
 
-  add_foreign_key "acompanhamento_series", "avaliacoes", :name => "acompanhamento_series_avaliacao_id_fk"
+  add_foreign_key "acompanhamento_series", "avaliacoes", name: "acompanhamento_series_avaliacao_id_fk"
 
-  add_foreign_key "amizades", "users", :name => "amizades_amigo_id_fk", :column => "amigo_id"
-  add_foreign_key "amizades", "users", :name => "amizades_user_id_fk"
+  add_foreign_key "avaliacoes", "users", name: "avaliacoes_user_id_fk"
 
-  add_foreign_key "avaliacoes", "users", :name => "avaliacoes_user_id_fk"
+  add_foreign_key "episodios", "series", name: "episodios_serie_id_fk"
 
-  add_foreign_key "episodios", "series", :name => "episodios_serie_id_fk"
+  add_foreign_key "generos_series", "generos", name: "generos_series_genero_id_fk"
+  add_foreign_key "generos_series", "series", name: "generos_series_serie_id_fk"
 
-  add_foreign_key "generos_series", "generos", :name => "generos_series_genero_id_fk"
-  add_foreign_key "generos_series", "series", :name => "generos_series_serie_id_fk"
+  add_foreign_key "personagens", "atores", name: "personagens_ator_id_fk"
+  add_foreign_key "personagens", "series", name: "personagens_serie_id_fk"
 
-  add_foreign_key "personagens", "atores", :name => "personagens_ator_id_fk"
-  add_foreign_key "personagens", "series", :name => "personagens_serie_id_fk"
+  add_foreign_key "series", "produtoras", name: "series_produtora_id_fk"
 
-  add_foreign_key "series", "produtoras", :name => "series_produtora_id_fk"
-
-  add_foreign_key "temporadas", "series", :name => "temporadas_serie_id_fk"
+  add_foreign_key "temporadas", "series", name: "temporadas_serie_id_fk"
 
 end
