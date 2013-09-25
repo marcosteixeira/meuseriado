@@ -18,29 +18,29 @@
                              :user => user} %>
     </span>
   <% end %>
-  
+
   &nbsp;
 
   <% if can_edit %>
     <% is_closed = thread.is_closed? %>
-    <% close_string = is_closed ? "reopen" : "close" %>
-    <%= link_to close_string.capitalize,
-                commontator.polymorphic_path([close_string, thread]),
-                :confirm => (!is_closed ? \
+      <% close_string = is_closed ? "reopen" : "close" %>
+      <%= link_to close_string.capitalize,
+                  commontator.polymorphic_path([close_string, thread]),
+                  :confirm => (!is_closed ? \
                               'Are you sure you want to close this thread?' : nil),
-                :method => :patch,
-                :id => "thread_#{thread.id.to_s}_#{close_string}_link",
-                :class => "thread_#{close_string}_link",
-                :remote => true %>
+                  :method => :patch,
+                  :id => "thread_#{thread.id.to_s}_#{close_string}_link",
+                  :class => "thread_#{close_string}_link",
+                  :remote => true %>
   <% end %>
 </span>
 
 <div id="thread_<%= thread.id.to_s %>_comment_list_div" class="thread_comment_list">
   <% thread.ordered_comments.each do |comment| %>
-    <% next unless comment.can_be_read_by?(user) %>
-    <%= render :partial => 'commontator/comments/show',
-               :locals => {:comment => comment,
-                           :user => user} %>
+      <% next unless comment.can_be_read_by?(user) %>
+      <%= render :partial => 'commontator/comments/show',
+                 :locals => {:comment => comment,
+                             :user => user} %>
   <% end %>
 </div>
 
@@ -48,15 +48,18 @@
 
 <% if thread.is_closed? %>
 
-  <p><%= thread.config.comment_name.capitalize.pluralize %> cannot be <%= thread.config.comment_create_verb_past %> at this time.</p>
+    <p><%= thread.config.comment_name.capitalize.pluralize %> cannot be <%= thread.config.comment_create_verb_past %> at
+      this time.</p>
 
 <% else %>
 
-  <div id="thread_<%= thread.id %>_new_comment_div" class="thread_new_comment"></div>
+    <div id="thread_<%= thread.id %>_new_comment_div" class="thread_new_comment"></div>
 
-  <span id="thread_<%= thread.id %>_new_comment_link_span" class="thread_new_comment_link">
-    <%= link_to thread.config.comment_create_verb_present.capitalize + ' ' + thread.config.comment_name,
-        commontator.new_thread_comment_path(thread), :remote => true %>
-  </span>
-  
+    <% if !user.nil? %>
+        <span id="thread_<%= thread.id %>_new_comment_link_span" class="thread_new_comment_link">
+        <%= link_to thread.config.comment_create_verb_present.capitalize + ' ' + thread.config.comment_name,
+                    commontator.new_thread_comment_path(thread), :remote => true %>
+      </span>
+    <% end %>
+
 <% end %>

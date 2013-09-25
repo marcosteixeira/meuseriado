@@ -1,59 +1,70 @@
 <div class="row">
-	<div class="large-12 columns">
-	     <ul class="breadcrumbs">
-	      <li><a href="/">meuseriado</a></li>
-	      <li><a href="/series">Séries</a></li>
-	      <li><a href='/series/<%=@episodio.serie.slug%>'><%=@episodio.serie.nome %></a></li>
-	      <li><a href='/series/<%=@episodio.serie.slug%>/temporadas/<%=@episodio.temporada %>'>Temporada <%=@episodio.temporada %></a></li>
-	      <li class="current"><a href="#">Episódio <%=@episodio.numero %>: <%=@episodio.nome %></a></li>
-	    </ul>
+  <div class="large-12 columns">
+    <ul class="breadcrumbs">
+      <li><a href="/">meuseriado</a></li>
+      <li><a href="/series">Séries</a></li>
+      <li><a href='/series/<%= @episodio.serie.slug %>'><%= @episodio.serie.nome %></a></li>
+      <li>
+        <a href='/series/<%= @episodio.serie.slug %>/temporadas/<%= @episodio.temporada %>'>Temporada <%= @episodio.temporada %></a>
+      </li>
+      <li class="current"><a href="#">Episódio <%= @episodio.numero %>: <%= @episodio.nome %></a></li>
+    </ul>
   </div>
 </div>
-	 
+
 <div class="row">
-	<div class="large-4 columns">
-		<img src='<%=@episodio.banner %>' alt="imagem-episodio">
-		<% if (user_signed_in? && current_user.viu_episodio?(@episodio)) %>
-			<a href='#' class="small button large-12 success columns primeiro-botao">Já viu(Ver com o André as estrelinhas)</a>
-		<% else %>
-			<a href='/episodios/<%= @episodio.slug%>/marcar' class="small button large-12 success columns primeiro-botao">Eu vi este episódio!</a>
-		<% end %>
-		<a href="#" class="small button secondary large-12 columns">Vou assistir depois</a> 
-		<a href="#" class="small button secondary large-12 columns">Escrever uma avaliação</a>
-		<h4>Quem viu este episódio:</h4>
-		<ul class="quem-viu-episodio large-12">
-			<% @episodio.avaliacoes.each do |avaliacao| %>
-				<li>
-					<a href='/users/<%= avaliacao.user.slug %>' class="tip-user" >
-						<img src='<%= avaliacao.user.imagem_formatada %>' width="60" height="60" alt='<%= avaliacao.user.name %>'>
-					</a>
-				</li>
-			<% end %>
-		</ul>
-		<a href="#"><%= @episodio.avaliacoes.count %> pessoas marcaram como visto</a>
-	</div>
-	<div class="large-8 columns">
-		<hgroup class="titulo-episodio">
-		<h2>
-			<a href="/series/<%= @episodio.serie.slug %>"><%= @episodio.serie.nome %></a> - <a href='/series/<%=@episodio.serie.slug%>/temporadas/<%= @episodio.temporada%>'> Temporada <%=@episodio.temporada%></a>
-		</h2> 
-		<a href="#">
-			<h1>
-				<small>Episódio <%=@episodio.numero%>:</small> 
-				<%=@episodio.nome%>
-			</h1>
-		</a>
-		</hgroup>
-		<p class="justify"> <%=@episodio.sinopse%></p>
-		<div class="panel">
-			<p>Análises deste Episódio:</p>
-			<p><a href="#">Viciado em Serie</a> | <a href="#">Temporada em Serie</a> | <a href="#">Manicomio Series</a> | <a href="#">LoGGado</a> | <a href="#">The Series Factor</a> | <a href="#">Portal Conquistadores</a> | <a href="#">Viciados em Series Anonimos</a> | <a href="#">Dominação Nerd</a> | <a href="#">Estante Nerd</a> | <a href="#">Guia das Series</a> | <a href="#">Séries em Foco</a> </p>
-			<p class="small"> <a href="#">Quer seu site aqui? Cadastre-se agora mesmo como um parceiro</a></p>
-		</div>
-	<h4>Comentários:</h4>
-	<!-- comentarios -->
-        <%= commontator_thread(@episodio) %>
-	
-	<!-- Comentarios Fim -->
-	</div>
+  <div class="large-4 columns">
+    <img src='<%= @episodio.banner %>' alt="imagem-episodio">
+    <% if (user_signed_in? && current_user.viu_episodio?(@episodio)) %>
+        <a href='#' class="small button large-12 success columns primeiro-botao">Já viu(Ver com o André as
+          estrelinhas)</a>
+    <% else %>
+        <a href='/episodios/<%= @episodio.slug %>/marcar' class="small button large-12 success columns primeiro-botao">Eu
+          vi este episódio!</a>
+    <% end %>
+    <a href="#" class="small button secondary large-12 columns">Vou assistir depois</a>
+    <a href="#" class="small button secondary large-12 columns">Escrever uma avaliação</a>
+    <h4>Quem viu este episódio:</h4>
+    <ul class="quem-viu-episodio large-12">
+      <% @episodio.avaliacoes.each do |avaliacao| %>
+          <li>
+            <a href='/users/<%= avaliacao.user.slug %>' class="tip-user">
+              <img src='<%= avaliacao.user.imagem_formatada %>' width="60" height="60" alt='<%= avaliacao.user.name %>'>
+            </a>
+          </li>
+      <% end %>
+    </ul>
+    <a href="#"><%= @episodio.avaliacoes.count %> pessoas marcaram como visto</a>
+  </div>
+  <div class="large-8 columns">
+    <hgroup class="titulo-episodio">
+      <h2>
+        <a href="/series/<%= @episodio.serie.slug %>"><%= @episodio.serie.nome %></a> -
+        <a href='/series/<%= @episodio.serie.slug %>/temporadas/<%= @episodio.temporada %>'>
+          Temporada <%= @episodio.temporada %></a>
+      </h2>
+      <a href="#">
+        <h1>
+          <small>Episódio <%= @episodio.numero %>:</small>
+          <%= @episodio.nome %>
+        </h1>
+      </a>
+    </hgroup>
+    <p class="justify"> <%= @episodio.sinopse %></p>
+
+    <div class="panel">
+      <p>Análises deste Episódio:</p>
+
+      <p><a href="#">Viciado em Serie</a> | <a href="#">Temporada em Serie</a> | <a href="#">Manicomio Series</a> |
+        <a href="#">LoGGado</a> | <a href="#">The Series Factor</a> | <a href="#">Portal Conquistadores</a> |
+        <a href="#">Viciados em Series Anonimos</a> | <a href="#">Dominação Nerd</a> | <a href="#">Estante Nerd</a> |
+        <a href="#">Guia das Series</a> | <a href="#">Séries em Foco</a></p>
+
+      <p class="small"><a href="#">Quer seu site aqui? Cadastre-se agora mesmo como um parceiro</a></p>
+    </div>
+    <!-- comentarios -->
+    <%= commontator_thread(@episodio) %>
+
+    <!-- Comentarios Fim -->
+  </div>
 </div>

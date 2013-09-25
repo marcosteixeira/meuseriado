@@ -2,17 +2,13 @@
    # comment
    # user
 %>
-  
+
 <div id="comment_<%= comment.id.to_s %>_div" class="comment">
   <span id="comment_<%= comment.id.to_s %>_commontator_span" class="comment_commontator">
-    <% if !user.nil? && user.commontator_config.user_name_clickable %>
       <%= link_to commontator_name(comment.creator), main_app.polymorphic_path(comment.creator) %>
-    <% else %>
-      <%= commontator_name(comment.creator) %>
-    <% end %>
     &nbsp;&nbsp;
     <span id="comment_<%= comment.id.to_s %>_timestamp_span" class="comment_timestamp">
-      <%= comment.timestamp %><%= " by #{commontator_name(comment.editor)}" if comment.is_modified? %>
+      <%= comment.timestamp %><%= " por #{commontator_name(comment.editor)}" if comment.is_modified? %>
     </span>
   </span>
   
@@ -21,11 +17,11 @@
                :locals => {:comment => comment,
                            :user => user} %>
   </span>
-  
+
   <br clear="all"/>
   
   <span id="comment_<%= comment.id.to_s %>_gravatar_image_span" class="comment_gravatar_image">
-    <%= commontator_gravatar_image comment.creator %>
+    <a href="/users/<%= comment.creator.slug %>"><img src='<%= comment.creator.imagem_formatada %>' style="width: 50px; height: 50px;" border="1"></a>
   </span>
   
   <span id="comment_<%= comment.id.to_s %>_votes_span" class="comment_votes">
@@ -33,7 +29,7 @@
                :locals => {:comment => comment,
                            :user => user} %>
   </span>
-  
+
   <div id="comment_<%= comment.id.to_s %>_body_div" class="comment_body">
     <%= render :partial => 'commontator/comments/body',
                :locals => {:comment => comment} %>

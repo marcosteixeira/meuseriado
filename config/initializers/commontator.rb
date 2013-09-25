@@ -17,7 +17,7 @@ Commontator.configure do |config|
 
 
   # User (acts_as_commontator) Configuration
-  
+
   # The name used if the user's name cannot be retrieved
   # Default: 'Anonymous'
   config.user_missing_name = 'Anonymous'
@@ -40,7 +40,7 @@ Commontator.configure do |config|
   # Note: user can be nil
   # Default: lambda { |user| false } (no admins)
   config.user_admin_proc = lambda { |user| false }
-  
+
   # Proc called with user as argument that returns true
   # if the user should receive subscription emails
   # Default: lambda { |user| true } (always receive subscription emails)
@@ -51,23 +51,23 @@ Commontator.configure do |config|
 
   # What a comment is called in your application
   # Default: 'comment'
-  config.comment_name = 'comment'
+  config.comment_name = 'comentário'
 
   # Verb used when creating comments (present)
   # Default: 'post'
-  config.comment_create_verb_present = 'post'
+  config.comment_create_verb_present = 'criar'
 
   # Verb used when creating comments (past)
   # Default: 'posted'
-  config.comment_create_verb_past = 'posted'
+  config.comment_create_verb_past = 'criado'
 
   # Verb used when editing comments (present)
   # Default: 'modify'
-  config.comment_edit_verb_present = 'modify'
+  config.comment_edit_verb_present = 'editar'
 
   # Verb used when editing comments (past)
   # Default: 'modified'
-  config.comment_edit_verb_past = 'modified'
+  config.comment_edit_verb_past = 'editado'
 
   # What a commontable is called in your application
   # If you have multiple commontable models,
@@ -78,7 +78,7 @@ Commontator.configure do |config|
 
   # The format of the timestamps used by Commontator
   # Default: '%b %d %Y, %I:%M %p'
-  config.timestamp_format = '%b %d %Y, %I:%M %p'
+  config.timestamp_format = '%d/%m/%y %H:%M'
 
   # Whether admins can edit other users' comments
   # Default: false
@@ -128,7 +128,7 @@ Commontator.configure do |config|
   # Whether comments deleted by moderators can be seen
   # (the content will still be hidden)
   # Default: true
-  config.deleted_comments_are_visible = true
+  config.deleted_comments_are_visible = false
 
   # The method which returns the commontable's id, sent to users in email messages
   # Default: 'id'
@@ -152,11 +152,11 @@ Commontator.configure do |config|
   # Main application's routes can be accessed using main_app object
   # Default: lambda { |main_app, commontable| main_app.polymorphic_url(commontable) }
   config.commontable_url_proc = lambda { |main_app, commontable| main_app.polymorphic_url(commontable) }
-  
+
   # Proc that returns the subscription email 'from' address
   # Default:
   # lambda { |params| 'no-reply@example.com' }
-  config.subscription_email_from_proc = lambda { |params| 'no-reply@example.com' }
+  config.subscription_email_from_proc = lambda { |params| 'contato@meuseriado.com.br' }
 
   # Proc that returns the subscription email 'subject' string
   # Default:
