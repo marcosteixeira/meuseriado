@@ -15,7 +15,7 @@
 <div class="row">
   <div class="large-4 columns">
     <a href="/series/<%= @personagem.serie.slug %>/personagens/<%= @personagem.slug %>"><img src="<%= @personagem.imagem %>" alt="<%= @personagem.nome %>" title="<%= @personagem.nome %>"></a>
-    <a href="#" class="small button large-12 success columns primeiro-botao">Marcar como personagem favorito</a>
+    <a href="#" class="small button large-12 success columns primeiro-botao" rel="nofollow">Marcar como personagem favorito</a>
     <h4>Série de origem:</h4>
     <a href="/series/<%= @personagem.serie.slug %>"><img src="<%= @personagem.serie.banner %>" alt="<%= @personagem.serie.nome %>" title="<%= @personagem.serie.nome %>"></a>
 
