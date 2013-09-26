@@ -34,5 +34,15 @@ xml.rss :version => "2.0" do
         xml.guid "http://meuseriado.com.br/series/#{temporada.serie.slug}/temporadas/#{temporada.temporada}"
       end
     end
+
+    for personagem in @personagens
+      xml.item do
+        xml.title personagem.nome
+        xml.description "#{personagem.serie.nome} - #{personagem.nome}"
+        xml.pubDate personagem.created_at.to_s(:rfc822)
+        xml.link "http://meuseriado.com.br/series/#{personagem.serie.slug}/personagens/#{personagem.slug}"
+        xml.guid "http://meuseriado.com.br/series/#{personagem.serie.slug}/personagens/#{personagem.slug}"
+      end
+    end
   end
 end

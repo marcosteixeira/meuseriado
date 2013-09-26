@@ -3,6 +3,7 @@ class FeedsController < ApplicationController
     @series = Serie.all.order(:nome)
     @episodios = Episodio.all.joins(:serie).order('series.nome, temporada, numero')
     @temporadas = Temporada.all.joins(:serie).order('series.nome, temporada')
+    @personagens = Personagem.all
 
     respond_to do |format|
       format.html
