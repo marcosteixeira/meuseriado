@@ -29,7 +29,7 @@
     <h4>Elenco:</h4>
     <ul class="lista-elenco">
       <% @serie.personagens_imagem.limit(8).each do |p| %>
-          <li><img src="<%= p.imagem %>" alt="<%= p.slug %>" class="imagem-elenco"></li>
+          <li><a href="/series/<%= @serie.slug %>/personagens/<%= p.slug %>"><img src="<%= p.imagem %>" alt="<%= p.nome %>"  title="<%= p.nome %>" class="imagem-elenco"></a></li>
       <% end %>
     </ul>
     <a href="/series/<%= @serie.slug %>/personagens" class="right">Mostrar todo o elenco >></a>

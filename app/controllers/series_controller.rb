@@ -157,9 +157,4 @@ class SeriesController < ApplicationController
     @serie.marcar_inteira(current_user)
     redirect_to(action: "show", id: @serie)
   end
-
-  def personagens
-    @serie = Serie.friendly.find(params[:id])
-  end
-
 end

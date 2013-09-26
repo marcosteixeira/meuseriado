@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130920015543497) do
+ActiveRecord::Schema.define(version: 20130925021708) do
 
   create_table "acompanhamento_series", force: true do |t|
     t.integer  "avaliacao_id", null: false
@@ -24,6 +24,14 @@ ActiveRecord::Schema.define(version: 20130920015543497) do
   end
 
   add_index "acompanhamento_series", ["avaliacao_id"], name: "index_acompanhamento_series_on_avaliacao_id", unique: true, using: :btree
+
+  create_table "amizades", id: false, force: true do |t|
+    t.integer "user_id",  null: false
+    t.integer "amigo_id", null: false
+  end
+
+  add_index "amizades", ["amigo_id"], name: "amizades_amigo_id_fk", using: :btree
+  add_index "amizades", ["user_id", "amigo_id"], name: "index_amizades_on_user_id_and_amigo_id", unique: true, using: :btree
 
   create_table "atores", force: true do |t|
     t.string   "nome",       default: "", null: false
@@ -230,6 +238,9 @@ ActiveRecord::Schema.define(version: 20130920015543497) do
   add_index "users", ["slug"], name: "index_users_on_slug", unique: true, using: :btree
 
   add_foreign_key "acompanhamento_series", "avaliacoes", name: "acompanhamento_series_avaliacao_id_fk"
+
+  add_foreign_key "amizades", "users", name: "amizades_amigo_id_fk", column: "amigo_id"
+  add_foreign_key "amizades", "users", name: "amizades_user_id_fk"
 
   add_foreign_key "avaliacoes", "users", name: "avaliacoes_user_id_fk"
 

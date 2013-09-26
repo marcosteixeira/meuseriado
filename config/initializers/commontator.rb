@@ -1,3 +1,4 @@
+#coding: utf-8
 # Change the settings below to suit your needs
 # All settings are initially set to their default values
 Commontator.configure do |config|

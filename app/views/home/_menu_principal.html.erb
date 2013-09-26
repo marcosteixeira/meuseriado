@@ -131,7 +131,11 @@
             delay: 0,
             select: function (event, ui) {
                 $("#pesquisa").val(ui.item.label);
-                window.location.replace("/series/" + ui.item.id);
+                if (ui.item.tipo == 'Personagens'){
+                    window.location.replace("/series/" + ui.item.serie +"/personagens/"+ui.item.id);
+                }else{
+                    window.location.replace("/series/" + ui.item.id);
+                }
                 return true;
             }
         });

@@ -1,0 +1,44 @@
+<div class="row">
+  <div class="large-12 columns">
+
+    <!-- Desktop Slider -->
+
+    <ul class="breadcrumbs">
+      <li><a href="/">meuseriado</a></li>
+      <li><a href="/series">Séries</a></li>
+      <li><a href="/series/<%= @personagem.serie.slug %>"><%= @personagem.serie.nome %></a></li>
+      <li class="current"><a href="#"><%= @personagem.nome %></a></li>
+    </ul>
+  </div>
+</div>
+
+<div class="row">
+  <div class="large-4 columns">
+    <a href="/series/<%= @personagem.serie.slug %>/personagens/<%= @personagem.slug %>"><img src="<%= @personagem.imagem %>" alt="<%= @personagem.nome %>" title="<%= @personagem.nome %>"></a>
+    <a href="#" class="small button large-12 success columns primeiro-botao">Marcar como personagem favorito</a>
+    <h4>Série de origem:</h4>
+    <a href="/series/<%= @personagem.serie.slug %>"><img src="<%= @personagem.serie.banner %>" alt="<%= @personagem.serie.nome %>" title="<%= @personagem.serie.nome %>"></a>
+
+  </div>
+  <div class="large-8 columns">
+    <h1><%= @personagem.nome %></h1>
+
+    <h2>Ator/Atriz:</h2> <p><%= @personagem.ator.nome %></p>
+
+    <h2>Quem é fã:</h2>
+    <ul class="quem-viu-episodio large-12">
+      <% @personagem.avaliacoes.each do |avaliacao| %>
+          <li>
+            <a href="/users/<%= avaliacao.user.slug %>" class="tip-user">
+              <img src="<%= avaliacao.user.imagem_formatada %>" width="60" height="60" alt="<%= avaliacao.user.name %>">
+            </a>
+          </li>
+      <% end %>
+    </ul>
+    <h2>Comentários:</h2>
+
+
+  </div>
+
+</div>
+
