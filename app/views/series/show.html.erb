@@ -16,8 +16,7 @@
     <img src="<%= @serie.poster %>" alt='<%= @serie.slug %>-grande'>
 
     <% if (user_signed_in? && current_user.viu_serie?(@serie)) %>
-        <a href='#' class="small button large-12 success columns primeiro-botao" rel="nofollow">Dar nota(Ver com o André
-          as estrelinhas)</a>
+        <a href='/series/<%= @serie.slug %>/desmarcar' class="small button large-12 success columns primeiro-botao" rel="nofollow">Remover das favoritas!</a>
     <% else %>
         <a href='/series/<%= @serie.slug %>/adicionar' class="small button large-12 success columns primeiro-botao" rel="nofollow">Adicionar
           as minhas séries favoritas!</a>

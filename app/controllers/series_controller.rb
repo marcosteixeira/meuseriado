@@ -149,7 +149,12 @@ class SeriesController < ApplicationController
     @serie = Serie.friendly.find(params[:id])
     @serie.marcar_como_vista(current_user)
     redirect_to(action: "show", id: @serie)
+  end
 
+  def desmarcar
+    @serie = Serie.friendly.find(params[:id])
+    @serie.desmarcar_como_vista(current_user)
+    redirect_to(action: "show", id: @serie)
   end
 
   def marcar_toda

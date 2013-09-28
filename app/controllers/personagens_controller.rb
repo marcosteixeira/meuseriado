@@ -16,4 +16,24 @@ class PersonagensController < ApplicationController
     @personagem = Personagem.friendly.find(params[:id])
     @title = @personagem.nome
   end
+
+  def marcar
+    @personagem = Personagem.friendly.find(params[:id])
+    @personagem.marcar(current_user)
+
+    respond_to do |format|
+      format.html { redirect_to(action: "show", id: @personagem )}
+      format.json { render json: @personagem, status: :ok }
+    end
+  end
+
+  def desmarcar
+    @personagem = Personagem.friendly.find(params[:id])
+    @personagem.desmarcar(current_user)
+
+    respond_to do |format|
+      format.html { redirect_to(action: "show", id: @personagem )}
+      format.json { render json: @personagem, status: :ok }
+    end
+  end
 end

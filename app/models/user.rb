@@ -33,7 +33,11 @@ class User < ActiveRecord::Base
 	
 	def temporadas
 	  Temporada.find_by_sql("SELECT `temporadas`.* FROM `temporadas` INNER JOIN `avaliacoes` ON `temporadas`.`id` = `avaliacoes`.`avaliavel_id` WHERE `avaliacoes`.`user_id` = #{self.id} AND `avaliacoes`.`avaliavel_type` = 'Temporada'")
-	end
+  end
+
+  def personagens
+    Personagem.find_by_sql("SELECT `personagens`.* FROM `personagens` INNER JOIN `avaliacoes` ON `personagens`.`id` = `avaliacoes`.`avaliavel_id` WHERE `avaliacoes`.`user_id` = #{self.id} AND `avaliacoes`.`avaliavel_type` = 'Personagem'")
+  end
 
 	def user_params
 	    params.require(:user).permit(:name, :provider, :uid, :name, :avatar)
@@ -96,6 +100,10 @@ class User < ActiveRecord::Base
   
   def viu_temporada? (temporada)
     self.temporadas.include?(temporada)
+  end
+
+  def fa? (personagem)
+    self.personagens.include?(personagem)
   end
 
 end

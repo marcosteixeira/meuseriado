@@ -13,4 +13,23 @@ class Personagem < ActiveRecord::Base
       "#{self.serie.nome}-#{self.ator.nome}"
     end
   end
+
+  def marcar(user)
+    aval = Avaliacao.find_by_sql("select * from avaliacoes where avaliavel_type='Personagem' and avaliavel_id=#{self.id} and user_id=#{user.id} ")
+
+    if aval.empty?
+      aval = Avaliacao.new
+      aval.user = user
+      self.avaliacoes << aval
+      self.save
+    end
+  end
+
+  def desmarcar(user)
+    aval = Avaliacao.find_by_sql("select * from avaliacoes where avaliavel_type='Personagem' and avaliavel_id=#{self.id} and user_id=#{user.id} ")
+
+    if !aval.empty?
+      aval.first.destroy
+    end
+  end
 end
