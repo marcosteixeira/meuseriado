@@ -15,6 +15,7 @@ class PersonagensController < ApplicationController
   def show
     @personagem = Personagem.friendly.find(params[:id])
     @title = @personagem.nome
+    commontator_thread_show(@personagem)
   end
 
   def marcar
