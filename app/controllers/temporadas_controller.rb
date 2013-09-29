@@ -9,6 +9,7 @@ class TemporadasController < ApplicationController
     end
     
     @title = @temporada.nome_temporada_formatado
+    commontator_thread_show(@temporada)
   end
   
   def marcar_toda

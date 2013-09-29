@@ -1,5 +1,6 @@
 class Temporada < ActiveRecord::Base
      extend FriendlyId
+     acts_as_commontable
  
   friendly_id :gerar_slug, use: :slugged
   

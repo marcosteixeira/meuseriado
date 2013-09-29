@@ -1,6 +1,7 @@
 #coding: utf-8
 class Serie < ActiveRecord::Base
   extend FriendlyId
+  acts_as_commontable
 
   friendly_id :nome, use: :slugged
   belongs_to :produtora

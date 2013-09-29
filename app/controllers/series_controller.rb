@@ -143,6 +143,7 @@ class SeriesController < ApplicationController
     end
 
     @title = @serie.nome
+    commontator_thread_show(@serie)
   end
 
   def adicionar
