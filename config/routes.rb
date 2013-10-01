@@ -29,6 +29,7 @@ Meuseriado::Application.routes.draw do
       get :adicionar
       get :marcar_toda
       get :desmarcar
+      post :inserir_trailer
     end
     # url: /series/:id/adicionar
     # named_route: adicionar_episodio_path

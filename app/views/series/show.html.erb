@@ -16,19 +16,23 @@
     <img src="<%= @serie.poster %>" alt='<%= @serie.slug %>-grande'>
 
     <% if (user_signed_in? && current_user.viu_serie?(@serie)) %>
-        <a href='/series/<%= @serie.slug %>/desmarcar' class="small button large-12 success columns primeiro-botao" rel="nofollow">Remover das favoritas!</a>
+        <a href='/series/<%= @serie.slug %>/desmarcar' class="small button large-12 success columns primeiro-botao" rel="nofollow">Remover
+          das favoritas!</a>
     <% else %>
         <a href='/series/<%= @serie.slug %>/adicionar' class="small button large-12 success columns primeiro-botao" rel="nofollow">Adicionar
           as minhas séries favoritas!</a>
     <% end %>
-    <a href='/series/<%= @serie.slug %>/marcar_toda' class="small button large-12 columns" rel="nofollow">Marcar série inteira como
+    <a href='/series/<%= @serie.slug %>/marcar_toda' class="small button large-12 columns" rel="nofollow">Marcar série
+      inteira como
       vista</a>
     <a href="#" class="small button secondary large-12 columns">Vou assistir depois</a>
     <a href="#" class="small button secondary large-12 columns">Escrever uma avaliação</a>
     <h4>Elenco:</h4>
     <ul class="lista-elenco">
       <% @serie.personagens_imagem.limit(8).each do |p| %>
-          <li><a href="/series/<%= @serie.slug %>/personagens/<%= p.slug %>"><img src="<%= p.imagem %>" alt="<%= p.nome %>"  title="<%= p.nome %>" class="imagem-elenco"></a></li>
+          <li>
+            <a href="/series/<%= @serie.slug %>/personagens/<%= p.slug %>"><img src="<%= p.imagem %>" alt="<%= p.nome %>" title="<%= p.nome %>" class="imagem-elenco"></a>
+          </li>
       <% end %>
     </ul>
     <a href="/series/<%= @serie.slug %>/personagens" class="right">Mostrar todo o elenco >></a>
@@ -36,6 +40,44 @@
   </div>
   <div class="large-8 columns">
     <h1><%= @serie.nome %></h1>
+    <%if current_user.try(:admin?) && @serie.trailer.nil? %>
+        <div class="row adicionar-trailer">
+          <div class="large-12 columns">
+            <%= form_tag(controller: "series", action: "inserir_trailer") do %>
+              <div class="row">
+                <div class="large-12 columns">
+                  <label for="codigo-youtube">
+                    Parace que esta série ainda não tem trailer! Adicione um trailer agora mesmo:
+                  </label>
+                </div>
+              </div>
+              <div class="row collapse">
+                <div class="large-10 columns">
+                  <input type="text" id="codigo-youtube" name="trailer" placeholder="Coloque aqui o código de incorporação do youtube...">
+                  </input>
+                </div>
+                <div class="large-2 columns">
+                  <input type="submit" class="button prefix">
+                </div>
+              </div>
+            <% end %>
+          </div>
+        </div>
+    <% end %>
+
+    <% if @serie.trailer %>
+        <div class="row">
+          <div class="large-12 columns linha-multimidia">
+            <div class="left video-trailer">
+              <iframe width="270" height="280" src="<%= @serie.trailer %>" frameborder="0" allowfullscreen></iframe>
+            </div>
+            <%
+            #<div class="anuncio-grande right">
+              #<img src="/images/anuncio2.jpg" alt="">
+            #</div>%>
+          </div>
+        </div>
+    <% end %>
 
     <p class="justify"><%= @serie.sinopse %></p>
 

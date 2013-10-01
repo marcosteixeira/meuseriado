@@ -163,4 +163,15 @@ class SeriesController < ApplicationController
     @serie.marcar_inteira(current_user)
     redirect_to(action: "show", id: @serie)
   end
+
+  def inserir_trailer
+
+    if current_user.admin?
+      @serie = Serie.friendly.find(params[:id])
+      @serie.trailer = params['trailer']
+      @serie.save!
+    end
+    redirect_to(action: "show", id: @serie)
+  end
+
 end
