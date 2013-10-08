@@ -115,7 +115,7 @@ Commontator.configure do |config|
   # Note: requires acts_as_votable gem installed
   # and configured for your application
   # Default: false
-  config.can_vote_on_comments = false
+  config.can_vote_on_comments = true
 
   # Whether comments should be ordered by vote score
   # instead of by order posted

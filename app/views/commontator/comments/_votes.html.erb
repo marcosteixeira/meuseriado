@@ -3,7 +3,7 @@
    # user
 %>
 
-<% if comment.can_be_voted_on? %>
+<% if comment.can_be_voted_on? && user %>
   <% can_vote = comment.can_be_voted_on_by?(user) %>
   <% vote = comment.get_vote_by(user) %>
 
