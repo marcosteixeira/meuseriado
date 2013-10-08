@@ -30,6 +30,7 @@
 
                 <div id="drop_entrar" class="f-dropdown content small" data-dropdown-content="">
                   <h4>Entre com sua conta:</h4>
+
                   <p>
                     <%= link_to "Entrar com Facebook", user_omniauth_authorize_path(:facebook), {:class => "button Facebook-entrar facebook-caixa-entrar large-12 columns"} %>
                   </p>
@@ -39,6 +40,9 @@
                   </p>
                   <br/>
                   <hr>
+                  <p>
+                    Ou entre com seu login e senha
+                  </p>
                   <%= form_for(resource, :as => resource_name, :url => session_path(resource_name), :html => {:class => "form-login"}) do |f| %>
 
                       <input autofocus="autofocus" id="user_email_entrar" placeholder="Nome" name="user[email]" type="email" class="campo campo-login">
@@ -131,9 +135,9 @@
             delay: 0,
             select: function (event, ui) {
                 $("#pesquisa").val(ui.item.label);
-                if (ui.item.tipo == 'Personagens'){
-                    window.location.replace("/series/" + ui.item.serie +"/personagens/"+ui.item.id);
-                }else{
+                if (ui.item.tipo == 'Personagens') {
+                    window.location.replace("/series/" + ui.item.serie + "/personagens/" + ui.item.id);
+                } else {
                     window.location.replace("/series/" + ui.item.id);
                 }
                 return true;

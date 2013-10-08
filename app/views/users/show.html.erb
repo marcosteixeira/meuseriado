@@ -51,9 +51,13 @@
         </a>
       </hgroup>
       <div class="row infos-interior">
-        <div class="large-4 columns">Episódios assistidos: <span class="round success label"><%=@user.episodios.count %></span>
-        </div> <div class="large-4 columns">Notas dadas: <span class="round label"><%= @user.notas_episodios.count%></span></div>
-        <div class="large-4 columns data-lancamento-interno">Cadastro: <span class="round secondary label"><%= date @user.created_at%></span></div>
+        <div class="large-4 columns">Episódios assistidos:
+          <span class="round success label"><%= @user.episodios.count %></span>
+        </div>
+        <div class="large-4 columns">Notas dadas: <span class="round label"><%= @user.notas_episodios.count %></span>
+        </div>
+        <div class="large-4 columns data-lancamento-interno">Cadastro:
+          <span class="round secondary label"><%= date @user.created_at %></span></div>
       </div>
 
       <div class="row">
@@ -65,6 +69,17 @@
             <% end %>
           </ul>
           <a href="javascript:carregarSeriesFavoritas()" class="right">Mostrar todas as séries favoritas >></a>
+        </div>
+        <div class="large-12 columns">
+          <h2>Personagens Favoritos</h2>
+          <ul class="lista-series-favoritas" id="ul-personagens">
+            <% @user.personagens.first(5).each do |personagem| %>
+                <li>
+                  <a href="/series/<%= personagem.serie.slug %>/personagens/<%= personagem.slug %>"><img src='<%= personagem.imagem %>' alt='<%= personagem.nome %>'></a>
+                </li>
+            <% end %>
+          </ul>
+          <a href="javascript:carregarSeriesFavoritas()" class="right">Mostrar todos os personagens favoritos >></a>
         </div>
       </div>
       <div class="row">
@@ -112,7 +127,7 @@
                         $("#ul-series").find('li:last').append('<a>');
                         $("#ul-series").find('li:last').append('<a>');
                         $("#ul-series").find('li:last').append('<a>');
-                        $("#ul-series").find('li:last').find('a').attr("href", "/series/"+serie.slug);
+                        $("#ul-series").find('li:last').find('a').attr("href", "/series/" + serie.slug);
                         $("#ul-series").find('a:last').append('<img>');
                         $("#ul-series").find('a:last').find('img').attr("src", serie.poster);
                     }
