@@ -19,4 +19,10 @@ class UsersController < ApplicationController
     @personagens = @user.personagens[5, 100]
     render :json => {:status => :ok, :personagens => @personagens.as_json(:include => { :serie => { :only => :slug} })}
   end
+
+  def adicionar_amigo
+    @user = User.friendly.find(params[:id])
+    @current_user.invite @user
+  end
+
 end

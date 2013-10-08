@@ -24,7 +24,7 @@
       <% if user_signed_in? && current_user.id == @user.id %>
           <%= link_to "Editar perfil", edit_user_registration_path, {:class => "small button large-12 success columns primeiro-botao"} %>
       <% else %>
-          <a href="#" class="small button large-12 success columns primeiro-botao">Adicionar como amigo</a>
+          <a href="/users/<%= @user.slug %>/adicionar_amigo" class="small button large-12 success columns primeiro-botao">Adicionar como amigo</a>
       <% end %>
       <a href="#" class="small button secondary large-12 columns">Enviar mensagem</a>
 

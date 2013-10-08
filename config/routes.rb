@@ -46,6 +46,7 @@ Meuseriado::Application.routes.draw do
     member do
       get :carregar_series
       get :carregar_personagens
+      post :adicionar_amigo
     end
   end
 
