@@ -79,7 +79,7 @@
                 </li>
             <% end %>
           </ul>
-          <a href="javascript:carregarSeriesFavoritas()" class="right">Mostrar todos os personagens favoritos >></a>
+          <a href="javascript:carregarPersonagensFavoritos()" class="right">Mostrar todos os personagens favoritos >></a>
         </div>
       </div>
       <div class="row">
@@ -130,6 +130,24 @@
                         $("#ul-series").find('li:last').find('a').attr("href", "/series/" + serie.slug);
                         $("#ul-series").find('a:last').append('<img>');
                         $("#ul-series").find('a:last').find('img').attr("src", serie.poster);
+                    }
+                });
+            }});
+    }
+
+    function carregarPersonagensFavoritos() {
+        $.ajax({
+            url: "/users/<%= @user.slug %>/carregar_personagens",
+            success: function (data) {
+                $(data.personagens).each(function (i, personagem) {
+                    if (jQuery("#li-" + personagem.id).length == 0) {
+                        $("#ul-personagens").append("<li style='margin-right: 2px;' id='li-" + personagem.id + "'>");
+                        $("#ul-personagens").find('li:last').append('<a>');
+                        $("#ul-personagens").find('li:last').append('<a>');
+                        $("#ul-personagens").find('li:last').append('<a>');
+                        $("#ul-personagens").find('li:last').find('a').attr("href", "/series/" + personagem.serie.slug + "/personagens/" + personagem.slug);
+                        $("#ul-personagens").find('a:last').append('<img>');
+                        $("#ul-personagens").find('a:last').find('img').attr("src", personagem.imagem);
                     }
                 });
             }});

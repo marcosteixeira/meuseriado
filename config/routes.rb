@@ -45,6 +45,7 @@ Meuseriado::Application.routes.draw do
   resources :users do
     member do
       get :carregar_series
+      get :carregar_personagens
     end
   end
 

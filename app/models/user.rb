@@ -21,8 +21,8 @@ class User < ActiveRecord::Base
 
 	def series
 	  Serie.find_by_sql("SELECT  `series`.* FROM `series` INNER JOIN `avaliacoes` ON `series`.`id` = `avaliacoes`.`avaliavel_id` WHERE `avaliacoes`.`user_id` = #{self.id} AND `avaliacoes`.`avaliavel_type` = 'Serie'  ORDER BY id DESC")
-	end
-	
+  end
+
 	def episodios(serie_id=nil)
 	  if serie_id
       Episodio.find_by_sql("SELECT `episodios`.* FROM `episodios` INNER JOIN `avaliacoes` ON `episodios`.`id` = `avaliacoes`.`avaliavel_id` WHERE `avaliacoes`.`user_id` = #{self.id} AND `avaliacoes`.`avaliavel_type` = 'Episodio' AND episodios.serie_id = #{serie_id} ")	  
