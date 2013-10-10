@@ -1,86 +1,91 @@
-
 <% if temporada %>
-	<a href="/series/<%= temporada.serie.slug%>/temporadas/<%= temporada.temporada%>">
-		<img src="<%= temporada.imagem%>" alt="temporada<%= temporada.temporada%>" class="imagem-temporada">
-	</a>
-		<p class="title nome-temporada" data-section-title>
-		<a href="#">
-			<% if temporada.temporada == 0%>
-				Especiais
-			<% else %>
-				Temporada <%= temporada.temporada %>
-			<% end %>
-			<span class="right">Média Geral:<%= temporada.media_geral %></span>
-		</a>
-	</p>
-	<div class="content" data-section-content>
-		<br>
-		<ul class="lista-episodios">
-			<% if user_signed_in? && current_user.viu_temporada?(temporada) %>
-				<li class="marcar-temporada-inteira episodio-assistido">
-					<input type="checkbox" onchange="marcarTemporada(<%= temporada.id%>)"  checked id="temporada_<%= temporada.id%>"> Marcar temporada inteira como vista<!-- linha nova -->
-			<% else %>
-				<li class="marcar-temporada-inteira">
-					<input type="checkbox" onchange="marcarTemporada(<%= temporada.id%>)"  id="temporada_<%= temporada.id%>"> Marcar temporada inteira como vista<!-- linha nova -->
-			<% end %>
-				</li>
-		<% temporada.episodios_ordenados_exibicao.each do |episodio| %>
-			<% if user_signed_in? && current_user.viu_episodio?(episodio)  %>
-				<li class="episodio-assistido li_temporada_<%=temporada.id%> li_<%= episodio.id%>"  ><input  class="check-box-viu-episodio episodio_temporada_<%=temporada.id%>" type="checkbox" checked id="episodio_<%= episodio.id%>" onchange="marcarEpisodio(<%= episodio.id%>)"> 
-			<% else %>
-		  		<li class="li_temporada_<%=temporada.id%> li_<%= episodio.id%>"><input class="check-box-viu-episodio episodio_temporada_<%=temporada.id%>" type="checkbox" id="episodio_<%= episodio.id%>" onchange="marcarEpisodio(<%= episodio.id%>)">
-		  	<% end %>
-		  		<a href="/episodios/<%= episodio.slug%>"><%= episodio.numero%> - <%= episodio.nome%></a>
-		  		<span class="texto-pequeno">Exibido em <%= date(episodio.estreia)%></span>	
-		  		<div class="nota-lista-serie">
-		  			<span class="left nota-label">Nota:</span>
-		  			<div id="star_<%=episodio.id%>" class="estrelas-pagina-interior"> </div>
-				</div>
-	  			<script type="text/javascript">
-					$(document).ready(function(){
-						$('#star_<%=episodio.id%>').raty({  });
-					
-					});
-				</script>
-		  	</li>
-		<% end %>
-		</ul>
-	</div>
-	
-	<script>
-		function marcarTemporada(idTemporada){
-			marcar = jQuery('#temporada_'+idTemporada).is(':checked');
-			
-			if(marcar){
-				$.getJSON('/temporadas/'+idTemporada+'/marcar_toda', function(data) {
-				 	jQuery('#temporada_'+idTemporada).prop('checked', true);
-				 	jQuery('.episodio_temporada_'+idTemporada).prop('checked', true);
-				 	jQuery('.li_temporada_'+idTemporada).addClass("episodio-assistido");
-				});
-			}else{
-				$.getJSON('/temporadas/'+idTemporada+'/desmarcar_toda', function(data) {
-				 	jQuery('#temporada_'+idTemporada).prop('checked', false);
-				 	jQuery('.episodio_temporada_'+idTemporada).prop('checked', false);
-				 	jQuery('.li_temporada_'+idTemporada).removeClass("episodio-assistido");
-				});	
-			}
-		}
-		
-		function marcarEpisodio(idEpisodio){
-			marcar = jQuery('#episodio_'+idEpisodio).is(':checked');
-			
-			if(marcar){
-				$.getJSON('/episodios/'+idEpisodio+'/marcar', function(data) {
-				 	jQuery('.episodio_temporada_'+idEpisodio).prop('checked', true);
-				 	jQuery('.li_'+idEpisodio).addClass("episodio-assistido");
-				});
-			}else{
-				$.getJSON('/episodios/'+idEpisodio+'/desmarcar', function(data) {
-				 	jQuery('.episodio_temporada_'+idEpisodio).prop('checked', false);
-				 	jQuery('.li_'+idEpisodio).removeClass("episodio-assistido");
-				});
-			}	
-		}
-	
-	</script>
+    <a href="/series/<%= temporada.serie.slug %>/temporadas/<%= temporada.temporada %>">
+      <img src="<%= temporada.imagem %>" alt="temporada<%= temporada.temporada %>" class="imagem-temporada">
+    </a>
+    <p class="title nome-temporada" data-section-title>
+      <a href="#">
+        <% if temporada.temporada == 0 %>
+            Especiais
+        <% else %>
+            Temporada <%= temporada.temporada %>
+        <% end %>
+        <span class="right">Média Geral:<%= temporada.media_geral %></span>
+      </a>
+    </p>
+    <div class="content" data-section-content>
+      <br>
+      <ul class="lista-episodios">
+        <% if user_signed_in? && current_user.viu_temporada?(temporada) %>
+            <li class="marcar-temporada-inteira episodio-assistido">
+              <input type="checkbox" onchange="marcarTemporada(<%= temporada.id%>)" checked id="temporada_<%= temporada.id %>">
+              Marcar temporada inteira como vista<!-- linha nova -->
+        <% else %>
+            <li class="marcar-temporada-inteira">
+              <input type="checkbox" onchange="marcarTemporada(<%= temporada.id%>)" id="temporada_<%= temporada.id %>">
+              Marcar temporada inteira como vista<!-- linha nova -->
+        <% end %>
+        </li>
+        <% temporada.episodios_ordenados_exibicao.each do |episodio| %>
+            <% if user_signed_in? && current_user.viu_episodio?(episodio) %>
+                <li class="episodio-assistido li_temporada_<%= temporada.id %> li_<%= episodio.id %>">
+                  <input class="check-box-viu-episodio episodio_temporada_<%= temporada.id %>" type="checkbox" checked id="episodio_<%= episodio.id %>" onchange="marcarEpisodio(<%= episodio.id%>)">
+            <% else %>
+                <li class="li_temporada_<%= temporada.id %> li_<%= episodio.id %>">
+                  <input class="check-box-viu-episodio episodio_temporada_<%= temporada.id %>" type="checkbox" id="episodio_<%= episodio.id %>" onchange="marcarEpisodio(<%= episodio.id%>)">
+            <% end %>
+            <a href="/episodios/<%= episodio.slug %>"><%= episodio.numero %> - <%= episodio.nome %></a>
+            <span class="texto-pequeno">Exibido em <%= date(episodio.estreia) %></span>
+
+            <div class="nota-lista-serie">
+              <span class="nota-label">Nota:</span>
+
+              <div id="star_<%= episodio.id %>" class="estrelas-pagina-interior"></div>
+            </div>
+            <script type="text/javascript">
+                $(document).ready(function () {
+                    $('#star_<%=episodio.id%>').raty({  });
+
+                });
+            </script>
+            </li>
+        <% end %>
+      </ul>
+    </div>
+
+    <script>
+        function marcarTemporada(idTemporada) {
+            marcar = jQuery('#temporada_' + idTemporada).is(':checked');
+
+            if (marcar) {
+                $.getJSON('/temporadas/' + idTemporada + '/marcar_toda', function (data) {
+                    jQuery('#temporada_' + idTemporada).prop('checked', true);
+                    jQuery('.episodio_temporada_' + idTemporada).prop('checked', true);
+                    jQuery('.li_temporada_' + idTemporada).addClass("episodio-assistido");
+                });
+            } else {
+                $.getJSON('/temporadas/' + idTemporada + '/desmarcar_toda', function (data) {
+                    jQuery('#temporada_' + idTemporada).prop('checked', false);
+                    jQuery('.episodio_temporada_' + idTemporada).prop('checked', false);
+                    jQuery('.li_temporada_' + idTemporada).removeClass("episodio-assistido");
+                });
+            }
+        }
+
+        function marcarEpisodio(idEpisodio) {
+            marcar = jQuery('#episodio_' + idEpisodio).is(':checked');
+
+            if (marcar) {
+                $.getJSON('/episodios/' + idEpisodio + '/marcar', function (data) {
+                    jQuery('.episodio_temporada_' + idEpisodio).prop('checked', true);
+                    jQuery('.li_' + idEpisodio).addClass("episodio-assistido");
+                });
+            } else {
+                $.getJSON('/episodios/' + idEpisodio + '/desmarcar', function (data) {
+                    jQuery('.episodio_temporada_' + idEpisodio).prop('checked', false);
+                    jQuery('.li_' + idEpisodio).removeClass("episodio-assistido");
+                });
+            }
+        }
+
+    </script>
 <% end %>

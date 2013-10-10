@@ -15,6 +15,33 @@
   <div class="large-4 columns">
     <img src="<%= @serie.poster %>" alt='<%= @serie.slug %>-grande'>
 
+    <div class="row">
+      <script type="text/javascript">
+          $(document).ready(function () {
+              $('#star').raty({
+                  half: true,
+                  size: 24,
+                  starHalf: '/images/star-half-big.png',
+                  starOff: '/images/star-off-big.png',
+                  starOn: '/images/star-on-big.png'
+
+              });
+          });
+      </script>
+      <script type="text/javascript">
+          $(document).ready(function () {
+              $('#star2').raty({readOnly: true, score: <%=@serie.nota.to_f/2%>});
+          });
+      </script>
+      <div class="large-7 columns">
+        <h4>Avalie a série:</h4>
+      </div>
+      <div class="large-5 columns">
+        <div id="star" class="nota-da-serie"></div>
+      </div>
+
+    </div>
+
     <% if (user_signed_in? && current_user.viu_serie?(@serie)) %>
         <a href='/series/<%= @serie.slug %>/desmarcar' class="small button large-12 success columns primeiro-botao" rel="nofollow">Remover
           das favoritas!</a>
@@ -39,27 +66,40 @@
 
   </div>
   <div class="large-8 columns">
-    <h1><%= @serie.nome %></h1>
-    <%if current_user.try(:admin?) && @serie.trailer.nil? %>
+    <h1 class="titulo-serie"><%= @serie.nome %></h1>
+
+    <div class="row infos-interior">
+      <div class="large-4 columns"><b>Média geral:</b>
+
+        <div id="star2" class="estrelas-pagina-interior"></div>
+        <span class="nota-numerica"></span></div>
+      <div class="large-4 columns genero-serie-interno">
+        <b>Gênero:</b> Ficção científica
+      </div>
+      <div class="large-4 columns data-lancamento-interno">
+        <b>Lançamento:</b> 04/10/11
+      </div>
+    </div>
+    <% if current_user.try(:admin?) && @serie.trailer.nil? %>
         <div class="row adicionar-trailer">
           <div class="large-12 columns">
             <%= form_tag(controller: "series", action: "inserir_trailer") do %>
-              <div class="row">
-                <div class="large-12 columns">
-                  <label for="codigo-youtube">
-                    Parace que esta série ainda não tem trailer! Adicione um trailer agora mesmo:
-                  </label>
+                <div class="row">
+                  <div class="large-12 columns">
+                    <label for="codigo-youtube">
+                      Parace que esta série ainda não tem trailer! Adicione um trailer agora mesmo:
+                    </label>
+                  </div>
                 </div>
-              </div>
-              <div class="row collapse">
-                <div class="large-10 columns">
-                  <input type="text" id="codigo-youtube" name="trailer" placeholder="Coloque aqui o código de incorporação do youtube...">
-                  </input>
+                <div class="row collapse">
+                  <div class="large-10 columns">
+                    <input type="text" id="codigo-youtube" name="trailer" placeholder="Coloque aqui o código de incorporação do youtube...">
+                    </input>
+                  </div>
+                  <div class="large-2 columns">
+                    <input type="submit" class="button prefix">
+                  </div>
                 </div>
-                <div class="large-2 columns">
-                  <input type="submit" class="button prefix">
-                </div>
-              </div>
             <% end %>
           </div>
         </div>
@@ -72,9 +112,9 @@
               <iframe width="270" height="280" src="<%= @serie.trailer %>" frameborder="0" allowfullscreen></iframe>
             </div>
             <%
-            #<div class="anuncio-grande right">
-              #<img src="/images/anuncio2.jpg" alt="">
-            #</div>%>
+               #<div class="anuncio-grande right">
+               #<img src="/images/anuncio2.jpg" alt="">
+               #</div>  %>
           </div>
         </div>
     <% end %>
