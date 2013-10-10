@@ -731,3 +731,29 @@ h1, h2, h3, h4, h5, h6 {
 .titulo-serie {
     margin-bottom: 0px;
 }
+
+.ui-menu-item p {
+    font-size: 16px;
+    color: #444;
+    margin-left: 20px;
+    margin-top: 10px;
+}
+
+.ui-menu-item {
+    border-top: 1px solid #ddd;
+}
+
+.ui-autocomplete-category {
+    margin: 5px 0px 5px 10px
+}
+
+.ui-state-focus {
+    border: 1px solid #F1AE00 !important;
+    font-weight: normal !important;
+    color: white !important;
+    background: rgb(245, 188, 9) !important;
+}
+
+.ui-state-focus p {
+    color: white;
+}
