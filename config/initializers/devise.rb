@@ -18,21 +18,21 @@ Devise.setup do |config|
   # Configure which authentication keys should be case-insensitive.
   # These keys will be downcased upon creating or modifying a user and when used
   # to authenticate or find a user. Default is :email.
-  config.case_insensitive_keys = [ :email ]
+  config.case_insensitive_keys = [:email]
 
   # Configure which authentication keys should have whitespace stripped.
   # These keys will have whitespace before and after removed upon creating or
   # modifying a user and when used to authenticate or find a user. Default is :email.
-  config.strip_whitespace_keys = [ :email ]
+  config.strip_whitespace_keys = [:email]
 
   # By default Devise will store the user in session. You can skip storage for
   # :http_auth and :token_auth by adding those symbols to the array below.
   # Notice that if you are skipping storage for all authentication paths, you
   # may want to disable generating routes to Devise's sessions controller by
   # passing :skip => :sessions to `devise_for` in your config/routes.rb
- 
+
   config.skip_session_storage = [:http_auth]
- 
+
   # Limiting the stretches to just one in testing will increase the performance of
   # your test suite dramatically. However, it is STRONGLY RECOMMENDED to not use
   # a value less than 10 in other environments.
@@ -49,10 +49,10 @@ Devise.setup do |config|
 
   # The default HTTP method used to sign out a resource. Default is :delete.
   config.sign_out_via = :get
-  
+
   require "omniauth-facebook"
-  config.omniauth :facebook, "178946175618292", "f2580eec301f82b42a078273fcd4fd7c", :scope => 'email'
+  config.omniauth :facebook, "213772275466936", "70f59dcc866f58653ec6e78e24593bc7", :scope => 'email'
   require "omniauth-google-oauth2"
-  config.omniauth :google_oauth2, "195300766712.apps.googleusercontent.com", "Fmh3_4Bvn5bgRQPcZxFGG67p", { access_type: "offline", approval_prompt: "" }
+  config.omniauth :google_oauth2, "465218412605.apps.googleusercontent.com", "SDCC2Rx1nCmdvk-9mt9mtFwz", {access_type: "offline", approval_prompt: ""}
   config.secret_key = '273d815c4c384c4c1164a006bc25b40d805a2888dd973d11245c96316cb347d31500b9d4b381d1524e08db9f2e07c7532d7829eee8761fe24df02b4c3048c489'
 end
