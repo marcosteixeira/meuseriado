@@ -55,6 +55,11 @@ gem 'commontator', '~> 4.0.0'
 
 gem 'acts_as_votable'
 
+group :development do
+  gem "better_errors"
+  gem "binding_of_caller"
+end
+
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
   gem 'sdoc', require: false
