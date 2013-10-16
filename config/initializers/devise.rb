@@ -1,6 +1,7 @@
 # Use this hook to configure devise mailer, warden hooks and so forth.
 # Many of these configuration options can be set straight in your model.
 Devise.setup do |config|
+  FACEBOOK_CONFIG = YAML.load_file("#{::Rails.root}/config/facebook.yml")[::Rails.env]
   # ==> Mailer Configuration
   # Configure the e-mail address which will be shown in Devise::Mailer,
   # note that it will be overwritten if you use your own mailer class with default "from" parameter.
@@ -51,7 +52,7 @@ Devise.setup do |config|
   config.sign_out_via = :get
 
   require "omniauth-facebook"
-  config.omniauth :facebook, "213772275466936", "70f59dcc866f58653ec6e78e24593bc7", :scope => 'email'
+  config.omniauth :facebook, FACEBOOK_CONFIG['app_id'], FACEBOOK_CONFIG['secret'], :scope => 'email'
   require "omniauth-google-oauth2"
   config.omniauth :google_oauth2, "465218412605.apps.googleusercontent.com", "SDCC2Rx1nCmdvk-9mt9mtFwz", {access_type: "offline", approval_prompt: ""}
   config.secret_key = '273d815c4c384c4c1164a006bc25b40d805a2888dd973d11245c96316cb347d31500b9d4b381d1524e08db9f2e07c7532d7829eee8761fe24df02b4c3048c489'
