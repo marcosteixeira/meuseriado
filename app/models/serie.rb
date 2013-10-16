@@ -14,7 +14,7 @@ class Serie < ActiveRecord::Base
   has_and_belongs_to_many :generos
 
   def personagens_imagem
-    self.personagens.where("imagem is not null" );
+    self.personagens.where("imagem is not null");
   end
 
   def temporadas_validas_ordenadas(ordenacao="desc")
@@ -75,13 +75,13 @@ class Serie < ActiveRecord::Base
       nova_serie.dia_exibicao = serie.airs_day_of_week
       nova_serie.horario_exibicao = serie.airs_time
       if serie.banner
-        nova_serie.banner = Serie.salvar_imagem(serie.banner,serie.banner.split("/").last , "banner")
+        nova_serie.banner = Serie.salvar_imagem(serie.banner, serie.banner.split("/").last, "banner")
       else
         nova_serie.banner = "/images/series/imagem_padrao.jpg"
       end
       nova_serie.sinopse = serie.overview
       if serie.fanart
-        nova_serie.fanart = Serie.salvar_imagem(serie.fanart,serie.fanart.split("/").last , "fanart")
+        nova_serie.fanart = Serie.salvar_imagem(serie.fanart, serie.fanart.split("/").last, "fanart")
       else
         nova_serie.fanart= "/images/series/imagem_padrao.jpg"
       end
@@ -89,7 +89,7 @@ class Serie < ActiveRecord::Base
       nova_serie.id_imdb = serie.imdb_id
 
       if serie.poster
-        nova_serie.poster = Serie.salvar_imagem(serie.poster,serie.poster.split("/").last , "serie")
+        nova_serie.poster = Serie.salvar_imagem(serie.poster, serie.poster.split("/").last, "serie")
       else
         nova_serie.poster = "/images/series/imagem_padrao.jpg"
       end
@@ -143,7 +143,7 @@ class Serie < ActiveRecord::Base
           episodio.escritores = episodio_tvdb.writer
           episodio.nota = episodio_tvdb.rating
           if episodio_tvdb.filename
-            episodio.banner = Serie.salvar_imagem(episodio_tvdb.filename,episodio_tvdb.filename.split("/").last , "episodio")
+            episodio.banner = Serie.salvar_imagem(episodio_tvdb.filename, episodio_tvdb.filename.split("/").last, "episodio")
           else
             episodio.banner = "/images/series/imagem_padrao.jpg"
           end
@@ -230,7 +230,7 @@ class Serie < ActiveRecord::Base
     end
   end
 
-  def marcar_como_vista(user,finalizou=false)
+  def marcar_como_vista(user, finalizou=false)
     aval = Avaliacao.find_by_sql("select * from avaliacoes where avaliavel_type='Serie' and avaliavel_id=#{self.id} and user_id=#{user.id} ")
     if aval.empty?
       aval = Avaliacao.new
@@ -295,7 +295,7 @@ class Serie < ActiveRecord::Base
   end
 
   def episodios_exibicao
-    result  = self.episodios.where("temporada <> 0 and estreia <  '#{Time.now}' ").order("temporada desc, numero desc")
+    result = self.episodios.where("temporada <> 0 and estreia <  '#{Time.now}' ").order("temporada desc, numero desc")
     if result.size == 0
       result = self.episodios.where("temporada <> 0 and (estreia <  '#{Time.now}' or estreia is null )").order("temporada desc, numero desc")
     end
@@ -309,4 +309,12 @@ class Serie < ActiveRecord::Base
   def votos_semanais
     self.visualizacoes_semanais(" and a.nota is not null")
   end
+
+  def data_lancamento
+    temporada_um = temporadas.where(:temporada => 1)
+    if temporada_um
+      temporada_um.first.data_lancamento
+    end
+  end
+
 end
