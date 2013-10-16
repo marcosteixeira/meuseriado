@@ -1,0 +1,11 @@
+development:
+  app_id: 195300766712.apps.googleusercontent.com
+  secret: Fmh3_4Bvn5bgRQPcZxFGG67p
+
+test:
+  app_id: 195300766712.apps.googleusercontent.com
+  secret: Fmh3_4Bvn5bgRQPcZxFGG67p
+
+production:
+  app_id: 465218412605.apps.googleusercontent.com
+  secret: SDCC2Rx1nCmdvk-9mt9mtFwz
