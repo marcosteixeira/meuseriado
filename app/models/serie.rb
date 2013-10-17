@@ -230,17 +230,20 @@ class Serie < ActiveRecord::Base
     end
   end
 
-  def marcar_como_vista(user, finalizou=false)
+  def marcar_como_vista(user, finalizou=false, nota=nil)
     aval = Avaliacao.find_by_sql("select * from avaliacoes where avaliavel_type='Serie' and avaliavel_id=#{self.id} and user_id=#{user.id} ")
     if aval.empty?
       aval = Avaliacao.new
       aval.user = user
+      if nota
+        aval.nota= nota
+      end
       acompanhamento = criar_acompanhamento(aval, finalizou)
       self.avaliacoes << aval
       self.save
     else
+      aval_banco = aval.first
       if self.finalizada? && finalizou
-        aval_banco = aval.first
         if !aval_banco.acompanhamento_serie.finalizada
           aval_banco.acompanhamento_serie.finalizada = true
           aval_banco.acompanhamento_serie.ativa = false
@@ -248,6 +251,10 @@ class Serie < ActiveRecord::Base
           aval_banco.acompanhamento_serie.abandonada = false
           aval_banco.acompanhamento_serie.save
         end
+      end
+      if nota
+        aval_banco.nota = nota
+        aval_banco.save
       end
     end
   end
@@ -314,6 +321,15 @@ class Serie < ActiveRecord::Base
     temporada_um = temporadas.where(:temporada => 1)
     if temporada_um
       temporada_um.first.data_lancamento
+    end
+  end
+
+  def nota_user(user=nil)
+    if user
+      aval_user = self.avaliacoes.where(user: user)
+      if !aval_user.empty?
+        aval_user.first.nota
+      end
     end
   end
 

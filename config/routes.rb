@@ -2,9 +2,9 @@ Meuseriado::Application.routes.draw do
 
   get "autocomplete/index"
   get "series/carregar_series"
-  devise_for :users,  :controllers => {:registrations => "users/registrations", :omniauth_callbacks => "users/omniauth_callbacks"}
+  devise_for :users, :controllers => {:registrations => "users/registrations", :omniauth_callbacks => "users/omniauth_callbacks"}
   resources :users, :only => [:index, :show]
-  resources :series, :only => [:show, :index,:create]
+  resources :series, :only => [:show, :index, :create]
   resources :episodios, :only => [:show, :index]
   resources :feeds
   root :to => "home#index"
@@ -30,6 +30,7 @@ Meuseriado::Application.routes.draw do
       get :marcar_toda
       get :desmarcar
       post :inserir_trailer
+      post :dar_nota
     end
     # url: /series/:id/adicionar
     # named_route: adicionar_episodio_path

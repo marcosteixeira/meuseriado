@@ -18,13 +18,18 @@
     <div class="row">
       <script type="text/javascript">
           $(document).ready(function () {
-              $('.nota-da-serie').raty({
+              $('#star').raty({
+                  <% if current_user %>
+                  score: <%= @serie.nota_user(current_user) %>,
+                  <% end %>
                   half: true,
                   size: 24,
                   starHalf: '/images/star-half-big.png',
                   starOff: '/images/star-off-big.png',
-                  starOn: '/images/star-on-big.png'
-
+                  starOn: '/images/star-on-big.png',
+                  click: function (score, evt) {
+                      $.post("<%= dar_nota_serie_path %>", { nota: score });
+                  }
               });
           });
       </script>
@@ -114,7 +119,7 @@
             <%
                #<div class="anuncio-grande right">
                #<img src="/images/anuncio2.jpg" alt="">
-               #</div>    %>
+               #</div>     %>
           </div>
         </div>
     <% end %>

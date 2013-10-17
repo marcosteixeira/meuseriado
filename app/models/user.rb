@@ -95,6 +95,10 @@ class User < ActiveRecord::Base
     end
   end
 
+  def notas_dadas
+    self.avaliacoes.where("nota IS NOT NULL")
+  end
+
   def media_serie(serie)
     Avaliacao.where("avaliavel_type = 'Episodio' and avaliavel_id in (select id from episodios where serie_id = #{serie.id})").average('nota')
   end

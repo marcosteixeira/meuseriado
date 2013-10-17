@@ -174,4 +174,13 @@ class SeriesController < ApplicationController
     redirect_to(action: "show", id: @serie)
   end
 
+  def dar_nota
+    @serie = Serie.friendly.find(params[:id])
+    nota = params[:nota]
+    if nota
+      @serie.marcar_como_vista(current_user, false, nota)
+    end
+    redirect_to(action: "show", id: @serie)
+  end
+
 end

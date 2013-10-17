@@ -24,7 +24,8 @@
       <% if user_signed_in? && current_user.id == @user.id %>
           <%= link_to "Editar perfil", edit_user_registration_path, {:class => "small button large-12 success columns primeiro-botao"} %>
       <% else %>
-          <a href="/users/<%= @user.slug %>/adicionar_amigo" class="small button large-12 success columns primeiro-botao">Adicionar como amigo</a>
+          <a href="/users/<%= @user.slug %>/adicionar_amigo" class="small button large-12 success columns primeiro-botao">Adicionar
+            como amigo</a>
       <% end %>
       <a href="#" class="small button secondary large-12 columns">Enviar mensagem</a>
 
@@ -54,7 +55,7 @@
         <div class="large-4 columns">Episódios assistidos:
           <span class="round success label"><%= @user.episodios.count %></span>
         </div>
-        <div class="large-4 columns">Notas dadas: <span class="round label"><%= @user.notas_episodios.count %></span>
+        <div class="large-4 columns">Notas dadas: <span class="round label"><%= @user.notas_dadas.count %></span>
         </div>
         <div class="large-4 columns data-lancamento-interno">Cadastro:
           <span class="round secondary label"><%= date @user.created_at %></span></div>
@@ -79,7 +80,8 @@
                 </li>
             <% end %>
           </ul>
-          <a href="javascript:carregarPersonagensFavoritos()" class="right">Mostrar todos os personagens favoritos >></a>
+          <a href="javascript:carregarPersonagensFavoritos()" class="right">Mostrar todos os personagens favoritos
+            >></a>
         </div>
       </div>
       <div class="row">
