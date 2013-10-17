@@ -19,7 +19,7 @@
       <script type="text/javascript">
           $(document).ready(function () {
               $('#star').raty({
-                  <% if current_user %>
+                  <% if current_user && @serie.nota_user(current_user) %>
                   score: <%= @serie.nota_user(current_user) %>,
                   <% end %>
                   half: true,
@@ -119,7 +119,7 @@
             <%
                #<div class="anuncio-grande right">
                #<img src="/images/anuncio2.jpg" alt="">
-               #</div>     %>
+               #</div>      %>
           </div>
         </div>
     <% end %>

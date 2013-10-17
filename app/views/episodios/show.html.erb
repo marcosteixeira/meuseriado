@@ -4,12 +4,19 @@
     });
 
     $(document).ready(function () {
-        $('.nota-da-serie').raty({
+        $('#star').raty({
+
+            <% if current_user && @episodio.nota_user(current_user) %>
+            score: <%= @episodio.nota_user(current_user) %>,
+            <% end %>
             half: true,
             size: 24,
             starHalf: '/images/star-half-big.png',
             starOff: '/images/star-off-big.png',
-            starOn: '/images/star-on-big.png'
+            starOn: '/images/star-on-big.png',
+            click: function (score, evt) {
+                $.post("<%= dar_nota_episodio_path %>", { nota: score });
+            }
 
         });
     });

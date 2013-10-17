@@ -19,6 +19,7 @@ Meuseriado::Application.routes.draw do
     member do
       get :marcar
       get :desmarcar
+      post :dar_nota
     end
     # url: /episodios/:id/marcar
     # named_route: marcar_episodio_path

@@ -1,3 +1,15 @@
+<script>
+    $(document).ready(function () {
+        $('#star').raty({
+            half: true,
+            size: 24,
+            starHalf: '/images/star-half-big.png',
+            starOff: '/images/star-off-big.png',
+            starOn: '/images/star-on-big.png',
+
+        });
+    });
+</script>
 <div class="row">
   <div class="large-12 columns">
 
@@ -16,10 +28,19 @@
   <div class="large-4 columns">
     <a href="/series/<%= @personagem.serie.slug %>/personagens/<%= @personagem.slug %>"><img src="<%= @personagem.imagem %>" alt="<%= @personagem.nome %>" title="<%= @personagem.nome %>"></a>
 
+    <div class="large-7 columns">
+      <h4>Avalie o personagem:</h4>
+    </div>
+    <div class="large-5 columns">
+      <div id="star" class="nota-da-serie"></div>
+    </div>
+
     <% if (user_signed_in? && current_user.fa?(@personagem)) %>
-        <a href="/personagens/<%= @personagem.slug %>/desmarcar" class="small button large-12 success columns primeiro-botao" rel="nofollow">Remover personagem favorito</a>
+        <a href="/personagens/<%= @personagem.slug %>/desmarcar" class="small button large-12 success columns primeiro-botao" rel="nofollow">Remover
+          personagem favorito</a>
     <% else %>
-        <a href="/personagens/<%= @personagem.slug %>/marcar" class="small button large-12 success columns primeiro-botao" rel="nofollow">Marcar como personagem favorito</a>
+        <a href="/personagens/<%= @personagem.slug %>/marcar" class="small button large-12 success columns primeiro-botao" rel="nofollow">Marcar
+          como personagem favorito</a>
     <% end %>
 
     <h4>Série de origem:</h4>
@@ -29,7 +50,9 @@
   <div class="large-8 columns">
     <h1><%= @personagem.nome %></h1>
 
-    <h2>Ator/Atriz:</h2> <p><%= @personagem.ator.nome %></p>
+    <h2>Ator/Atriz:</h2>
+
+    <p><%= @personagem.ator.nome %></p>
 
     <h2>Quem é fã:</h2>
     <ul class="quem-viu-episodio large-12">
