@@ -51,7 +51,7 @@ gem 'amistad'
 
 gem 'kaminari'
 
-gem 'commontator', '~> 4.0.0'
+gem 'acts_as_commentable_with_threading', github: 'marcosteixeira/acts_as_commentable_with_threading', branch: 'master'
 
 gem 'acts_as_votable'
 

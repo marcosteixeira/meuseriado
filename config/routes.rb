@@ -8,7 +8,6 @@ Meuseriado::Application.routes.draw do
   resources :episodios, :only => [:show, :index]
   resources :feeds
   root :to => "home#index"
-  mount Commontator::Engine => '/commontator'
 
   resources :series do
     resources :temporadas

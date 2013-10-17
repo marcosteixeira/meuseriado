@@ -8,14 +8,13 @@ class PersonagensController < ApplicationController
     else
       redirect_to root_path
     end
-    
+
     @title = "Personagens #{@serie.nome}"
   end
 
   def show
     @personagem = Personagem.friendly.find(params[:id])
     @title = @personagem.nome
-    commontator_thread_show(@personagem)
   end
 
   def marcar
@@ -23,7 +22,7 @@ class PersonagensController < ApplicationController
     @personagem.marcar(current_user)
 
     respond_to do |format|
-      format.html { redirect_to(action: "show", id: @personagem )}
+      format.html { redirect_to(action: "show", id: @personagem) }
       format.json { render json: @personagem, status: :ok }
     end
   end
@@ -33,7 +32,7 @@ class PersonagensController < ApplicationController
     @personagem.desmarcar(current_user)
 
     respond_to do |format|
-      format.html { redirect_to(action: "show", id: @personagem )}
+      format.html { redirect_to(action: "show", id: @personagem) }
       format.json { render json: @personagem, status: :ok }
     end
   end

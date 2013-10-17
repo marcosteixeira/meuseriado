@@ -1,8 +1,6 @@
 class User < ActiveRecord::Base
   extend FriendlyId
   include Amistad::FriendModel
-  acts_as_commontator
-
   friendly_id :name, use: :slugged
 
   require 'serie'
