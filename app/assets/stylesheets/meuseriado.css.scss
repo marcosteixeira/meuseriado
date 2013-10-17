@@ -758,4 +758,74 @@ h1, h2, h3, h4, h5, h6 {
   color: white;
 }
 
+.comentario-corpo {
+  background-color: white !important;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #ddd;
+}
+
+.caixa-de-comentario {
+  margin-top: 20px;
+}
+
+.comentario-cabecalho {
+  font-size: 12px;
+  font-family: arial, sans-serif;
+}
+
+.editar-deletar-comentario {
+  text-align: right;
+  font-size: 10px;
+}
+
+.nome-do-comentador {
+  margin-left: 14px;
+  margin-right: 5px;
+
+}
+
+.comment_timestamp {
+  font-size: 11px;
+}
+
+.responder {
+  background-color: #F1F1F1;
+  border-color: #E2E2E2;
+  color: #777777;
+  font-weight: normal;
+}
+
+.responder:hover {
+  background-color: #F8F8F8;
+  color: #777777;
+}
+
+.responder:focus {
+  background-color: #F8F8F8;
+  color: #777777;
+}
+
+.voto-positivo {
+  background: url(/images/cesar-sprite.png) no-repeat;
+  display: inline-block;
+  font-size: 11px;
+  color: green;
+  margin-right: 10px;
+  margin-left: 0px;
+  margin-top: 5px;
+  padding-left: 18px;
+  padding-top: 8px;
+
+}
+
+.voto-negativo {
+  background: url(/images/cesar-sprite.png)-1px -24px no-repeat;
+  margin-top: 10px;
+  height: 24px;
+  color: red;
+  font-size: 11px;
+  display: inline-block;
+  padding-left: 18px;
+}
 

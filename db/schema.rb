@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131008123646) do
+ActiveRecord::Schema.define(version: 20131017213129) do
 
   create_table "acompanhamento_series", force: true do |t|
     t.integer "avaliacao_id", null: false
@@ -57,50 +57,22 @@ ActiveRecord::Schema.define(version: 20131008123646) do
   add_index "avaliacoes", ["avaliavel_type"], name: "index_avaliacoes_on_avaliavel_type", using: :btree
   add_index "avaliacoes", ["user_id"], name: "avaliacoes_user_id_fk", using: :btree
 
-  create_table "commontator_comments", force: true do |t|
-    t.string "creator_type"
-    t.integer "creator_id"
-    t.string "editor_type"
-    t.integer "editor_id"
-    t.integer "thread_id", null: false
-    t.text "body", null: false
-    t.datetime "deleted_at"
-    t.integer "cached_votes_total", default: 0
-    t.integer "cached_votes_up", default: 0
-    t.integer "cached_votes_down", default: 0
+  create_table "comments", force: true do |t|
+    t.integer "commentable_id", default: 0
+    t.string "commentable_type", default: ""
+    t.string "title", default: ""
+    t.text "body"
+    t.string "subject", default: ""
+    t.integer "user_id", default: 0, null: false
+    t.integer "parent_id"
+    t.integer "lft"
+    t.integer "rgt"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  add_index "commontator_comments", ["cached_votes_down"], name: "index_commontator_comments_on_cached_votes_down", using: :btree
-  add_index "commontator_comments", ["cached_votes_total"], name: "index_commontator_comments_on_cached_votes_total", using: :btree
-  add_index "commontator_comments", ["cached_votes_up"], name: "index_commontator_comments_on_cached_votes_up", using: :btree
-  add_index "commontator_comments", ["creator_type", "creator_id", "thread_id"], name: "index_c_c_on_c_type_and_c_id_and_t_id", using: :btree
-  add_index "commontator_comments", ["thread_id"], name: "index_commontator_comments_on_thread_id", using: :btree
-
-  create_table "commontator_subscriptions", force: true do |t|
-    t.string "subscriber_type", null: false
-    t.integer "subscriber_id", null: false
-    t.integer "thread_id", null: false
-    t.integer "unread", default: 0, null: false
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "commontator_subscriptions", ["subscriber_type", "subscriber_id", "thread_id"], name: "index_c_s_on_s_type_and_s_id_and_t_id", unique: true, using: :btree
-  add_index "commontator_subscriptions", ["thread_id"], name: "index_commontator_subscriptions_on_thread_id", using: :btree
-
-  create_table "commontator_threads", force: true do |t|
-    t.string "commontable_type"
-    t.integer "commontable_id"
-    t.datetime "closed_at"
-    t.string "closer_type"
-    t.integer "closer_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "commontator_threads", ["commontable_type", "commontable_id"], name: "index_c_t_on_c_type_and_c_id", unique: true, using: :btree
+  add_index "comments", ["commentable_id", "commentable_type"], name: "index_comments_on_commentable_id_and_commentable_type", using: :btree
+  add_index "comments", ["user_id"], name: "index_comments_on_user_id", using: :btree
 
   create_table "episodios", force: true do |t|
     t.integer "numero", default: 0, null: false

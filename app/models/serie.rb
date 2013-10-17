@@ -1,8 +1,10 @@
 #coding: utf-8
 class Serie < ActiveRecord::Base
   extend FriendlyId
-
+  acts_as_commentable
   friendly_id :nome, use: :slugged
+
+
   belongs_to :produtora
   has_many :avaliacoes, as: :avaliavel
   has_many :users, :through => :avaliacoes
