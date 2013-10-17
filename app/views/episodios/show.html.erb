@@ -41,12 +41,16 @@
   <div class="large-4 columns">
     <img src='<%= @episodio.banner %>' alt="imagem-episodio">
 
-    <div class="large-7 columns">
-      <h4>Avalie o episódio:</h4>
+    <div class="row">
+      <div class="large-4 columns">
+        <h4>Avalie:</h4>
+      </div>
+      <div class="large-8 columns">
+        <div id="star" class="nota-da-serie"></div>
+      </div>
     </div>
-    <div class="large-5 columns">
-      <div id="star" class="nota-da-serie"></div>
-    </div>
+
+
     <% if (user_signed_in? && current_user.viu_episodio?(@episodio)) %>
         <a href='/episodios/<%= @episodio.slug %>/desmarcar' class="small button large-12 success columns primeiro-botao" rel="nofollow">Remover
           dos episódios vistos!</a>
@@ -82,6 +86,7 @@
         </h1>
       </a>
     </hgroup>
+
     <div class="row infos-interior">
       <div class="large-4 columns"><b>Média geral:</b>
 
@@ -91,6 +96,8 @@
         <b>Lançamento:</b> <%= date @episodio.estreia %>
       </div>
     </div>
+
+
     <p class="justify"> <%= @episodio.sinopse %></p>
     <!-- comentarios -->
     <%= commontator_thread(@episodio) %>
