@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131017213129) do
+ActiveRecord::Schema.define(version: 20131018152642) do
 
   create_table "acompanhamento_series", force: true do |t|
     t.integer "avaliacao_id", null: false
@@ -25,13 +25,20 @@ ActiveRecord::Schema.define(version: 20131017213129) do
 
   add_index "acompanhamento_series", ["avaliacao_id"], name: "index_acompanhamento_series_on_avaliacao_id", unique: true, using: :btree
 
-  create_table "amizades", id: false, force: true do |t|
-    t.integer "user_id", null: false
-    t.integer "amigo_id", null: false
+  create_table "active_admin_comments", force: true do |t|
+    t.string "namespace"
+    t.text "body"
+    t.string "resource_id", null: false
+    t.string "resource_type", null: false
+    t.integer "author_id"
+    t.string "author_type"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
-  add_index "amizades", ["amigo_id"], name: "amizades_amigo_id_fk", using: :btree
-  add_index "amizades", ["user_id", "amigo_id"], name: "index_amizades_on_user_id_and_amigo_id", unique: true, using: :btree
+  add_index "active_admin_comments", ["author_type", "author_id"], name: "index_active_admin_comments_on_author_type_and_author_id", using: :btree
+  add_index "active_admin_comments", ["namespace"], name: "index_active_admin_comments_on_namespace", using: :btree
+  add_index "active_admin_comments", ["resource_type", "resource_id"], name: "index_active_admin_comments_on_resource_type_and_resource_id", using: :btree
 
   create_table "atores", force: true do |t|
     t.string "nome", default: "", null: false
@@ -72,6 +79,7 @@ ActiveRecord::Schema.define(version: 20131017213129) do
   end
 
   add_index "comments", ["commentable_id", "commentable_type"], name: "index_comments_on_commentable_id_and_commentable_type", using: :btree
+  add_index "comments", ["parent_id"], name: "comments_parent_id_fk", using: :btree
   add_index "comments", ["user_id"], name: "index_comments_on_user_id", using: :btree
 
   create_table "episodios", force: true do |t|
@@ -104,6 +112,8 @@ ActiveRecord::Schema.define(version: 20131017213129) do
     t.boolean "pending", default: true
   end
 
+  add_index "friendships", ["blocker_id"], name: "friendships_blocker_id_fk", using: :btree
+  add_index "friendships", ["friend_id"], name: "friendships_friend_id_fk", using: :btree
   add_index "friendships", ["friendable_id", "friend_id"], name: "index_friendships_on_friendable_id_and_friend_id", unique: true, using: :btree
 
   create_table "generos", force: true do |t|
@@ -227,12 +237,16 @@ ActiveRecord::Schema.define(version: 20131017213129) do
 
   add_foreign_key "acompanhamento_series", "avaliacoes", name: "acompanhamento_series_avaliacao_id_fk"
 
-  add_foreign_key "amizades", "users", name: "amizades_amigo_id_fk", column: "amigo_id"
-  add_foreign_key "amizades", "users", name: "amizades_user_id_fk"
-
   add_foreign_key "avaliacoes", "users", name: "avaliacoes_user_id_fk"
 
+  add_foreign_key "comments", "comments", name: "comments_parent_id_fk", column: "parent_id"
+  add_foreign_key "comments", "users", name: "comments_user_id_fk"
+
   add_foreign_key "episodios", "series", name: "episodios_serie_id_fk"
+
+  add_foreign_key "friendships", "users", name: "friendships_blocker_id_fk", column: "blocker_id"
+  add_foreign_key "friendships", "users", name: "friendships_friend_id_fk", column: "friend_id"
+  add_foreign_key "friendships", "users", name: "friendships_friendable_id_fk", column: "friendable_id"
 
   add_foreign_key "generos_series", "generos", name: "generos_series_genero_id_fk"
   add_foreign_key "generos_series", "series", name: "generos_series_serie_id_fk"

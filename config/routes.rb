@@ -1,5 +1,6 @@
 Meuseriado::Application.routes.draw do
 
+  ActiveAdmin.routes(self)
   get "autocomplete/index"
   get "series/carregar_series"
   devise_for :users, :controllers => {:registrations => "users/registrations", :omniauth_callbacks => "users/omniauth_callbacks"}

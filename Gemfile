@@ -55,6 +55,13 @@ gem 'acts_as_commentable_with_threading', github: 'marcosteixeira/acts_as_commen
 
 gem 'acts_as_votable'
 
+gem 'immigrant'
+
+gem 'activeadmin', github: 'gregbell/active_admin'
+
+gem 'responders', github: 'plataformatec/responders'
+gem 'inherited_resources', github: 'josevalim/inherited_resources'
+
 group :development do
   gem "better_errors"
   gem "binding_of_caller"

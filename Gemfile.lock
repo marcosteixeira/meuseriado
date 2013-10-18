@@ -7,6 +7,32 @@ GIT
       activerecord (~> 4.0.0)
 
 GIT
+  remote: git://github.com/gregbell/active_admin.git
+  revision: 754838f6cb07a9b8cad42921679b51c48a7835a7
+  specs:
+    activeadmin (0.6.1)
+      arbre (~> 1.0)
+      bourbon
+      coffee-rails
+      devise (~> 3.0)
+      formtastic (~> 2.3.0.rc2)
+      inherited_resources (~> 1.3)
+      jquery-rails
+      jquery-ui-rails
+      kaminari (~> 0.13)
+      rails (>= 3.2, < 4.1)
+      ransack (~> 1.0)
+      sass-rails
+
+GIT
+  remote: git://github.com/josevalim/inherited_resources.git
+  revision: cf9c44845c6af46739978fdca8ed06ea840d01a1
+  specs:
+    inherited_resources (1.4.1)
+      has_scope (~> 0.6.0.rc)
+      responders (~> 1.0.0.rc)
+
+GIT
   remote: git://github.com/marcosteixeira/acts_as_commentable_with_threading.git
   revision: 36b5dd40475836ea04c395c9ff6fc5878f734d3f
   branch: master
@@ -15,6 +41,13 @@ GIT
       activerecord (>= 3.0)
       activesupport (>= 3.0)
       awesome_nested_set (>= 2.0)
+
+GIT
+  remote: git://github.com/plataformatec/responders.git
+  revision: d6d3cb4b0d644ebb21ad3c4fe28b5d4040d4df69
+  specs:
+    responders (1.0.0)
+      railties (>= 3.2, < 5)
 
 GEM
   remote: https://rubygems.org/
@@ -46,6 +79,8 @@ GEM
     acts_as_votable (0.7.1)
     amistad (0.9.2)
       squeel
+    arbre (1.0.1)
+      activesupport (>= 3.0.0)
     arel (4.0.0)
     atomic (1.1.14)
     awesome_nested_set (2.1.6)
@@ -56,6 +91,9 @@ GEM
       erubis (>= 2.6.6)
     binding_of_caller (0.7.2)
       debug_inspector (>= 0.0.1)
+    bourbon (3.1.8)
+      sass (>= 3.2.0)
+      thor
     builder (3.1.4)
     capistrano (3.0.0)
       i18n
@@ -86,6 +124,11 @@ GEM
       multipart-post (~> 1.2.0)
     foreigner (1.5.0)
       activerecord (>= 3.0.0)
+    formtastic (2.3.0.rc2)
+      actionpack (>= 3.0)
+    has_scope (0.6.0.rc)
+      actionpack (>= 3.2, < 5)
+      activesupport (>= 3.2, < 5)
     hashie (2.0.5)
     hike (1.2.3)
     httparty (0.12.0)
@@ -93,12 +136,17 @@ GEM
       multi_xml (>= 0.5.2)
     httpauth (0.2.0)
     i18n (0.6.5)
+    immigrant (0.1.5)
+      activerecord (>= 3.0)
+      foreigner (>= 1.2.1)
     jbuilder (1.5.2)
       activesupport (>= 3.0.0)
       multi_json (>= 1.2.0)
     jquery-rails (3.0.4)
       railties (>= 3.0, < 5.0)
       thor (>= 0.14, < 2.0)
+    jquery-ui-rails (4.0.5)
+      railties (>= 3.1.0)
     json (1.8.1)
     jwt (0.1.8)
       multi_json (>= 1.5)
@@ -160,6 +208,10 @@ GEM
       rake (>= 0.8.7)
       thor (>= 0.18.1, < 2.0)
     rake (10.1.0)
+    ransack (1.0.0)
+      actionpack (>= 3.0)
+      activerecord (>= 3.0)
+      polyamorous (~> 0.6.0)
     rdoc (3.12.2)
       json (~> 1.4)
     rufus-scheduler (3.0.0)
@@ -215,6 +267,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  activeadmin!
   acts_as_commentable_with_threading!
   acts_as_votable
   amistad
@@ -225,6 +278,8 @@ DEPENDENCIES
   devise
   foreigner
   friendly_id!
+  immigrant
+  inherited_resources!
   jbuilder (~> 1.2)
   jquery-rails
   kaminari
@@ -234,6 +289,7 @@ DEPENDENCIES
   omniauth-google-oauth2
   paperclip
   rails (= 4.0.0)
+  responders!
   rufus-scheduler
   sass-rails (~> 4.0.0)
   sdoc

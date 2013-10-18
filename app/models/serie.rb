@@ -4,6 +4,8 @@ class Serie < ActiveRecord::Base
   acts_as_commentable
   friendly_id :nome, use: :slugged
 
+  scope :sem_trailer, where(:trailer => nil)
+
 
   belongs_to :produtora
   has_many :avaliacoes, as: :avaliavel
