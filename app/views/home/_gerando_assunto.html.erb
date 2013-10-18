@@ -4,7 +4,7 @@
   <ul class="trending-topic">
     <% @episodios_top.each do |episodio| %>
         <li>
-          <span class="comentarios-armazenados"><%= episodio.comments.count %> </span><a href="/episodios/<%= episodio.slug %>"><%= episodio.nome_episodio_formatado %></a>
+          <span class="comentarios-armazenados"><%= episodio.id %> </span><a href="/episodios/<%= episodio.slug %>"><%= episodio.nome_episodio_formatado %></a>
         </li>
     <% end %>
   </ul>
