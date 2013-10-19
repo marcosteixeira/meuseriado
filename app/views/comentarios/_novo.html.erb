@@ -1,9 +1,0 @@
-<div class="row">
-  <div class="large-12 columns">
-    <%= form_for @comentario do |f| %>
-        <%= hidden_field :commentable_id, @comentario.commentable.id %>
-        <%= f.text_area :body, :rows => "8", :placeholder => "Vamos lá! Escreva aqui seu comentário..." %>
-        <%= f.submit "Comentar", :class => "button prefix" %>
-    <% end %>
-  </div>
-</div>
