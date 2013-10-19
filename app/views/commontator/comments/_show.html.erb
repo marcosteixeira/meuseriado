@@ -3,38 +3,38 @@
    # user
 %>
 
-<div id="comment_<%= comment.id.to_s %>_div" class="comment">
-  <span id="comment_<%= comment.id.to_s %>_commontator_span" class="comment_commontator">
-      <%= link_to commontator_name(comment.creator), main_app.polymorphic_path(comment.creator) %>
-    &nbsp;&nbsp;
-    <span id="comment_<%= comment.id.to_s %>_timestamp_span" class="comment_timestamp">
-      <%= comment.timestamp %><%= " por #{commontator_name(comment.editor)}" if comment.is_modified? %>
-    </span>
-  </span>
-  
-  <span id="comment_<%= comment.id.to_s %>_actions_span" class="comment_actions">
-    <%= render :partial => 'commontator/comments/actions',
-               :locals => {:comment => comment,
-                           :user => user} %>
-  </span>
+<div class="row"><!-- Caixa principal do comentário -->
+  <div class="large-12 columns" id="comment_<%= comment.id.to_s %>_div">
+    <div class="large-12 columns comentario-corpo">
+      <div class="row comentario-cabecalho">
+        <div class="large-9 columns" id="comment_<%= comment.id.to_s %>_commontator_span">
+          <%= link_to commontator_name(comment.creator), main_app.polymorphic_path(comment.creator), class: "nome-do-comentador" %>
 
-  <br clear="all"/>
-  
-  <span id="comment_<%= comment.id.to_s %>_gravatar_image_span" class="comment_gravatar_image">
-    <a href="/users/<%= comment.creator.slug %>"><img src='<%= comment.creator.imagem_formatada %>' style="width: 50px; height: 50px;" border="1"></a>
-  </span>
-  
-  <span id="comment_<%= comment.id.to_s %>_votes_span" class="comment_votes">
-    <%= render :partial => 'commontator/comments/votes',
-               :locals => {:comment => comment,
-                           :user => user} %>
-  </span>
+          <span id="comment_<%= comment.id.to_s %>_timestamp_span" class="comment_timestamp">
+              <%= comment.timestamp %>
+            </span>
+        </div>
 
-  <div id="comment_<%= comment.id.to_s %>_body_div" class="comment_body">
-    <%= render :partial => 'commontator/comments/body',
-               :locals => {:comment => comment} %>
+        <div class="large-3 columns editar-deletar-comentario" id="comment_<%= comment.id.to_s %>_actions_span">
+          <%= render :partial => 'commontator/comments/actions',
+                     :locals => {:comment => comment,
+                                 :user => user} %>
+        </div>
+      </div>
+      <br/>
+
+
+      <div class="large-2 columns" id="comment_<%= comment.id.to_s %>_gravatar_image_span"><!-- Foto do usuário -->
+        <a href="/users/<%= comment.creator.slug %>"><img src='<%= comment.creator.imagem_formatada %>'></a>
+      </div>
+
+
+      <div id="comment_<%= comment.id.to_s %>_body_div" class="large-10 columns">
+        <%= render :partial => 'commontator/comments/body',
+                   :locals => {:comment => comment} %>
+      </div>
+
+    </div>
   </div>
-
 </div>
-
-<br clear="all"/>
+<br/>

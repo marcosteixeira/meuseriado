@@ -3,8 +3,6 @@
    # user
 %>
 
-<% subscription = thread.subscription_for(user) %>
-
 <% if thread.can_be_read_by?(user) %>
     <%= stylesheet_link_tag "commontator/application.css", :media => "all" %>
     <%= stylesheet_link_tag "commontator/comments.css", :media => "all" %>
