@@ -8,7 +8,6 @@ Meuseriado::Application.routes.draw do
   resources :series, :only => [:show, :index, :create]
   resources :episodios, :only => [:show, :index]
   resources :feeds
-  resources :comments
   root :to => "home#index"
   mount Commontator::Engine => '/commontator'
 
