@@ -40,7 +40,7 @@ Commontator.configure do |config|
   # Admins can always delete other users' comments and close threads
   # Note: user can be nil
   # Default: lambda { |user| false } (no admins)
-  config.user_admin_proc = lambda { |user| false }
+  config.user_admin_proc = lambda { |user| user.admin? }
 
   # Proc called with user as argument that returns true
   # if the user should receive subscription emails
@@ -115,7 +115,7 @@ Commontator.configure do |config|
   # Note: requires acts_as_votable gem installed
   # and configured for your application
   # Default: false
-  config.can_vote_on_comments = true
+  config.can_vote_on_comments = false
 
   # Whether comments should be ordered by vote score
   # instead of by order posted
