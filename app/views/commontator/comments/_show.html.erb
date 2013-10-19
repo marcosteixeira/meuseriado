@@ -32,6 +32,13 @@
       <div id="comment_<%= comment.id.to_s %>_body_div" class="large-10 columns">
         <%= render :partial => 'commontator/comments/body',
                    :locals => {:comment => comment} %>
+
+        <div id="comment_<%= comment.id %>_votes_span" class="row">
+          <%= render :partial => 'commontator/comments/votes',
+                     :locals => {:comment => comment, :user => user} %>
+        </div>
+
+
       </div>
 
     </div>

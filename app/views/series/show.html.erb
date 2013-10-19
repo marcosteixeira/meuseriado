@@ -122,7 +122,7 @@
             <%
                #<div class="anuncio-grande right">
                #<img src="/images/anuncio2.jpg" alt="">
-               #</div>        %>
+               #</div>         %>
           </div>
         </div>
     <% end %>
@@ -130,8 +130,8 @@
     <p class="justify"><%= @serie.sinopse %></p>
 
     <div class="section-container accordion" data-section="accordion">
-      <% @serie.temporadas_validas_ordenadas.each do |temporada| %>
-          <section>
+      <% @serie.temporadas_validas_ordenadas.each_with_index do |temporada, index| %>
+          <section class="<%= 'active' if index = 0 %>">
             <%= listar_temporada temporada %>
           </section>
       <% end %>

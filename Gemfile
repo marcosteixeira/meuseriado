@@ -53,13 +53,14 @@ gem 'kaminari'
 
 gem 'commontator', '~> 4.0.0'
 
-gem 'acts_as_votable'
+gem 'acts_as_votable', '~> 0.7.1'
 
 gem 'immigrant'
 
 gem 'activeadmin', github: 'gregbell/active_admin'
 
 gem 'responders', github: 'plataformatec/responders'
+
 gem 'inherited_resources', github: 'josevalim/inherited_resources'
 
 group :development do
