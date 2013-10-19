@@ -143,9 +143,6 @@ class SeriesController < ApplicationController
     end
 
     @title = @serie.nome
-    @comentario = Comment.new
-    @comentario.user = current_user
-    @comentario.commentable = @serie
   end
 
   def adicionar

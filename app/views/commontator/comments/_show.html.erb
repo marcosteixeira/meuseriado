@@ -1,0 +1,40 @@
+<% # Clients of this partial must supply the following variables:
+   # comment
+   # user
+%>
+
+<div id="comment_<%= comment.id.to_s %>_div" class="comment">
+  <span id="comment_<%= comment.id.to_s %>_commontator_span" class="comment_commontator">
+      <%= link_to commontator_name(comment.creator), main_app.polymorphic_path(comment.creator) %>
+    &nbsp;&nbsp;
+    <span id="comment_<%= comment.id.to_s %>_timestamp_span" class="comment_timestamp">
+      <%= comment.timestamp %><%= " por #{commontator_name(comment.editor)}" if comment.is_modified? %>
+    </span>
+  </span>
+  
+  <span id="comment_<%= comment.id.to_s %>_actions_span" class="comment_actions">
+    <%= render :partial => 'commontator/comments/actions',
+               :locals => {:comment => comment,
+                           :user => user} %>
+  </span>
+
+  <br clear="all"/>
+  
+  <span id="comment_<%= comment.id.to_s %>_gravatar_image_span" class="comment_gravatar_image">
+    <a href="/users/<%= comment.creator.slug %>"><img src='<%= comment.creator.imagem_formatada %>' style="width: 50px; height: 50px;" border="1"></a>
+  </span>
+  
+  <span id="comment_<%= comment.id.to_s %>_votes_span" class="comment_votes">
+    <%= render :partial => 'commontator/comments/votes',
+               :locals => {:comment => comment,
+                           :user => user} %>
+  </span>
+
+  <div id="comment_<%= comment.id.to_s %>_body_div" class="comment_body">
+    <%= render :partial => 'commontator/comments/body',
+               :locals => {:comment => comment} %>
+  </div>
+
+</div>
+
+<br clear="all"/>

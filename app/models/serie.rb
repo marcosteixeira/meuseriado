@@ -2,6 +2,7 @@
 class Serie < ActiveRecord::Base
   extend FriendlyId
   acts_as_commentable
+
   friendly_id :nome, use: :slugged
 
   scope :sem_trailer, where(:trailer => nil)

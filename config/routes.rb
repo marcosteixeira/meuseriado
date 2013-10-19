@@ -10,6 +10,7 @@ Meuseriado::Application.routes.draw do
   resources :feeds
   resources :comments
   root :to => "home#index"
+  mount Commontator::Engine => '/commontator'
 
   resources :series do
     resources :temporadas
