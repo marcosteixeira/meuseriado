@@ -4,4 +4,6 @@ ActiveAdmin.register Episodio do
       scoped_collection.friendly.find(params[:id])
     end
   end
+
+  config.per_page = 10
 end
