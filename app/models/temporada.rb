@@ -13,7 +13,7 @@ class Temporada < ActiveRecord::Base
   end
 
   def episodios_ordenados_exibicao_passado
-    self.serie.episodios.where("temporada = #{self.temporada} and (ativo = 1 or estreia is null ) ").order("temporada asc, numero asc")
+    self.serie.episodios.where("temporada = #{self.temporada} and ativo = 1 ").order("temporada asc, numero asc")
   end
 
   def media_geral

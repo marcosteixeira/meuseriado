@@ -17,7 +17,7 @@
               <%= submit_tag comment.upvotes.size.to_s, class: "voto-positivo" %>
           <% end %>
       <% else %>
-          <div class="voto-positivo"><%= comment.upvotes.size.to_s %></div>
+          <div class="voto-positivo hide"><%= comment.upvotes.size.to_s %></div>
       <% end %>
 
       <% if can_vote && (vote.blank? || vote.vote_flag) %>
@@ -29,7 +29,7 @@
               <%= submit_tag comment.downvotes.size.to_s, class: "voto-negativo" %>
           <% end %>
       <% else %>
-          <div class="voto-negativo"><%= comment.downvotes.size.to_s %></div>
+          <div class="voto-negativo hide"><%= comment.downvotes.size.to_s %></div>
       <% end %>
     </div>
 <% end %>

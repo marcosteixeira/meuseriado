@@ -36,7 +36,7 @@ class User < ActiveRecord::Base
   end
 
   def personagens
-    Personagem.find_by_sql("SELECT `personagens`.* FROM `personagens` INNER JOIN `avaliacoes` ON `personagens`.`id` = `avaliacoes`.`avaliavel_id` WHERE `avaliacoes`.`user_id` = #{self.id} AND `avaliacoes`.`avaliavel_type` = 'Personagem'")
+    Personagem.find_by_sql("SELECT `personagens`.* FROM `personagens` INNER JOIN `avaliacoes` ON `personagens`.`id` = `avaliacoes`.`avaliavel_id` WHERE `avaliacoes`.`user_id` = #{self.id} AND `avaliacoes`.`avaliavel_type` = 'Personagem'  ORDER BY id DESC")
   end
 
   def user_params
@@ -46,8 +46,10 @@ class User < ActiveRecord::Base
   def imagem_formatada
     if self.avatar_file_name
       "/images/series/users/#{self.id}/#{self.avatar_file_name}"
-    else
+    elsif self.imagem
       self.imagem
+    else
+      "/images/series/imagem_padrao.jpg"
     end
   end
 
