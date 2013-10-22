@@ -125,10 +125,11 @@ class SeriesController < ApplicationController
 
   def show
     if params[:id].respond_to?(:to_str)
-      @serie = Serie.friendly.find_by_slug(params[:id])
+      @serie = Serie.friendly.includes(:episodios, :avaliacoes, :temporadas, :personagens).find_by_slug(params[:id])
     else
-      @serie = Serie.friendly.find_by_id(params[:id])
+      @serie = Serie.friendly.includes(:episodios, :avaliacoes, :temporadas, :personagens).find_by_id(params[:id])
     end
+
     if !@serie
 
       tvdb = Tvdbr::Client.new

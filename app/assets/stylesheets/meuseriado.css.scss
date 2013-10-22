@@ -816,16 +816,19 @@ h1, h2, h3, h4, h5, h6 {
   margin-top: 5px;
   padding-left: 18px;
   padding-top: 8px;
-
+  float: left;
+  border: 0px;
 }
 
 .voto-negativo {
-  background: url(/images/cesar-sprite.png)-1px -24px no-repeat;
-  margin-top: 10px;
+  background: url(/images/cesar-sprite.png) -1px -24px no-repeat;
+  margin-top: -7px;
   height: 24px;
   color: red;
   font-size: 11px;
   display: inline-block;
   padding-left: 18px;
+  float: left;
+  border: 0px;
 }
 

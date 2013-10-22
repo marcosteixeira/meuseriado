@@ -63,6 +63,8 @@ gem 'responders', github: 'plataformatec/responders'
 
 gem 'inherited_resources', github: 'josevalim/inherited_resources'
 
+gem 'rack-mini-profiler'
+
 group :development do
   gem "better_errors"
   gem "binding_of_caller"
