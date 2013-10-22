@@ -14,15 +14,45 @@
 
 <script type="text/javascript">
     $(document).ready(function () {
-        $('#star').raty({  });
+        $('#star').raty({readOnly: true, score: <%= @temporada.media_geral ? @temporada.media_geral : 0   %>  });
+
+        $('#star2').raty({
+
+            <% if current_user && @temporada.nota_user(current_user) %>
+            score: <%= @temporada.nota_user(current_user) %>,
+            <% end %>
+            half: true,
+            size: 24,
+            starHalf: '/images/star-half-big.png',
+            starOff: '/images/star-off-big.png',
+            starOn: '/images/star-on-big.png',
+            click: function (score, evt) {
+                $.post("<%= dar_nota_temporada_path %>", { nota: score });
+            }
+
+        });
+
 
     });
+
+
 </script>
 <div class="row">
   <div class="large-4 columns">
     <img src="<%= @temporada.imagem %>" alt="<%= @temporada.serie.slug %>-grande">
+
+    <div class="row">
+      <div class="large-4 columns">
+        <h4>Avalie:</h4>
+      </div>
+      <div class="large-8 columns">
+        <div id="star2" class="nota-da-serie"></div>
+      </div>
+    </div>
+
     <% if (user_signed_in? && current_user.viu_temporada?(@temporada)) %>
-        <a href='/temporadas/<%= @temporada.slug %>/desmarcar_toda' class="small button large-12 success columns primeiro-botao" rel="nofollow">Remover das temporadas vistas</a>
+        <a href='/temporadas/<%= @temporada.slug %>/desmarcar_toda' class="small button large-12 success columns primeiro-botao" rel="nofollow">Remover
+          das temporadas vistas</a>
     <% else %>
         <a href='/temporadas/<%= @temporada.slug %>/marcar_toda' class="small button large-12 success columns primeiro-botao" rel="nofollow">Marcar
           temporada inteira como vista</a>

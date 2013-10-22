@@ -42,6 +42,7 @@ Meuseriado::Application.routes.draw do
     member do
       get :marcar_toda
       get :desmarcar_toda
+      post :dar_nota
     end
   end
 
