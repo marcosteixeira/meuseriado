@@ -8,7 +8,7 @@ class PersonagensController < ApplicationController
     else
       redirect_to root_path
     end
-    
+
     @title = "Personagens #{@serie.nome}"
   end
 
@@ -23,7 +23,7 @@ class PersonagensController < ApplicationController
     @personagem.marcar(current_user)
 
     respond_to do |format|
-      format.html { redirect_to(action: "show", id: @personagem )}
+      format.html { redirect_to(action: "show", id: @personagem) }
       format.json { render json: @personagem, status: :ok }
     end
   end
@@ -33,8 +33,18 @@ class PersonagensController < ApplicationController
     @personagem.desmarcar(current_user)
 
     respond_to do |format|
-      format.html { redirect_to(action: "show", id: @personagem )}
+      format.html { redirect_to(action: "show", id: @personagem) }
       format.json { render json: @personagem, status: :ok }
     end
   end
+
+  def dar_nota
+    @personagem = Personagem.friendly.find(params[:id])
+    nota = params[:nota]
+    if nota
+      @personagem.marcar(current_user, nota)
+    end
+    redirect_to(action: "show", id: @personagem)
+  end
+
 end

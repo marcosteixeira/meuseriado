@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
 
   def show
-    @user = User.friendly.find(params[:id])
+    @user = User.friendly.includes(:avaliacoes, :series_vistas).find(params[:id])
   end
 
   def index
@@ -17,7 +17,7 @@ class UsersController < ApplicationController
   def carregar_personagens
     @user = User.friendly.find(params[:id])
     @personagens = @user.personagens[5, 100]
-    render :json => {:status => :ok, :personagens => @personagens.as_json(:include => { :serie => { :only => :slug} })}
+    render :json => {:status => :ok, :personagens => @personagens.as_json(:include => {:serie => {:only => :slug}})}
   end
 
   def adicionar_amigo

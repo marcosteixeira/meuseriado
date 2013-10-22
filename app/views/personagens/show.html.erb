@@ -1,11 +1,17 @@
 <script>
     $(document).ready(function () {
         $('#star').raty({
+            <% if current_user && @personagem.nota_user(current_user) %>
+            score: <%= @personagem.nota_user(current_user) %>,
+            <% end %>
             half: true,
             size: 24,
             starHalf: '/images/star-half-big.png',
             starOff: '/images/star-off-big.png',
-            starOn: '/images/star-on-big.png'
+            starOn: '/images/star-on-big.png',
+            click: function (score, evt) {
+                $.post("<%= dar_nota_personagem_path %>", { nota: score });
+            }
 
         });
     });

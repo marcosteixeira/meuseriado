@@ -22,7 +22,8 @@ ActiveAdmin.register Serie do
     default_actions
   end
 
-  preserve_default_filters!
   filter :produtora, :as => :select, :collection => Produtora.all.collect { |o| [o.nome, o.id] }
+  filter :nome
+  filter :generos, :as => :select, :collection => Genero.all.collect { |o| [o.nome, o.id] }
   config.per_page = 10
 end

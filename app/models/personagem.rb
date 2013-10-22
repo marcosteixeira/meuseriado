@@ -15,14 +15,22 @@ class Personagem < ActiveRecord::Base
     end
   end
 
-  def marcar(user)
+  def marcar(user, nota=nil)
     aval = Avaliacao.find_by_sql("select * from avaliacoes where avaliavel_type='Personagem' and avaliavel_id=#{self.id} and user_id=#{user.id} ")
 
     if aval.empty?
       aval = Avaliacao.new
       aval.user = user
+
+      if nota
+        aval.nota = nota
+      end
+
       self.avaliacoes << aval
       self.save
+    elsif nota
+      aval.first.nota = nota
+      aval.first.save
     end
   end
 
@@ -33,4 +41,14 @@ class Personagem < ActiveRecord::Base
       aval.first.destroy
     end
   end
+
+  def nota_user(user=nil)
+    if user
+      aval_user = self.avaliacoes.where(user: user)
+      if !aval_user.empty?
+        aval_user.first.nota
+      end
+    end
+  end
+
 end
