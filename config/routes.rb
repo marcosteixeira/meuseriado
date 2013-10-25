@@ -3,6 +3,7 @@ Meuseriado::Application.routes.draw do
   ActiveAdmin.routes(self)
   get "autocomplete/index"
   get "series/carregar_series"
+  get "home/onde_parei"
   devise_for :users, :controllers => {:registrations => "users/registrations", :omniauth_callbacks => "users/omniauth_callbacks"}
   resources :users, :only => [:index, :show]
   resources :series, :only => [:show, :index, :create]
