@@ -78,5 +78,12 @@ class Temporada < ActiveRecord::Base
     end
   end
 
+  def percentual(user)
+    return 0 unless user.viu_temporada?
+    episodios_vistos_temporada = user.episodios(self.serie.id, self.temporada)
+
+
+  end
+
 
 end
