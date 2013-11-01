@@ -58,7 +58,12 @@
           temporada inteira como vista</a>
     <% end %>
 
-    <a href="#" class="small button secondary large-12 columns">Vou assistir depois</a>
+    <a href="#" class="small button large-12 columns Facebook-entrar" onclick="
+    window.open(
+            'https://www.facebook.com/sharer/sharer.php?u='+encodeURIComponent(location.href),
+            'facebook-share-dialog',
+            'width=626,height=436');
+            return false;">Recomendar no Facebook</a>
     <a href="#" class="small button secondary large-12 columns">Escrever uma avaliação</a>
     <h4>Quem viu esta temporada:</h4>
     <ul class="quem-viu-episodio large-12">

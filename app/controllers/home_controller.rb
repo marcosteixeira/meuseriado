@@ -8,7 +8,7 @@ class HomeController < ApplicationController
     contagem = @episodios.size
 
     if contagem - 9 < 0
-      Episodio.all.sample((contagem - 9).abs).each do |ep|
+      Episodio.where("banner IS NOT NULL").sample((contagem - 9).abs).each do |ep|
         @episodios << ep
       end
     end

@@ -51,6 +51,13 @@
           como personagem favorito</a>
     <% end %>
 
+    <a href="#" class="small button large-12 columns Facebook-entrar" onclick="
+    window.open(
+            'https://www.facebook.com/sharer/sharer.php?u='+encodeURIComponent(location.href),
+            'facebook-share-dialog',
+            'width=626,height=436');
+            return false;">Recomendar no Facebook</a>
+
     <h4>Série de origem:</h4>
     <a href="/series/<%= @personagem.serie.slug %>"><img src="<%= @personagem.serie.banner %>" alt="<%= @personagem.serie.nome %>" title="<%= @personagem.serie.nome %>"></a>
 

@@ -271,7 +271,13 @@ class Serie < ActiveRecord::Base
   end
 
   def criar_acompanhamento(aval, finalizou)
-    acompanhamento= AcompanhamentoSerie.new
+
+    if aval.acompanhamento_serie
+      acompanhamento = aval.acompanhamento_serie
+    else
+      acompanhamento = AcompanhamentoSerie.new
+    end
+
     if finalizou
       if self.finalizada?
         acompanhamento.finalizada = true
