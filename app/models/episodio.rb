@@ -6,13 +6,6 @@ class Episodio < ActiveRecord::Base
   belongs_to :serie, :dependent => :delete
   has_many :avaliacoes, as: :avaliavel
 
-  scope :top10,
-        select("comments.id, OTHER_ATTRS_YOU_NEED, count(listens.id) AS listens_count").
-            joins(:listens).
-            group("songs.id").
-            order("listens_count DESC").
-            limit(5)
-
   def gerar_slug
     [[self.serie.nome, self.temporada, self.numero, self.nome],
      [self.serie.nome, self.temporada, self.numero]]
@@ -64,5 +57,14 @@ class Episodio < ActiveRecord::Base
         aval_user.first.nota
       end
     end
+  end
+
+  def proximo
+    eps = self.serie.episodios.to_a
+    return eps[eps.index(self) + 1]
+  end
+
+  def percentual_conclusao_temporada
+    numero.to_f / Episodio.where(temporada: self.temporada, serie: self.serie).count.to_f * 100.0
   end
 end

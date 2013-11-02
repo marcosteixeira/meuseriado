@@ -343,4 +343,8 @@ class Serie < ActiveRecord::Base
     end
   end
 
+  def percentual_conclusao_temporada(temporada)
+    temporada.to_f / temporadas_validas_ordenadas.count.to_f * 100.0
+  end
+
 end

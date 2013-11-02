@@ -532,6 +532,13 @@ section.active p.nome-temporada {
   font-weight: bold;
 }
 
+.texto-limitado-onde-parei {
+
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
 .texto-limitado li {
 
   overflow: hidden;
@@ -732,113 +739,64 @@ h1, h2, h3, h4, h5, h6 {
   margin-bottom: 0px;
 }
 
-.ui-menu-item p {
-  font-size: 16px;
-  color: #444;
-  margin-left: 20px;
-  margin-top: 10px;
+.onde-parei {
+  background-color: white;
+  padding-left: 0px;
+  border-radius: 10px;
 }
 
-.ui-menu-item {
-  border-top: 1px solid #ddd;
+.infos-onde-parei h1 {
+  margin-bottom: 5px;
 }
 
-.ui-autocomplete-category {
-  margin: 5px 0px 5px 10px
+.em-pequeno {
+  font-size: 13px;
+  color: #777;
+  font-style: normal;
+  padding-bottom: 5px;
+  padding-top: 5px;
 }
 
-.ui-state-focus {
-  border: 1px solid #F1AE00 !important;
-  font-weight: normal !important;
-  color: white !important;
-  background: rgb(245, 188, 9) !important;
+.progress {
+  margin-bottom: 0px;
 }
 
-.ui-state-focus p {
-  color: white;
+.infos-onde-parei h1 {
+  margin-top: -5px;
 }
 
-.comentario-corpo {
-  background-color: white !important;
-  padding: 10px;
-  border-radius: 5px;
-  border: 1px solid #ddd;
+.infos-onde-parei h2 {
+  margin-top: 16px;
+  margin-bottom: 10px;
 }
 
-.caixa-de-comentario {
-  margin-top: 20px;
+.infos-onde-parei h3 {
+  font-size: 14px;
+  color: #777;
+  margin-top: 0px;
 }
 
-.comentario-cabecalho {
+.label-onde-parei {
+  color: #aaa;
   font-size: 12px;
-  font-family: arial, sans-serif;
+  font-style: normal;
+  position: absolute;
+  margin-top: -17px;
 }
 
-.editar-deletar-comentario {
-  text-align: right;
-  font-size: 10px;
+.em-proximo-episodio {
+  font-weight: bold;
 }
 
-.nome-do-comentador {
-  margin-left: 14px;
-  margin-right: 5px;
-
+.em-proximo-episodio {
+  font-weight: bold;
+  color: white;
+  background-color: #ffc247;
+  padding: 5px;
+  border-radius: 5px;
+  margin-top: -30px;
 }
 
-.comment_timestamp {
-  font-size: 11px;
-}
+.titulo-onde-voce-parou {
 
-.responder {
-  background-color: #F1F1F1;
-  border-color: #E2E2E2;
-  color: #777777;
-  font-weight: normal;
 }
-
-.responder:hover {
-  background-color: #F8F8F8;
-  color: #777777;
-}
-
-.responder:focus {
-  background-color: #F8F8F8;
-  color: #777777;
-}
-
-.voto-positivo {
-  background: url(/images/cesar-sprite.png) no-repeat;
-  display: inline-block;
-  font-size: 11px;
-  color: green;
-  margin-right: 10px;
-  margin-left: 0px;
-  margin-top: 5px;
-  padding-left: 18px;
-  padding-top: 8px;
-  float: left;
-  border: 0px;
-  cursor: pointer;
-}
-
-.voto-negativo {
-  background: url(/images/cesar-sprite.png) -1px -24px no-repeat;
-  margin-top: -7px;
-  height: 24px;
-  color: red;
-  font-size: 11px;
-  display: inline-block;
-  padding-left: 18px;
-  float: left;
-  border: 0px;
-  cursor: pointer;
-}
-
-.voto-positivo:focus {
-  outline: none;
-}
-
-.voto-negativo:focus {
-  outline: none;
-}
-

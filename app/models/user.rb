@@ -23,15 +23,22 @@ class User < ActiveRecord::Base
     Serie.find_by_sql("SELECT  `series`.* FROM `series` INNER JOIN `avaliacoes` ON `series`.`id` = `avaliacoes`.`avaliavel_id` WHERE `avaliacoes`.`user_id` = #{self.id} AND `avaliacoes`.`avaliavel_type` = 'Serie'  ORDER BY id DESC")
   end
 
-  def episodios(serie_id=nil, temporada_numero = nil)
+  def episodios(serie_id=nil, temporada_numero = nil, order=nil)
     if serie_id
       if !temporada_numero
-        Episodio.find_by_sql("SELECT `episodios`.* FROM `episodios` INNER JOIN `avaliacoes` ON `episodios`.`id` = `avaliacoes`.`avaliavel_id` WHERE `avaliacoes`.`user_id` = #{self.id} AND `avaliacoes`.`avaliavel_type` = 'Episodio' AND episodios.serie_id = #{serie_id} ")
+        Episodio.find_by_sql("SELECT `episodios`.* FROM `episodios` INNER JOIN `avaliacoes` ON `episodios`.`id` = `avaliacoes`.`avaliavel_id` WHERE `avaliacoes`.`user_id` = #{self.id} AND `avaliacoes`.`avaliavel_type` = 'Episodio' AND episodios.serie_id = #{serie_id}  #{order}")
       else
-        Episodio.find_by_sql("SELECT `episodios`.* FROM `episodios` INNER JOIN `avaliacoes` ON `episodios`.`id` = `avaliacoes`.`avaliavel_id` WHERE `avaliacoes`.`user_id` = #{self.id} AND `avaliacoes`.`avaliavel_type` = 'Episodio' AND episodios.serie_id = #{serie_id} AND episodios.temporada = #{temporada_numero} ")
+        Episodio.find_by_sql("SELECT `episodios`.* FROM `episodios` INNER JOIN `avaliacoes` ON `episodios`.`id` = `avaliacoes`.`avaliavel_id` WHERE `avaliacoes`.`user_id` = #{self.id} AND `avaliacoes`.`avaliavel_type` = 'Episodio' AND episodios.serie_id = #{serie_id} AND episodios.temporada = #{temporada_numero} #{order}")
       end
     else
-      Episodio.find_by_sql("SELECT `episodios`.* FROM `episodios` INNER JOIN `avaliacoes` ON `episodios`.`id` = `avaliacoes`.`avaliavel_id` WHERE `avaliacoes`.`user_id` = #{self.id} AND `avaliacoes`.`avaliavel_type` = 'Episodio'")
+      Episodio.find_by_sql("SELECT `episodios`.* FROM `episodios` INNER JOIN `avaliacoes` ON `episodios`.`id` = `avaliacoes`.`avaliavel_id` WHERE `avaliacoes`.`user_id` = #{self.id} AND `avaliacoes`.`avaliavel_type` = 'Episodio' #{order}")
+    end
+  end
+
+  def ultimo_episodio_visto(serie_id)
+    eps = episodios(serie_id, nil, "order by temporada desc, numero desc")
+    if eps
+      eps.first
     end
   end
 

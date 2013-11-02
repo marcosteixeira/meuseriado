@@ -13,10 +13,5 @@ module Meuseriado
     config.assets.enabled = false
     config.time_zone = 'Brasilia'
     config.active_record.default_timezone = :local
-
-    console do
-      require "pry"
-      config.console = Pry
-    end
   end
 end
