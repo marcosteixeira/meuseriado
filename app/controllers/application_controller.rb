@@ -15,7 +15,7 @@ class ApplicationController < ActionController::Base
   end
 
   def after_sign_in_path_for(resource)
-    session[:previous_url] || root_path
+    "#{session[:previous_url]}?bxmh=Q2HY3UDtGXH2" || "#{root_path}?bxmh=Q2HY3UDtGXH2"
   end
 
   def after_sign_out_path_for(resource)

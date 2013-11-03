@@ -1,5 +1,5 @@
 <!-- ONDE EU PAREI - CAIXA -->
-<% if user_signed_in? %>
+<% if user_signed_in? && current_user.series_vistas.count > 0 %>
     <div class="row">
       <div class="large-12 columns">
         <h2 class="titulo-onde-voce-parou">Onde você parou</h2>
