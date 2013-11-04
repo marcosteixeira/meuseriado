@@ -17,7 +17,7 @@ class User < ActiveRecord::Base
                     :url => "/images/series/:id/:filename"
 
   has_many :avaliacoes, :dependent => :delete_all, :order => 'id DESC'
-  has_many :series_vistas, :through => :avaliacoes, :source => :acompanhamento_serie
+  has_many :series_vistas, :through => :avaliacoes, :source => :acompanhamento_serie, :order => 'avaliacoes.updated_at DESC'
 
   def series
     Serie.find_by_sql("SELECT  `series`.* FROM `series` INNER JOIN `avaliacoes` ON `series`.`id` = `avaliacoes`.`avaliavel_id` WHERE `avaliacoes`.`user_id` = #{self.id} AND `avaliacoes`.`avaliavel_type` = 'Serie'  ORDER BY id DESC")
