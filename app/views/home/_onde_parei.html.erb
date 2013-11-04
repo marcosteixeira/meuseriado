@@ -1,7 +1,7 @@
 <!-- ONDE EU PAREI - CAIXA -->
 <% if user_signed_in? && current_user.series_vistas.count > 0 %>
 
-    <% limite ||= current_user.series_vistas.count %>
+    <% limite ||= current_user.series_vistas.order('avaliacoes.updated_at DESC').count %>
     <div class="row">
       <div class="large-12 columns" id="corpo-onde-parei">
         <h2 class="titulo-onde-voce-parou">Onde você parou</h2>
