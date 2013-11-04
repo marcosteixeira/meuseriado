@@ -23,7 +23,7 @@
                           de <%= pluralize(avaliavel.temporadas_validas_ordenadas.count, 'temporada') %>
                         </div>
                         <div class="secondary progress">
-                          <span class="meter" style="width:<%= avaliavel.percentual_conclusao_temporada(current_user_ultimo_episodio_visto.temporada) %>%"></span>
+                          <span id="progresso_<%= avaliavel.id %>" class="meter" style="width:<%= avaliavel.percentual_conclusao_temporada(current_user_ultimo_episodio_visto.temporada) %>%"></span>
                         </div>
 
                         <h2>Seu progresso atual:</h2>
@@ -83,7 +83,8 @@
                             $('#proximo_episodio_' + idEpisodio).append("<em class='label-onde-parei em-proximo-episodio'> Próximo episódio: </em> <a href='/series/" + data.serie.slug + "/temporadas/" + data.temporada + "'>Temporada completa</a>");
                         }
 
-                        $('#progresso_temporada_' + data.serie.id)
+                        $('#progresso_temporada_' + data.serie.id).css('width', data.percentual_conclusao_temporada + "%");
+                        $('#progresso_' + data.serie.id).css('width', <%= avaliavel.percentual_conclusao_temporada(current_user_ultimo_episodio_visto.temporada) %> +"%");
 
                     });
 
