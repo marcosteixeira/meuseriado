@@ -1,3 +1,10 @@
+* {
+  -webkit-transition: all 0.2s ease;
+  -moz-transition: all 0.2s ease;
+  -ms-transition: all 0.2s ease;
+  -o-transition: all 0.2s ease;
+}
+
 body {
   background-color: #eeeeee;
 }
@@ -902,4 +909,11 @@ h1, h2, h3, h4, h5, h6 {
 
 .titulo-onde-voce-parou {
 
+}
+
+.texto-limitado-onde-parei {
+
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
