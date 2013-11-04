@@ -21,7 +21,7 @@ class EpisodiosController < ApplicationController
 
     respond_to do |format|
       format.html { redirect_to(action: "show", id: @episodio) }
-      format.json { render json: @episodio, status: :ok }
+      format.json { render json: @episodio.to_json({:include => {:serie => {:methods => :slug}, :proximo => {:methods => :nome_episodio}}, :methods => [:nome_episodio]}), status: :ok }
     end
   end
 
