@@ -1,0 +1,85 @@
+<% current_user_ultimo_episodio_visto = current_user.ultimo_episodio_visto(avaliavel.id) %>
+<% proximo = current_user_ultimo_episodio_visto.proximo %>
+
+<div class="panel onde-parei" id="painel_<%= avaliavel.id %>">
+  <div class="row">
+    <div class="large-12 columns">
+      <div class="large-2 columns">
+        <a href="<%= serie_path avaliavel %>"><img src="<%= avaliavel.poster %>" alt="<%= avaliavel.nome %>"></a>
+      </div>
+      <div class="large-10 columns infos-onde-parei">
+        <a href="<%= serie_path avaliavel %>"><h1><%= avaliavel.nome %></h1></a>
+
+        <% if current_user_ultimo_episodio_visto %>
+            <div class="em-pequeno"> Você está assistindo
+              a <%= current_user_ultimo_episodio_visto.temporada %>ª
+              de <%= pluralize(avaliavel.temporadas_validas_ordenadas.count, 'temporada') %>
+            </div>
+            <div class="secondary progress">
+              <span id="progresso_<%= avaliavel.id %>" class="meter" style="width:<%= avaliavel.percentual_conclusao_temporada(current_user_ultimo_episodio_visto.temporada) %>%"></span>
+            </div>
+
+            <h2>Seu progresso atual:</h2>
+
+            <div class="row">
+              <div class="large-2 columns">
+                <a href="/series/<%= avaliavel.slug %>/temporadas/<%= current_user_ultimo_episodio_visto.temporada %>">
+                  <h3>Temporada <%= current_user_ultimo_episodio_visto.temporada %></h3>
+                </a>
+              </div>
+              <div class="large-3 columns">
+                <div class="episodio-assistido texto-limitado-onde-parei" id="episodio_anterior_<%= proximo.id if proximo %><%= current_user_ultimo_episodio_visto.id if !proximo %>">
+                  <a href="<%= episodio_path current_user_ultimo_episodio_visto %>"><%= current_user_ultimo_episodio_visto.nome_episodio %>
+                    - <%= current_user_ultimo_episodio_visto.nome %></a></div>
+              </div>
+              <% if proximo %>
+                  <div class="large-7 columns" id="proximo_episodio_<%= proximo.id %>">
+                    <a href="<%= episodio_path proximo %>"><em class="label-onde-parei em-proximo-episodio">
+                      Próximo episódio:
+                    </em></a>
+                    <input type="checkbox" id="episodio_<%= proximo.id %>" onchange="marcarEpisodio(<%= proximo.id %>)">
+                    <a href="<%= episodio_path proximo %>"><%= proximo.nome_episodio %> -
+                      <%= proximo.nome %></a>
+                  </div>
+              <% else %>
+                  <div class="large-7 columns" id="proximo_episodio_<%= current_user_ultimo_episodio_visto.id %>">
+                    <em class="label-onde-parei em-proximo-episodio">
+                      Próximo episódio:
+                    </em>
+                    <a href="/series/<%= avaliavel.slug %>/temporadas/<%= current_user_ultimo_episodio_visto.temporada %>">Temporada
+                      completa</a>
+                  </div>
+              <% end %>
+            </div>
+            <div class="progress">
+              <span id="progresso_temporada_<%= avaliavel.id %>" class="meter" style="width:<%= current_user_ultimo_episodio_visto.percentual_conclusao_temporada%>%"></span>
+            </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+    function marcarEpisodio(idEpisodio) {
+        $.getJSON('/episodios/' + idEpisodio + '/marcar', function (data) {
+            $('.episodio_temporada_' + idEpisodio).prop('checked', true);
+            $('#episodio_anterior_' + idEpisodio).empty();
+            $('#episodio_anterior_' + idEpisodio).append("<a href='/episodios/" + data.slug + "'>" + data.nome_episodio + " - " + data.nome + "</a>");
+            $('#proximo_episodio_' + idEpisodio).empty();
+
+            if (data.proximo) {
+                $('#proximo_episodio_' + idEpisodio).append("<a href='/episodios/" + data.proximo.slug + "'><em class='label-onde-parei em-proximo-episodio'>Próximo episódio:</em></a>  <input type='checkbox' id='episodio_" + data.proximo.id + "' onchange='marcarEpisodio(" + data.proximo.id + ")'> <a href='/episodios/" + data.proximo.slug + "'>" + data.proximo.nome_episodio + " - " + data.proximo.nome + "</a>");
+                $('#episodio_anterior_' + idEpisodio).attr('id', "episodio_anterior_" + data.proximo.id);
+                $('#proximo_episodio_' + idEpisodio).attr('id', "proximo_episodio_" + data.proximo.id);
+            } else {
+                $('#proximo_episodio_' + idEpisodio).append("<em class='label-onde-parei em-proximo-episodio'> Próximo episódio: </em> <a href='/series/" + data.serie.slug + "/temporadas/" + data.temporada + "'>Temporada completa</a>");
+            }
+
+            $('#progresso_temporada_' + data.serie.id).css('width', data.percentual_conclusao_temporada + "%");
+            $('#progresso_' + data.serie.id).css('width', <%= avaliavel.percentual_conclusao_temporada(current_user_ultimo_episodio_visto.temporada) %> +"%");
+
+        });
+
+    }
+</script>

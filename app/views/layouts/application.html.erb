@@ -53,7 +53,7 @@
   </div>
 </div>
 
-<%= render :partial => "home/onde_parei" if params[:bxmh] %>
+<%= render :partial => "home/onde_parei", locals: {limite: 2} if params[:bxmh] %>
 
 <%= yield %>
 
