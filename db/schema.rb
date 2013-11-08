@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131018152642) do
+ActiveRecord::Schema.define(version: 20131108104735) do
 
   create_table "acompanhamento_series", force: true do |t|
     t.integer "avaliacao_id", null: false
@@ -58,6 +58,7 @@ ActiveRecord::Schema.define(version: 20131018152642) do
     t.string "avaliavel_type", null: false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer "ordem", default: 0
   end
 
   add_index "avaliacoes", ["avaliavel_id"], name: "index_avaliacoes_on_avaliavel_id", using: :btree
@@ -242,6 +243,7 @@ ActiveRecord::Schema.define(version: 20131018152642) do
     t.integer "avatar_file_size"
     t.datetime "avatar_updated_at"
     t.boolean "admin", default: false
+    t.integer "indice_acompanhamento", default: 0
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree

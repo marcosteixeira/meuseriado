@@ -1,11 +1,11 @@
 <!-- ONDE EU PAREI - CAIXA -->
 <% if user_signed_in? && current_user.series_vistas.count > 0 %>
 
-    <% limite ||= current_user.series_vistas.order('avaliacoes.updated_at DESC').count %>
+    <% limite ||= current_user.series_vistas.count %>
     <div class="row">
       <div class="large-12 columns" id="corpo-onde-parei">
         <h2 class="titulo-onde-voce-parou">Onde você parou</h2>
-        <% current_user.series_vistas.limit(limite).each do |acompanhamento| %>
+        <% current_user.series_vistas.order('avaliacoes.ordem DESC').limit(limite).each do |acompanhamento| %>
             <% avaliavel = acompanhamento.avaliacao.avaliavel %>
             <%= render :partial => 'home/painel_onde_parei', :locals => {:avaliavel => avaliavel} %>
         <% end %>

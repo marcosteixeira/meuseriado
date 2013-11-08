@@ -21,6 +21,12 @@ class Episodio < ActiveRecord::Base
 
   def marcar_como_visto(user, nota=nil)
     aval = Avaliacao.find_by_sql("select * from avaliacoes where avaliavel_type='Episodio' and avaliavel_id=#{self.id} and user_id=#{user.id} ")
+    user.indice_acompanhamento = user.indice_acompanhamento + 1
+    user.save
+
+    aval_serie = Avaliacao.find_by_sql("select * from avaliacoes where avaliavel_type='Serie' and avaliavel_id=#{self.serie.id} and user_id=#{user.id} ").first
+    aval_serie.ordem = user.indice_acompanhamento
+    aval_serie.save
 
     if aval.empty?
       aval = Avaliacao.new
@@ -35,6 +41,7 @@ class Episodio < ActiveRecord::Base
       aval.first.nota = nota
       aval.first.save
     end
+
   end
 
   def desmarcar_como_visto(user)
