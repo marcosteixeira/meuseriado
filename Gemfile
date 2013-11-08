@@ -43,7 +43,7 @@ gem 'friendly_id', github: 'FriendlyId/friendly_id', branch: 'master'
 
 gem 'paperclip'
 
-gem 'capistrano'
+gem 'capistrano', "~> 2.15.5"
 
 gem 'rufus-scheduler'
 

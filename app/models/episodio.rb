@@ -74,4 +74,5 @@ class Episodio < ActiveRecord::Base
   def percentual_conclusao_temporada
     numero.to_f / Episodio.where(temporada: self.temporada, serie: self.serie).count.to_f * 100.0
   end
+
 end

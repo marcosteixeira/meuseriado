@@ -343,7 +343,8 @@ class Serie < ActiveRecord::Base
     end
   end
 
-  def percentual_conclusao_temporada(temporada)
+  def percentual_conclusao_temporada(temporada=nil)
+    temporada ||= User.current_user.ultimo_episodio_visto(self.id).temporada
     temporada.to_f / temporadas_validas_ordenadas.count.to_f * 100.0
   end
 
