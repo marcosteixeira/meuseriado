@@ -329,7 +329,7 @@ class Serie < ActiveRecord::Base
 
   def data_lancamento
     temporada_um = temporadas.where(:temporada => 1)
-    if temporada_um
+    if temporada_um.present?
       temporada_um.first.data_lancamento
     end
   end

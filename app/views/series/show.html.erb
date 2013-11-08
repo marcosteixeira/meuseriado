@@ -88,7 +88,7 @@
         <div id="star2" class="estrelas-pagina-interior"></div>
         <span class="nota-numerica"></span></div>
       <div class="large-4 columns genero-serie-interno">
-        <b>Gênero:</b> <%= @serie.generos.first.nome if @serie.generos %>
+        <b>Gênero:</b> <%= @serie.generos.first.nome if @serie.generos.present? %>
       </div>
       <div class="large-4 columns data-lancamento-interno">
         <b>Lançamento:</b> <%= date @serie.data_lancamento %>
@@ -128,7 +128,7 @@
             <%
                #<div class="anuncio-grande right">
                #<img src="/images/anuncio2.jpg" alt="">
-               #</div>          %>
+               #</div>           %>
           </div>
         </div>
     <% end %>
