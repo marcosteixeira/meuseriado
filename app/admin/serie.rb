@@ -23,7 +23,7 @@ ActiveAdmin.register Serie do
   end
 
   #collections
-  collection_action :atualizar_todas, :method => :post do
+  collection_action :atualizar_todas, :method => :get do
     Serie.all.each do |serie|
       Serie.update_serie serie
     end
@@ -49,7 +49,7 @@ ActiveAdmin.register Serie do
 
 
   action_item do
-    link_to "Atualizar todas", atualizar_todas_admin_series_path, method: :post
+    link_to "Atualizar todas", atualizar_todas_admin_series_path, method: :get
   end
 
   action_item :only => :show do
