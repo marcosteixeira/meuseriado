@@ -22,7 +22,10 @@ class UsersController < ApplicationController
 
   def adicionar_amigo
     @user = User.friendly.find(params[:id])
-    @current_user.invite @user
+    if @user.id != current_user.id
+      current_user.invite @user
+    end
+    redirect_to :back
   end
 
 end
