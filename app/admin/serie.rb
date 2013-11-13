@@ -30,14 +30,8 @@ ActiveAdmin.register Serie do
     redirect_to admin_series_path, notice: "Todas atualizadas"
   end
 
-  collection_action :atualizar_status, :method => :post do
-    AcompanhamentoSerie.all.each do |acompanhamento|
-      if acompanhamento.avaliacao.avaliavel.finalizada?
-
-      else
-
-      end
-    end
+  collection_action :updater_bot, :method => :get do
+    Serie.updater_bot
     redirect_to admin_series_path, notice: "Todas atualizadas"
   end
 
@@ -50,6 +44,7 @@ ActiveAdmin.register Serie do
 
   action_item do
     link_to "Atualizar todas", atualizar_todas_admin_series_path, method: :get
+    link_to "Updater", updater_bot_admin_series_path, method: :get
   end
 
   action_item :only => :show do
