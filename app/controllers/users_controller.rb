@@ -28,4 +28,36 @@ class UsersController < ApplicationController
     redirect_to :back
   end
 
+  def aceitar_amigo
+    @user = User.friendly.find(params[:id])
+    if @user.id != current_user.id
+      current_user.approve @user
+    end
+    redirect_to :back
+  end
+
+  def recusar_amigo
+    @user = User.friendly.find(params[:id])
+    if @user.id != current_user.id
+      current_user.block @user
+    end
+    redirect_to :back
+  end
+
+  def desbloquear_amigo
+    @user = User.friendly.find(params[:id])
+    if @user.id != current_user.id
+      current_user.unblock @user
+    end
+    redirect_to :back
+  end
+
+  def excluir_amigo
+    @user = User.friendly.find(params[:id])
+    if @user.id != current_user.id
+      current_user.remove_friendship @user
+    end
+    redirect_to :back
+  end
+
 end

@@ -52,6 +52,10 @@ Meuseriado::Application.routes.draw do
       get :carregar_series
       get :carregar_personagens
       post :adicionar_amigo
+      post :aceitar_amigo
+      post :recusar_amigo
+      post :desbloquear_amigo
+      post :excluir_amigo
     end
   end
 

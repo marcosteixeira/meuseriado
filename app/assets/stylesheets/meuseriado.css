@@ -539,6 +539,12 @@ section.active p.nome-temporada {
     font-weight: bold;
 }
 
+.texto-limitado-geral {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
 .texto-limitado li {
 
     overflow: hidden;
@@ -916,4 +922,79 @@ h1, h2, h3, h4, h5, h6 {
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
+}
+
+.notificacao-geral {
+    width: 25px;
+    height: 27px;
+    background: url('/images/notificacao.png');
+    margin: 10px 0px 0px 10px;
+    cursor: pointer;
+}
+
+.notificacao-geral-ativa {
+    background: url('/images/notificacao.png') 0px 30px;
+    width: 25px;
+    height: 27px;
+    margin: 10px 0px 0px 10px;
+    cursor: pointer;
+}
+
+.numero-de-notificacoes {
+    color: white;
+    font-family: arial;
+    font-weight: bold;
+    font-size: 11px;
+    background-color: rgb(255, 82, 39);
+    border-radius: 20px;
+    text-align: center;
+    vertical-align: middle;
+    margin: 11px 0px 0px 9px;
+    position: absolute;
+    padding: 0px 5px 0px 5px;
+    line-height: 18px;
+}
+
+.caixa-atualizacoes-detalhadas {
+    margin-left: 16px !important;
+    padding: 0px !important;
+    max-width: 400px !important;
+}
+
+.notificacao-detalhada {
+    display: inline-block;
+    width: 100%;
+    padding: 15px;
+    border-bottom: 1px solid #ddd;
+}
+
+.notificacao-detalhada img {
+    width: 35px;
+    border: 1px solid #ddd;
+    margin-right: 10px;
+}
+
+.lista-de-notificacoes a {
+    padding: 0px !important;
+    line-height: 0px !important;
+    color: #7A7A7A;
+}
+
+.ainda-nao-leu {
+    background-color: rgb(252, 224, 115);
+    border-bottom: 1px solid #CFAB38;
+    color: rgb(105, 81, 18);
+}
+
+.ainda-nao-leu:hover {
+    background-color: rgb(233, 199, 90) !important;
+}
+
+.aceitar-amizade {
+    margin-left: 63px;
+}
+
+.aceitar-amizade button {
+    margin-bottom: 0px;
+    margin-top: -10px !important;
 }
