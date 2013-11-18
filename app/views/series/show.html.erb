@@ -86,10 +86,10 @@
       <% end %>
     </ul>
     <h4>Quem vê?</h4>
-    <ul class="lista-elenco">
+    <ul class="quem-viu-episodio">
       <% @serie.avaliacoes.sample(8).each do |avaliacao| %>
           <li>
-            <a href="/users/<%= avaliacao.user.slug %>"><img src="<%= avaliacao.user.imagem_formatada %>" alt="<%= avaliacao.user.name %>" title="<%= avaliacao.user.name %>" class="imagem-elenco"></a>
+            <a href="/users/<%= avaliacao.user.slug %>"><img src="<%= avaliacao.user.imagem_formatada %>" alt="<%= avaliacao.user.name %>" title="<%= avaliacao.user.name %>"></a>
           </li>
       <% end %>
     </ul>
@@ -144,7 +144,7 @@
             <%
                #<div class="anuncio-grande right">
                #<img src="/images/anuncio2.jpg" alt="">
-               #</div>             %>
+               #</div>              %>
           </div>
         </div>
     <% end %>

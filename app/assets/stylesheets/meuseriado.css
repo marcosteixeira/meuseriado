@@ -1000,3 +1000,7 @@ h1, h2, h3, h4, h5, h6 {
     margin-bottom: 0px;
     margin-top: -10px !important;
 }
+
+.img-limitada-usuario {
+    max-height: 50px;
+}

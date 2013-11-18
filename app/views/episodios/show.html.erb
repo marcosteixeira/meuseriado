@@ -70,7 +70,7 @@
       <% @episodio.avaliacoes.each do |avaliacao| %>
           <li>
             <a href='/users/<%= avaliacao.user.slug %>' class="tip-user">
-              <img src='<%= avaliacao.user.imagem_formatada %>' width="60" height="60" alt='<%= avaliacao.user.name %>'>
+              <img src='<%= avaliacao.user.imagem_formatada %>' alt='<%= avaliacao.user.name %>'>
             </a>
           </li>
       <% end %>
