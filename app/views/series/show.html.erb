@@ -77,6 +77,14 @@
       <% end %>
     </ul>
     <a href="/series/<%= @serie.slug %>/personagens" class="right">Mostrar todo o elenco >></a>
+    <h4>Séries relacionadas:</h4>
+    <ul class="lista-elenco">
+      <% @serie.series_relacionadas.first(8).each do |s| %>
+          <li>
+            <a href="/series/<%= s.slug %>"><img src="<%= s.poster %>" alt="<%= s.nome %>" title="<%= s.nome %>" class="imagem-elenco"></a>
+          </li>
+      <% end %>
+    </ul>
 
   </div>
   <div class="large-8 columns">
@@ -128,7 +136,7 @@
             <%
                #<div class="anuncio-grande right">
                #<img src="/images/anuncio2.jpg" alt="">
-               #</div>           %>
+               #</div>            %>
           </div>
         </div>
     <% end %>

@@ -348,4 +348,15 @@ class Serie < ActiveRecord::Base
     temporada.to_f / temporadas_validas_ordenadas.count.to_f * 100.0
   end
 
+  def series_relacionadas
+    series = Array.new
+    self.generos.each do |genero|
+      genero.series.each do |serie_relacionada|
+        if !series.include? serie_relacionada
+          series << serie_relacionada
+        end
+      end
+    end
+    series
+  end
 end
