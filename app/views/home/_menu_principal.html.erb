@@ -179,6 +179,8 @@
                 $("#pesquisa").val(ui.item.label);
                 if (ui.item.tipo == 'Personagens') {
                     window.location.replace("/series/" + ui.item.serie + "/personagens/" + ui.item.id);
+                } else if (ui.item.tipo == 'User') {
+                    window.location.replace("/users/" + ui.item.id);
                 } else {
                     window.location.replace("/series/" + ui.item.id);
                 }

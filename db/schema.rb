@@ -65,24 +65,6 @@ ActiveRecord::Schema.define(version: 20131111094206) do
   add_index "avaliacoes", ["avaliavel_type"], name: "index_avaliacoes_on_avaliavel_type", using: :btree
   add_index "avaliacoes", ["user_id"], name: "avaliacoes_user_id_fk", using: :btree
 
-  create_table "comments", force: true do |t|
-    t.integer "commentable_id", default: 0
-    t.string "commentable_type", default: ""
-    t.string "title", default: ""
-    t.text "body"
-    t.string "subject", default: ""
-    t.integer "user_id", default: 0, null: false
-    t.integer "parent_id"
-    t.integer "lft"
-    t.integer "rgt"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "comments", ["commentable_id", "commentable_type"], name: "index_comments_on_commentable_id_and_commentable_type", using: :btree
-  add_index "comments", ["parent_id"], name: "comments_parent_id_fk", using: :btree
-  add_index "comments", ["user_id"], name: "index_comments_on_user_id", using: :btree
-
   create_table "commontator_comments", force: true do |t|
     t.string "creator_type"
     t.integer "creator_id"
@@ -293,9 +275,6 @@ ActiveRecord::Schema.define(version: 20131111094206) do
   add_foreign_key "acompanhamento_series", "avaliacoes", name: "acompanhamento_series_avaliacao_id_fk"
 
   add_foreign_key "avaliacoes", "users", name: "avaliacoes_user_id_fk"
-
-  add_foreign_key "comments", "comments", name: "comments_parent_id_fk", column: "parent_id"
-  add_foreign_key "comments", "users", name: "comments_user_id_fk"
 
   add_foreign_key "episodios", "series", name: "episodios_serie_id_fk"
 
