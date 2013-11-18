@@ -79,9 +79,17 @@
     <a href="/series/<%= @serie.slug %>/personagens" class="right">Mostrar todo o elenco >></a>
     <h4>Séries relacionadas:</h4>
     <ul class="lista-elenco">
-      <% @serie.series_relacionadas.first(8).each do |s| %>
+      <% @serie.series_relacionadas.sample(8).each do |s| %>
           <li>
             <a href="/series/<%= s.slug %>"><img src="<%= s.poster %>" alt="<%= s.nome %>" title="<%= s.nome %>" class="imagem-elenco"></a>
+          </li>
+      <% end %>
+    </ul>
+    <h4>Quem vê?</h4>
+    <ul class="lista-elenco">
+      <% @serie.avaliacoes.sample(8).each do |avaliacao| %>
+          <li>
+            <a href="/users/<%= avaliacao.user.slug %>"><img src="<%= avaliacao.user.imagem_formatada %>" alt="<%= avaliacao.user.name %>" title="<%= avaliacao.user.name %>" class="imagem-elenco"></a>
           </li>
       <% end %>
     </ul>
@@ -136,7 +144,7 @@
             <%
                #<div class="anuncio-grande right">
                #<img src="/images/anuncio2.jpg" alt="">
-               #</div>            %>
+               #</div>             %>
           </div>
         </div>
     <% end %>

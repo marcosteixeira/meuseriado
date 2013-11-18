@@ -35,7 +35,7 @@
               <%= link_to "Adicionar como amigo", adicionar_amigo_user_path(@user), class: "small button large-12 success columns primeiro-botao", method: :post if !@user.blocked? current_user %>
           <% end %>
       <% else %>
-          <%= link_to "Adicionar como amigo", adicionar_amigo_user_path(@user), class: "small button large-12 success columns primeiro-botao", method: :post if !@user.blocked? current_user %>
+          <%= link_to "Adicionar como amigo", adicionar_amigo_user_path(@user), class: "small button large-12 success columns primeiro-botao", method: :post %>
       <% end %>
       <a href="#" class="small button large-12 columns Facebook-entrar" onclick="
       window.open(
@@ -80,8 +80,9 @@
         <div class="large-12 columns">
           <h2>Séries Favoritas</h2>
           <ul class="lista-series-favoritas" id="ul-series">
-            <% @user.series.first(5).each do |serie| %>
-                <li><a href="/series/<%= serie.slug %>"><img src='<%= serie.poster %>' alt='<%= serie.nome %>'></a></li>
+            <% @user.series.sample(5).each do |serie| %>
+                <li id="li-<%= serie.id %>">
+                  <a href="/series/<%= serie.slug %>"><img src='<%= serie.poster %>' alt='<%= serie.nome %>'></a></li>
             <% end %>
           </ul>
           <a href="javascript:carregarSeriesFavoritas()" class="right">Mostrar todas as séries favoritas >></a>
@@ -89,8 +90,8 @@
         <div class="large-12 columns">
           <h2>Personagens Favoritos</h2>
           <ul class="lista-series-favoritas" id="ul-personagens">
-            <% @user.personagens.first(5).each do |personagem| %>
-                <li>
+            <% @user.personagens.sample(5).each do |personagem| %>
+                <li id="li-<%= personagem.id %>">
                   <a href="/series/<%= personagem.serie.slug %>/personagens/<%= personagem.slug %>"><img src='<%= personagem.imagem %>' alt='<%= personagem.nome %>'></a>
                 </li>
             <% end %>
