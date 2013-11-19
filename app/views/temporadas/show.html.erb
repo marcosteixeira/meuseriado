@@ -3,7 +3,7 @@
     <ul class="breadcrumbs">
       <li><a href="/">meuseriado</a></li>
       <li><a href="/series">Séries</a></li>
-      <li><a href='/series/<%= @temporada.serie.slug %>'><%= @temporada.serie.nome %></a></li>
+      <li><a href='/series/<%= @temporada.serie.slug %>'><%= @temporada.serie.nome_exibicao %></a></li>
       <li class="current">
         <a href='/series/<%= @temporada.serie.slug %>/temporadas/<%= @temporada.temporada %>'>Temporada <%= @temporada.temporada %></a>
       </li>
@@ -70,7 +70,7 @@
       <% @temporada.avaliacoes.each do |avaliacao| %>
           <li>
             <a href='/users/<%= avaliacao.user.slug %>' class="tip-user">
-              <img src='<%= avaliacao.user.imagem_formatada %>' width="60" height="60" alt='<%= avaliacao.user.name %>'>
+              <img src='<%= avaliacao.user.imagem_formatada %>' alt='<%= avaliacao.user.name %>'>
             </a>
           </li>
       <% end %>
@@ -81,7 +81,7 @@
     <hgroup class="titulo-episodio">
       <h1>
         <a href="/series/<%= @temporada.serie.slug %>">
-          <small><%= @temporada.serie.nome %>:</small>
+          <small><%= @temporada.serie.nome_exibicao %>:</small>
         </a>
         <a href="#">
           Temporada <%= @temporada.temporada %>

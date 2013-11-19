@@ -6,7 +6,7 @@
     <ul class="breadcrumbs">
       <li><a href="/">meuseriado</a></li>
       <li><a href="/series">Séries</a></li>
-      <li class="current"><a href='/series/<%= @serie.slug %>'><%= @serie.nome %></a></li>
+      <li class="current"><a href='/series/<%= @serie.slug %>'><%= @serie.nome_exibicao %></a></li>
     </ul>
   </div>
 </div>
@@ -81,7 +81,7 @@
     <ul class="lista-elenco">
       <% @serie.series_relacionadas.sample(8).each do |s| %>
           <li>
-            <a href="/series/<%= s.slug %>"><img src="<%= s.poster %>" alt="<%= s.nome %>" title="<%= s.nome %>" class="imagem-elenco"></a>
+            <a href="/series/<%= s.slug %>"><img src="<%= s.poster %>" alt="<%= s.nome_exibicao %>" title="<%= s.nome_exibicao %>" class="imagem-elenco"></a>
           </li>
       <% end %>
     </ul>
@@ -96,7 +96,7 @@
 
   </div>
   <div class="large-8 columns">
-    <h1 class="titulo-serie"><%= @serie.nome %></h1>
+    <h1 class="titulo-serie"><%= @serie.nome_exibicao %></h1>
 
     <div class="row infos-interior">
       <div class="large-4 columns"><b>Média geral:</b>
@@ -144,7 +144,7 @@
             <%
                #<div class="anuncio-grande right">
                #<img src="/images/anuncio2.jpg" alt="">
-               #</div>              %>
+               #</div>               %>
           </div>
         </div>
     <% end %>

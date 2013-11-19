@@ -28,7 +28,7 @@ class SeriesController < ApplicationController
     array = Array.new
     series.each do |serie|
       if !array.include? serie.nome[0, 1]
-        array << serie.nome[0, 1]
+        array << serie.nome_exibicao[0, 1]
       end
     end
     array

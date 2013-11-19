@@ -7,12 +7,12 @@ class Episodio < ActiveRecord::Base
   has_many :avaliacoes, as: :avaliavel
 
   def gerar_slug
-    [[self.serie.nome, self.temporada, self.numero, self.nome],
-     [self.serie.nome, self.temporada, self.numero]]
+    [[self.serie.nome_exibicao, self.temporada, self.numero, self.nome],
+     [self.serie.nome_exibicao, self.temporada, self.numero]]
   end
 
   def nome_episodio_formatado
-    "#{self.serie.nome} #{self.nome_episodio}"
+    "#{self.serie.nome_exibicao} #{self.nome_episodio}"
   end
 
   def nome_episodio

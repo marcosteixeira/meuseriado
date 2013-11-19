@@ -28,7 +28,7 @@
     <ul class="breadcrumbs">
       <li><a href="/">meuseriado</a></li>
       <li><a href="/series">Séries</a></li>
-      <li><a href='/series/<%= @episodio.serie.slug %>'><%= @episodio.serie.nome %></a></li>
+      <li><a href='/series/<%= @episodio.serie.slug %>'><%= @episodio.serie.nome_exibicao %></a></li>
       <li>
         <a href='/series/<%= @episodio.serie.slug %>/temporadas/<%= @episodio.temporada %>'>Temporada <%= @episodio.temporada %></a>
       </li>
@@ -80,7 +80,7 @@
   <div class="large-8 columns">
     <hgroup class="titulo-episodio">
       <h2>
-        <a href="/series/<%= @episodio.serie.slug %>"><%= @episodio.serie.nome %></a> -
+        <a href="/series/<%= @episodio.serie.slug %>"><%= @episodio.serie.nome_exibicao %></a> -
         <a href='/series/<%= @episodio.serie.slug %>/temporadas/<%= @episodio.temporada %>'>
           Temporada <%= @episodio.temporada %></a>
       </h2>

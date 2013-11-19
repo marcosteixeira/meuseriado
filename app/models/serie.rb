@@ -76,6 +76,7 @@ class Serie < ActiveRecord::Base
 
       nova_serie.id = serie.id
       nova_serie.nome = serie.series_name
+      nova_serie.nome_exibicao= serie.series_name
       nova_serie.dia_exibicao = serie.airs_day_of_week
       nova_serie.horario_exibicao = serie.airs_time
       if serie.banner

@@ -2,9 +2,9 @@ class AutocompleteController < ApplicationController
   def index
     @hash = []
 
-    series = Serie.where("nome like '%#{params[:term]}%'").limit(5)
+    series = Serie.where("nome like '%#{params[:term]}%' or nome_exibicao like '%#{params[:term]}%' ").limit(5)
     series.each do |serie|
-      @hash << {"label" => serie.nome, "id" => serie.slug, "imagem" => serie.poster, "tipo" => "Series", "serie" => serie.slug}
+      @hash << {"label" => serie.nome_exibicao, "id" => serie.slug, "imagem" => serie.poster, "tipo" => "Series", "serie" => serie.slug}
     end
 
     personagens = Personagem.where("nome like '%#{params[:term]}%'").limit(5)
