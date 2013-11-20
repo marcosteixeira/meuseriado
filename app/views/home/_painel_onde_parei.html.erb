@@ -1,5 +1,5 @@
 <% current_user_ultimo_episodio_visto = current_user.ultimo_episodio_visto(avaliavel.id) %>
-<% proximo = current_user_ultimo_episodio_visto.proximo %>
+<% proximo = current_user_ultimo_episodio_visto.proximo if current_user_ultimo_episodio_visto %>
 
 <div class="panel onde-parei" id="painel_<%= avaliavel.id %>">
   <div class="row">

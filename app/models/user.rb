@@ -37,7 +37,7 @@ class User < ActiveRecord::Base
 
   def ultimo_episodio_visto(serie_id)
     eps = episodios(serie_id, nil, "order by temporada desc, numero desc")
-    if eps
+    if eps.present?
       eps.first
     end
   end
