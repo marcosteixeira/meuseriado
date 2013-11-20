@@ -82,7 +82,8 @@
           <ul class="lista-series-favoritas" id="ul-series">
             <% @user.series.sample(5).each do |serie| %>
                 <li id="li-<%= serie.id %>">
-                  <a href="/series/<%= serie.slug %>"><img src='<%= serie.poster %>' alt='<%= serie.nome %>'></a></li>
+                  <a href="/series/<%= serie.slug %>"><img src='<%= serie.poster %>' alt='<%= serie.nome_exibicao %>'></a>
+                </li>
             <% end %>
           </ul>
           <a href="javascript:carregarSeriesFavoritas()" class="right">Mostrar todas as séries favoritas >></a>
