@@ -69,6 +69,15 @@
 
     <p><%= @personagem.ator.nome %></p>
 
+    <h2>Séries:</h2>
+    <ul class="lista-elenco">
+      <% @personagem.ator.series.each do |s| %>
+          <li>
+            <a href="/series/<%= s.slug %>"><img src="<%= s.poster %>" alt="<%= s.nome_exibicao %>" title="<%= s.nome_exibicao %>" class="imagem-elenco"></a>
+          </li>
+      <% end %>
+    </ul>
+
     <h2>Quem é fã:</h2>
     <ul class="quem-viu-episodio large-12">
       <% @personagem.avaliacoes.includes(:user).each do |avaliacao| %>
@@ -79,6 +88,7 @@
           </li>
       <% end %>
     </ul>
+
     <%= commontator_thread(@personagem) %>
 
 

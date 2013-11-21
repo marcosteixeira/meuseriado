@@ -1,7 +1,8 @@
 class Ator < ActiveRecord::Base
-   extend FriendlyId
+  extend FriendlyId
   friendly_id :nome, use: :slugged
-  
+
   has_many :personagens, dependent: :nullify
   has_many :avaliacoes, as: :avaliavel
+  has_many :series, through: :personagens
 end

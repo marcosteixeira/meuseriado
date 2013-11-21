@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131120195905) do
+ActiveRecord::Schema.define(version: 20131121111535) do
 
   create_table "acompanhamento_series", force: true do |t|
     t.integer "avaliacao_id", null: false
@@ -212,7 +212,6 @@ ActiveRecord::Schema.define(version: 20131120195905) do
     t.datetime "updated_at"
     t.string "trailer"
     t.string "nome_exibicao"
-    t.integer "visualizacoes", default: 0
   end
 
   add_index "series", ["nome"], name: "index_series_on_nome", unique: true, using: :btree
