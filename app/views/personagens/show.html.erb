@@ -59,7 +59,7 @@
             return false;">Recomendar no Facebook</a>
 
     <h4>Série de origem:</h4>
-    <a href="/series/<%= @personagem.serie.slug %>"><img src="<%= @personagem.serie.banner %>" alt="<%= @personagem.serie.nome %>" title="<%= @personagem.serie.nome %>"></a>
+    <a href="/series/<%= @personagem.serie.slug %>"><img src="<%= @personagem.serie.banner %>" alt="<%= @personagem.serie.nome_exibicao %>" title="<%= @personagem.serie.nome_exibicao %>"></a>
 
   </div>
   <div class="large-8 columns">
@@ -71,7 +71,7 @@
 
     <h2>Quem é fã:</h2>
     <ul class="quem-viu-episodio large-12">
-      <% @personagem.avaliacoes.each do |avaliacao| %>
+      <% @personagem.avaliacoes.includes(:user).each do |avaliacao| %>
           <li>
             <a href="/users/<%= avaliacao.user.slug %>" class="tip-user">
               <img src="<%= avaliacao.user.imagem_formatada %>" width="60" height="60" alt="<%= avaliacao.user.name %>">

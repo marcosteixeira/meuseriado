@@ -3,7 +3,8 @@ class UsersController < ApplicationController
   before_filter :authenticate_user!, :except => [:show, :index, :carregar_series, :carregar_personagens]
 
   def show
-    @user = User.friendly.includes(:avaliacoes, :series_vistas).find(params[:id])
+    #removi eager
+    @user = User.friendly.find(params[:id])
   end
 
   def index

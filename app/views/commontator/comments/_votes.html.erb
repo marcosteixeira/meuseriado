@@ -9,11 +9,11 @@
 
     <div class="large-9 columns <%= "hide" if !can_vote %>">
       <% if can_vote && (vote.blank? || !vote.vote_flag) %>
-          <%= form_tag commontator.upvote_comment_path(comment), :method => :patch, :remote => true do %>
+          <%= form_tag commontator.upvote_comment_path(comment), :method => :put, :remote => true do %>
               <%= submit_tag comment.upvotes.size.to_s, class: "voto-positivo" %>
           <% end %>
       <% elsif can_vote %>
-          <%= form_tag commontator.unvote_comment_path(comment), :method => :patch, :remote => true do %>
+          <%= form_tag commontator.unvote_comment_path(comment), :method => :put, :remote => true do %>
               <%= submit_tag comment.upvotes.size.to_s, class: "voto-positivo" %>
           <% end %>
       <% else %>
@@ -21,11 +21,11 @@
       <% end %>
 
       <% if can_vote && (vote.blank? || vote.vote_flag) %>
-          <%= form_tag commontator.downvote_comment_path(comment), :method => :patch, :remote => true do %>
+          <%= form_tag commontator.downvote_comment_path(comment), :method => :put, :remote => true do %>
               <%= submit_tag comment.downvotes.size.to_s, class: "voto-negativo" %>
           <% end %>
       <% elsif can_vote %>
-          <%= form_tag commontator.unvote_comment_path(comment), :method => :patch, :remote => true do %>
+          <%= form_tag commontator.unvote_comment_path(comment), :method => :put, :remote => true do %>
               <%= submit_tag comment.downvotes.size.to_s, class: "voto-negativo" %>
           <% end %>
       <% else %>

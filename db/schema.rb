@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131119173829) do
+ActiveRecord::Schema.define(version: 20131120195905) do
 
   create_table "acompanhamento_series", force: true do |t|
     t.integer "avaliacao_id", null: false
@@ -64,24 +64,6 @@ ActiveRecord::Schema.define(version: 20131119173829) do
   add_index "avaliacoes", ["avaliavel_id"], name: "index_avaliacoes_on_avaliavel_id", using: :btree
   add_index "avaliacoes", ["avaliavel_type"], name: "index_avaliacoes_on_avaliavel_type", using: :btree
   add_index "avaliacoes", ["user_id"], name: "avaliacoes_user_id_fk", using: :btree
-
-  create_table "comments", force: true do |t|
-    t.integer "commentable_id", default: 0
-    t.string "commentable_type", default: ""
-    t.string "title", default: ""
-    t.text "body"
-    t.string "subject", default: ""
-    t.integer "user_id", default: 0, null: false
-    t.integer "parent_id"
-    t.integer "lft"
-    t.integer "rgt"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "comments", ["commentable_id", "commentable_type"], name: "index_comments_on_commentable_id_and_commentable_type", using: :btree
-  add_index "comments", ["parent_id"], name: "comments_parent_id_fk", using: :btree
-  add_index "comments", ["user_id"], name: "index_comments_on_user_id", using: :btree
 
   create_table "commontator_comments", force: true do |t|
     t.string "creator_type"
@@ -278,6 +260,14 @@ ActiveRecord::Schema.define(version: 20131119173829) do
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   add_index "users", ["slug"], name: "index_users_on_slug", unique: true, using: :btree
 
+  create_table "visualizacoes", force: true do |t|
+    t.integer "serie_id", default: 0, null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "visualizacoes", ["serie_id"], name: "visualizacoes_serie_id_fk", using: :btree
+
   create_table "votes", force: true do |t|
     t.integer "votable_id"
     t.string "votable_type"
@@ -296,9 +286,6 @@ ActiveRecord::Schema.define(version: 20131119173829) do
 
   add_foreign_key "avaliacoes", "users", name: "avaliacoes_user_id_fk"
 
-  add_foreign_key "comments", "comments", name: "comments_parent_id_fk", column: "parent_id"
-  add_foreign_key "comments", "users", name: "comments_user_id_fk"
-
   add_foreign_key "episodios", "series", name: "episodios_serie_id_fk"
 
   add_foreign_key "friendships", "users", name: "friendships_blocker_id_fk", column: "blocker_id"
@@ -314,5 +301,7 @@ ActiveRecord::Schema.define(version: 20131119173829) do
   add_foreign_key "series", "produtoras", name: "series_produtora_id_fk"
 
   add_foreign_key "temporadas", "series", name: "temporadas_serie_id_fk"
+
+  add_foreign_key "visualizacoes", "series", name: "visualizacoes_serie_id_fk"
 
 end

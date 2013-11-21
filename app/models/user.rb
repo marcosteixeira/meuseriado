@@ -17,7 +17,7 @@ class User < ActiveRecord::Base
                     :url => "/images/series/:id/:filename"
 
   has_many :avaliacoes, :dependent => :delete_all, :order => 'id DESC'
-  has_many :series_vistas, :through => :avaliacoes, :source => :acompanhamento_serie
+  has_many :series_vistas, :through => :avaliacoes, :source => :acompanhamento_serie, :include => {avaliacao: :avaliavel}
 
   def series
     Serie.find_by_sql("SELECT  `series`.* FROM `series` INNER JOIN `avaliacoes` ON `series`.`id` = `avaliacoes`.`avaliavel_id` WHERE `avaliacoes`.`user_id` = #{self.id} AND `avaliacoes`.`avaliavel_type` = 'Serie'  ORDER BY id DESC")
@@ -47,7 +47,10 @@ class User < ActiveRecord::Base
   end
 
   def personagens
-    Personagem.find_by_sql("SELECT `personagens`.* FROM `personagens` INNER JOIN `avaliacoes` ON `personagens`.`id` = `avaliacoes`.`avaliavel_id` WHERE `avaliacoes`.`user_id` = #{self.id} AND `avaliacoes`.`avaliavel_type` = 'Personagem'  ORDER BY id DESC")
+    #Personagem.find_by_sql("SELECT `personagens`.* FROM `personagens` INNER JOIN `avaliacoes` ON `personagens`.`id` = `avaliacoes`.`avaliavel_id` WHERE `avaliacoes`.`user_id` = #{self.id} AND `avaliacoes`.`avaliavel_type` = 'Personagem'  ORDER BY id DESC")
+    avaliacoes.where(avaliavel_type: "Personagem").includes({avaliavel: :serie}).map do |aval|
+      aval.avaliavel
+    end
   end
 
   def user_params

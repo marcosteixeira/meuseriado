@@ -68,6 +68,7 @@ gem 'rack-mini-profiler'
 group :development do
   gem "better_errors"
   gem "binding_of_caller"
+  gem 'bullet'
 end
 
 group :doc do

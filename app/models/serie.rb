@@ -16,13 +16,14 @@ class Serie < ActiveRecord::Base
   has_many :temporadas, :dependent => :delete_all
   has_many :episodios_vistos, :through => :avaliacoes, :source => :avaliavel, :source_type => "Episodio"
   has_and_belongs_to_many :generos
+  has_many :visualizacoes, :dependent => :delete_all
 
   def personagens_imagem
     self.personagens.where("imagem is not null");
   end
 
   def temporadas_validas_ordenadas(ordenacao="desc")
-    self.temporadas.where("temporadas.temporada <> 0").order("temporadas.temporada #{ordenacao}")
+    self.temporadas.includes(:serie).where("temporadas.temporada <> 0").order("temporadas.temporada #{ordenacao}")
   end
 
   def temporada_especial
@@ -351,7 +352,7 @@ class Serie < ActiveRecord::Base
 
   def series_relacionadas
     series = Array.new
-    self.generos.each do |genero|
+    self.generos.includes(:series).each do |genero|
       genero.series.each do |serie_relacionada|
         if !series.include? serie_relacionada
           series << serie_relacionada

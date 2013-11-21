@@ -67,7 +67,7 @@
     <a href="#" class="small button secondary large-12 columns">Escrever uma avaliação</a>
     <h4>Quem viu este episódio:</h4>
     <ul class="quem-viu-episodio large-12">
-      <% @episodio.avaliacoes.each do |avaliacao| %>
+      <% @episodio.avaliacoes.includes(:user).each do |avaliacao| %>
           <li>
             <a href='/users/<%= avaliacao.user.slug %>' class="tip-user">
               <img src='<%= avaliacao.user.imagem_formatada %>' alt='<%= avaliacao.user.name %>'>

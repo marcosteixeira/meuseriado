@@ -6,12 +6,13 @@
 ActiveSupport::Inflector.inflections(:en) do |inflect|
 #   inflect.plural /^(ox)$/i, '\1en'
 #   inflect.singular /^(ox)en/i, '\1'
-   inflect.irregular 'serie', 'series'
-   inflect.irregular 'ator', 'atores'
-   inflect.irregular 'personagem', 'personagens'
-   inflect.irregular 'nota', 'notas'
-   inflect.irregular 'avaliacao', 'avaliacoes'
-   inflect.irregular 'episodio', 'episodios'
+  inflect.irregular 'serie', 'series'
+  inflect.irregular 'ator', 'atores'
+  inflect.irregular 'personagem', 'personagens'
+  inflect.irregular 'nota', 'notas'
+  inflect.irregular 'avaliacao', 'avaliacoes'
+  inflect.irregular 'episodio', 'episodios'
+  inflect.irregular 'visualizacao', 'visualizacoes'
 #   inflect.uncountable %w( fish sheep )
 end
 
