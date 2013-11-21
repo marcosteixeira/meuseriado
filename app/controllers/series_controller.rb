@@ -143,7 +143,7 @@ class SeriesController < ApplicationController
       end
     end
 
-    @title = @serie.nome
+    @title = @serie.nome_exibicao
     commontator_thread_show(@serie)
   end
 

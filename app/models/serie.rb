@@ -15,8 +15,16 @@ class Serie < ActiveRecord::Base
   has_many :personagens, :dependent => :delete_all, :order => 'personagens.aparicao'
   has_many :temporadas, :dependent => :delete_all
   has_many :episodios_vistos, :through => :avaliacoes, :source => :avaliavel, :source_type => "Episodio"
+
   has_and_belongs_to_many :generos
   has_many :visualizacoes, :dependent => :delete_all
+
+  scope :top9,
+        select("series.*, count(visualizacoes.id) AS visualizacoes_count").
+            joins(:visualizacoes).
+            group("series.id").
+            order("visualizacoes_count DESC").
+            limit(9)
 
   def personagens_imagem
     self.personagens.where("imagem is not null");
@@ -321,12 +329,12 @@ class Serie < ActiveRecord::Base
     return result
   end
 
-  def visualizacoes_semanais(nota_null = "")
-    series = Serie.find_by_sql("select * from series s, episodios e, avaliacoes a where e.serie_id = s.id and e.id = a.avaliavel_id and a.created_at > '#{1.week.ago}' and s.id = #{self.id} and a.avaliavel_type= 'Episodio' #{nota_null} order by a.created_at desc ")
+  def visualizacoes_semanais
+    self.visualizacoes.where(created_at: 1.week.ago..Time.now)
   end
 
   def votos_semanais
-    self.visualizacoes_semanais(" and a.nota is not null")
+    self.visualizacoes_semanais.where("nota IS NOT NULL")
   end
 
   def data_lancamento
