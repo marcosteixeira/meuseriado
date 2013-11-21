@@ -9,7 +9,7 @@ class FeedsController < ApplicationController
   end
 
   def episodios
-    @episodios = Episodio.all.joins(:serie).order('series.nome, temporada, numero')
+    @episodios = Episodio.all.includes(:serie)
 
     respond_to do |format|
       format.html
@@ -19,7 +19,7 @@ class FeedsController < ApplicationController
   end
 
   def temporadas
-    @temporadas = Temporada.all.joins(:serie).order('series.nome, temporada')
+    @temporadas = Temporada.all.includes(:serie)
 
     respond_to do |format|
       format.html
@@ -29,7 +29,7 @@ class FeedsController < ApplicationController
   end
 
   def personagens
-    @personagens = Personagem.all
+    @personagens = Personagem.all.includes(:serie)
 
     respond_to do |format|
       format.html
