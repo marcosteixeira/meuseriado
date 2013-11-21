@@ -43,7 +43,10 @@ class User < ActiveRecord::Base
   end
 
   def temporadas
-    Temporada.find_by_sql("SELECT `temporadas`.* FROM `temporadas` INNER JOIN `avaliacoes` ON `temporadas`.`id` = `avaliacoes`.`avaliavel_id` WHERE `avaliacoes`.`user_id` = #{self.id} AND `avaliacoes`.`avaliavel_type` = 'Temporada'")
+    #Temporada.find_by_sql("SELECT `temporadas`.* FROM `temporadas` INNER JOIN `avaliacoes` ON `temporadas`.`id` = `avaliacoes`.`avaliavel_id` WHERE `avaliacoes`.`user_id` = #{self.id} AND `avaliacoes`.`avaliavel_type` = 'Temporada'")
+    avaliacoes.where(avaliavel_type: "Temporada").includes(:avaliavel).map do |aval|
+      aval.avaliavel
+    end
   end
 
   def personagens
