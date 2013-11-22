@@ -255,6 +255,7 @@ ActiveRecord::Schema.define(version: 20131222184329) do
     t.integer "indice_acompanhamento", default: 0
     t.string "token"
     t.datetime "token_expire_at"
+    t.boolean "notificar_atualizacoes_fb", default: true
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree

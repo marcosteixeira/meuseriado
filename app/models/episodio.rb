@@ -1,3 +1,4 @@
+#coding: utf-8
 class Episodio < ActiveRecord::Base
   extend FriendlyId
   friendly_id :gerar_slug, use: :slugged
@@ -19,7 +20,7 @@ class Episodio < ActiveRecord::Base
     "S%02dE%02d" % [self.temporada, self.numero]
   end
 
-  def marcar_como_visto(user, nota=nil)
+  def marcar_como_visto(user, nota=nil, notificar=false)
     aval = Avaliacao.find_by_sql("select * from avaliacoes where avaliavel_type='Episodio' and avaliavel_id=#{self.id} and user_id=#{user.id} ")
     user.indice_acompanhamento = user.indice_acompanhamento + 1
     user.save
@@ -40,6 +41,15 @@ class Episodio < ActiveRecord::Base
     elsif nota
       aval.first.nota = nota
       aval.first.save
+    end
+
+    if notificar && user.provider.eql?("facebook") && user.notificar_atualizacoes_fb
+      begin
+        graph = Koala::Facebook::API.new(user.token)
+        graph.put_wall_post("Acabei de assistir #{self.nome_episodio_formatado} e marquei lá no MeuSeriado", {:name => "MeuSeriado - #{self.nome_episodio_formatado} - #{self.nome}", :link => "http://meuseriado.com.br/episodios/#{self.slug}"}, user.uid)
+      rescue => e
+        #faz nada
+      end
     end
 
   end
