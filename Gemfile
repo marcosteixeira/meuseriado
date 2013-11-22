@@ -65,6 +65,8 @@ gem 'inherited_resources', github: 'josevalim/inherited_resources'
 
 gem 'rack-mini-profiler'
 
+gem "koala", "~> 1.8.0rc1"
+
 group :development do
   gem "better_errors"
   gem "binding_of_caller"

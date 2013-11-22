@@ -53,7 +53,7 @@ Devise.setup do |config|
   config.sign_out_via = :get
 
   require "omniauth-facebook"
-  config.omniauth :facebook, FACEBOOK_CONFIG['app_id'], FACEBOOK_CONFIG['secret'], :scope => 'email'
+  config.omniauth :facebook, FACEBOOK_CONFIG['app_id'], FACEBOOK_CONFIG['secret'], :scope => 'email, publish_actions'
   require "omniauth-google-oauth2"
   config.omniauth :google_oauth2, GOOGLE_CONFIG['app_id'], GOOGLE_CONFIG['secret'], {access_type: "offline", approval_prompt: ""}
   config.secret_key = '273d815c4c384c4c1164a006bc25b40d805a2888dd973d11245c96316cb347d31500b9d4b381d1524e08db9f2e07c7532d7829eee8761fe24df02b4c3048c489'

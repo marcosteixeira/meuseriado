@@ -78,8 +78,17 @@ class User < ActiveRecord::Base
                          uid: auth.uid,
                          email: auth.info.email,
                          password: Devise.friendly_token[0, 20],
-                         imagem: "https://graph.facebook.com/#{auth.uid}/picture?type=large"
+                         imagem: "https://graph.facebook.com/#{auth.uid}/picture?type=large",
+                         token: auth.credentials.token,
+                         token_expire_at: Time.at(auth.credentials.expires_at)
+
       )
+    end
+
+    if user.troca_token?
+      user.token = auth.credentials.token
+      user.token_expire_at = Time.at(auth.credentials.expires_at)
+      user.save
     end
     user
   end
@@ -130,6 +139,10 @@ class User < ActiveRecord::Base
     self.personagens.include?(personagem)
   end
 
+  def troca_token?
+    !self.token.present? || self.token_expire_at < Time.now
+  end
+
   class << self
     def current_user=(user)
       Thread.current[:current_user] = user
@@ -139,5 +152,7 @@ class User < ActiveRecord::Base
       Thread.current[:current_user]
     end
   end
+
+  #@graph.put_wall_post("BlablaBla- Dexter", {:name => "Nome - Dexter", :link => "http://meuseriado.com.br/episodios/dexter-8-12-remember-the-monsters"}, "100002077371868")
 
 end
