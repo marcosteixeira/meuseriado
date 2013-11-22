@@ -2,6 +2,7 @@
 class Serie < ActiveRecord::Base
   extend FriendlyId
   acts_as_commentable
+  acts_as_votable
   before_create :set_nome_exibicao
 
   friendly_id :nome, use: :slugged
@@ -378,5 +379,7 @@ class Serie < ActiveRecord::Base
       self.nome_exibicao = self.nome
     end
   end
+
+  #@serie.vote :voter => @user5, :vote => 'like', :vote_scope => 'batalha.id'
 
 end

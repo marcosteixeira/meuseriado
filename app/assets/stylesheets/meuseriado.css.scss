@@ -919,3 +919,72 @@ h1, h2, h3, h4, h5, h6 {
   white-space: nowrap;
   text-overflow: ellipsis;
 }
+
+.guerra-de-series h3 {
+  font-size: 12px;
+}
+
+.versus {
+  position: relative;
+}
+
+.versus img {
+  line-height: 100%;
+  vertical-align: middle;
+}
+
+.mostrar-todos {
+  margin-top: 15px !important;
+}
+
+.mostrar-todos-pequeno a {
+  font-size: 12px;
+  color: #B1B1B1;
+  border-bottom: 1px dotted #ccc;
+}
+
+.mostrar-todos-pequeno a:hover {
+  color: #ccc;
+}
+
+.mostrar-todos-pequeno a:active {
+  color: #333;
+}
+
+.lista-com-margem-menor {
+  margin-bottom: 5px;
+}
+
+.neutral {
+  background-color: rgb(230, 186, 13);
+  border-color: rgb(187, 158, 4);
+}
+
+.neutral:hover {
+  background-color: #D89B00;
+}
+
+.comentarios-batalha {
+  margin-top: 20px;
+}
+
+.grafico-teste {
+  max-height: 300px;
+  height: 170px;
+  display: table-cell;
+  vertical-align: bottom;
+}
+
+.grafico-60 {
+  height: 60%;
+  background-color: rgb(39, 192, 155);
+  vertical-align: bottom;
+  width: 120px;
+}
+
+.grafico-40 {
+  height: 40%;
+  background-color: rgb(218, 135, 114);
+  vertical-align: bottom;
+  width: 120px;
+}

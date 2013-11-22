@@ -1,0 +1,227 @@
+<div class="row">
+  <div class="large-12 columns">
+
+    <!-- Desktop Slider -->
+
+    <ul class="breadcrumbs">
+      <li><a href="/">meuseriado</a></li>
+      <li><a href="/batalhas">Batalhas</a></li>
+      <li class="current"><a href='<%= batalha_path(@batalha) %>'><%= @batalha.nome %></a></li>
+    </ul>
+  </div>
+</div>
+
+<div class="row">
+  <section class="guerra-de-series">
+    <div class="row">
+      <div class="large-12 columns">
+        <h1>Batalha de séries</h1>
+      </div>
+      <div class="large-4 small-4 columns">
+        <img src="<%= @batalha.desafiante.poster %>" alt="<%= @batalha.desafiante.nome_exibicao %>">
+      </div>
+      <div class="large-4 small-4 columns">
+        <div class="large-6 columns">
+          <h2><%= @batalha.desafiante.nome_exibicao %></h2>
+
+          <div class="grafico-teste">
+            <div class="grafico-60"></div>
+          </div>
+          <h3>votos: 532</h3>
+        </div>
+        <div class="large-6 columns">
+          <h2><%= @batalha.desafiada.nome_exibicao %>"</h2>
+
+          <div class="grafico-teste">
+            <div class="grafico-40"></div>
+          </div>
+          <h3>votos: 234</h3>
+        </div>
+      </div>
+      <div class="large-4 small-4 columns">
+        <img src="<%= @batalha.desafiada.poster %>" alt="<%= @batalha.desafiada.nome_exibicao %>">
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="large-4 small-4 columns">
+        <a href="#" class="small button large-12 success columns primeiro-botao">Votar nesta opção</a>
+
+        <div class="row">
+          <div class="large-12 columns">
+            <h3>Quem apoia esta opção: (532)</h3>
+            <ul class="quem-viu-episodio lista-com-margem-menor">
+              <li>
+                <a href="/users/marcos-vinicius-teixeira" class="tip-user">
+                  <img src="http://www.meuseriado.com.br/images/series/users/1/969038_509418345804073_1446962869_n.jpg" width="60" height="60" alt="Marcos Vinicius Teixeira">
+                </a>
+              </li>
+              <li>
+                <a href="/users/marcos-vinicius-teixeira" class="tip-user">
+                  <img src="http://www.meuseriado.com.br/images/series/users/1/969038_509418345804073_1446962869_n.jpg" width="60" height="60" alt="Marcos Vinicius Teixeira">
+                </a>
+              </li>
+              <li>
+                <a href="/users/marcos-vinicius-teixeira" class="tip-user">
+                  <img src="http://www.meuseriado.com.br/images/series/users/1/969038_509418345804073_1446962869_n.jpg" width="60" height="60" alt="Marcos Vinicius Teixeira">
+                </a>
+              </li>
+              <li>
+                <a href="/users/marcos-vinicius-teixeira" class="tip-user">
+                  <img src="http://www.meuseriado.com.br/images/series/users/1/969038_509418345804073_1446962869_n.jpg" width="60" height="60" alt="Marcos Vinicius Teixeira">
+                </a>
+              </li>
+              <li>
+                <a href="/users/marcos-vinicius-teixeira" class="tip-user">
+                  <img src="http://www.meuseriado.com.br/images/series/users/1/969038_509418345804073_1446962869_n.jpg" width="60" height="60" alt="Marcos Vinicius Teixeira">
+                </a>
+              </li>
+              <li>
+                <a href="/users/marcos-vinicius-teixeira" class="tip-user">
+                  <img src="http://www.meuseriado.com.br/images/series/users/1/969038_509418345804073_1446962869_n.jpg" width="60" height="60" alt="Marcos Vinicius Teixeira">
+                </a>
+              </li>
+            </ul>
+            <div class="row mostrar-todos-pequeno">
+              <div class="large-12 columns">
+                <a href="/series/anatomia-de-grey/personagens" class="right">Mostrar todos</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="large-4 small-4 columns">
+        <a href="#" class="small button large-12 columns primeiro-botao">Sou neutro nesta batalha</a>
+
+        <div class="row">
+          <div class="large-12 columns">
+            <h3>Quem é neutro: (6)</h3>
+            <ul class="quem-viu-episodio lista-com-margem-menor">
+              <li>
+                <a href="/users/marcos-vinicius-teixeira" class="tip-user">
+                  <img src="http://www.meuseriado.com.br/images/series/users/1/969038_509418345804073_1446962869_n.jpg" width="60" height="60" alt="Marcos Vinicius Teixeira">
+                </a>
+              </li>
+              <li>
+                <a href="/users/marcos-vinicius-teixeira" class="tip-user">
+                  <img src="http://www.meuseriado.com.br/images/series/users/1/969038_509418345804073_1446962869_n.jpg" width="60" height="60" alt="Marcos Vinicius Teixeira">
+                </a>
+              </li>
+              <li>
+                <a href="/users/marcos-vinicius-teixeira" class="tip-user">
+                  <img src="http://www.meuseriado.com.br/images/series/users/1/969038_509418345804073_1446962869_n.jpg" width="60" height="60" alt="Marcos Vinicius Teixeira">
+                </a>
+              </li>
+              <li>
+                <a href="/users/marcos-vinicius-teixeira" class="tip-user">
+                  <img src="http://www.meuseriado.com.br/images/series/users/1/969038_509418345804073_1446962869_n.jpg" width="60" height="60" alt="Marcos Vinicius Teixeira">
+                </a>
+              </li>
+              <li>
+                <a href="/users/marcos-vinicius-teixeira" class="tip-user">
+                  <img src="http://www.meuseriado.com.br/images/series/users/1/969038_509418345804073_1446962869_n.jpg" width="60" height="60" alt="Marcos Vinicius Teixeira">
+                </a>
+              </li>
+              <li>
+                <a href="/users/marcos-vinicius-teixeira" class="tip-user">
+                  <img src="http://www.meuseriado.com.br/images/series/users/1/969038_509418345804073_1446962869_n.jpg" width="60" height="60" alt="Marcos Vinicius Teixeira">
+                </a>
+              </li>
+            </ul>
+            <div class="row mostrar-todos-pequeno">
+              <div class="large-12 columns">
+                <a href="/series/anatomia-de-grey/personagens" class="right">Mostrar todos</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="large-4 small-4 columns">
+        <a href="#" class="small button large-12 success columns primeiro-botao">Votar nesta opção</a>
+
+        <div class="row">
+          <div class="large-12 columns">
+            <h3>Quem apoia esta opção: (234)</h3>
+            <ul class="quem-viu-episodio lista-com-margem-menor">
+              <li>
+                <a href="/users/marcos-vinicius-teixeira" class="tip-user">
+                  <img src="http://www.meuseriado.com.br/images/series/users/1/969038_509418345804073_1446962869_n.jpg" width="60" height="60" alt="Marcos Vinicius Teixeira">
+                </a>
+              </li>
+              <li>
+                <a href="/users/marcos-vinicius-teixeira" class="tip-user">
+                  <img src="http://www.meuseriado.com.br/images/series/users/1/969038_509418345804073_1446962869_n.jpg" width="60" height="60" alt="Marcos Vinicius Teixeira">
+                </a>
+              </li>
+              <li>
+                <a href="/users/marcos-vinicius-teixeira" class="tip-user">
+                  <img src="http://www.meuseriado.com.br/images/series/users/1/969038_509418345804073_1446962869_n.jpg" width="60" height="60" alt="Marcos Vinicius Teixeira">
+                </a>
+              </li>
+              <li>
+                <a href="/users/marcos-vinicius-teixeira" class="tip-user">
+                  <img src="http://www.meuseriado.com.br/images/series/users/1/969038_509418345804073_1446962869_n.jpg" width="60" height="60" alt="Marcos Vinicius Teixeira">
+                </a>
+              </li>
+              <li>
+                <a href="/users/marcos-vinicius-teixeira" class="tip-user">
+                  <img src="http://www.meuseriado.com.br/images/series/users/1/969038_509418345804073_1446962869_n.jpg" width="60" height="60" alt="Marcos Vinicius Teixeira">
+                </a>
+              </li>
+              <li>
+                <a href="/users/marcos-vinicius-teixeira" class="tip-user">
+                  <img src="http://www.meuseriado.com.br/images/series/users/1/969038_509418345804073_1446962869_n.jpg" width="60" height="60" alt="Marcos Vinicius Teixeira">
+                </a>
+              </li>
+            </ul>
+            <div class="row mostrar-todos-pequeno">
+              <div class="large-12 columns">
+                <a href="/series/anatomia-de-grey/personagens" class="right">Mostrar todos</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<br/>
+
+
+<div class="row">
+  <div class="large-8 columns">
+    <h2>Comentários</h2>
+    <%= commontator_thread(@batalha) %>
+  </div>
+
+  <div class="large-4 columns">
+    <h2>Outras batalhas:</h2>
+
+    <div class="row">
+      <div class="large-12 columns">
+        <a href="#">
+          <div class="row">
+            <div class="large-5 columns">
+              <img src="http://meuseriado.com.br/images/series/poster/75760-34.jpg" alt="">
+            </div>
+            <div class="large-2 columns versus">
+              <img src="images/versus.png" alt="">
+            </div>
+            <div class="large-5 columns">
+              <img src="http://meuseriado.com.br/images/series/poster/71528-1.jpg" alt="">
+            </div>
+          </div>
+        </a>
+
+        <div class="row mostrar-todos">
+          <div class="large-12">
+            <a href="/series/anatomia-de-grey/personagens" class="right">Mostrar todas as batalhas &gt;&gt;</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
