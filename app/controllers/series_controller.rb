@@ -184,4 +184,10 @@ class SeriesController < ApplicationController
     redirect_to(action: "show", id: @serie)
   end
 
+  def votar
+    @batalha = Batalha.friendly.find(params[:batalha_id])
+    @serie = Serie.friendly.find(params[:id])
+    current_user.votar(@batalha, @serie)
+  end
+
 end

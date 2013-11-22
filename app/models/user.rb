@@ -130,6 +130,12 @@ class User < ActiveRecord::Base
     self.personagens.include?(personagem)
   end
 
+  def votar(batalha, serie)
+    #if !self.voted_up_on? (serie, :vote_scope => batalha.id)
+    if self.voted_for?(serie, :vote_scope => batalha.id)
+    end
+  end
+
   class << self
     def current_user=(user)
       Thread.current[:current_user] = user
@@ -139,5 +145,6 @@ class User < ActiveRecord::Base
       Thread.current[:current_user]
     end
   end
+
 
 end

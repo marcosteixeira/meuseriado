@@ -71,4 +71,12 @@ Meuseriado::Application.routes.draw do
     end
   end
 
+  resources :batalhas do
+    resources :series do
+      member do
+        put :votar
+      end
+    end
+  end
+
 end
