@@ -20,6 +20,9 @@ class Serie < ActiveRecord::Base
   has_and_belongs_to_many :generos
   has_many :visualizacoes, :dependent => :delete_all
 
+  has_many :batalhas_casa, :class_name => "Batalha", :foreign_key => 'batalhas_desafiante_id_fk'
+  has_many :batalhas_fora, :class_name => "Batalha", :foreign_key => 'batalhas_desafiada_id_fk'
+
   scope :top9,
         select("series.*, count(visualizacoes.id) AS visualizacoes_count").
             joins(:visualizacoes).

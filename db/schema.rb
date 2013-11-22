@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131121111535) do
+ActiveRecord::Schema.define(version: 20131122234940) do
 
   create_table "acompanhamento_series", force: true do |t|
     t.integer "avaliacao_id", null: false
@@ -64,6 +64,18 @@ ActiveRecord::Schema.define(version: 20131121111535) do
   add_index "avaliacoes", ["avaliavel_id"], name: "index_avaliacoes_on_avaliavel_id", using: :btree
   add_index "avaliacoes", ["avaliavel_type"], name: "index_avaliacoes_on_avaliavel_type", using: :btree
   add_index "avaliacoes", ["user_id"], name: "avaliacoes_user_id_fk", using: :btree
+
+  create_table "batalhas", force: true do |t|
+    t.integer "user_id", default: 0, null: false
+    t.integer "desafiante_id", default: 0, null: false
+    t.integer "desafiada_id", default: 0, null: false
+    t.string "slug"
+  end
+
+  add_index "batalhas", ["desafiada_id"], name: "batalhas_desafiada_id_fk", using: :btree
+  add_index "batalhas", ["desafiante_id", "desafiada_id"], name: "index_batalhas_on_desafiante_id_and_desafiada_id", unique: true, using: :btree
+  add_index "batalhas", ["slug"], name: "index_batalhas_on_slug", unique: true, using: :btree
+  add_index "batalhas", ["user_id"], name: "batalhas_user_id_fk", using: :btree
 
   create_table "commontator_comments", force: true do |t|
     t.string "creator_type"
@@ -284,6 +296,14 @@ ActiveRecord::Schema.define(version: 20131121111535) do
   add_foreign_key "acompanhamento_series", "avaliacoes", name: "acompanhamento_series_avaliacao_id_fk"
 
   add_foreign_key "avaliacoes", "users", name: "avaliacoes_user_id_fk"
+
+  add_foreign_key "batalhas", "series", name: "batalhas_desafiada_id_fk", column: "desafiada_id"
+  add_foreign_key "batalhas", "series", name: "batalhas_desafiante_id_fk", column: "desafiante_id"
+  add_foreign_key "batalhas", "users", name: "batalhas_user_id_fk"
+
+  add_foreign_key "commontator_comments", "commontator_threads", name: "commontator_comments_thread_id_fk", column: "thread_id"
+
+  add_foreign_key "commontator_subscriptions", "commontator_threads", name: "commontator_subscriptions_thread_id_fk", column: "thread_id"
 
   add_foreign_key "episodios", "series", name: "episodios_serie_id_fk"
 
