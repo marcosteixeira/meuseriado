@@ -67,6 +67,8 @@ gem 'rack-mini-profiler'
 
 gem "koala", "~> 1.8.0rc1"
 
+gem "watu_table_builder", :require => "table_builder"
+
 group :development do
   gem "better_errors"
   gem "binding_of_caller"

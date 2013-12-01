@@ -1,6 +1,6 @@
 class HomeController < ApplicationController
 
-  before_filter :authenticate_user!, :except => [:index]
+  before_filter :authenticate_user!, :except => [:index, :calendario]
 
   def index
 
@@ -13,6 +13,17 @@ class HomeController < ApplicationController
 
 
   def onde_parei
+  end
+
+  def calendario
+    @date = params[:month] ? Date.parse(params[:month]) : Date.today
+    @all =  params[:all] ? params[:all] : false
+
+    if user_signed_in? && !@all
+      @episodios = current_user.episodios_series(@date)
+    else
+      @episodios = Episodio.includes(:serie).where(:estreia => @date.beginning_of_month..@date.end_of_month).to_a
+    end
   end
 
 end

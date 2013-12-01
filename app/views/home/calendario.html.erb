@@ -1,0 +1,20 @@
+<div id="calendar">
+  <h2 id="month">
+    <%= link_to "<", :month => (@date.beginning_of_month-1).strftime("%Y-%m-%d") %>
+    <%= @date.strftime("%B %Y") %>
+    <%= link_to ">", :month => (@date.end_of_month+1).strftime("%Y-%m-%d") %>
+    <%= link_to "Mostrar todas", all: true  if user_signed_in? and !@all %>
+    <%= link_to "Somente minhas séries", all: false  if user_signed_in? and @all %>
+  </h2>
+  <%= calendar_for @episodios, :year => @date.year, :month => @date.month do |calendar| %>
+      <%= calendar.head('Domingo','Segunda' ,'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado') %>
+      <% calendar.day(:day_method => :estreia) do |date, episodios| %>
+          <%= date.day %>
+          <ul>
+            <% for episodio in episodios %>
+                <li><%= link_to h(episodio.nome_episodio_formatado), episodio %></li>
+            <% end %>
+          </ul>
+      <% end %>
+  <% end %>
+</div>

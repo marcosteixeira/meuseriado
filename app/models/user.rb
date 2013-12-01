@@ -36,6 +36,18 @@ class User < ActiveRecord::Base
     end
   end
 
+  def episodios_series(data)
+    eps = []
+    series.each do |serie|
+      serie.episodios.each do |ep|
+        if ep.estreia && (ep.estreia > data.beginning_of_month && ep.estreia < data.end_of_month)
+          eps << ep
+        end
+      end
+    end
+    eps
+  end
+
   def ultimo_episodio_visto(serie_id)
     eps = episodios(serie_id, nil, "order by temporada desc, numero desc")
     if eps.present?

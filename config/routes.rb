@@ -2,6 +2,7 @@ Meuseriado::Application.routes.draw do
 
   ActiveAdmin.routes(self)
   get "home/onde_parei"
+  get "home/calendario"
   get "autocomplete/index"
   get "series/carregar_series"
   get "feeds/personagens"
