@@ -2,6 +2,7 @@ class User < ActiveRecord::Base
   extend FriendlyId
   include Amistad::FriendModel
   acts_as_commontator
+  acts_as_voter
 
   friendly_id :name, use: :slugged
 
@@ -131,8 +132,17 @@ class User < ActiveRecord::Base
   end
 
   def votar(batalha, serie)
-    #if !self.voted_up_on? (serie, :vote_scope => batalha.id)
-    if self.voted_for?(serie, :vote_scope => batalha.id)
+
+    oponente = batalha.oponente(serie)
+    puts "Votou série? #{self.voted_for?(serie, :vote_scope => batalha.id)}"
+    puts "Votou oponente? #{self.voted_for?(oponente, :vote_scope => batalha.id)}"
+    if !self.voted_for?(serie, :vote_scope => batalha.id) && !self.voted_for?(oponente, :vote_scope => batalha.id)
+      serie.vote :voter => self, :vote => 'like', :vote_scope => batalha.id
+      puts "IF"
+    elsif self.voted_for?(oponente, :vote_scope => batalha.id)
+      serie.unliked_by self
+      oponente.vote :voter => self, :vote => 'like', :vote_scope => batalha.id
+      puts "ELSE"
     end
   end
 

@@ -380,6 +380,6 @@ class Serie < ActiveRecord::Base
     end
   end
 
-  #@serie.vote :voter => @user5, :vote => 'like', :vote_scope => 'batalha.id'
+  #@serie.vote :voter => @user5, :vote => 'like', x
 
 end

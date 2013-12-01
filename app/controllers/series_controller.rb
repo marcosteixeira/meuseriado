@@ -188,6 +188,7 @@ class SeriesController < ApplicationController
     @batalha = Batalha.friendly.find(params[:batalha_id])
     @serie = Serie.friendly.find(params[:id])
     current_user.votar(@batalha, @serie)
+    redirect_to batalha_path @batalha
   end
 
 end
