@@ -375,15 +375,15 @@ section.active p.nome-temporada {
 
 /*
 .pagina-do-usuario{
-	background: url('http://thetvdb.com/banners/fanart/original/153021-13.jpg') no-repeat  fixed;
-	margin-top:-30px;
+    background: url('http://thetvdb.com/banners/fanart/original/153021-13.jpg') no-repeat  fixed;
+    margin-top:-30px;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
 }
 .conteudo-do-usuario{
-	background:url('/images/testebg.png');
+    background:url('/images/testebg.png');
 }
 */
 
@@ -539,6 +539,12 @@ section.active p.nome-temporada {
 .marcar-temporada-inteira {
   color: #666;
   font-weight: bold;
+}
+
+.texto-limitado-geral {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 
 .texto-limitado li {
@@ -918,4 +924,193 @@ h1, h2, h3, h4, h5, h6 {
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
+}
+
+.notificacao-geral {
+  width: 25px;
+  height: 27px;
+  background: url('/images/notificacao.png');
+  margin: 10px 0px 0px 10px;
+  cursor: pointer;
+}
+
+.notificacao-geral-ativa {
+  background: url('/images/notificacao.png') 0px 30px;
+  width: 25px;
+  height: 27px;
+  margin: 10px 0px 0px 10px;
+  cursor: pointer;
+}
+
+.numero-de-notificacoes {
+  color: white;
+  font-family: arial;
+  font-weight: bold;
+  font-size: 11px;
+  background-color: rgb(255, 82, 39);
+  border-radius: 20px;
+  text-align: center;
+  vertical-align: middle;
+  margin: 11px 0px 0px 9px;
+  position: absolute;
+  padding: 0px 5px 0px 5px;
+  line-height: 18px;
+}
+
+.caixa-atualizacoes-detalhadas {
+  margin-left: 16px !important;
+  padding: 0px !important;
+  max-width: 400px !important;
+}
+
+.notificacao-detalhada {
+  display: inline-block;
+  width: 100%;
+  padding: 15px;
+  border-bottom: 1px solid #ddd;
+}
+
+.notificacao-detalhada img {
+  width: 35px;
+  border: 1px solid #ddd;
+  margin-right: 10px;
+}
+
+.lista-de-notificacoes a {
+  padding: 0px !important;
+  line-height: 0px !important;
+  color: #7A7A7A;
+}
+
+.ainda-nao-leu {
+  background-color: rgb(252, 224, 115);
+  border-bottom: 1px solid #CFAB38;
+  color: rgb(105, 81, 18);
+}
+
+.ainda-nao-leu:hover {
+  background-color: rgb(233, 199, 90) !important;
+}
+
+.aceitar-amizade {
+  margin-left: 63px;
+}
+
+.aceitar-amizade button {
+  margin-bottom: 0px;
+  margin-top: -10px !important;
+}
+
+.guerra-de-series h3 {
+  font-size: 12px;
+}
+
+.versus{
+  position:relative;
+}
+
+.versus img{
+  line-height:100%;
+  vertical-align:middle;
+}
+
+.mostrar-todos{
+  margin-top:15px !important;
+}
+
+.mostrar-todos-pequeno a{
+  font-size:12px;
+  color: #B1B1B1;
+  border-bottom:1px dotted #ccc;
+}
+
+.mostrar-todos-pequeno a:hover{
+  color: #ccc;
+}
+
+.mostrar-todos-pequeno a:active{
+  color: #333;
+}
+
+.lista-com-margem-menor{
+  margin-bottom:5px;
+}
+
+.neutral{
+  background-color: rgb(230, 186, 13);
+  border-color: rgb(187, 158, 4);
+}
+
+.neutral:hover{
+  background-color: #D89B00;
+}
+
+.comentarios-batalha{
+  margin-top:20px;
+}
+
+.resultado-batalha{
+  border:0px;
+  height: 28px;
+  color: white;
+  font-size: 12px;
+  font-weight: bold;
+  padding:0px;
+  background-color:#ddd;
+}
+
+.batalha-vencedor{
+  background: #D4551A;
+  height: 100%;
+  display: block;
+  padding: 8px;
+}
+
+.batalha-perdedor{
+  background: #61A6C7;
+  height: 100%;
+  display: block;
+  padding: 8px;
+}
+
+.batalha-neutro{
+  background: #C7C361;
+  height: 100%;
+  display: block;
+  padding: 4px;
+}
+
+.resultado-batalha-neutro{
+  height:22px;
+}
+
+.texto-limitado{
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.titulo-vencedor{
+  margin:0px 0px 7px 0px;
+}
+.titulo-perdedor{
+  font-size: 18px;
+  margin:6px 0px 5px 0px;
+}
+
+.titulo-neutro{
+  font-size: 14px;
+  margin:5px 0px 0px 0px;
+  color: #818181;
+}
+
+.outras-batalhas{
+  background: url(../images/versus.png) no-repeat center center;
+  background-size: 30px;
+}
+
+.titulo-batalha-de-series{
+  font-size: 35px;
+  margin-top: 0px;
+  background: url(../images/batalha-series.png) no-repeat center left;
+  padding-left:35px;
 }

@@ -2,6 +2,7 @@
 class Serie < ActiveRecord::Base
   extend FriendlyId
   acts_as_commentable
+  acts_as_votable
   before_create :set_nome_exibicao
 
   friendly_id :nome, use: :slugged
@@ -20,9 +21,13 @@ class Serie < ActiveRecord::Base
   has_and_belongs_to_many :generos
   has_many :visualizacoes, :dependent => :delete_all
 
+  has_many :batalhas_casa, :class_name => "Batalha", :foreign_key => 'batalhas_desafiante_id_fk'
+  has_many :batalhas_fora, :class_name => "Batalha", :foreign_key => 'batalhas_desafiada_id_fk'
+
   scope :top9,
         select("series.*, count(visualizacoes.id) AS visualizacoes_count").
             joins(:visualizacoes).
+            where("visualizacoes.created_at > '#{1.week.ago}'").
             group("series.id").
             order("visualizacoes_count DESC").
             limit(9)
@@ -375,5 +380,7 @@ class Serie < ActiveRecord::Base
       self.nome_exibicao = self.nome
     end
   end
+
+  #@serie.vote :voter => @user5, :vote => 'like', x
 
 end

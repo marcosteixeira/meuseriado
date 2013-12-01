@@ -12,6 +12,7 @@ Meuseriado::Application.routes.draw do
   resources :series, :only => [:show, :index, :create]
   resources :episodios, :only => [:show, :index]
   resources :feeds
+  resources :batalhas
   root :to => "home#index"
   mount Commontator::Engine => '/commontator'
 
@@ -68,6 +69,19 @@ Meuseriado::Application.routes.draw do
       get :desmarcar
       post :dar_nota
     end
+  end
+
+  resources :batalhas do
+    resources :series do
+      member do
+        put :votar
+      end
+    end
+
+    member do
+      put :votar_neutro
+    end
+
   end
 
 end

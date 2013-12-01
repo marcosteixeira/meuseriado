@@ -2,6 +2,7 @@ class User < ActiveRecord::Base
   extend FriendlyId
   include Amistad::FriendModel
   acts_as_commontator
+  acts_as_voter
 
   friendly_id :name, use: :slugged
 
@@ -139,6 +140,26 @@ class User < ActiveRecord::Base
     self.personagens.include?(personagem)
   end
 
+  def votar(batalha, serie, neutro=false)
+    oponente = batalha.oponente(serie)
+
+    if neutro
+      serie.unliked_by(self, vote_scope: batalha.id)
+      oponente.unliked_by(self, vote_scope: batalha.id)
+      batalha.vote :voter => self, :vote => 'like', :vote_scope => 'neutro'
+    else
+
+      if !self.voted_for?(serie, :vote_scope => batalha.id) && !self.voted_for?(oponente, :vote_scope => batalha.id)
+        serie.vote :voter => self, :vote => 'like', :vote_scope => batalha.id
+      elsif self.voted_for?(oponente, :vote_scope => batalha.id)
+        oponente.unliked_by(self, vote_scope: batalha.id)
+        serie.vote :voter => self, :vote => 'like', :vote_scope => batalha.id
+      end
+
+      batalha.unliked_by(self, vote_scope: 'neutro')
+    end
+  end
+
   def troca_token?
     !self.token.present? || self.token_expire_at < Time.now
   end
@@ -152,7 +173,8 @@ class User < ActiveRecord::Base
       Thread.current[:current_user]
     end
   end
+end
+
 
   #@graph.put_wall_post("BlablaBla- Dexter", {:name => "Nome - Dexter", :link => "http://meuseriado.com.br/episodios/dexter-8-12-remember-the-monsters"}, "100002077371868")
 
-end

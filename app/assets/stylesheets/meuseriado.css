@@ -375,15 +375,15 @@ section.active p.nome-temporada {
 
 /*
 .pagina-do-usuario{
-	background: url('http://thetvdb.com/banners/fanart/original/153021-13.jpg') no-repeat  fixed;
-	margin-top:-30px;
+    background: url('http://thetvdb.com/banners/fanart/original/153021-13.jpg') no-repeat  fixed;
+    margin-top:-30px;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
 }
 .conteudo-do-usuario{
-	background:url('/images/testebg.png');
+    background:url('/images/testebg.png');
 }
 */
 
@@ -999,4 +999,118 @@ h1, h2, h3, h4, h5, h6 {
 .aceitar-amizade button {
     margin-bottom: 0px;
     margin-top: -10px !important;
+}
+
+.guerra-de-series h3 {
+    font-size: 12px;
+}
+
+.versus{
+    position:relative;
+}
+
+.versus img{
+    line-height:100%;
+    vertical-align:middle;
+}
+
+.mostrar-todos{
+    margin-top:15px !important;
+}
+
+.mostrar-todos-pequeno a{
+    font-size:12px;
+    color: #B1B1B1;
+    border-bottom:1px dotted #ccc;
+}
+
+.mostrar-todos-pequeno a:hover{
+    color: #ccc;
+}
+
+.mostrar-todos-pequeno a:active{
+    color: #333;
+}
+
+.lista-com-margem-menor{
+    margin-bottom:5px;
+}
+
+.neutral{
+    background-color: rgb(230, 186, 13);
+    border-color: rgb(187, 158, 4);
+}
+
+.neutral:hover{
+    background-color: #D89B00;
+}
+
+.comentarios-batalha{
+    margin-top:20px;
+}
+
+.resultado-batalha{
+    border:0px;
+    height: 28px;
+    color: white;
+    font-size: 12px;
+    font-weight: bold;
+    padding:0px;
+    background-color:#ddd;
+}
+
+.batalha-vencedor{
+    background: #D4551A;
+    height: 100%;
+    display: block;
+    padding: 8px;
+}
+
+.batalha-perdedor{
+    background: #61A6C7;
+    height: 100%;
+    display: block;
+    padding: 8px;
+}
+
+.batalha-neutro{
+    background: #C7C361;
+    height: 100%;
+    display: block;
+    padding: 4px;
+}
+
+.resultado-batalha-neutro{
+    height:22px;
+}
+
+.texto-limitado{
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+.titulo-vencedor{
+    margin:0px 0px 7px 0px;
+}
+.titulo-perdedor{
+    font-size: 18px;
+    margin:6px 0px 5px 0px;
+}
+
+.titulo-neutro{
+    font-size: 14px;
+    margin:5px 0px 0px 0px;
+    color: #818181;
+}
+
+.outras-batalhas{
+    background: url(../images/versus.png) no-repeat center center;
+    background-size: 30px;
+}
+
+.titulo-batalha-de-series{
+    font-size: 35px;
+    margin-top: 0px;
+    background: url(../images/batalha-series.png) no-repeat center left;
+    padding-left:35px;
 }

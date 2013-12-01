@@ -1,0 +1,7 @@
+<% likes.each do |like| %>
+    <li>
+      <a href="/users/<%= like.voter.slug %>" class="tip-user">
+        <img src="<%= like.voter.imagem_formatada %>"  alt="<%= like.voter.name %>">
+      </a>
+    </li>
+<% end %>

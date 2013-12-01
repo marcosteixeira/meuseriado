@@ -1,0 +1,166 @@
+<div class="row">
+  <div class="large-12 columns">
+    <ul class="breadcrumbs">
+      <li><a href="/">meuseriado</a></li>
+      <li><a href="/batalhas">Batalha de séries</a></li>
+      <li class="current"><a href="#"><%= @batalha.nome %></a></li>
+    </ul>
+  </div>
+</div>
+
+<div class="row">
+  <section class="large-12 columns guerra-de-series">
+    <div class="row">
+      <div class="large-12 columns">
+        <h1 class="titulo-batalha-de-series">Batalha de séries</h1>
+      </div>
+      <div class="large-4 small-4 columns">
+        <a href="<%= serie_path(@batalha.desafiante)%>"><img src="<%= @batalha.desafiante.poster %>" alt="<%= @batalha.desafiante.nome_exibicao %>"></a>
+      </div>
+
+      <% likes_desafiante = @batalha.desafiante.likes(:vote_scope => @batalha.id)  %>
+      <% likes_desafiante_size = likes_desafiante.size  %>
+      <% likes_desafiada = @batalha.desafiada.likes(:vote_scope => @batalha.id)  %>
+      <% likes_desafiada_size = likes_desafiada.size  %>
+      <% likes_neutro = @batalha.likes(:vote_scope => "neutro")  %>
+      <% qtde_neutros = likes_neutro.size  %>
+
+      <% if likes_desafiante_size >= likes_desafiada_size   %>
+          <% vencedor =  @batalha.desafiante %>
+          <% perdedor =  @batalha.desafiada %>
+      <% else %>
+          <% vencedor =  @batalha.desafiada %>
+          <% perdedor =  @batalha.desafiante %>
+      <% end %>
+
+      <% likes_vencedor = vencedor.likes(:vote_scope => @batalha.id).size  %>
+      <% likes_perdedor = perdedor.likes(:vote_scope => @batalha.id).size  %>
+
+      <div class="large-4 small-4 columns">
+        <h2 class="titulo-vencedor texto-limitado"><%= vencedor.nome_exibicao %></h2>
+
+        <div class="progress resultado-batalha">
+          <span class="batalha-vencedor" style="width:<%= @batalha.percentual(likes_vencedor) %>%"><%= likes_vencedor%></span>
+        </div>
+
+        <h2 class="titulo-perdedor texto-limitado"><%= perdedor.nome_exibicao %></h2>
+
+        <div class="progress resultado-batalha">
+          <span class="batalha-perdedor" style="width:<%= @batalha.percentual(likes_perdedor)%>%"><%= likes_perdedor %></span>
+        </div>
+        <h2 class="titulo-neutro texto-limitado">Neutros</h2>
+
+        <div class="progress resultado-batalha resultado-batalha-neutro">
+          <span class="batalha-neutro" style="width:<%= @batalha.percentual(qtde_neutros)%>%"><%= qtde_neutros %></span>
+        </div>
+
+      </div>
+      <div class="large-4 small-4 columns">
+        <a href="<%= serie_path(@batalha.desafiada)%>"><img src="<%= @batalha.desafiada.poster %>" alt="<%= @batalha.desafiada.nome_exibicao %>"></a>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="large-4 small-4 columns">
+        <% if user_signed_in? && current_user.liked?(@batalha.desafiante, vote_scope: @batalha.id) %>
+            <%= button_to "Votar nessa opção", votar_batalha_serie_path(batalha_id: @batalha, id: @batalha.desafiante), disabled:true, class: "small button large-12 success columns primeiro-botao disabled", method: :put%>
+        <% else %>
+            <%= button_to "Votar nessa opção", votar_batalha_serie_path(batalha_id: @batalha, id: @batalha.desafiante), class: "small button large-12 success columns primeiro-botao", method: :put%>
+        <% end %>
+
+        <div class="row">
+          <div class="large-12 columns">
+            <h3>Quem apoia esta opção: (<%= likes_desafiante_size %>)</h3>
+            <ul class="quem-viu-episodio lista-com-margem-menor">
+              <%= render 'listagem_votos_batalha', likes: likes_desafiante %>
+            </ul>
+            <div class="row mostrar-todos-pequeno">
+              <div class="large-12 columns">
+                <a href="#" class="right">Mostrar todos</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="large-4 small-4 columns">
+        <% if user_signed_in? && current_user.liked?(@batalha, vote_scope: "neutro") %>
+            <%= button_to "Sou neutro nesta batalha", votar_neutro_batalha_path(@batalha), disabled:true, class: "small secondary button large-12 columns primeiro-botao disabled", method: :put %>
+        <% else %>
+            <%= link_to "Sou neutro nesta batalha", votar_neutro_batalha_path(@batalha), class: "small secondary button large-12 columns primeiro-botao", method: :put %>
+        <% end %>
+
+        <div class="row">
+          <div class="large-12 columns">
+            <h3>Quem é neutro: (<%= qtde_neutros %>)</h3>
+            <ul class="quem-viu-episodio lista-com-margem-menor">
+              <%= render 'listagem_votos_batalha', likes: likes_neutro %>
+            </ul>
+            <div class="row mostrar-todos-pequeno">
+              <div class="large-12 columns">
+                <a href="/series/anatomia-de-grey/personagens" class="right">Mostrar todos</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="large-4 small-4 columns">
+        <% if user_signed_in? && current_user.liked?(@batalha.desafiada, vote_scope: @batalha.id) %>
+            <%= button_to "Votar nessa opção", votar_batalha_serie_path(batalha_id: @batalha, id: @batalha.desafiada),disabled:true, class: "small button large-12 success columns primeiro-botao disabled", method: :put%>
+        <% else %>
+            <%= button_to "Votar nessa opção", votar_batalha_serie_path(batalha_id: @batalha, id: @batalha.desafiada), class: "small button large-12 success columns primeiro-botao", method: :put%>
+        <% end %>
+
+        <div class="row">
+          <div class="large-12 columns">
+            <h3>Quem apoia esta opção: (<%= likes_desafiada_size %>)</h3>
+            <ul class="quem-viu-episodio lista-com-margem-menor">
+              <%= render 'listagem_votos_batalha', likes: likes_desafiada %>
+            </ul>
+            <div class="row mostrar-todos-pequeno">
+              <div class="large-12 columns">
+                <a href="/series/anatomia-de-grey/personagens" class="right">Mostrar todos</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<br/>
+
+<div class="row">
+  <div class="large-8 columns">
+    <h2>Comentários</h2>
+    <%= commontator_thread(@batalha) %>
+  </div>
+
+  <div class="large-4 columns">
+    <h2>Outras batalhas:</h2>
+
+    <div class="row">
+      <div class="large-12 columns">
+        <a href="#">
+          <div class="row outras-batalhas">
+            <div class="large-5 columns">
+              <img src="http://meuseriado.com.br/images/series/poster/75760-34.jpg" alt="">
+            </div>
+            <div class="large-2 columns versus">
+            </div>
+            <div class="large-5 columns">
+              <img src="http://meuseriado.com.br/images/series/poster/71528-1.jpg" alt="">
+            </div>
+          </div>
+        </a>
+
+        <div class="row mostrar-todos">
+          <div class="large-12">
+            <a href="/series/anatomia-de-grey/personagens" class="right">Mostrar todas as batalhas &gt;&gt;</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
