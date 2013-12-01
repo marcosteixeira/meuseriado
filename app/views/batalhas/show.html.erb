@@ -18,11 +18,14 @@
         <a href="<%= serie_path(@batalha.desafiante)%>"><img src="<%= @batalha.desafiante.poster %>" alt="<%= @batalha.desafiante.nome_exibicao %>"></a>
       </div>
 
-      <% likes_desafiante = @batalha.desafiante.likes(:vote_scope => @batalha.id).size  %>
-      <% likes_desafiada = @batalha.desafiada.likes(:vote_scope => @batalha.id).size  %>
-      <% qtde_neutros = @batalha.likes(:vote_scope => "neutro").size  %>
+      <% likes_desafiante = @batalha.desafiante.likes(:vote_scope => @batalha.id)  %>
+      <% likes_desafiante_size = likes_desafiante.size  %>
+      <% likes_desafiada = @batalha.desafiada.likes(:vote_scope => @batalha.id)  %>
+      <% likes_desafiada_size = likes_desafiada.size  %>
+      <% likes_neutro = @batalha.likes(:vote_scope => "neutro")  %>
+      <% qtde_neutros = likes_neutro.size  %>
 
-      <% if likes_desafiante >= likes_desafiada   %>
+      <% if likes_desafiante_size >= likes_desafiada_size   %>
           <% vencedor =  @batalha.desafiante %>
           <% perdedor =  @batalha.desafiada %>
       <% else %>
@@ -37,18 +40,18 @@
         <h2 class="titulo-vencedor texto-limitado"><%= vencedor.nome_exibicao %></h2>
 
         <div class="progress resultado-batalha">
-          <span id="progresso_temporada_78901" class="batalha-vencedor" style="width:<%= @batalha.percentual(likes_vencedor) %>%"><%= likes_vencedor%></span>
+          <span class="batalha-vencedor" style="width:<%= @batalha.percentual(likes_vencedor) %>%"><%= likes_vencedor%></span>
         </div>
 
         <h2 class="titulo-perdedor texto-limitado"><%= perdedor.nome_exibicao %></h2>
 
         <div class="progress resultado-batalha">
-          <span id="progresso_temporada_78901" class="batalha-perdedor" style="width:<%= @batalha.percentual(likes_perdedor)%>%"><%= likes_perdedor %></span>
+          <span class="batalha-perdedor" style="width:<%= @batalha.percentual(likes_perdedor)%>%"><%= likes_perdedor %></span>
         </div>
         <h2 class="titulo-neutro texto-limitado">Neutros</h2>
 
         <div class="progress resultado-batalha resultado-batalha-neutro">
-          <span id="progresso_temporada_78901" class="batalha-neutro" style="width:<%= @batalha.percentual(qtde_neutros)%>%"><%= qtde_neutros %></span>
+          <span class="batalha-neutro" style="width:<%= @batalha.percentual(qtde_neutros)%>%"><%= qtde_neutros %></span>
         </div>
 
       </div>
@@ -59,89 +62,38 @@
 
     <div class="row">
       <div class="large-4 small-4 columns">
-
-        <%= link_to "Votar nessa opção", votar_batalha_serie_path(batalha_id: @batalha, id: @batalha.desafiante), class: "small button large-12 success columns primeiro-botao", method: :put%>
+        <% if user_signed_in? && current_user.liked?(@batalha.desafiante, vote_scope: @batalha.id) %>
+            <%= button_to "Votar nessa opção", votar_batalha_serie_path(batalha_id: @batalha, id: @batalha.desafiante), disabled:true, class: "small button large-12 success columns primeiro-botao disabled", method: :put%>
+        <% else %>
+            <%= button_to "Votar nessa opção", votar_batalha_serie_path(batalha_id: @batalha, id: @batalha.desafiante), class: "small button large-12 success columns primeiro-botao", method: :put%>
+        <% end %>
 
         <div class="row">
           <div class="large-12 columns">
-            <h3>Quem apoia esta opção: (<%= likes_desafiante %>)</h3>
+            <h3>Quem apoia esta opção: (<%= likes_desafiante_size %>)</h3>
             <ul class="quem-viu-episodio lista-com-margem-menor">
-              <li>
-                <a href="/users/marcos-vinicius-teixeira" class="tip-user">
-                  <img src="http://www.meuseriado.com.br/images/series/users/1/969038_509418345804073_1446962869_n.jpg" width="60" height="60" alt="Marcos Vinicius Teixeira">
-                </a>
-              </li>
-              <li>
-                <a href="/users/marcos-vinicius-teixeira" class="tip-user">
-                  <img src="http://www.meuseriado.com.br/images/series/users/1/969038_509418345804073_1446962869_n.jpg" width="60" height="60" alt="Marcos Vinicius Teixeira">
-                </a>
-              </li>
-              <li>
-                <a href="/users/marcos-vinicius-teixeira" class="tip-user">
-                  <img src="http://www.meuseriado.com.br/images/series/users/1/969038_509418345804073_1446962869_n.jpg" width="60" height="60" alt="Marcos Vinicius Teixeira">
-                </a>
-              </li>
-              <li>
-                <a href="/users/marcos-vinicius-teixeira" class="tip-user">
-                  <img src="http://www.meuseriado.com.br/images/series/users/1/969038_509418345804073_1446962869_n.jpg" width="60" height="60" alt="Marcos Vinicius Teixeira">
-                </a>
-              </li>
-              <li>
-                <a href="/users/marcos-vinicius-teixeira" class="tip-user">
-                  <img src="http://www.meuseriado.com.br/images/series/users/1/969038_509418345804073_1446962869_n.jpg" width="60" height="60" alt="Marcos Vinicius Teixeira">
-                </a>
-              </li>
-              <li>
-                <a href="/users/marcos-vinicius-teixeira" class="tip-user">
-                  <img src="http://www.meuseriado.com.br/images/series/users/1/969038_509418345804073_1446962869_n.jpg" width="60" height="60" alt="Marcos Vinicius Teixeira">
-                </a>
-              </li>
+              <%= render 'listagem_votos_batalha', likes: likes_desafiante %>
             </ul>
             <div class="row mostrar-todos-pequeno">
               <div class="large-12 columns">
-                <a href="/series/anatomia-de-grey/personagens" class="right">Mostrar todos</a>
+                <a href="#" class="right">Mostrar todos</a>
               </div>
             </div>
           </div>
         </div>
       </div>
       <div class="large-4 small-4 columns">
-        <a href="#" class="small secondary button large-12 columns primeiro-botao">Sou neutro nesta batalha</a>
+        <% if user_signed_in? && current_user.liked?(@batalha, vote_scope: "neutro") %>
+            <%= button_to "Sou neutro nesta batalha", votar_neutro_batalha_path(@batalha), disabled:true, class: "small secondary button large-12 columns primeiro-botao disabled", method: :put %>
+        <% else %>
+            <%= link_to "Sou neutro nesta batalha", votar_neutro_batalha_path(@batalha), class: "small secondary button large-12 columns primeiro-botao", method: :put %>
+        <% end %>
 
         <div class="row">
           <div class="large-12 columns">
             <h3>Quem é neutro: (<%= qtde_neutros %>)</h3>
             <ul class="quem-viu-episodio lista-com-margem-menor">
-              <li>
-                <a href="/users/marcos-vinicius-teixeira" class="tip-user">
-                  <img src="http://www.meuseriado.com.br/images/series/users/1/969038_509418345804073_1446962869_n.jpg" width="60" height="60" alt="Marcos Vinicius Teixeira">
-                </a>
-              </li>
-              <li>
-                <a href="/users/marcos-vinicius-teixeira" class="tip-user">
-                  <img src="http://www.meuseriado.com.br/images/series/users/1/969038_509418345804073_1446962869_n.jpg" width="60" height="60" alt="Marcos Vinicius Teixeira">
-                </a>
-              </li>
-              <li>
-                <a href="/users/marcos-vinicius-teixeira" class="tip-user">
-                  <img src="http://www.meuseriado.com.br/images/series/users/1/969038_509418345804073_1446962869_n.jpg" width="60" height="60" alt="Marcos Vinicius Teixeira">
-                </a>
-              </li>
-              <li>
-                <a href="/users/marcos-vinicius-teixeira" class="tip-user">
-                  <img src="http://www.meuseriado.com.br/images/series/users/1/969038_509418345804073_1446962869_n.jpg" width="60" height="60" alt="Marcos Vinicius Teixeira">
-                </a>
-              </li>
-              <li>
-                <a href="/users/marcos-vinicius-teixeira" class="tip-user">
-                  <img src="http://www.meuseriado.com.br/images/series/users/1/969038_509418345804073_1446962869_n.jpg" width="60" height="60" alt="Marcos Vinicius Teixeira">
-                </a>
-              </li>
-              <li>
-                <a href="/users/marcos-vinicius-teixeira" class="tip-user">
-                  <img src="http://www.meuseriado.com.br/images/series/users/1/969038_509418345804073_1446962869_n.jpg" width="60" height="60" alt="Marcos Vinicius Teixeira">
-                </a>
-              </li>
+              <%= render 'listagem_votos_batalha', likes: likes_neutro %>
             </ul>
             <div class="row mostrar-todos-pequeno">
               <div class="large-12 columns">
@@ -152,42 +104,17 @@
         </div>
       </div>
       <div class="large-4 small-4 columns">
-        <%= link_to "Votar nessa opção", votar_batalha_serie_path(batalha_id: @batalha, id: @batalha.desafiada), class: "small button large-12 success columns primeiro-botao", method: :put%>
+        <% if user_signed_in? && current_user.liked?(@batalha.desafiada, vote_scope: @batalha.id) %>
+            <%= button_to "Votar nessa opção", votar_batalha_serie_path(batalha_id: @batalha, id: @batalha.desafiada),disabled:true, class: "small button large-12 success columns primeiro-botao disabled", method: :put%>
+        <% else %>
+            <%= button_to "Votar nessa opção", votar_batalha_serie_path(batalha_id: @batalha, id: @batalha.desafiada), class: "small button large-12 success columns primeiro-botao", method: :put%>
+        <% end %>
 
         <div class="row">
           <div class="large-12 columns">
-            <h3>Quem apoia esta opção: (<%= likes_desafiada %>)</h3>
+            <h3>Quem apoia esta opção: (<%= likes_desafiada_size %>)</h3>
             <ul class="quem-viu-episodio lista-com-margem-menor">
-              <li>
-                <a href="/users/marcos-vinicius-teixeira" class="tip-user">
-                  <img src="http://www.meuseriado.com.br/images/series/users/1/969038_509418345804073_1446962869_n.jpg" width="60" height="60" alt="Marcos Vinicius Teixeira">
-                </a>
-              </li>
-              <li>
-                <a href="/users/marcos-vinicius-teixeira" class="tip-user">
-                  <img src="http://www.meuseriado.com.br/images/series/users/1/969038_509418345804073_1446962869_n.jpg" width="60" height="60" alt="Marcos Vinicius Teixeira">
-                </a>
-              </li>
-              <li>
-                <a href="/users/marcos-vinicius-teixeira" class="tip-user">
-                  <img src="http://www.meuseriado.com.br/images/series/users/1/969038_509418345804073_1446962869_n.jpg" width="60" height="60" alt="Marcos Vinicius Teixeira">
-                </a>
-              </li>
-              <li>
-                <a href="/users/marcos-vinicius-teixeira" class="tip-user">
-                  <img src="http://www.meuseriado.com.br/images/series/users/1/969038_509418345804073_1446962869_n.jpg" width="60" height="60" alt="Marcos Vinicius Teixeira">
-                </a>
-              </li>
-              <li>
-                <a href="/users/marcos-vinicius-teixeira" class="tip-user">
-                  <img src="http://www.meuseriado.com.br/images/series/users/1/969038_509418345804073_1446962869_n.jpg" width="60" height="60" alt="Marcos Vinicius Teixeira">
-                </a>
-              </li>
-              <li>
-                <a href="/users/marcos-vinicius-teixeira" class="tip-user">
-                  <img src="http://www.meuseriado.com.br/images/series/users/1/969038_509418345804073_1446962869_n.jpg" width="60" height="60" alt="Marcos Vinicius Teixeira">
-                </a>
-              </li>
+              <%= render 'listagem_votos_batalha', likes: likes_desafiada %>
             </ul>
             <div class="row mostrar-todos-pequeno">
               <div class="large-12 columns">
@@ -205,7 +132,6 @@
 
 <div class="row">
   <div class="large-8 columns">
-    <!-- COLOCAR AKI OS COMENTARIOS -->
     <h2>Comentários</h2>
     <%= commontator_thread(@batalha) %>
   </div>

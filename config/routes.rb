@@ -77,6 +77,11 @@ Meuseriado::Application.routes.draw do
         put :votar
       end
     end
+
+    member do
+      put :votar_neutro
+    end
+
   end
 
 end

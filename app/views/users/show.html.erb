@@ -30,7 +30,7 @@
           <% elsif current_user.blocked? @user %>
               <%= link_to "Desbloquear", desbloquear_amigo_user_path(@user), {:class => "small button large-12 success columns primeiro-botao", :method => :post} %>
           <% elsif current_user.pending_invited.include? @user %>
-              <%= link_to "Solicitação enviada", adicionar_amigo_user_path(@user), class: "small button large-12 success columns primeiro-botao disabled", method: :post %>
+              <%= button_to "Solicitação enviada", adicionar_amigo_user_path(@user), disabled: true,class: "small button large-12 success columns primeiro-botao disabled", method: :post %>
           <% else %>
               <%= link_to "Adicionar como amigo", adicionar_amigo_user_path(@user), class: "small button large-12 success columns primeiro-botao", method: :post if !@user.blocked? current_user %>
           <% end %>

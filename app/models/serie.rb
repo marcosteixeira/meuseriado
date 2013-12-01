@@ -27,6 +27,7 @@ class Serie < ActiveRecord::Base
   scope :top9,
         select("series.*, count(visualizacoes.id) AS visualizacoes_count").
             joins(:visualizacoes).
+            where("visualizacoes.created_at > '#{1.week.ago}'").
             group("series.id").
             order("visualizacoes_count DESC").
             limit(9)

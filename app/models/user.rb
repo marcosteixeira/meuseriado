@@ -131,13 +131,23 @@ class User < ActiveRecord::Base
     self.personagens.include?(personagem)
   end
 
-  def votar(batalha, serie)
+  def votar(batalha, serie, neutro=false)
     oponente = batalha.oponente(serie)
-    if !self.voted_for?(serie, :vote_scope => batalha.id) && !self.voted_for?(oponente, :vote_scope => batalha.id)
-      serie.vote :voter => self, :vote => 'like', :vote_scope => batalha.id
-    elsif self.voted_for?(oponente, :vote_scope => batalha.id)
+
+    if neutro
+      serie.unliked_by(self, vote_scope: batalha.id)
       oponente.unliked_by(self, vote_scope: batalha.id)
-      serie.vote :voter => self, :vote => 'like', :vote_scope => batalha.id
+      batalha.vote :voter => self, :vote => 'like', :vote_scope => 'neutro'
+    else
+
+      if !self.voted_for?(serie, :vote_scope => batalha.id) && !self.voted_for?(oponente, :vote_scope => batalha.id)
+        serie.vote :voter => self, :vote => 'like', :vote_scope => batalha.id
+      elsif self.voted_for?(oponente, :vote_scope => batalha.id)
+        oponente.unliked_by(self, vote_scope: batalha.id)
+        serie.vote :voter => self, :vote => 'like', :vote_scope => batalha.id
+      end
+
+      batalha.unliked_by(self, vote_scope: 'neutro')
     end
   end
 
