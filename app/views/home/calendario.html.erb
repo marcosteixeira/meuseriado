@@ -4,7 +4,7 @@
     <%= @date.strftime("%B %Y") %>
     <%= link_to ">", :month => (@date.end_of_month+1).strftime("%Y-%m-%d") %>
     <%= link_to "Mostrar todas", all: true  if user_signed_in? and !@all %>
-    <%= link_to "Somente minhas séries", all: false  if user_signed_in? and @all %>
+    <%= link_to "Somente minhas séries", all: nil if user_signed_in? and @all %>
   </h2>
   <%= calendar_for @episodios, :year => @date.year, :month => @date.month do |calendar| %>
       <%= calendar.head('Domingo','Segunda' ,'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado') %>

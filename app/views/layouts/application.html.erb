@@ -1,7 +1,5 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:og="http://ogp.me/ns#"
-      xmlns:fb="https://www.facebook.com/2008/fbml" >
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:og="http://ogp.me/ns#">
 <!--[if IE 8]>
 <html class="no-js lt-ie9" lang="en"> <![endif]-->
 <!--[if gt IE 8]><!-->
@@ -16,6 +14,11 @@
   <meta charset="utf-8"/>
   <meta name="google-site-verification" content="yY69MiM4_1l1uSzD9RDycZu-5w80j-IN08roDTw_1vs"/>
   <meta name="viewport" content="width=device-width"/>
+
+  <% if @og_image %>
+      <meta property="og:image" content="<%= @og_image %>"/>
+      <meta property="og:image:secure_url" content="<%= @og_image %>"/>
+  <% end %>
 
 
   <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon"/>

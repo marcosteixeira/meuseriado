@@ -145,6 +145,8 @@ class SeriesController < ApplicationController
 
     @title = @serie.nome_exibicao
     commontator_thread_show(@serie)
+
+    @og_image = "http://meuseriado.com.br#{@serie.poster}"
   end
 
   def adicionar

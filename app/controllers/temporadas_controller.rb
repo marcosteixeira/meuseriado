@@ -12,6 +12,7 @@ class TemporadasController < ApplicationController
 
     @title = @temporada.nome_temporada_formatado
     commontator_thread_show(@temporada)
+    @og_image = "http://meuseriado.com.br#{@temporada.imagem}"
   end
 
   def marcar_toda

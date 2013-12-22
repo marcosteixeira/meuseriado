@@ -11,6 +11,8 @@ class EpisodiosController < ApplicationController
     @episodio = Episodio.friendly.find(params[:id])
     @title = "#{@episodio.nome_episodio_formatado} - Temporada #{@episodio.temporada} Episódio #{@episodio.numero} - #{@episodio.nome}"
     commontator_thread_show(@episodio)
+    @og_image = "http://meuseriado.com.br#{@episodio.banner}"
+
   end
 
   def marcar

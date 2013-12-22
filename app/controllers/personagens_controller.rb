@@ -16,6 +16,7 @@ class PersonagensController < ApplicationController
     @personagem = Personagem.friendly.find(params[:id])
     @title = @personagem.nome
     commontator_thread_show(@personagem)
+    @og_image = "http://meuseriado.com.br#{@personagem.imagem}"
   end
 
   def marcar
