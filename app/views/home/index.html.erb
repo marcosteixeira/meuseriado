@@ -64,7 +64,36 @@
     </div>
   </div>
   <div class="row">
-    <%= gerando_assunto(@avaliacoes) %>
+    <div class="large-12 columns">
+      <div class="large-4 columns">
+        <h2>Batalha da semana:</h2>
+
+        <div class="row">
+          <div class="large-12 columns">
+            <a href="/batalhas/<%= @batalha_ativa.slug %>">
+              <div class="row outras-batalhas">
+                <div class="large-5 columns">
+                  <img src="http://meuseriado.com.br/images/series/poster/75760-34.jpg" alt="">
+                </div>
+                <div class="large-2 columns versus">
+                </div>
+                <div class="large-5 columns">
+                  <img src="http://meuseriado.com.br/images/series/poster/71528-1.jpg" alt="">
+                </div>
+              </div>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="large-12 columns">
+      <hr>
+    </div>
+  </div>
+  <div class="row">
+  <%= gerando_assunto(@avaliacoes) %>
     <%= rolando_agora(@avaliacoes) %>
     <div class="large-5 columns">
       <div class="anuncio-grande right">

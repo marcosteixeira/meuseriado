@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131222013605) do
+ActiveRecord::Schema.define(version: 20131224015109) do
 
   create_table "acompanhamento_series", force: true do |t|
     t.integer "avaliacao_id", null: false
@@ -70,6 +70,7 @@ ActiveRecord::Schema.define(version: 20131222013605) do
     t.integer "desafiante_id", default: 0, null: false
     t.integer "desafiada_id", default: 0, null: false
     t.string "slug"
+    t.boolean "ativa", default: true
   end
 
   add_index "batalhas", ["desafiada_id"], name: "batalhas_desafiada_id_fk", using: :btree
