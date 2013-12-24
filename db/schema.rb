@@ -11,8 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-
-ActiveRecord::Schema.define(version: 20131122234940) do
+ActiveRecord::Schema.define(version: 20131222013605) do
 
   create_table "acompanhamento_series", force: true do |t|
     t.integer "avaliacao_id", null: false
@@ -174,6 +173,14 @@ ActiveRecord::Schema.define(version: 20131122234940) do
   add_index "generos_series", ["genero_id"], name: "generos_series_genero_id_fk", using: :btree
   add_index "generos_series", ["serie_id"], name: "generos_series_serie_id_fk", using: :btree
 
+  create_table "notificacoes", force: true do |t|
+    t.integer "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "notificacoes", ["user_id"], name: "index_notificacoes_on_user_id", using: :btree
+
   create_table "parceiros", force: true do |t|
     t.string "nome"
     t.string "email"
@@ -241,6 +248,16 @@ ActiveRecord::Schema.define(version: 20131122234940) do
   end
 
   add_index "temporadas", ["serie_id"], name: "temporadas_serie_id_fk", using: :btree
+
+  create_table "user_neutros", force: true do |t|
+    t.integer "user_id", default: 0, null: false
+    t.integer "batalha_id", default: 0, null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "user_neutros", ["batalha_id"], name: "user_neutros_batalha_id_fk", using: :btree
+  add_index "user_neutros", ["user_id", "batalha_id"], name: "index_user_neutros_on_user_id_and_batalha_id", unique: true, using: :btree
 
   create_table "users", force: true do |t|
     t.string "email", default: "", null: false
@@ -318,12 +335,17 @@ ActiveRecord::Schema.define(version: 20131122234940) do
   add_foreign_key "generos_series", "generos", name: "generos_series_genero_id_fk"
   add_foreign_key "generos_series", "series", name: "generos_series_serie_id_fk"
 
+  add_foreign_key "notificacoes", "users", name: "notificacoes_user_id_fk"
+
   add_foreign_key "personagens", "atores", name: "personagens_ator_id_fk"
   add_foreign_key "personagens", "series", name: "personagens_serie_id_fk"
 
   add_foreign_key "series", "produtoras", name: "series_produtora_id_fk"
 
   add_foreign_key "temporadas", "series", name: "temporadas_serie_id_fk"
+
+  add_foreign_key "user_neutros", "batalhas", name: "user_neutros_batalha_id_fk"
+  add_foreign_key "user_neutros", "users", name: "user_neutros_user_id_fk"
 
   add_foreign_key "visualizacoes", "series", name: "visualizacoes_serie_id_fk"
 

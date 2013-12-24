@@ -151,7 +151,7 @@ class SeriesController < ApplicationController
 
   def adicionar
     @serie = Serie.friendly.find(params[:id])
-    @serie.marcar_como_vista(current_user)
+    @serie.marcar_como_vista(current_user, false, nil, true)
     redirect_to(action: "show", id: @serie)
   end
 

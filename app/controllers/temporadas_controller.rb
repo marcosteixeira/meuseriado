@@ -19,7 +19,7 @@ class TemporadasController < ApplicationController
     @temporada = Temporada.friendly.find(params[:id])
     serie = @temporada.serie
     serie.marcar_como_vista(current_user)
-    @temporada.marcar_como_vista(current_user)
+    @temporada.marcar_como_vista(current_user, true)
     respond_to do |format|
       format.html { redirect_to(action: "show", id: @temporada) }
       format.json { render json: @temporada, status: :ok }

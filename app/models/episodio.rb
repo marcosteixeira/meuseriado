@@ -37,19 +37,30 @@ class Episodio < ActiveRecord::Base
       end
       self.avaliacoes << aval
       self.save
+      if notificar && user.notifica?
+        begin
+          graph = Koala::Facebook::API.new(user.token)
+          graph.put_wall_post("Acabei de assistir #{self.nome_episodio_formatado} e marquei lá no MeuSeriado", {:name => "MeuSeriado - #{self.nome_episodio_formatado} - #{self.nome}", :link => "http://meuseriado.com.br/episodios/#{self.slug}"}, user.uid)
+        rescue => e
+          #faz nada
+        end
+      end
     elsif nota
       aval.first.nota = nota
       aval.first.save
-    end
-
-    if notificar && user.provider.eql?("facebook") && user.notificar_atualizacoes_fb
-      begin
-        graph = Koala::Facebook::API.new(user.token)
-        graph.put_wall_post("Acabei de assistir #{self.nome_episodio_formatado} e marquei lá no MeuSeriado", {:name => "MeuSeriado - #{self.nome_episodio_formatado} - #{self.nome}", :link => "http://meuseriado.com.br/episodios/#{self.slug}"}, user.uid)
-      rescue => e
-        #faz nada
+      if user.notifica?
+        begin
+          graph = Koala::Facebook::API.new(user.token)
+          graph.put_wall_post("Acabei de dar nota #{nota}/5 para #{self.nome_episodio_formatado} lá no MeuSeriado", {:name => "MeuSeriado - #{self.nome_episodio_formatado}", :link => "http://meuseriado.com.br/episodios/#{self.slug}"}, user.uid)
+          notific = Notificacao.new
+          notific.user = user
+          notific.save
+        rescue => e
+          #faz nada
+        end
       end
     end
+
 
   end
 

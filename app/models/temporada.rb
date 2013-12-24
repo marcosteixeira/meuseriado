@@ -1,3 +1,4 @@
+#coding: utf-8
 class Temporada < ActiveRecord::Base
   extend FriendlyId
   acts_as_commontable
@@ -31,7 +32,7 @@ class Temporada < ActiveRecord::Base
     "#{self.temporada}"
   end
 
-  def marcar_como_vista(user, nota= nil)
+  def marcar_como_vista(user, nota= nil, notifica=false)
     self.episodios_ordenados_exibicao_passado.each do |episodio|
       episodio.marcar_como_visto(user)
     end
@@ -47,9 +48,29 @@ class Temporada < ActiveRecord::Base
       end
       self.avaliacoes << aval
       self.save
+
+      if notifica && user.notifica?
+        begin
+          graph = Koala::Facebook::API.new(user.token)
+          graph.put_wall_post("Acabei de assistir a temporada #{self.temporada} de #{self.serie.nome_exibicao} e marquei lá no MeuSeriado", {:name => "MeuSeriado - #{self.serie.nome_exibicao} - Temporada #{self.temporada}", :link => "http://meuseriado.com.br/temporadas/#{self.slug}"}, user.uid)
+        rescue => e
+          #faz nada
+        end
+      end
     elsif nota
       aval.first.nota = nota
       aval.first.save
+      if user.notifica?
+        begin
+          graph = Koala::Facebook::API.new(user.token)
+          graph.put_wall_post("Acabei de dar nota para a temporada #{self.temporada} de #{self.serie.nome_exibicao} lá no MeuSeriado", {:name => "MeuSeriado - #{self.serie.nome_exibicao} - Temporada #{self.temporada}", :link => "http://meuseriado.com.br/temporadas/#{self.slug}"}, user.uid)
+          notific = Notificacao.new
+          notific.user = user
+          notific.save
+        rescue => e
+          #faz nada
+        end
+      end
     end
   end
 

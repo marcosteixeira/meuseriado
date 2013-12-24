@@ -1,3 +1,4 @@
+#coding: utf-8
 class Personagem < ActiveRecord::Base
   extend FriendlyId
   friendly_id :gerar_slug, use: :slugged
@@ -11,7 +12,7 @@ class Personagem < ActiveRecord::Base
     if nome
       "#{self.nome}"
     else
-      "#{self.serie.nome}-#{self.ator.nome}"
+      "#{self.serie.nome_exibicao}-#{self.ator.nome}"
     end
   end
 
@@ -28,9 +29,28 @@ class Personagem < ActiveRecord::Base
 
       self.avaliacoes << aval
       self.save
+      if user.notifica?
+        begin
+          graph = Koala::Facebook::API.new(user.token)
+          graph.put_wall_post("Encontrei #{self.nome} da série #{self.serie.nome_exibicao} lá no MeuSeriado", {:name => "MeuSeriado - #{self.nome} - #{self.serie.nome_exibicao}", :link => "http://meuseriado.com.br/personagens/#{self.slug}"}, user.uid)
+        rescue => e
+          #faz nada
+        end
+      end
     elsif nota
       aval.first.nota = nota
       aval.first.save
+      if user.notifica?
+        begin
+          graph = Koala::Facebook::API.new(user.token)
+          graph.put_wall_post("Acabei de dar nota #{nota}/5 para o personagem #{self.nome} da série #{self.serie.nome_exibicao} lá no MeuSeriado", {:name => "MeuSeriado - #{self.nome} - #{self.serie.nome_exibicao}", :link => "http://meuseriado.com.br/personagens/#{self.slug}"}, user.uid)
+          notific = Notificacao.new
+          notific.user = user
+          notific.save
+        rescue => e
+          #faz nada
+        end
+      end
     end
   end
 

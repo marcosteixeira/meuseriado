@@ -19,6 +19,7 @@ class User < ActiveRecord::Base
 
   has_many :avaliacoes, :dependent => :delete_all, :order => 'id DESC'
   has_many :series_vistas, :through => :avaliacoes, :source => :acompanhamento_serie, :include => {avaliacao: :avaliavel}
+  has_many :notificacoes
 
   def series
     Serie.find_by_sql("SELECT  `series`.* FROM `series` INNER JOIN `avaliacoes` ON `series`.`id` = `avaliacoes`.`avaliavel_id` WHERE `avaliacoes`.`user_id` = #{self.id} AND `avaliacoes`.`avaliavel_type` = 'Serie'  ORDER BY id DESC")
@@ -176,6 +177,16 @@ class User < ActiveRecord::Base
     !self.token.present? || self.token_expire_at < Time.now
   end
 
+  def notifica?
+    if self.provider.eql?("facebook") && self.notificar_atualizacoes_fb
+      if !self.notificacoes.present?
+        return true
+      else
+        return self.notificacoes.last.created_at < 5.minutes.ago
+      end
+    end
+  end
+
   class << self
     def current_user=(user)
       Thread.current[:current_user] = user
@@ -186,7 +197,3 @@ class User < ActiveRecord::Base
     end
   end
 end
-
-
-  #@graph.put_wall_post("BlablaBla- Dexter", {:name => "Nome - Dexter", :link => "http://meuseriado.com.br/episodios/dexter-8-12-remember-the-monsters"}, "100002077371868")
-

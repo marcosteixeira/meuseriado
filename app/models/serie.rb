@@ -249,18 +249,32 @@ class Serie < ActiveRecord::Base
     end
   end
 
-  def marcar_como_vista(user, finalizou=false, nota=nil)
+  def marcar_como_vista(user, finalizou=false, nota=nil, notifica=false)
     aval = Avaliacao.find_by_sql("select * from avaliacoes where avaliavel_type='Serie' and avaliavel_id=#{self.id} and user_id=#{user.id} ")
     if aval.empty?
+      #adicionou as favoritas ou marcou inteira como vista. Se finalizou = marcar inteira.
       aval = Avaliacao.new
       aval.user = user
+      #nao marcou como vista mas deu nota
       if nota
         aval.nota= nota
       end
       acompanhamento = criar_acompanhamento(aval, finalizou)
       self.avaliacoes << aval
       self.save
+      if notifica && user.notifica?
+        begin
+          graph = Koala::Facebook::API.new(user.token)
+          graph.put_wall_post("Acabei de adicionar #{self.nome_exibicao} como favorita lá no MeuSeriado", {:name => "MeuSeriado - #{self.nome_exibicao}", :link => "http://meuseriado.com.br/series/#{self.slug}"}, user.uid)
+          notific = Notificacao.new
+          notific.user = user
+          notific.save
+        rescue => e
+          #faz nada
+        end
+      end
     else
+      # ja havia adicionado as favoritas. Se finalizou = marcar inteira
       aval_banco = aval.first
       if self.finalizada? && finalizou
         if !aval_banco.acompanhamento_serie.finalizada
@@ -271,9 +285,22 @@ class Serie < ActiveRecord::Base
           aval_banco.acompanhamento_serie.save
         end
       end
+
+      #marcou como vista e deu nota
       if nota
         aval_banco.nota = nota
         aval_banco.save
+        if user.notifica?
+          begin
+            graph = Koala::Facebook::API.new(user.token)
+            graph.put_wall_post("Acabei de dar nota #{nota}/5 para #{self.nome_exibicao} lá no MeuSeriado", {:name => "MeuSeriado - #{self.nome_exibicao}", :link => "http://meuseriado.com.br/series/#{self.slug}"}, user.uid)
+            notific = Notificacao.new
+            notific.user = user
+            notific.save
+          rescue => e
+            #faz nada
+          end
+        end
       end
     end
   end
@@ -316,9 +343,21 @@ class Serie < ActiveRecord::Base
   end
 
   def marcar_inteira(user)
-    self.marcar_como_vista(user, true)
+    self.marcar_como_vista(user, true, nil, false)
     self.temporadas_validas_ordenadas("asc").each do |temporada|
-      temporada.marcar_como_vista(user)
+      temporada.marcar_como_vista(user, false)
+    end
+
+    if user.notifica?
+      begin
+        graph = Koala::Facebook::API.new(user.token)
+        graph.put_wall_post("Acabei de marcar #{self.nome_exibicao} como vista lá no MeuSeriado", {:name => "MeuSeriado - #{self.nome_exibicao}", :link => "http://meuseriado.com.br/series/#{self.slug}"}, user.uid)
+        notific = Notificacao.new
+        notific.user = user
+        notific.save
+      rescue => e
+        #faz nada
+      end
     end
   end
 

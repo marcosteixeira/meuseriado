@@ -7,7 +7,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
     end
 
     @user = User.find(current_user.id)
-    if @user.update_attributes(params[:user].permit(:avatar, :name))
+    if @user.update_attributes(params[:user].permit(:avatar, :name, :email, :notificar_atualizacoes_fb, :password, :password_confirmation))
       set_flash_message :notice, :updated
       # Sign in the user bypassing validation in case his password changed
       sign_in @user, :bypass => true
@@ -23,10 +23,10 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   private
   def resource_params
-    params.require(:user).permit(:name, :email, :password, :password_confirmation, :profile_attributes, :provider, :uid, :avatar)
+    params.require(:user).permit(:name, :email, :password, :password_confirmation, :profile_attributes, :provider, :uid, :avatar, :notificar_atualizacoes_fb)
   end
 
   def sign_up_params
-    params.require(:user).permit(:name, :email, :password, :password_confirmation, :profile_attributes, :provider, :uid, :avatar)
+    params.require(:user).permit(:name, :email, :password, :password_confirmation, :profile_attributes, :provider, :uid, :avatar, :notificar_atualizacoes_fb)
   end
 end

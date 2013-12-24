@@ -16,19 +16,19 @@ set :default_stage, "production"
 # if you're still using the script/reaper helper you will need
 # these http://github.com/rails/irs_process_scripts
 namespace :deploy do
-    task :restart, :roles => :app, :except => { :no_release => true } do
-        run "cd #{current_path} && touch tmp/restart.txt"
-    end
+  task :restart, :roles => :app, :except => {:no_release => true} do
+    run "cd #{current_path} && touch tmp/restart.txt"
+  end
 end
 before :deploy, 'deploy:copia_imagens'
 after :deploy, 'deploy:database'
 namespace :deploy do
-    task :database, :roles => :app do
-        run "cp #{deploy_to}shared/database.yml #{current_path}/config/"
-    end
-    task :copia_imagens do
-        run "mv #{current_path}/app/assets/images/series/ #{deploy_to}shared/"
-    end
+  task :database, :roles => :app do
+    run "cp #{deploy_to}shared/database.yml #{current_path}/config/"
+  end
+  task :copia_imagens do
+    run "mv #{current_path}/app/assets/images/series/ #{deploy_to}shared/"
+  end
 
 end
 
@@ -38,7 +38,7 @@ namespace :bundle do
   task :install do
     run "cd #{current_path} && bundle install  --deployment && rake db:migrate RAILS_ENV=\"production\""
   end
-  task :restaura_imagens do 
+  task :restaura_imagens do
     run "cp -r  #{deploy_to}shared/series/ #{current_path}/app/assets/images/ && rm -rf #{deploy_to}shared/series/ "
   end
 end
