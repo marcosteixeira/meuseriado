@@ -1,3 +1,4 @@
+#coding: utf-8
 class User < ActiveRecord::Base
   extend FriendlyId
   include Amistad::FriendModel
@@ -160,6 +161,17 @@ class User < ActiveRecord::Base
       serie.unliked_by(self, vote_scope: batalha.id)
       oponente.unliked_by(self, vote_scope: batalha.id)
       batalha.vote :voter => self, :vote => 'like', :vote_scope => 'neutro'
+      if self.notifica?
+        begin
+          graph = Koala::Facebook::API.new(user.token)
+          graph.put_wall_post("Votei neutro na batalha #{batalha.nome} lá do MeuSeriado", {:name => "MeuSeriado - #{batalha.nome}", :link => "http://meuseriado.com.br/batalhas/#{batalha.slug}"}, self.uid)
+          notific = Notificacao.new
+          notific.user = user
+          notific.save
+        rescue => e
+          #faz nada
+        end
+      end
     else
 
       if !self.voted_for?(serie, :vote_scope => batalha.id) && !self.voted_for?(oponente, :vote_scope => batalha.id)
@@ -167,6 +179,18 @@ class User < ActiveRecord::Base
       elsif self.voted_for?(oponente, :vote_scope => batalha.id)
         oponente.unliked_by(self, vote_scope: batalha.id)
         serie.vote :voter => self, :vote => 'like', :vote_scope => batalha.id
+      end
+
+      if self.notifica?
+        begin
+          graph = Koala::Facebook::API.new(user.token)
+          graph.put_wall_post("Votei em #{serie.nome_exibicao} contra #{oponente.nome_exibicao} lá do MeuSeriado", {:name => "MeuSeriado - #{batalha.nome}", :link => "http://meuseriado.com.br/batalhas/#{batalha.slug}"}, self.uid)
+          notific = Notificacao.new
+          notific.user = user
+          notific.save
+        rescue => e
+          #faz nada
+        end
       end
 
       batalha.unliked_by(self, vote_scope: 'neutro')
