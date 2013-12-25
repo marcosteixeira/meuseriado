@@ -73,7 +73,7 @@
             <a href="/batalhas/<%= @batalha_ativa.slug %>">
               <div class="row outras-batalhas">
                 <div class="large-5 columns">
-                  <img src="http://meuseriado.com.br/images/series/poster/75760-34.jpg" alt="">
+                  <img src="<%= @batalha_ativa.desafiante.poster %>" alt="<%= @batalha_ativa.desafiante.nome_exibicao %>">
                 </div>
                 <div class="large-2 columns versus">
                 </div>
