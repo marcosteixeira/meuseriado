@@ -24,8 +24,9 @@ ActiveAdmin.register Serie do
 
   #collections
   collection_action :atualizar_todas, :method => :get do
+    tvdb = Tvdbr::Client.new
     Serie.all.each do |serie|
-      Serie.update_serie serie
+      Serie.update_serie (serie, tvdb)
     end
     redirect_to admin_series_path, notice: "Todas atualizadas"
   end
@@ -36,8 +37,9 @@ ActiveAdmin.register Serie do
   end
 
   member_action :atualizar, :method => :get do
+    tvdb = Tvdbr::Client.new
     serie = Serie.friendly.find(params[:id])
-    Serie.update_serie serie
+    Serie.update_serie (serie, tvdb)
     redirect_to admin_serie_path(serie), notice: "Serie atualizada"
   end
 

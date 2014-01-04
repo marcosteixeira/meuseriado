@@ -13,14 +13,5 @@ module Meuseriado
     config.assets.enabled = false
     config.time_zone = 'Brasilia'
     config.active_record.default_timezone = :local
-
-    require 'rufus-scheduler'
-
-    scheduler = Rufus::Scheduler.new
-
-    scheduler.cron '00 3 * * *' do
-      Serie.updater_bot
-    end
-
   end
 end
