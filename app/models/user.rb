@@ -43,7 +43,19 @@ class User < ActiveRecord::Base
     eps = []
     series.each do |serie|
       serie.episodios.each do |ep|
-        if ep.estreia && (ep.estreia > data.beginning_of_month && ep.estreia < data.end_of_month)
+        if ep.estreia && (ep.estreia >= data.beginning_of_month && ep.estreia <= data.end_of_month)
+          eps << ep
+        end
+      end
+    end
+    eps
+  end
+
+  def episodios_series_dia(data)
+    eps = []
+    series.each do |serie|
+      serie.episodios.each do |ep|
+        if ep.estreia && (ep.estreia >= data.beginning_of_day && ep.estreia <= data.end_of_day)
           eps << ep
         end
       end
