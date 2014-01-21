@@ -31,6 +31,13 @@
             <%= f.check_box :notificar_atualizacoes_fb %></div>
 
 
+          <div class="row collapse"><%= f.label :api_key %>
+            <br/>
+            <input type="text" disabled value="<%= current_user.api_keys.first.access_token %>">
+            </div>
+
+
+
           <div class="row lista-de-botoes">
             <div class="large-2 columns"><%= f.submit "Atualizar", :class => 'small button large-12 columns' %></div>
           </div>

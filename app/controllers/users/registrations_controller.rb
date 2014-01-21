@@ -21,6 +21,13 @@ class Users::RegistrationsController < Devise::RegistrationsController
     super
   end
 
+  def edit
+    if current_user && !current_user.api_keys.present?
+      ApiKey.create(user: current_user)
+    end
+    super
+  end
+
   private
   def resource_params
     params.require(:user).permit(:name, :email, :password, :password_confirmation, :profile_attributes, :provider, :uid, :avatar, :notificar_atualizacoes_fb)

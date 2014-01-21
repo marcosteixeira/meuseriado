@@ -62,6 +62,7 @@ Meuseriado::Application.routes.draw do
       post :desbloquear_amigo
       post :excluir_amigo
     end
+    post :gerar_api_key
   end
 
   resources :personagens do
@@ -83,6 +84,18 @@ Meuseriado::Application.routes.draw do
       put :votar_neutro
     end
 
+  end
+
+  namespace :api, defaults: {format: "json"}  do
+    namespace :v1 do
+      resources :episodios do
+        collection do
+          get :search
+        end
+      end
+
+      resources :series
+    end
   end
 
 end

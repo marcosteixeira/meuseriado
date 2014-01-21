@@ -188,10 +188,17 @@ class Serie < ActiveRecord::Base
     end
 
     def updater_bot(tempo=1.day.ago)
-      tvdb = Tvdbr::Client.new
-      tvdb.each_updated_series(:since => tempo) do |serie|
-        Serie.salvar(serie)
+      update = Update.create!
+      begin
+        tvdb = Tvdbr::Client.new
+        tvdb.each_updated_series(:since => tempo) do |serie|
+          Serie.salvar(serie)
+        end
+      rescue => e
+        update.falha=e.message
       end
+      update.fim = Time.now
+
     end
 
     def update_serie(serie, tvdb)

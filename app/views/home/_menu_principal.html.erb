@@ -21,6 +21,7 @@
               </a>
               <ul id="dropdown-usuario-logado" class="f-dropdown" data-dropdown-content>
                 <li><%= link_to 'Onde parei?', home_onde_parei_path %></li>
+                <li><%= link_to 'Calendário', home_calendario_path %></li>
                 <li><%= link_to 'Minha página pessoal', user_path(current_user) %></li>
                 <li><%= link_to "Sair", destroy_user_session_path, method: :get %></li>
               </ul>
