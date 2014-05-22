@@ -25,17 +25,17 @@
           <% if current_user.id == @user.id %>
               <%= link_to "Editar perfil", edit_user_registration_path, {:class => "small button large-12 success columns primeiro-botao"} %>
           <% elsif current_user.friend_with? @user %>
-              <%= link_to "Bloquear", recusar_amigo_user_path(@user), {:class => "small button large-12 success columns primeiro-botao", :method => :post} %>
-              <%= link_to "Excluir", excluir_amigo_user_path(@user), {:class => "small button large-12 alert columns primeiro-botao", :method => :post, :confirm => "Você tem certeza?"} %>
+              <%= link_to "Bloquear", "#", {:class => "small button large-12 success columns primeiro-botao", :method => :post} %>
+              <%= link_to "Excluir", "#", {:class => "small button large-12 alert columns primeiro-botao", :method => :post, :confirm => "Você tem certeza?"} %>
           <% elsif current_user.blocked? @user %>
-              <%= link_to "Desbloquear", desbloquear_amigo_user_path(@user), {:class => "small button large-12 success columns primeiro-botao", :method => :post} %>
+              <%= link_to "Desbloquear", "#", {:class => "small button large-12 success columns primeiro-botao", :method => :post} %>
           <% elsif current_user.pending_invited.include? @user %>
-              <%= button_to "Solicitação enviada", adicionar_amigo_user_path(@user), disabled: true,class: "small button large-12 success columns primeiro-botao disabled", method: :post %>
+              <%= button_to "Solicitação enviada", "#", disabled: true,class: "small button large-12 success columns primeiro-botao disabled", method: :post %>
           <% else %>
-              <%= link_to "Adicionar como amigo", adicionar_amigo_user_path(@user), class: "small button large-12 success columns primeiro-botao", method: :post if !@user.blocked? current_user %>
+              <%= link_to "Adicionar como amigo", "#", class: "small button large-12 success columns primeiro-botao", method: :post if !@user.blocked? current_user %>
           <% end %>
       <% else %>
-          <%= link_to "Adicionar como amigo", adicionar_amigo_user_path(@user), class: "small button large-12 success columns primeiro-botao", method: :post %>
+          <%= link_to "Adicionar como amigo", "#", class: "small button large-12 success columns primeiro-botao", method: :post %>
       <% end %>
       <a href="#" class="small button large-12 columns Facebook-entrar" onclick="
       window.open(

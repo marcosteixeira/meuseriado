@@ -1,7 +1,6 @@
 #coding: utf-8
 class User < ActiveRecord::Base
   extend FriendlyId
-  include Amistad::FriendModel
   acts_as_commontator
   acts_as_voter
 
