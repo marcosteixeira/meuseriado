@@ -47,13 +47,6 @@
 
       <h4>Amigos:</h4>
       <ul class="quem-viu-episodio large-12">
-        <% @user.friends.each do |amigo| %>
-            <li>
-              <a href="/users/<%= amigo.slug %>" class="tip-user">
-                <img src='<%= amigo.imagem_formatada %>' width="60" height="60" alt="<%= amigo.name %>">
-              </a>
-            </li>
-        <% end %>
 
       </ul>
       <a href="#">Mostrar todos os amigos</a>
