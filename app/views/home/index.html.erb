@@ -70,7 +70,7 @@
 
         <div class="row">
           <div class="large-12 columns">
-            <a href="/batalhas/<%= @batalha_ativa.slug %>">
+            <a href="#">
               <div class="row outras-batalhas">
                 <div class="large-5 columns">
                   <img src="<%= @batalha_ativa.desafiante.poster %>" alt="<%= @batalha_ativa.desafiante.nome_exibicao %>">
@@ -78,7 +78,7 @@
                 <div class="large-2 columns versus">
                 </div>
                 <div class="large-5 columns">
-                  <img src="http://meuseriado.com.br/images/series/poster/71528-1.jpg" alt="">
+                  <img src="<%= @batalha_ativa.desafiada.poster %>" alt="<%= @batalha_ativa.desafiada.nome_exibicao %>">
                 </div>
               </div>
             </a>
