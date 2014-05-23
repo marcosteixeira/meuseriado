@@ -89,46 +89,6 @@
             </ul>
         <% end %>
 
-        <% if user_signed_in? %>
-
-            <ul class="notificacoes">
-              <% pending_invited_by = current_user.pending_invited_by %>
-              <% if !pending_invited_by.present? %>
-                  <li class="notificacao-geral">
-                  </li>
-              <% else %>
-                  <li>
-                    <a href="#" data-dropdown="drop3">
-                      <div class="notificacao-geral-ativa">
-                        <div class="numero-de-notificacoes">
-                          <%= pending_invited_by.count %>
-                        </div>
-                      </div>
-                    </a>
-
-                    <div id="drop3" class="f-dropdown content small caixa-atualizacoes-detalhadas" data-dropdown-content="">
-                      <ul class="lista-de-notificacoes">
-                        <% pending_invited_by.each do |user| %>
-                            <li class="notificacao-detalhada ainda-nao-leu texto-limitado-geral" id="li_<%= user.id %>">
-                              <img src="<%= user.imagem_formatada %>" alt="<%= user.name %>"> <%= user.name %> te
-                              adicionou
-                              aos amigos
-                              <div class="row">
-                                <div class="aceitar-amizade" id="aceitar_<%= user.id %>">
-                                  <button class="small" onclick="$.post('/users/<%= user.id %>/aceitar_amigo'); $('#aceitar_<%=user.id %>').empty(); $('li_<%= user.id %>').removeClass('ainda-nao-leu');">Aceitar</button>
-                                  <button class="small secondary" onclick="$.post('/users/<%= user.id %>/recusar_amigo');$('#aceitar_<%=user.id %>').empty(); $('li_<%= user.id %>').removeClass('ainda-nao-leu');">Recusar</button>
-                                </div>
-                              </div>
-                            </li>
-                        <% end %>
-                      </ul>
-                    </div>
-                  </li>
-              <% end %>
-            </ul>
-
-        <% end %>
-
         <ul class="pesquisa-topo">
           <%= form_for Serie.new do |f| %>
               <li class="search">
