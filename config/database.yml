@@ -14,7 +14,7 @@ development:
   database: meuseriado_development
   port: 3306
   pool: 5
-  username: root
+  username: malandro
   password:
   #socket: /var/run/mysqld/mysqld.sock
 
@@ -26,7 +26,7 @@ test:
   encoding: utf8
   database: meuseriado_test
   pool: 5
-  username: root
+  username: malandro
   password:
   #socket: /var/run/mysqld/mysqld.sock
 
@@ -34,7 +34,7 @@ production:
   adapter: mysql2
   encoding: utf8
   database: meuseriado_production
-  pool: 5
-  username: mallandro
-  password: capadocia
+  pool: 15
+  username: malandro
+  password:
   #socket: /var/run/mysqld/mysqld.sock

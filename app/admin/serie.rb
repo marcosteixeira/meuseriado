@@ -53,8 +53,5 @@ ActiveAdmin.register Serie do
     link_to "Atualizar", atualizar_admin_serie_path(serie)
   end
 
-  filter :produtora, :as => :select, :collection => Produtora.all.collect { |o| [o.nome, o.id] }
-  filter :nome
-  filter :generos, :as => :select, :collection => Genero.all.collect { |o| [o.nome, o.id] }
   config.per_page = 10
 end
